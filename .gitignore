@@ -1,6 +1,17 @@
-#Apple's .DS_Store
-.DS_Store
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+*.DS_Store
 
-#Sublime Text Projects
+# Files that might appear on external disk #
+######################
+.Spotlight-V100
+.Trashes
+
+# Sublime Text Projects #
+######################
 *.sublime-project
 *.sublime-workspace
