@@ -1,0 +1,6 @@
+#Apple's .DS_Store
+.DS_Store
+
+#Sublime Text Projects
+*.sublime-project
+*.sublime-workspace
