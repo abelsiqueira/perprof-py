@@ -5,7 +5,7 @@ setup(
     name='perprof',
     version='0.0.0',
     author='Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luíz Rafael dos Santos',
-    author_email='abel@ime.unicamp.br, raraniere@ime.unicamp.br',
+    author_email='abel@ime.unicamp.br, raniere@ime.unicamp.br',
     packages=['perprof'],
     url='https://github.com/abelsiqueira/perprof-py',
     license='LICENSE',
