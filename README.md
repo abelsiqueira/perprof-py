@@ -6,3 +6,15 @@ tikz outputing and matplotlib.
 ## License
 
 GPLv3. See LICENSE.
+
+## Install
+
+Just
+
+    $ python setup.py install
+
+## How to use
+
+For help
+
+    $ perprof -h
