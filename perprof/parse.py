@@ -27,9 +27,9 @@ def parse_file(fname):
                 raise ValueError('Line of files must have 3 elements.')
             else:
                 if ldata[1] == 'c':
-                    data[ldata[0]] = [True, float(ldata[2])]
+                    data[ldata[0]] = float(ldata[2])
                 elif ldata[1] == 'd':
-                    data[ldata[0]] = [False, float('inf')]
+                    data[ldata[0]] = float('inf')
                 else:
                     raise ValueError('The second element in the lime must be `c` or `d`.')
     return data
