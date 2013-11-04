@@ -9,9 +9,10 @@ GPLv3. See LICENSE.
 
 ## Install
 
-Just
+You will need *setup_tools*.
+Then
 
-    $ python setup.py install
+    # python setup.py install
 
 ## How to use
 
