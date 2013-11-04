@@ -2,20 +2,20 @@
 
 class PerProfSetup():
     """This is a class to store the files to be used."""
-    def __init__(self):
-        self.cache = False
-        self.files = []
+    def __init__(self, fnames, cache=False):
+        self.cache = cache
+        self.files = fnames
 
     def using_cache(self):
         return self.cache
 
-    def set_cache(val):
+    def set_cache(self, val):
         self.cache = val
 
     def get_files(self):
         return self.files
 
-    def set_files(files):
+    def set_files(self, files):
         self.files = files
 
 def main():
@@ -31,6 +31,4 @@ def main():
 
     args = parser.parse_args()
 
-    s = PerProfSetup()
-    s.set_cache(args.cache)
-    s.set_files(args.file_name)
+    s = PerProfSetup(args.file_name, args.cache)
