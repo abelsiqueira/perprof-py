@@ -2,25 +2,26 @@
 
 class PerProfSetup():
     """This is a class to store the files to be used."""
-    def __init__(self):
-        self.cache = False
-        self.files = []
+    def __init__(self, fnames, cache=False):
+        self.cache = cache
+        self.files = fnames
 
     def using_cache(self):
         return self.cache
 
-    def set_cache(val):
+    def set_cache(self, val):
         self.cache = val
 
     def get_files(self):
         return self.files
 
-    def set_files(files):
+    def set_files(self, files):
         self.files = files
 
 def main():
     """This is the entry point when calling perprof."""
     import argparse
+    from . import prof
 
     parser = argparse.ArgumentParser(
             description='A python module for performance profiling (as described by Dolan and Moré).')
@@ -31,6 +32,7 @@ def main():
 
     args = parser.parse_args()
 
-    s = PerProfSetup()
-    s.set_cache(args.cache)
-    s.set_files(args.file_name)
+    s = PerProfSetup(args.file_name, args.cache)
+    d = prof.Pdata(s)
+    d.scale()
+    print(d)
