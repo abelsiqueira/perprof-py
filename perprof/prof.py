@@ -2,6 +2,7 @@
 The functions related with the perform (not the output).
 """
 
+import pprint
 from . import parse
 
 def load_data(setup):
@@ -43,6 +44,10 @@ class Pdata:
         print('times = ', end=' ')
         for t in self.times:
             print('{:.4}'.format(t), end=' ')
+        print()
+
+        print('perf_functions:')
+        pprint.pprint(self.perf_functions)
 
         return ''
 
@@ -96,3 +101,12 @@ class Pdata:
         self.times = [x for x in self.times]
         self.times.sort()
 
+    def generate_perf_functions(self):
+        self.perf_functions = {}
+        for s in self.solvers:
+            self.perf_functions[s] = []
+        for t in self.times:
+            for s in self.solvers:
+                self.perf_functions[s].append(len(
+                    [x for x in self.data[s].values() if x <= t]))
+            
