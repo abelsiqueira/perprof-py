@@ -36,4 +36,5 @@ def main():
     d = prof.Pdata(s)
     d.scale()
     d.generate_perf_functions()
-    print(d)
+    d.print_tikz(True)
+    
