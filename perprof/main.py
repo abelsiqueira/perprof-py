@@ -35,4 +35,6 @@ def main():
     s = PerProfSetup(args.file_name, args.cache)
     d = prof.Pdata(s)
     d.scale()
-    print(d)
+    d.generate_perf_functions()
+    d.print_tikz(True)
+    

@@ -2,6 +2,8 @@
 The functions related with the perform (not the output).
 """
 
+import pprint
+import math
 from . import parse
 
 def load_data(setup):
@@ -37,8 +39,16 @@ class Pdata:
         for p in self.problems:
             print('{:>8}'.format(p), end='  ')
             for s in self.solvers:
-                print('{:8.4}'.format(self.data[s][p][1]), end='  ')
+                print('{:8.4}'.format(self.data[s][p]), end='  ')
             print()
+
+        print('times = ', end=' ')
+        for t in self.times:
+            print('{:.4}'.format(t), end=' ')
+        print()
+
+        print('perf_functions:')
+        pprint.pprint(self.perf_functions)
 
         return ''
 
@@ -73,10 +83,63 @@ class Pdata:
         except:
             self.get_set_problems()
 
+        self.times = set()
         for p in self.problems:
             min_time = float('inf')
             for s in self.solvers:
-                if self.data[s][p][1] < min_time:
-                    min_time = self.data[s][p][1]
+                try:
+                    if self.data[s][p] < min_time:
+                        min_time = self.data[s][p]
+                except:
+                    pass
             for s in self.solvers:
-                self.data[s][p][1] = self.data[s][p][1] / min_time
+                try:
+                    self.data[s][p] = self.data[s][p] / min_time
+                except:
+                    self.data[s][p] = float('inf')
+                if (self.data[s][p] < float('inf')):
+                    self.times.add(self.data[s][p])
+        self.times = [x for x in self.times]
+        self.times.sort()
+
+    def generate_perf_functions(self):
+        self.perf_functions = {}
+        for s in self.solvers:
+            self.perf_functions[s] = []
+        for t in self.times:
+            for s in self.solvers:
+                self.perf_functions[s].append(len(
+                    [x for x in self.data[s].values() if x <= t]))
+            
+    def print_tikz(self, use_log = False):
+        maxt = max(self.times)
+
+        print('%%Require \\usepackage{pgfplots} on preamble')
+        print('\\begin{center}')
+        print('\\begin{tikzpicture}')
+
+        if use_log:
+            print('  \\begin{semilogxaxis}[const plot, ')
+        else:
+            print('  \\begin{axis}[const plot, ')
+        print('    xmin=1, xmax={:.2f},'.format(maxt))
+        print('    ymin=0, ymax=1,')
+        print('    ymajorgrids,')
+        print('    ytick={0,0.2,0.4,0.6,0.8,1.0},')
+        print('    legend pos= south east,')
+        print('    width=\\textwidth')
+        print('    ]')
+        for s in self.solvers:
+            N = len(self.problems)
+            print('  \\addplot+[mark=none, thick] coordinates {')
+            for i in range(len(self.times)):
+                t = self.times[i]
+                p = self.perf_functions[s][i]/N
+                print('    ({:.4f},{:.4f})'.format(t,p))
+            print('  };')
+        if use_log:
+            print('  \\end{semilogxaxis}')
+        else:
+            print('  \\end{axis}')
+        print('\end{tikzpicture}')
+        print('\end{center}')
