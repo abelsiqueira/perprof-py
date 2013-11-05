@@ -112,60 +112,34 @@ class Pdata:
                     [x for x in self.data[s].values() if x <= t]))
             
     def print_tikz(self, use_log = False):
-        colors = ['red','blue','green']
         maxt = max(self.times)
 
-        if use_log:
-            for i in range(len(self.times)):
-                self.times[i] = math.log(self.times[i])/math.log(maxt)
-        else:
-            for i in range(len(self.times)):
-                self.times[i] = self.times[i]/maxt
-
-
+        print('%%Require \\usepackage{pgfplots} on preamble')
         print('\\begin{center}')
-        print('\\begin{tikzpicture}[yscale=10,xscale=15]')
-        print('  \draw[->] (-0.01,0) -- (1.01,0);')
-        print('  \draw[->] (0,-0.01) -- (0,1.05);')
+        print('\\begin{tikzpicture}')
 
-        print('  \\foreach \\y in {0.2,0.4,0.6,0.8,1.0} {')
-        print('    \draw (-0.01,\\y)node[left]{\\y} -- (0.01,\\y);')
-        print('    \draw[dashed,gray,thin] (0,\\y) -- (1,\\y);')
-        print('    \draw (1.01,\\y)node[right]{\\y} -- (0.99,\\y);')
-        print('  }')
-
-        
-        N = math.floor(math.log10(maxt));
-        V = 10**N/maxt
-
-        for i in range(1,N+1):
-            print('  \draw ({:.2f},-0.01)'.format(i*V), end='')
-            print('node[below]', end='')
-            if use_log:
-                print('{$10^{'+'{}'.format(i)+'}$}', end='')
-            else:
-                print('{$'+'{}'.format(i), end='')
-                print('\\times10^{'+'{}'.format(N)+'}$}', end='')
-            print(' -- ({:.2f},0.01);'.format(i*V))
-
-        print('  \draw (1,-0.01)node[below]{', end='')
-        print('{:.2f}'.format(maxt), end='')
-        print('} -- (1,1.05);')
-
-        count = 0
+        if use_log:
+            print('  \\begin{semilogxaxis}[const plot, ')
+        else:
+            print('  \\begin{axis}[const plot, ')
+        print('    xmin=1, xmax={:.2f},'.format(maxt))
+        print('    ymin=0, ymax=1,')
+        print('    ymajorgrids,')
+        print('    ytick={0,0.2,0.4,0.6,0.8,1.0},')
+        print('    legend pos= south east,')
+        print('    width=\\textwidth')
+        print('    ]')
         for s in self.solvers:
             N = len(self.problems)
-            p = self.perf_functions[s][0]/N
-            for i in range(len(self.times)-1):
+            print('  \\addplot+[mark=none, thick] coordinates {')
+            for i in range(len(self.times)):
                 t = self.times[i]
-                tp = self.times[i+1]
-                print('  \draw[{},thick] '.format(colors[count]), end='')
-                print('({:.4f},{:.4f})'.format(t,p), end='')
-                print(' -- ({:.4f},{:.4f})'.format(tp,p), end='')
-                p = self.perf_functions[s][i+1]/N;
-                print(' -- ({:.4f},{:.4f})'.format(tp,p), end='')
-                print(';')
-            count = count + 1
-
+                p = self.perf_functions[s][i]/N
+                print('    ({:.4f},{:.4f})'.format(t,p))
+            print('  };')
+        if use_log:
+            print('  \\end{semilogxaxis}')
+        else:
+            print('  \\end{axis}')
         print('\end{tikzpicture}')
         print('\end{center}')
