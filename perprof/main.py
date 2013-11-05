@@ -21,7 +21,7 @@ class PerProfSetup():
 def main():
     """This is the entry point when calling perprof."""
     import argparse
-    from . import prof
+    from . import matplotlib
 
     parser = argparse.ArgumentParser(
             description='A python module for performance profiling (as described by Dolan and Moré).')
@@ -33,6 +33,5 @@ def main():
     args = parser.parse_args()
 
     s = PerProfSetup(args.file_name, args.cache)
-    d = prof.Pdata(s)
-    d.scale()
-    print(d)
+    d = matplotlib.MPdata(s)
+    d.plot()
