@@ -37,8 +37,12 @@ class Pdata:
         for p in self.problems:
             print('{:>8}'.format(p), end='  ')
             for s in self.solvers:
-                print('{:8.4}'.format(self.data[s][p][1]), end='  ')
+                print('{:8.4}'.format(self.data[s][p]), end='  ')
             print()
+
+        print('times = ', end=' ')
+        for t in self.times:
+            print('{:.4}'.format(t), end=' ')
 
         return ''
 
@@ -73,10 +77,22 @@ class Pdata:
         except:
             self.get_set_problems()
 
+        self.times = set()
         for p in self.problems:
             min_time = float('inf')
             for s in self.solvers:
-                if self.data[s][p][1] < min_time:
-                    min_time = self.data[s][p][1]
+                try:
+                    if self.data[s][p] < min_time:
+                        min_time = self.data[s][p]
+                except:
+                    pass
             for s in self.solvers:
-                self.data[s][p][1] = self.data[s][p][1] / min_time
+                try:
+                    self.data[s][p] = self.data[s][p] / min_time
+                except:
+                    self.data[s][p] = float('inf')
+                if (self.data[s][p] < float('inf')):
+                    self.times.add(self.data[s][p])
+        self.times = [x for x in self.times]
+        self.times.sort()
+
