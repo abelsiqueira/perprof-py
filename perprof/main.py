@@ -33,5 +33,11 @@ def main():
     args = parser.parse_args()
 
     s = PerProfSetup(args.file_name, args.cache)
+    # With matplotlib
     d = matplotlib.MPdata(s)
     d.plot()
+    # With tikz
+    d = prof.Pdata(s)
+    d.scale()
+    d.generate_perf_functions()
+    d.print_tikz(True)
