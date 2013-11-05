@@ -56,12 +56,14 @@ class Pdata:
     def get_set_problems(self):
         try:
             self.problems
+            self.number_problems
         except:
             p = set()
             for i in self.data.keys():
                 for j in self.data[i].keys():
                     p.add(j)
             self.problems = p
+            self.number_problems = len(p)
         return self.problems
 
     def scale(self):
@@ -96,3 +98,8 @@ class Pdata:
         self.times = [x for x in self.times]
         self.times.sort()
 
+    def plot(self):
+        """
+        This should be implemented by a child of this class.
+        """
+        pass
