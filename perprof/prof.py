@@ -2,6 +2,8 @@
 The functions related with the perform (not the output).
 """
 
+import pprint
+import math
 from . import parse
 
 def load_data(setup):
@@ -19,6 +21,8 @@ def load_data(setup):
 class Pdata:
     def __init__(self, setup):
         self.data = load_data(setup)
+        self.cache = setup.using_cache()
+        self.log = setup.using_log()
 
     def __repr__(self):
         try:
@@ -43,6 +47,10 @@ class Pdata:
         print('times = ', end=' ')
         for t in self.times:
             print('{:.4}'.format(t), end=' ')
+        print()
+
+        print('perf_functions:')
+        pprint.pprint(self.perf_functions)
 
         return ''
 
@@ -102,4 +110,4 @@ class Pdata:
         """
         This should be implemented by a child of this class.
         """
-        pass
+        raise NotImplementedError()
