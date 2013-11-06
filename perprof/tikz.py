@@ -2,11 +2,16 @@
 This handle the plot using tikz.
 """
 
+import sys
 import math
 from . import prof
 
 class Profiler(prof.Pdata):
     def __init__(self, setup, tikz_header):
+        if setup.get_output() is None:
+            self.output = sys.stdin
+        else:
+            self.output = '{}.tex'.format(setup.get_output())
         self.tikz_header = tikz_header
         prof.Pdata.__init__(self, setup)
 
@@ -24,6 +29,14 @@ class Profiler(prof.Pdata):
                     [x for x in self.data[s].values() if x <= t]))
 
     def plot(self):
+        if not self.force:
+            try:
+                f = open(self.output, 'r')
+                f.close()
+                raise PermissionError('Use the `-f` flag')
+            except FileNotFoundError():
+                pass
+
         try:
             self.already_scaled
         except:
