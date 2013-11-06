@@ -15,7 +15,8 @@ def load_data(setup):
     """
     data = {}
     for f in setup.get_files():
-        data[f] = parse.parse_file(f)
+        data_tmp, solver_name = parse.parse_file(f)
+        data[solver_name] = data_tmp
     return data
 
 class Pdata:

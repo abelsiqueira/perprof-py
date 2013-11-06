@@ -20,10 +20,13 @@ def parse_file(fname):
     This function parse one file.
     """
     data = {}
+    algname = fname
     with open(fname) as f:
         for l in f:
             ldata = l.split()
-            if len(ldata) != 3:
+            if ldata[0] == '#Name' and len(ldata) == 2:
+                algname = ldata[1]
+            elif len(ldata) != 3:
                 raise ValueError('Line of files must have 3 elements.')
             else:
                 if ldata[1] == 'c':
@@ -32,4 +35,4 @@ def parse_file(fname):
                     data[ldata[0]] = float('inf')
                 else:
                     raise ValueError('The second element in the lime must be `c` or `d`.')
-    return data
+    return data, algname
