@@ -6,7 +6,7 @@ from . import prof
 import matplotlib.pyplot as plt
 
 class Profiler(prof.Pdata):
-    def __init__(self, setup, tikz_header):
+    def __init__(self, setup):
         if setup.get_output() is None:
             self.output = 'performance-profile.png'
         else:
@@ -23,7 +23,7 @@ class Profiler(prof.Pdata):
                 f = open(self.output, 'r')
                 f.close()
                 raise PermissionError('Use the `-f` flag')
-            except FileNotFoundError():
+            except FileNotFoundError:
                 pass
 
         try:
