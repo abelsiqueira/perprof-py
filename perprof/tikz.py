@@ -33,7 +33,9 @@ class Profiler(prof.Pdata):
             try:
                 f = open(self.output, 'r')
                 f.close()
-                raise PermissionError('Use the `-f` flag')
+                print('ERROR: File {} exists'.format(self.output))
+                print('Use `-f` to overwrite')
+                exit(1)
             except FileNotFoundError:
                 pass
             except TypeError:

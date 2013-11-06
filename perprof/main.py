@@ -58,7 +58,7 @@ def main():
             help='Enable cache.')
     parser.add_argument('-o', '--output',
             help='Name of the file to use as output (the correct extension will be add)')
-    parser.add_argument('-f', '--force',
+    parser.add_argument('-f', '--force', action='store_true',
             help='Force overwrite the output file')
     parser.add_argument('file_name', nargs='+',
             help='The name of the files to be used for the performance profiling')
