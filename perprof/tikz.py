@@ -6,6 +6,10 @@ import math
 from . import prof
 
 class Profiler(prof.Pdata):
+    def __init__(self, setup, tikz_header):
+        self.tikz_header = tikz_header
+        prof.Pdata.__init__(self, setup)
+
     def scale(self):
         self.already_scaled = True
         super().scale()
@@ -40,6 +44,18 @@ class Profiler(prof.Pdata):
             for i in range(len(self.times)):
                 self.times[i] = self.times[i]/maxt
 
+        if self.tikz_header:
+            print('\\documentclass{article}')
+            print('\\usepackage[utf8]{inputenc}')
+            print('\\usepackage[T1]{fontenc}')
+            print('\\usepackage{tikz}')
+            print('\\usepackage{pgfplots}')
+            print()
+            print('\\usepackage{geometry}')
+            print()
+            print('\\geometry{top=2cm,bottom=2cm,left=2cm,right=2cm}')
+            print()
+            print('\\begin{document}')
 
         print('\\begin{center}')
         print('\\begin{tikzpicture}[yscale=10,xscale=15]')
@@ -87,3 +103,6 @@ class Profiler(prof.Pdata):
 
         print('\end{tikzpicture}')
         print('\end{center}')
+
+        if self.tikz_header:
+            print('\\end{document}')

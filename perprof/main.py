@@ -38,6 +38,8 @@ def main():
             help='Use LaTex/TikZ as backend for the plot (only generate the TeX file)')
     parser.add_argument('--semilog', action='store_true',
             help='Use logarithmic scale for the x axis of the plot.')
+    parser.add_argument('--tikz-header', action='store_true',
+            help='Create the header to the tikz file, enabling compilation of the result')
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
     parser.add_argument('file_name', nargs='+',
@@ -56,6 +58,6 @@ def main():
         # tikz
         from . import tikz
 
-        d = tikz.Profiler(s)
+        d = tikz.Profiler(s, args.tikz_header)
 
     d.plot()
