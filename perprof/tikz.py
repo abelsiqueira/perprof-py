@@ -19,15 +19,6 @@ class Profiler(prof.Pdata):
         self.already_scaled = True
         super().scale()
 
-    def generate_perf_functions(self):
-        self.perf_functions = {}
-        for s in self.solvers:
-            self.perf_functions[s] = []
-        for t in self.times:
-            for s in self.solvers:
-                self.perf_functions[s].append(len(
-                    [x for x in self.data[s].values() if x <= t]))
-
     def plot(self):
         if not self.force:
             try:
@@ -48,9 +39,9 @@ class Profiler(prof.Pdata):
             self.scale()
 
         try:
-            self.perf_functions
+            self.ppsbt
         except:
-            self.generate_perf_functions()
+            self.set_percent_problems_solved_by_time()
 
         maxt = max(self.times)
 
@@ -82,11 +73,10 @@ class Profiler(prof.Pdata):
         str2output += '    ]\n'
 
         for s in self.solvers:
-            N = len(self.problems)
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
             for i in range(len(self.times)):
                 t = self.times[i]
-                p = self.perf_functions[s][i]/N
+                p = self.ppsbt[s][i]
                 str2output += '    ({:.4f},{:.4f})\n'.format(t,p)
             str2output += '  };\n'
             str2output += '  \\addlegendentry{' + s + '}\n'
