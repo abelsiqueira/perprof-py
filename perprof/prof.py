@@ -15,13 +15,15 @@ def load_data(setup):
     """
     data = {}
     for f in setup.get_files():
-        data[f] = parse.parse_file(f)
+        data_tmp, solver_name = parse.parse_file(f)
+        data[solver_name] = data_tmp
     return data
 
 class Pdata:
     def __init__(self, setup):
         self.data = load_data(setup)
         self.cache = setup.using_cache()
+        self.force = setup.using_force()
         self.semilog = setup.using_semilog()
 
     def __repr__(self):
