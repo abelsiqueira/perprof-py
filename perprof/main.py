@@ -5,7 +5,9 @@ class PerProfSetup():
     def __init__(self, args):
         self.cache = args.cache
         self.files = args.file_name
+        self.force = args.force
         self.semilog = args.semilog
+        self.output = args.output
 
     def using_cache(self):
         return self.cache
@@ -18,6 +20,18 @@ class PerProfSetup():
 
     def set_files(self, files):
         self.files = files
+
+    def using_force(self):
+        return self.force
+
+    def set_force(self, force):
+        self.force = force
+
+    def get_output(self):
+        return self.output
+
+    def set_output(self, output):
+        self.output = output
 
     def using_semilog(self):
         return self.semilog
@@ -42,6 +56,10 @@ def main():
             help='Create the header to the tikz file, enabling compilation of the result')
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
+    parser.add_argument('-o', '--output',
+            help='Name of the file to use as output (the correct extension will be add)')
+    parser.add_argument('-f', '--force',
+            help='Force overwrite the output file')
     parser.add_argument('file_name', nargs='+',
             help='The name of the files to be used for the performance profiling')
 
