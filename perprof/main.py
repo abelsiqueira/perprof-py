@@ -47,12 +47,12 @@ def main():
 
     s = PerProfSetup(args)
 
-    if s.mp:
+    if args.mp:
         # matplotlib
         from . import matplotlib
 
         d = matplotlib.Profiler(s)
-    elif s.tikz:
+    elif args.tikz:
         # tikz
         from . import tikz
 

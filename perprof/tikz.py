@@ -2,6 +2,7 @@
 This handle the plot using tikz.
 """
 
+import math
 from . import prof
 
 class Profiler(prof.Pdata):
@@ -23,6 +24,11 @@ class Profiler(prof.Pdata):
             self.already_scale
         except:
             self.scale()
+
+        try:
+            self.perf_functions
+        except:
+            self.generate_perf_functions()
 
         colors = ['red','blue','green']
         maxt = max(self.times)
