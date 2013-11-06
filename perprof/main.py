@@ -45,11 +45,14 @@ def main():
 
     parser = argparse.ArgumentParser(
             description='A python module for performance profiling (as described by Dolan and Moré).')
-    group = parser.add_mutually_exclusive_group()
+    group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('--mp', action='store_true',
             help='Use matplotlib as backend for the plot')
     group.add_argument('--tikz', action='store_true',
             help='Use LaTex/TikZ as backend for the plot (only generate the TeX file)')
+    group.add_argument('--raw', action='store_true',
+            help='Print raw data')
+
     parser.add_argument('--semilog', action='store_true',
             help='Use logarithmic scale for the x axis of the plot.')
     parser.add_argument('--tikz-header', action='store_true',
@@ -72,10 +75,16 @@ def main():
         from . import matplotlib
 
         d = matplotlib.Profiler(s)
+        d.plot()
     elif args.tikz:
         # tikz
         from . import tikz
 
         d = tikz.Profiler(s, args.tikz_header)
-
-    d.plot()
+        d.plot()
+    elif args.raw:
+        # raw
+        from . import prof
+        print('raw')
+        
+        print(prof.Pdata(s))

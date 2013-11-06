@@ -36,25 +36,27 @@ class Pdata:
         except:
             self.get_set_problems()
 
+        str2output = ' ' * 18
+
         for s in self.solvers:
-            print('{:>8}'.format(s), end='  ')
-        print()
+            if len(s) > 16:
+                str2output += '{:>16}  '.format(s[-16:])
+            else:
+                str2output += '{space}{:>16}  '.format(s,
+                        space = ' ' * (len(s) - 16))
+        str2output += '\n'
 
         for p in self.problems:
-            print('{:>8}'.format(p), end='  ')
+            str2output += '{:>16}  '.format(p)
             for s in self.solvers:
-                print('{:8.4}'.format(self.data[s][p]), end='  ')
-            print()
+                try:
+                    str2output += '{space}{:8.4}  '.format(self.data[s][p],
+                            space = ' ' * 8)
+                except:
+                    str2output += '{}inf  '.format(13 * ' ')
+            str2output += '\n'
 
-        print('times = ', end=' ')
-        for t in self.times:
-            print('{:.4}'.format(t), end=' ')
-        print()
-
-        print('perf_functions:')
-        pprint.pprint(self.perf_functions)
-
-        return ''
+        return str2output[:-2]
 
     def get_set_solvers(self):
         try:
@@ -107,6 +109,17 @@ class Pdata:
                     self.times.add(self.data[s][p])
         self.times = [x for x in self.times]
         self.times.sort()
+
+    def set_percent_problems_solved_by_time(self):
+        self.ppsbt = {}
+        for s in self.solvers:
+            self.ppsbt[s] = []
+            for t in self.times:
+                aux = 0
+                for p in self.problems:
+                    if t > self.data[s][p]:
+                        aux += 1
+                self.ppsbt[s].append(aux / self.number_problems)
 
     def plot(self):
         """

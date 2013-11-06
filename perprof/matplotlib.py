@@ -33,16 +33,14 @@ class Profiler(prof.Pdata):
         except:
             self.scale()
 
+        try:
+            self.ppsbt
+        except:
+            self.set_percent_problems_solved_by_time()
+
         plt.hold(True)
         for s in self.solvers:
-            p_solved = []
-            for t in self.times:
-                aux = 0
-                for p in self.problems:
-                    if t > self.data[s][p]:
-                        aux += 1
-                p_solved.append(aux / self.number_problems)
-            plt.plot(self.times, p_solved)
+            plt.plot(self.times, self.ppsbt[s])
 
         if self.semilog:
             plt.gca().set_xscale('log')
