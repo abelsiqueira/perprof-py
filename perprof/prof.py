@@ -21,6 +21,8 @@ def load_data(setup):
 class Pdata:
     def __init__(self, setup):
         self.data = load_data(setup)
+        self.cache = setup.using_cache()
+        self.semilog = setup.using_semilog()
 
     def __repr__(self):
         try:
@@ -62,12 +64,14 @@ class Pdata:
     def get_set_problems(self):
         try:
             self.problems
+            self.number_problems
         except:
             p = set()
             for i in self.data.keys():
                 for j in self.data[i].keys():
                     p.add(j)
             self.problems = p
+            self.number_problems = len(p)
         return self.problems
 
     def scale(self):
@@ -102,41 +106,8 @@ class Pdata:
         self.times = [x for x in self.times]
         self.times.sort()
 
-    def generate_perf_functions(self):
-        self.perf_functions = {}
-        for s in self.solvers:
-            self.perf_functions[s] = []
-        for t in self.times:
-            for s in self.solvers:
-                self.perf_functions[s].append(len(
-                    [x for x in self.data[s].values() if x <= t]))
-            
-    def print_tikz(self, use_log = False):
-        maxt = max(self.times)
-
-        print('\\begin{center}')
-        print('\\begin{tikzpicture}')
-
-        if use_log:
-            print('  \\begin{semilogxaxis}[const plot, ')
-        else:
-            print('  \\begin{axis}[const plot, ')
-        print('    xmin=1, xmax={:.2f},'.format(maxt))
-        print('    ymin=0, ymax=1,')
-        print('    width=\\textwidth')
-        print('    ]')
-
-        for s in self.solvers:
-            N = len(self.problems)
-            print('  \\addplot+[mark=none, thick] coordinates {')
-            for i in range(len(self.times)):
-                t = self.times[i]
-                p = self.perf_functions[s][i]/N
-                print('    ({:.4f},{:.4f})'.format(t,p))
-            print('  };')
-        if use_log:
-            print('  \\end{semilogxaxis}')
-        else:
-            print('  \\end{axis}')
-        print('\end{tikzpicture}')
-        print('\end{center}')
+    def plot(self):
+        """
+        This should be implemented by a child of this class.
+        """
+        raise NotImplementedError()
