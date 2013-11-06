@@ -110,6 +110,17 @@ class Pdata:
         self.times = [x for x in self.times]
         self.times.sort()
 
+    def set_percent_problems_solved_by_time(self):
+        self.ppsbt = {}
+        for s in self.solvers:
+            self.ppsbt[s] = []
+            for t in self.times:
+                aux = 0
+                for p in self.problems:
+                    if t > self.data[s][p]:
+                        aux += 1
+                self.ppsbt[s].append(aux / self.number_problems)
+
     def plot(self):
         """
         This should be implemented by a child of this class.
