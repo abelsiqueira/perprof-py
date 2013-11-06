@@ -14,7 +14,7 @@ GNU/Linux distribution to install it.
 
 In the terminal:
 
-    # pip -r REQUIREMENTS
+    # pip install -r REQUIREMENTS
     # python setup.py install
 
 ## How to use
