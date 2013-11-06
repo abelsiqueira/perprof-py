@@ -4,19 +4,20 @@
     >>> import perprof.parse as parse
     >>> data = parse.parse_file('ipopt-4.13.sample')
     >>> pprint.pprint(data)
-    {'clnlbeam': [True, '35'],
-     'corkscrw': [True, '7'],
-     'dtoc1nd': [True, '8'],
-     'dtoc2': [True, '10'],
-     'optmass': [True, '3'],
-     'svanberg': [True, '10']}
+    {'clnlbeam': 35.0,
+     'corkscrw': 7.0,
+     'dtoc1nd': 8.0,
+     'dtoc2': 10.0,
+     'optmass': 3.0,
+     'svanberg': 10.0}
     >>> data = parse.parse_file('conpt-31.8.sample')
     >>> pprint.pprint(data)
-    {'clnlbeam': [False, inf],
-     'corkscrw': [True, '51'],
-     'dtoc1nd': [True, '144'],
-     'dtoc2': [False, inf],
-     'optmass': [True, '66'],
-     'svanberg': [False, inf]}
+    {'clnlbeam': inf,
+     'corkscrw': 51.0,
+     'dtoc1nd': 144.0,
+     'dtoc2': inf,
+     'hs35': 1.0,
+     'optmass': 66.0,
+     'svanberg': inf}
 
 """
