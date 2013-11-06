@@ -33,7 +33,7 @@ class Profiler(prof.Pdata):
         colors = ['red','blue','green']
         maxt = max(self.times)
 
-        if self.log:
+        if self.semilog:
             for i in range(len(self.times)):
                 self.times[i] = math.log(self.times[i])/math.log(maxt)
         else:
@@ -59,7 +59,7 @@ class Profiler(prof.Pdata):
         for i in range(1,N+1):
             print('  \draw ({:.2f},-0.01)'.format(i*V), end='')
             print('node[below]', end='')
-            if self.log:
+            if self.semilog:
                 print('{$10^{'+'{}'.format(i)+'}$}', end='')
             else:
                 print('{$'+'{}'.format(i), end='')

@@ -5,7 +5,7 @@ class PerProfSetup():
     def __init__(self, args):
         self.cache = args.cache
         self.files = args.file_name
-        self.log = args.log
+        self.semilog = args.semilog
 
     def using_cache(self):
         return self.cache
@@ -19,11 +19,11 @@ class PerProfSetup():
     def set_files(self, files):
         self.files = files
 
-    def using_log(self):
-        return self.log
+    def using_semilog(self):
+        return self.semilog
 
-    def set_log(self, val):
-        self.log= val
+    def set_semilog(self, val):
+        self.semilog= val
 
 def main():
     """This is the entry point when calling perprof."""
@@ -36,8 +36,8 @@ def main():
             help='Use matplotlib as backend for the plot')
     group.add_argument('--tikz', action='store_true',
             help='Use LaTex/TikZ as backend for the plot (only generate the TeX file)')
-    parser.add_argument('--log', action='store_true',
-            help='Use logarithmic scale for the plot.')
+    parser.add_argument('--semilog', action='store_true',
+            help='Use logarithmic scale for the x axis of the plot.')
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
     parser.add_argument('file_name', nargs='+',

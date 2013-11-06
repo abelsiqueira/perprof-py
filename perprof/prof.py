@@ -22,7 +22,7 @@ class Pdata:
     def __init__(self, setup):
         self.data = load_data(setup)
         self.cache = setup.using_cache()
-        self.log = setup.using_log()
+        self.semilog = setup.using_semilog()
 
     def __repr__(self):
         try:

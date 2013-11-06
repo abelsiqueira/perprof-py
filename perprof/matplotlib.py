@@ -27,7 +27,7 @@ class Profiler(prof.Pdata):
                 p_solved.append(aux / self.number_problems)
             plt.plot(self.times, p_solved)
 
-        if self.log:
+        if self.semilog:
             plt.gca().set_xscale('log')
 
         plt.savefig('performance-profile.png')
