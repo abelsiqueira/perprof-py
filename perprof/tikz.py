@@ -7,7 +7,7 @@ from . import prof
 
 class Profiler(prof.Pdata):
     def scale(self):
-        self.already_scale = True
+        self.already_scaled = True
         super().scale()
 
     def generate_perf_functions(self):
@@ -21,7 +21,7 @@ class Profiler(prof.Pdata):
 
     def plot(self):
         try:
-            self.already_scale
+            self.already_scaled
         except:
             self.scale()
 
