@@ -72,6 +72,7 @@ class Profiler(prof.Pdata):
                 p = self.perf_functions[s][i]/N
                 print('    ({:.4f},{:.4f})'.format(t,p))
             print('  };')
+            print('  \\addlegendentry{' + s + '}')
         if self.semilog:
             print('  \\end{semilogxaxis}')
         else:
