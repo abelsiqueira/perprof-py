@@ -15,6 +15,14 @@ that it hadn't (in this case ``time-in-seconds`` is optional and can be a string
 since it will be stored as ``float("inf")``).
 """
 
+def problem_name_sanitize(name):
+    """
+    This sanitize the problem name for LaTeX.
+    """
+    name = name.replace('_', '-')
+
+    return name
+
 def parse_file(fname):
     """
     This function parse one file.
@@ -33,9 +41,9 @@ def parse_file(fname):
                     if len(ldata) < 3:
                         raise ValueError('When problem converge line must have at least 3 elements: `{}`.'.format(l[:-1]))
                     else:
-                        data[ldata[0]] = float(ldata[2])
+                        data[problem_name_sanitize(ldata[0])] = float(ldata[2])
                 elif ldata[1] == 'd':
-                    data[ldata[0]] = float('inf')
+                    data[problem_name_sanitize(ldata[0])] = float('inf')
                 else:
                     raise ValueError('The second element in the lime must be `c` or `d`: `{}`.'.format(l[:-1]))
     return data, algname

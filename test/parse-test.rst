@@ -22,6 +22,9 @@ Test for parser::
 
     >>> import pprint
     >>> import perprof.parse as parse
+    >>> data = parse.parse_file('sanitize.sample')
+    >>> pprint.pprint(data)
+    ({'3-K': 0.0133}, 'sanitize.sample')
     >>> data = parse.parse_file('ipopt-4.13.sample')
     >>> pprint.pprint(data)
     ({'clnlbeam': 35.0,
