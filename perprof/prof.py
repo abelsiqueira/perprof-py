@@ -13,9 +13,14 @@ def load_data(setup):
     :param setup: the setup configurations
     :type setup: main.PerProfSetup
     """
+    try:
+        with open(setup.get_subset(), 'r') as subset_file:
+            subset = [l.strip() for l in subset_file]
+    except:
+        subset = []
     data = {}
     for f in setup.get_files():
-        data_tmp, solver_name = parse.parse_file(f)
+        data_tmp, solver_name = parse.parse_file(f, subset)
         data[solver_name] = data_tmp
     return data
 
