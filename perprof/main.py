@@ -79,21 +79,25 @@ def main():
 
     s = PerProfSetup(args)
 
-    if args.mp:
-        # matplotlib
-        from . import matplotlib
+    try:
+        if args.mp:
+            # matplotlib
+            from . import matplotlib
 
-        d = matplotlib.Profiler(s)
-        d.plot()
-    elif args.tikz:
-        # tikz
-        from . import tikz
+            d = matplotlib.Profiler(s)
+            d.plot()
+        elif args.tikz:
+            # tikz
+            from . import tikz
 
-        d = tikz.Profiler(s, args.tikz_header)
-        d.plot()
-    elif args.raw:
-        # raw
-        from . import prof
-        print('raw')
-        
-        print(prof.Pdata(s))
+            d = tikz.Profiler(s, args.tikz_header)
+            d.plot()
+        elif args.raw:
+            # raw
+            from . import prof
+            print('raw')
+            
+            print(prof.Pdata(s))
+    except ValueError as error:
+        print(error)
+

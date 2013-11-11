@@ -40,18 +40,18 @@ def parse_file(fname, subset):
             if ldata[0] == '#Name' and len(ldata) == 2:
                 algname = str_sanitize(ldata[1])
             elif len(ldata) < 2:
-                raise ValueError('Line must have at least 2 elements: `{}`.'.format(l.strip()))
+                raise ValueError('ERROR: Line must have at least 2 elements: `{}`.'.format(l.strip()))
             else:
                 ldata[0] = str_sanitize(ldata[0])
                 if has_subset and ldata[0] not in subset:
                     continue
                 if ldata[1] == 'c':
                     if len(ldata) < 3:
-                        raise ValueError('When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
+                        raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
                         data[ldata[0]] = float(ldata[2])
                 elif ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
-                    raise ValueError('The second element in the lime must be `c` or `d`: `{}`.'.format(l[:-1]))
+                    raise ValueError('ERROR: The second element in the lime must be `c` or `d`: `{}`.'.format(l[:-1]))
     return data, algname
