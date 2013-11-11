@@ -43,6 +43,9 @@ class PerProfSetup():
     def get_subset(self):
         return self.subset
 
+    def set_subset(self, subset):
+        self.subset = subset
+
 def main():
     """This is the entry point when calling perprof."""
     import argparse
@@ -69,7 +72,7 @@ def main():
             help='Force overwrite the output file')
     parser.add_argument('file_name', nargs='+',
             help='The name of the files to be used for the performance profiling')
-    parser.add_argument('--subset',
+    parser.add_argument('-s', '--subset',
             help='Name of a file with a subset of problems to compare')
 
     args = parser.parse_args()

@@ -14,7 +14,8 @@ def load_data(setup):
     :type setup: main.PerProfSetup
     """
     try:
-        subset = [l.strip() for l in open(setup.get_subset(),'r')]
+        with open(setup.get_subset(), 'r') as subset_file:
+            subset = [l.strip() for l in subset_file]
     except:
         subset = []
     data = {}
