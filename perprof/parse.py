@@ -15,10 +15,14 @@ that it hadn't (in this case ``time-in-seconds`` can be a string since it will
 be stored as ``float("inf")``).
 """
 
-def parse_file(fname):
+def parse_file(fname, subset):
     """
     This function parse one file.
     """
+    if len(subset) > 0:
+        has_subset = True;
+    else:
+        has_subset = False;
     data = {}
     algname = fname
     with open(fname) as f:
@@ -29,6 +33,8 @@ def parse_file(fname):
             elif len(ldata) != 3:
                 raise ValueError('Line of files must have 3 elements.')
             else:
+                if has_subset and ldata[0] not in subset:
+                    continue
                 if ldata[1] == 'c':
                     data[ldata[0]] = float(ldata[2])
                 elif ldata[1] == 'd':
