@@ -67,7 +67,7 @@ class Pdata:
         try:
             self.solvers
         except:
-            self.solvers = self.data.keys()
+            self.solvers = sorted(list(self.data.keys()))
         return self.solvers
 
     def get_set_problems(self):
