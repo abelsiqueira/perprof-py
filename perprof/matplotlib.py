@@ -38,9 +38,14 @@ class Profiler(prof.Pdata):
 
         plt.hold(True)
         for s in self.solvers:
-            plt.plot(self.times, self.ppsbt[s])
+            plt.plot(self.times, self.ppsbt[s], label=s)
 
         if self.semilog:
             plt.gca().set_xscale('log')
+        plt.gca().set_xlim(0, max(self.times))
+        plt.gca().set_ylim(0, 1)
+        plt.gca().legend(loc=4)
+        plt.gca().grid(axis='y',color='0.5',linestyle='-')
+        plt.gca().set_title('Performance profile')
 
         plt.savefig(self.output)
