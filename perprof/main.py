@@ -14,6 +14,8 @@ class PerProfSetup():
             self.output_format = 'pdf'
         elif args.tex:
             self.output_format = 'tex'
+        else:
+            self.output_format = None
 
     def using_cache(self):
         return self.cache

@@ -15,6 +15,7 @@ class Profiler(prof.Pdata):
             self.output = '{}.tex'.format(setup.get_output())
         self.tikz_header = tikz_header
         prof.Pdata.__init__(self, setup)
+        self.output_format = setup.get_output_format()
 
     def scale(self):
         self.already_scaled = True
@@ -46,7 +47,7 @@ class Profiler(prof.Pdata):
 
         str2output = ''
 
-        if self.tikz_header:
+        if self.tikz_header or self.output_format == 'pdf':
             str2output += '\\documentclass{article}\n'
             str2output += '\\usepackage[utf8]{inputenc}\n'
             str2output += '\\usepackage[T1]{fontenc}\n'
@@ -86,7 +87,7 @@ class Profiler(prof.Pdata):
         str2output += '\\end{tikzpicture}\n'
         str2output += '\\end{center}\n'
 
-        if self.tikz_header:
+        if self.tikz_header or self.output_format == 'pdf':
             str2output += '\\end{document}'
 
         try:
