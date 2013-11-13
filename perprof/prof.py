@@ -67,7 +67,7 @@ class Pdata:
         try:
             self.solvers
         except:
-            self.solvers = self.data.keys()
+            self.solvers = sorted(list(self.data.keys()))
         return self.solvers
 
     def get_set_problems(self):
@@ -112,6 +112,8 @@ class Pdata:
                     self.data[s][p] = float('inf')
                 if (self.data[s][p] < float('inf')):
                     self.times.add(self.data[s][p])
+        if len(self.times) == 0:
+            raise ValueError("ERROR: problem set is empty")
         self.times = [x for x in self.times]
         self.times.sort()
 

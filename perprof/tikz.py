@@ -24,9 +24,7 @@ class Profiler(prof.Pdata):
             try:
                 f = open(self.output, 'r')
                 f.close()
-                print('ERROR: File {} exists'.format(self.output))
-                print('Use `-f` to overwrite')
-                exit(1)
+                raise ValueError('ERROR: File {} exists. '.format(self.output) + 'Use `-f` to overwrite')
             except FileNotFoundError:
                 pass
             except TypeError:
