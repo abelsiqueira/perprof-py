@@ -3,6 +3,7 @@ This handle the plot using tikz.
 """
 
 import sys
+import subprocess
 import math
 from . import prof
 
@@ -91,6 +92,9 @@ class Profiler(prof.Pdata):
         try:
             with open(self.output, 'w') as f:
                 f.write(str2output)
+
+            if self.output_format == 'pdf':
+                subprocess.check_call(['pdflatex', '-interaction', 'nonstopmode', self.output])
         except TypeError:
             # When using stdout
             print(str2output, file=self.output)
