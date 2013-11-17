@@ -3,6 +3,8 @@ This handle the plot using tikz.
 """
 
 import sys
+import os.path
+import subprocess
 import math
 from . import prof
 
@@ -14,6 +16,7 @@ class Profiler(prof.Pdata):
             self.output = '{}.tex'.format(setup.get_output())
         self.tikz_header = tikz_header
         prof.Pdata.__init__(self, setup)
+        self.output_format = setup.get_output_format()
 
     def scale(self):
         self.already_scaled = True
@@ -45,7 +48,7 @@ class Profiler(prof.Pdata):
 
         str2output = ''
 
-        if self.tikz_header:
+        if self.tikz_header or self.output_format == 'pdf':
             str2output += '\\documentclass{article}\n'
             str2output += '\\usepackage[utf8]{inputenc}\n'
             str2output += '\\usepackage[T1]{fontenc}\n'
@@ -85,12 +88,18 @@ class Profiler(prof.Pdata):
         str2output += '\\end{tikzpicture}\n'
         str2output += '\\end{center}\n'
 
-        if self.tikz_header:
+        if self.tikz_header or self.output_format == 'pdf':
             str2output += '\\end{document}'
 
         try:
             with open(self.output, 'w') as f:
                 f.write(str2output)
+
+            if self.output_format == 'pdf':
+                subprocess.check_call(['pdflatex',
+                    '-interaction', 'nonstopmode',
+                    '-output-directory', os.path.dirname(self.output),
+                    self.output])
         except TypeError:
             # When using stdout
             print(str2output, file=self.output)

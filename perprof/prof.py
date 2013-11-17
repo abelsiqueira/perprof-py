@@ -30,6 +30,7 @@ class Pdata:
         self.cache = setup.using_cache()
         self.force = setup.using_force()
         self.semilog = setup.using_semilog()
+        self.output_format = setup.get_output_format()
 
     def __repr__(self):
         try:

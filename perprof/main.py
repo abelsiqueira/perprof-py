@@ -10,6 +10,13 @@ class PerProfSetup():
         self.output = args.output
         self.subset = args.subset
 
+        if args.pdf:
+            self.output_format = 'pdf'
+        elif args.tex:
+            self.output_format = 'tex'
+        else:
+            self.output_format = None
+
     def using_cache(self):
         return self.cache
 
@@ -34,6 +41,12 @@ class PerProfSetup():
     def set_output(self, output):
         self.output = output
 
+    def get_output_format(self):
+        return self.output_format
+
+    def set_output_format(self, output_format):
+        self.output_format = output_format
+
     def using_semilog(self):
         return self.semilog
 
@@ -52,13 +65,20 @@ def main():
 
     parser = argparse.ArgumentParser(
             description='A python module for performance profiling (as described by Dolan and Moré).')
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--mp', action='store_true',
+
+    backend = parser.add_mutually_exclusive_group(required=True)
+    backend.add_argument('--mp', action='store_true',
             help='Use matplotlib as backend for the plot')
-    group.add_argument('--tikz', action='store_true',
+    backend.add_argument('--tikz', action='store_true',
             help='Use LaTex/TikZ as backend for the plot (only generate the TeX file)')
-    group.add_argument('--raw', action='store_true',
+    backend.add_argument('--raw', action='store_true',
             help='Print raw data')
+
+    output_format = parser.add_mutually_exclusive_group()
+    output_format.add_argument('--tex', action='store_true',
+            help='The output file will be a (La)TeX file')
+    output_format.add_argument('--pdf', action='store_true',
+            help='The output file will be a PDF file')
 
     parser.add_argument('--semilog', action='store_true',
             help='Use logarithmic scale for the x axis of the plot.')
