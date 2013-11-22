@@ -86,14 +86,14 @@ def main():
             help='Create the header to the tikz file, enabling compilation of the result')
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
-    parser.add_argument('-o', '--output',
-            help='Name of the file to use as output (the correct extension will be add)')
-    parser.add_argument('-f', '--force', action='store_true',
-            help='Force overwrite the output file')
-    parser.add_argument('file_name', nargs='+',
-            help='The name of the files to be used for the performance profiling')
     parser.add_argument('-s', '--subset',
             help='Name of a file with a subset of problems to compare')
+    parser.add_argument('-f', '--force', action='store_true',
+            help='Force overwrite the output file')
+    parser.add_argument('-o', '--output',
+            help='Name of the file to use as output (the correct extension will be add)')
+    parser.add_argument('file_name', nargs='+',
+            help='The name of the files to be used for the performance profiling')
 
     args = parser.parse_args()
 
