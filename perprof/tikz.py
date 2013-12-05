@@ -14,6 +14,7 @@ class Profiler(prof.Pdata):
             self.output = sys.stdout
         else:
             self.output = '{}.tex'.format(setup.get_output())
+            self.output = os.path.abspath(self.output)
         self.tikz_header = tikz_header
         prof.Pdata.__init__(self, setup)
         self.output_format = setup.get_output_format()
