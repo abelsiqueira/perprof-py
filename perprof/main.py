@@ -107,11 +107,14 @@ def main():
             d = matplotlib.Profiler(s)
             d.plot()
         elif args.tikz:
-            # tikz
-            from . import tikz
+            if args.pdf and args.output is None:
+                print("ERROR: When using `--pdf` you need to provide the name of the output file.")
+            else:
+                # tikz
+                from . import tikz
 
-            d = tikz.Profiler(s, args.tikz_header)
-            d.plot()
+                d = tikz.Profiler(s, args.tikz_header)
+                d.plot()
         elif args.raw:
             # raw
             from . import prof
