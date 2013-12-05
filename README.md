@@ -1,7 +1,7 @@
 #perprof-py 
 
-A python module for performance profiling (as described by Dolan and Moré) with
-tikz outputing and matplotlib.
+A python module for performance profiling (as described by [Dolan and
+Moré](http://arxiv.org/abs/cs/0102001)) with tikz and matplotlib output.
 
 ## License
 
@@ -19,10 +19,35 @@ In the terminal:
 
 ## How to use
 
-For create a PNG file:
+Some examples of input file are provided at `test`. You can get a list of they
+with
 
-    $ perprof file_name [file_name ...]
+    $ ls test/*.sample
 
-For help
+To create a PNG file using matplotlib:
+
+    $ perprof --mp file_name [file_name ...]
+
+Example:
+
+    $ perprof --mp test/*.long
+
+To create a PDF using LaTeX and TikZ:
+
+    $ perprof --tikz --tikz-header file_name [file_name ...]
+
+Example:
+
+    $ perprof --tikz --tikz-header test/*.long
+
+To create the `.tex` file to be include in another document:
+
+    $ perprof --tikz file_name [file_name ...]
+
+Example:
+
+    $ perprof --tikz test/*.long
+
+And for help
 
     $ perprof -h

@@ -7,6 +7,7 @@ class PerProfSetup():
         self.files = args.file_name
         self.force = args.force
         self.semilog = args.semilog
+        self.bw = args.black_and_white
         self.output = args.output
         self.subset = args.subset
 
@@ -51,7 +52,13 @@ class PerProfSetup():
         return self.semilog
 
     def set_semilog(self, val):
-        self.semilog= val
+        self.semilog = val
+
+    def using_black_and_white(self):
+        return self.bw
+
+    def set_black_and_white(self, val):
+        self.bw = val
 
     def get_subset(self):
         return self.subset
@@ -80,6 +87,8 @@ def main():
     output_format.add_argument('--pdf', action='store_true',
             help='The output file will be a PDF file')
 
+    parser.add_argument('--black-and-white', action='store_true',
+            help='Use only black color.')
     parser.add_argument('--semilog', action='store_true',
             help='Use logarithmic scale for the x axis of the plot.')
     parser.add_argument('--tikz-header', action='store_true',
