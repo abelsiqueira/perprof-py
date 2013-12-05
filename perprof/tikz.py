@@ -65,6 +65,8 @@ class Profiler(prof.Pdata):
             str2output += '  \\begin{semilogxaxis}[const plot, \n'
         else:
             str2output += '  \\begin{axis}[const plot, \n'
+        if self.bw:
+            str2output += 'cycle list name=linestyles*,\n'
         str2output += '    xmin=1, xmax={:.2f},'.format(maxt)
         str2output += '    ymin=0, ymax=1,\n'
         str2output += '    ymajorgrids,\n'
