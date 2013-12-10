@@ -24,7 +24,8 @@ def str_sanitize(name):
 
     return name
 
-def parse_file(fname, subset):
+
+def parse_file(fname, subset, free_format=False):
     """
     This function parse one file.
     """
@@ -49,7 +50,7 @@ def parse_file(fname, subset):
                     if len(ldata) < 3:
                         raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
-                        data[ldata[0]] = float(ldata[2])
+                        data[ldata[0]] = float_sanitize(ldata[2])
                 elif ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:

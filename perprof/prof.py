@@ -20,7 +20,8 @@ def load_data(setup):
         subset = []
     data = {}
     for f in setup.get_files():
-        data_tmp, solver_name = parse.parse_file(f, subset)
+        data_tmp, solver_name = parse.parse_file(f, subset,
+                setup.using_free_format())
         data[solver_name] = data_tmp
     return data
 
@@ -120,13 +121,14 @@ class Pdata:
         self.times.sort()
 
     def set_percent_problems_solved_by_time(self):
+        # ppsbt = Percent Problems Solved By Time
         self.ppsbt = {}
         for s in self.solvers:
             self.ppsbt[s] = []
             for t in self.times:
                 aux = 0
                 for p in self.problems:
-                    if t > self.data[s][p]:
+                    if t >= self.data[s][p]:
                         aux += 1
                 self.ppsbt[s].append(aux / self.number_problems)
 
