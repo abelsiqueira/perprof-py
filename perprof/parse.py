@@ -16,6 +16,8 @@ is the elapsed time the solver used to reach the solution. If the solver did not
 converge, this column is ignored.
 """
 
+import re
+
 def str_sanitize(name):
     """
     This sanitize the problem name for LaTeX.
@@ -24,6 +26,19 @@ def str_sanitize(name):
 
     return name
 
+def float_sanitize(float_string):
+    """
+    This sanitize the time spending to solve a problem.
+
+    Some solvers can give the time as 0.0 and this will make the scaling step of
+    the performance profile to fail. When finding a time of 0.0 it will be
+    converted to 0.01.
+    """
+    regex = r'^0+\.0+$'  # This regex had some limitations
+    match = re.search(regex, float_string)
+    if match:
+        float_string = '{0}1'.format(float_string)
+    return float(float_string)
 
 def parse_file(fname, subset, free_format=False):
     """
