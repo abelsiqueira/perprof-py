@@ -50,8 +50,8 @@ def parse_file(fname, subset, free_format=False):
                     if len(ldata) < 3:
                         raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
-                        data[ldata[0]] = float_sanitize(ldata[2])
-                elif ldata[1] == 'd':
+                        data[ldata[0]] = float(ldata[2])
+                elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
                     raise ValueError('ERROR: The second element in the lime must be `c` or `d`: `{}`.'.format(l[:-1]))
