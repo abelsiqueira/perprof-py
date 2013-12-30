@@ -32,6 +32,7 @@ class Pdata:
         self.semilog = setup.using_semilog()
         self.bw = setup.using_black_and_white()
         self.output_format = setup.get_output_format()
+        self.tau = setup.get_tau()
 
     def __repr__(self):
         try:
