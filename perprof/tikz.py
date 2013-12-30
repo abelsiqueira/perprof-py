@@ -68,13 +68,14 @@ class Profiler(prof.Pdata):
             str2output += '  \\begin{axis}[const plot, \n'
         if self.bw:
             str2output += 'cycle list name=linestyles*,\n'
-        str2output += '    xmin=1, xmax={:.2f},'.format(maxt)
-        str2output += '    ymin=0, ymax=1,\n'
-        str2output += '    ymajorgrids,\n'
-        str2output += '    ytick={0,0.2,0.4,0.6,0.8,1.0},\n'
-        str2output += '    legend pos= south east,\n'
-        str2output += '    width=\\textwidth\n'
-        str2output += '    ]\n'
+        str2output += '    xmin=1, xmax={:.2f},' \
+        '    ymin=0, ymax=1,\n' \
+        '    ymajorgrids,\n' \
+        '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
+        '    xlabel={{Performance Ratio}}, ylabel={{Problems solved}},\n' \
+        '    legend pos= south east,\n' \
+        '    width=\\textwidth\n' \
+        '    ]\n'.format(maxt)
 
         for s in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
