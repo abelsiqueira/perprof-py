@@ -8,6 +8,12 @@ import subprocess
 import math
 from . import prof
 
+import gettext
+
+this_dir, this_filename = os.path.split(__file__)
+t = gettext.translation('perprof', os.path.join(this_dir, 'locale'))
+_ = t.gettext
+
 class Profiler(prof.Pdata):
     def __init__(self, setup, tikz_header):
         if setup.get_output() is None:
@@ -72,10 +78,11 @@ class Profiler(prof.Pdata):
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
-        '    xlabel={{Performance Ratio}}, ylabel={{Problems solved}},\n' \
+        '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
-        '    ]\n'.format(maxt)
+        '    ]\n'.format(maxt, xlabel=_('Performance Ratio'),
+                ylabel=_('Problems solved'))
 
         for s in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
