@@ -1,0 +1,52 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[top=3.3cm,left=2.9cm,right=2.9cm,bottom=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{indentfirst}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{url}
+\usepackage{hyperref}
+
+\usepackage[hyperref=true]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+\title{perprof-py -- A Python Package for Performance Profile}
+\author{Raniere Gaia Costa da Silva\footnote{Instituto de Matemática,
+Estatística e Computação Científica, University of Campinas}
+\and
+Abel Soares Siqueira\footnote{Instituto de Matemática,
+Estatística e Computação Científica, University of Campinas}
+\and
+Luiz Rafael dos Santos\footnote{Instituto Federal Catarinense and Instituto de Matemática,
+Estatística e Computação Científica, University of  Campinas}}
+\date{}
+
+\maketitle
+
+Benchmarking optimization packages are very important in optimization field, not
+only because it is one of the way to compare packages, but also to uncover
+deficiencies that could be overlooked. During benchmarking, one can obtain
+several informations, like CPU time, number of functions evaluations, number of
+iterations and so on. These informations, if presented as tables, can be
+difficult to be analyzed, due, for instance, to large amount of data. Therefore,
+researchers started testing tools to better process and understand this data.
+One of the most widespread ways to do so is using Performance Profile graphics
+proposed by \citeauthor{Dolan2001}.
+
+In this context, we implemented a free software that makes Performance Profile
+using data provided by user in a friendly manner. This software produces
+graphics in PDF using LaTeX with PGF/TikZ\nocite{TikZ} and
+pgfplots\nocite{pgfplots} packages, in PNG using matplotlib\nocite{Hunter:2007}
+and can also be easily extended to use with other plot library. The software is
+implemented in Python3 with support for internationalization and is available on
+\url{https://github.com/abelsiqueira/perprof-py}.
+
+\printbibliography
+
+\section*{License}
+This work is licensed under the Creative Commons Attribution 4.0 International
+License. To view a copy of this license, visit
+\url{http://creativecommons.org/licenses/by/4.0/deed.en_US}.
+\end{document}
