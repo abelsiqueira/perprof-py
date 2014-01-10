@@ -55,6 +55,7 @@ class Profiler(prof.Pdata):
             str2output += '\\usepackage[T1]{fontenc}\n'
             str2output += '\\usepackage{tikz}\n'
             str2output += '\\usepackage{pgfplots}\n'
+            str2output += '\\pgfplotsset{compat=1.9}\n'
             str2output += '\\usepackage{geometry}\n'
             str2output += '\\geometry{top=2cm,bottom=2cm,left=2cm,right=2cm}\n\n'
             str2output += '\\begin{document}\n'
