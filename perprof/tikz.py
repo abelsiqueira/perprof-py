@@ -50,16 +50,14 @@ class Profiler(prof.Pdata):
         str2output = ''
 
         if self.tikz_header or self.output_format == 'pdf':
-            str2output += '\\documentclass{article}\n'
+            str2output += '\\documentclass{standalone}\n'
             str2output += '\\usepackage[utf8]{inputenc}\n'
             str2output += '\\usepackage[T1]{fontenc}\n'
             str2output += '\\usepackage{tikz}\n'
             str2output += '\\usepackage{pgfplots}\n'
-            str2output += '\\usepackage{geometry}\n'
-            str2output += '\\geometry{top=2cm,bottom=2cm,left=2cm,right=2cm}\n\n'
             str2output += '\\begin{document}\n'
-
-        str2output += '\\begin{center}\n'
+        else:
+            str2output += '\\begin{center}\n'
         str2output += '\\begin{tikzpicture}\n'
 
         if self.semilog:
@@ -89,10 +87,10 @@ class Profiler(prof.Pdata):
         else:
             str2output += '  \\end{axis}\n'
         str2output += '\\end{tikzpicture}\n'
-        str2output += '\\end{center}\n'
-
         if self.tikz_header or self.output_format == 'pdf':
             str2output += '\\end{document}'
+        else:
+            str2output += '\\end{center}\n'
 
         try:
             with open(self.output, 'w') as f:
