@@ -55,7 +55,12 @@ class Profiler(prof.Pdata):
             str2output += '\\usepackage[T1]{fontenc}\n'
             str2output += '\\usepackage{tikz}\n'
             str2output += '\\usepackage{pgfplots}\n'
-            str2output += '\\pgfplotsset{compat=1.9}\n'
+            if self.pgfplot_version is not None:
+                str2output += '\\pgfplotsset{{compat={0}}}\n'.format(
+                        self.pgfplot_version)
+            else:
+                str2output += '\\pgfplotsset{compat=newest,compat/show ' \
+                        'suggested version=false}\n'
             str2output += '\\begin{document}\n'
         else:
             str2output += '\\begin{center}\n'
