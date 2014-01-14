@@ -55,7 +55,7 @@ class Profiler(prof.Pdata):
             str2output += '\\usepackage[T1]{fontenc}\n'
             str2output += '\\usepackage{tikz}\n'
             str2output += '\\usepackage{pgfplots}\n'
-            str2output += '\\pgfplotsset{compat=1.9}\n'
+            str2output += '\\pgfplotsset{compat=1.8}\n'
             str2output += '\\begin{document}\n'
         else:
             str2output += '\\begin{center}\n'
