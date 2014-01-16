@@ -3,6 +3,7 @@
 class PerProfSetup():
     """This is a class to store the files to be used."""
     def __init__(self, args):
+        self.free_format = args.free_format
         self.cache = args.cache
         self.files = args.file_name
         self.force = args.force
@@ -17,6 +18,12 @@ class PerProfSetup():
             self.output_format = 'tex'
         else:
             self.output_format = None
+
+    def using_free_format(self):
+        return self.free_format
+
+    def set_free_format(self, val):
+        self.free_format = val
 
     def using_cache(self):
         return self.cache
@@ -87,10 +94,12 @@ def main():
     output_format.add_argument('--pdf', action='store_true',
             help='The output file will be a PDF file')
 
+    parser.add_argument('--free-format', action='store_true',
+            help='When parsing file handle all non `c` character as `d`')
     parser.add_argument('--black-and-white', action='store_true',
             help='Use only black color.')
     parser.add_argument('--semilog', action='store_true',
-            help='Use logarithmic scale for the x axis of the plot.')
+            help='Use logarithmic scale for the x axis of the plot')
     parser.add_argument('--tikz-header', action='store_true',
             help='Create the header to the tikz file, enabling compilation of the result')
     parser.add_argument('-c', '--cache', action='store_true',
