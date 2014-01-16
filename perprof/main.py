@@ -11,6 +11,7 @@ class PerProfSetup():
         self.bw = args.black_and_white
         self.output = args.output
         self.subset = args.subset
+        self.pgfplot_version = args.pgfplotcompat
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -73,6 +74,12 @@ class PerProfSetup():
     def set_subset(self, subset):
         self.subset = subset
 
+    def get_pgfplot_version(self):
+        return self.pgfplot_version
+
+    def set_pgfplot_version(self, version):
+        self.pgfplot_version = version
+
 def main():
     """This is the entry point when calling perprof."""
     import argparse
@@ -102,6 +109,8 @@ def main():
             help='Use logarithmic scale for the x axis of the plot')
     parser.add_argument('--tikz-header', action='store_true',
             help='Create the header to the tikz file, enabling compilation of the result')
+    parser.add_argument('--pgfplotcompat', type=float, default=None,
+            help='Set pgfplots backwards compatibility mode to given version')
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
     parser.add_argument('-s', '--subset',
