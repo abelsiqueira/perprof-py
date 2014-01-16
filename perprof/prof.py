@@ -79,8 +79,8 @@ class Pdata:
             self.number_problems
         except:
             p = set()
-            for i in self.data.keys():
-                for j in self.data[i].keys():
+            for i in self.data:
+                for j in self.data[i]:
                     p.add(j)
             self.problems = p
             self.number_problems = len(p)
