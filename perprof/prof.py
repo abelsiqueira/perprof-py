@@ -34,6 +34,7 @@ class Pdata:
         self.bw = setup.using_black_and_white()
         self.output_format = setup.get_output_format()
         self.pgfplot_version = setup.get_pgfplot_version()
+        self.tau = setup.get_tau()
 
     def __repr__(self):
         try:

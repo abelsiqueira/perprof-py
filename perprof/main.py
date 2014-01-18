@@ -12,6 +12,7 @@ class PerProfSetup():
         self.output = args.output
         self.subset = args.subset
         self.pgfplot_version = args.pgfplotcompat
+        self.tau = args.tau
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -80,6 +81,12 @@ class PerProfSetup():
     def set_pgfplot_version(self, version):
         self.pgfplot_version = version
 
+    def get_tau(self):
+        return self.tau
+
+    def set_tau(self, tau):
+        self.tau = tau
+
 def main():
     """This is the entry point when calling perprof."""
     import argparse
@@ -115,6 +122,8 @@ def main():
             help='Enable cache.')
     parser.add_argument('-s', '--subset',
             help='Name of a file with a subset of problems to compare')
+    parser.add_argument('--tau', type=float,
+            help='Limit the x-axis based this value')
     parser.add_argument('-f', '--force', action='store_true',
             help='Force overwrite the output file')
     parser.add_argument('-o', '--output',

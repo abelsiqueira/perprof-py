@@ -46,6 +46,11 @@ class Profiler(prof.Pdata):
             self.set_percent_problems_solved_by_time()
 
         maxt = max(self.times)
+        try:
+            self.tau
+            maxt = min(maxt, self.tau)
+        except:
+            self.tau = maxt
 
         str2output = ''
 
@@ -83,9 +88,12 @@ class Profiler(prof.Pdata):
         for s in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
             for i in range(len(self.times)):
-                t = self.times[i]
-                p = self.ppsbt[s][i]
-                str2output += '    ({:.4f},{:.4f})\n'.format(t,p)
+                if self.times[i] <= self.tau:
+                    t = self.times[i]
+                    p = self.ppsbt[s][i]
+                    str2output += '    ({:.4f},{:.4f})\n'.format(t,p)
+                else:
+                    break
             str2output += '  };\n'
             str2output += '  \\addlegendentry{' + s + '}\n'
         if self.semilog:
