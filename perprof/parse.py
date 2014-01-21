@@ -26,7 +26,7 @@ def str_sanitize(name):
 
     return name
 
-def parse_file(fname, subset, free_format=False):
+def parse_file(fname, subset, success, free_format=False):
     """
     This function parse one file.
     """
@@ -39,7 +39,7 @@ def parse_file(fname, subset, free_format=False):
     with open(fname) as f:
         for l in f:
             ldata = l.split()
-            if ldata[0] == '#Name' and len(ldata) == 2:
+            if ldata[0] == '#Name' and len(ldata) >= 2:
                 algname = str_sanitize(ldata[1])
             elif len(ldata) < 2:
                 raise ValueError('ERROR: Line must have at least 2 elements: `{}`.'.format(l.strip()))
@@ -47,7 +47,7 @@ def parse_file(fname, subset, free_format=False):
                 ldata[0] = str_sanitize(ldata[0])
                 if has_subset and ldata[0] not in subset:
                     continue
-                if ldata[1] == 'c':
+                if ldata[1] in success:
                     if len(ldata) < 3:
                         raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
