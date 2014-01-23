@@ -26,20 +26,6 @@ def str_sanitize(name):
 
     return name
 
-def float_sanitize(float_string):
-    """
-    This sanitize the time spending to solve a problem.
-
-    Some solvers can give the time as 0.0 and this will make the scaling step of
-    the performance profile to fail. When finding a time of 0.0 it will be
-    converted to 0.01.
-    """
-    regex = r'^0+\.0+$'  # This regex had some limitations
-    match = re.search(regex, float_string)
-    if match:
-        float_string = '{0}1'.format(float_string)
-    return float(float_string)
-
 def parse_file(fname, subset, free_format=False):
     """
     This function parse one file.
@@ -66,6 +52,8 @@ def parse_file(fname, subset, free_format=False):
                         raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
                         data[ldata[0]] = float(ldata[2])
+                        if data[ldata[0]] == 0:
+                            raise ValueError("ERROR: Time spending can't be zero.")
                 elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
