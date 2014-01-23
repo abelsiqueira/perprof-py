@@ -112,10 +112,14 @@ class Profiler(prof.Pdata):
                 f.write(str2output)
 
             if self.output_format == 'pdf':
-                subprocess.check_call(['pdflatex',
+                if not self.pdf_verbose:
+                    print("Compiling .tex to .pdf")
+                out = subprocess.check_output(['pdflatex',
                     '-interaction', 'nonstopmode',
                     '-output-directory', os.path.dirname(self.output),
                     self.output])
+                if self.pdf_verbose:
+                    print(out)
         except TypeError:
             # When using stdout
             print(str2output, file=self.output)

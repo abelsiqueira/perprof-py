@@ -13,6 +13,7 @@ class PerProfSetup():
         self.subset = args.subset
         self.pgfplot_version = args.pgfplotcompat
         self.tau = args.tau
+        self.pdf_verbose = args.pdf_verbose
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -69,6 +70,12 @@ class PerProfSetup():
     def set_black_and_white(self, val):
         self.bw = val
 
+    def get_pdf_verbose(self):
+        return self.pdf_verbose
+
+    def set_pdf_verbose(self, val):
+        self.pdf_verbose = val
+
     def get_subset(self):
         return self.subset
 
@@ -110,6 +117,8 @@ def main():
 
     parser.add_argument('--free-format', action='store_true',
             help='When parsing file handle all non `c` character as `d`')
+    parser.add_argument('--pdf-verbose', action='store_true',
+            help='Print output of pdflatex')
     parser.add_argument('--black-and-white', action='store_true',
             help='Use only black color.')
     parser.add_argument('--semilog', action='store_true',
