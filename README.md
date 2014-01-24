@@ -51,3 +51,18 @@ Example:
 And for help
 
     $ perprof -h
+
+## Use a file for your flags
+
+To fully customize your needs, you may need to add a few flags for perprof. The
+best way to do this is to create a file with a flag in each line and calling
+`perprof` with that file as argument, with a `@` preceding the file name:
+
+    $ perprof @filename [more flags]
+
+A file test/pdf.args in included as example. To use it, enter
+
+    $ perprof test/*.long -f -o tmp @test/pdf.args
+
+Please note that the arguments in the the file and in the command line are
+treated equally, so you can't add confliting options.
