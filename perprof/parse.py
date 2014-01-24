@@ -16,6 +16,8 @@ is the elapsed time the solver used to reach the solution. If the solver did not
 converge, this column is ignored.
 """
 
+import re
+
 def str_sanitize(name):
     """
     This sanitize the problem name for LaTeX.
@@ -23,7 +25,6 @@ def str_sanitize(name):
     name = name.replace('_', '-')
 
     return name
-
 
 def parse_file(fname, subset, free_format=False):
     """
@@ -51,6 +52,8 @@ def parse_file(fname, subset, free_format=False):
                         raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
                     else:
                         data[ldata[0]] = float(ldata[2])
+                        if data[ldata[0]] == 0:
+                            raise ValueError("ERROR: Time spending can't be zero.")
                 elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
