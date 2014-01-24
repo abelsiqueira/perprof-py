@@ -99,7 +99,8 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-            description='A python module for performance profiling (as described by Dolan and Moré).')
+            description='A python module for performance profiling (as described by Dolan and Moré).',
+            fromfile_prefix_chars='@')
 
     backend = parser.add_mutually_exclusive_group(required=True)
     backend.add_argument('--mp', action='store_true',
