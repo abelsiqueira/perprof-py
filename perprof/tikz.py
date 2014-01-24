@@ -112,8 +112,11 @@ class Profiler(prof.Pdata):
                 f.write(str2output)
 
             if self.output_format == 'pdf':
-                subprocess.check_call(['pdflatex',
-                    '-interaction', 'nonstopmode',
+                if self.pdf_verbose:
+                    mode = 'nonstopmode'
+                else:
+                    mode = 'batchmode'
+                subprocess.check_call(['pdflatex', '-interaction', mode,
                     '-output-directory', os.path.dirname(self.output),
                     self.output])
         except TypeError:
