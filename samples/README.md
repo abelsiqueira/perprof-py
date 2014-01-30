@@ -1,10 +1,3 @@
-Unit Test Examples
-
-- parse-error0.sample
-- parse-error1.sample
-- parse-error2.sample
-- sanitize.sample
-
 Examples from http://plato.asu.edu/ftp/ampl-nlp.html
 
 - conpt-31.8.sample
