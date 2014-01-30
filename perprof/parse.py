@@ -53,7 +53,7 @@ def parse_file(fname, subset, success, free_format=False):
                     else:
                         data[ldata[0]] = float(ldata[2])
                         if data[ldata[0]] == 0:
-                            raise ValueError("ERROR: Time spending can't be zero.")
+                            raise ValueError("ERROR: Time spending can't be zero: Problem '{:1}' from '{:2}'.".format(ldata[0], fname))
                 elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
