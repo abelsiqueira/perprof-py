@@ -18,6 +18,13 @@ converge, this column is ignored.
 
 import re
 
+def _error_message(filename, line_number, details):
+    """
+    Return error message.
+    """
+    return 'ERROR when reading line #{} of {}:' \
+            '\n    {}'.format(line_number, filename, details)
+
 def str_sanitize(name):
     """
     This sanitize the problem name for LaTeX.
@@ -26,7 +33,7 @@ def str_sanitize(name):
 
     return name
 
-def parse_file(fname, subset, success, free_format=False):
+def parse_file(filename, subset=[], success='c', free_format=False):
     """
     This function parse one file.
     """
@@ -35,27 +42,34 @@ def parse_file(fname, subset, success, free_format=False):
     else:
         has_subset = False;
     data = {}
-    algname = str_sanitize(fname)
-    with open(fname) as f:
+    algname = str_sanitize(filename)
+    with open(filename) as f:
+        line_number = 0
         for l in f:
+            line_number += 1
             ldata = l.split()
             if ldata[0] == '#Name' and len(ldata) >= 2:
                 algname = str_sanitize(ldata[1])
             elif len(ldata) < 2:
-                raise ValueError('ERROR: Line must have at least 2 elements: `{}`.'.format(l.strip()))
+                raise ValueError(_error_message(filename, line_number,
+                        'This line must have at least 2 elements.'))
             else:
                 ldata[0] = str_sanitize(ldata[0])
                 if has_subset and ldata[0] not in subset:
                     continue
                 if ldata[1] in success:
                     if len(ldata) < 3:
-                        raise ValueError('ERROR: When problem converge line must have at least 3 elements: `{}`.'.format(l.strip()))
+                        raise ValueError(_error_message(filename, line_number,
+                                'This line must have at least 3 elements.'))
                     else:
                         data[ldata[0]] = float(ldata[2])
                         if data[ldata[0]] == 0:
-                            raise ValueError("ERROR: Time spending can't be zero.")
+                            raise ValueError(_error_message(filename,
+                                    line_number, "Time spending can't be zero."))
                 elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
-                    raise ValueError('ERROR: The second element in the lime must be `c` or `d`: `{}`.'.format(l[:-1]))
+                    raise ValueError(_error_message(filename, line_number,
+                            'The second element in this lime must be ' \
+                            '{} or d.'.format(', '.join(success))))
     return data, algname
