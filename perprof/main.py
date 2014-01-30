@@ -14,6 +14,7 @@ class PerProfSetup():
         self.pgfplot_version = args.pgfplotcompat
         self.tau = args.tau
         self.pdf_verbose = args.pdf_verbose
+        self.success = args.success.split(',')
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -63,6 +64,12 @@ class PerProfSetup():
 
     def set_semilog(self, val):
         self.semilog = val
+
+    def set_success(self, val):
+        self.success = val
+
+    def get_success(self):
+        return self.success
 
     def using_black_and_white(self):
         return self.bw
@@ -124,6 +131,8 @@ def main():
             help='Use only black color.')
     parser.add_argument('--semilog', action='store_true',
             help='Use logarithmic scale for the x axis of the plot')
+    parser.add_argument('--success', type=str, default='c',
+            help='Flags that are interpreted as success, separated by commas.  Default: `c`')
     parser.add_argument('--tikz-header', action='store_true',
             help='Create the header to the tikz file, enabling compilation of the result')
     parser.add_argument('--pgfplotcompat', type=float, default=None,
