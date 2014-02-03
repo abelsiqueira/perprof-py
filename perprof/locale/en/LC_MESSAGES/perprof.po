@@ -5,21 +5,42 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-12-30 21:50+BRST\n"
+"POT-Creation-Date: 2014-02-03 18:31+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
+#: perprof/parse.py:32
+msgid ""
+"ERROR when reading line #{} of {}:\n"
+"    {}"
+msgstr ""
 
-#: perprof/tikz.py:78
+#: perprof/parse.py:62
+msgid "This line must have at least 2 elements."
+msgstr ""
+
+#: perprof/parse.py:70
+msgid "This line must have at least 3 elements."
+msgstr ""
+
+#: perprof/parse.py:75
+msgid "Time spending can't be zero."
+msgstr ""
+
+#: perprof/parse.py:80
+msgid "The second element in this lime must be {} or d."
+msgstr ""
+
+#: perprof/tikz.py:93
 msgid "Performance Ratio"
 msgstr ""
 
-#: perprof/tikz.py:79
+#: perprof/tikz.py:94
 msgid "Problems solved"
 msgstr ""
-

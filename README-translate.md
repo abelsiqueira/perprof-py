@@ -40,3 +40,8 @@ could use
 
     $ pygettext.py -p perprof/locale/ -o perprof.pot \
     perprof/*.py
+
+To update the translation
+
+    $ msgmerge -U perprof/locale/xx_yy/LC_MESSAGES/perporf.po \
+    perporflocale/perprof.pot
