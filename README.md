@@ -17,6 +17,11 @@ In the terminal:
     # pip install -r REQUIREMENTS
     # python setup.py install
 
+If you use bash and bash-completion, you can, and should, also copy the
+`perprof.bash-completion` to your completions folder. This folder is
+`/usr/share/bash-completion/completions` for some distributions. Change the name
+of the file `perprof.bash-completion` to `perprof`.
+
 ## How to use
 
 Some examples of input file are provided at `test`. You can get a list of they
