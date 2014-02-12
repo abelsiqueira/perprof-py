@@ -21,7 +21,7 @@ def load_data(setup):
     data = {}
     for f in setup.get_files():
         data_tmp, solver_name = parse.parse_file(f, subset,
-                setup.using_free_format())
+                setup.success, setup.using_free_format())
         data[solver_name] = data_tmp
     return data
 
