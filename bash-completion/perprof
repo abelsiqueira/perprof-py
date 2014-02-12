@@ -1,0 +1,46 @@
+_perprof()
+{
+  local cur prev opts
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  opts="--help --mp --tikz --raw --tex --pdf --tikz-header --semilog \
+  --black-and-white --free-format --pgfplotcompat --cache --tau --force \
+  --output --subset \
+  -h -c -s -f -o"
+
+
+  case "${prev}" in
+    --pgfplotcompat)
+      versions="1.7 1.8 1.9"
+      COMPREPLY=( $(compgen -W "$versions" ${cur}) )
+      return 0
+      ;;
+    --tau)
+      #[ -z "${cur}" ] && return 0
+      #re='^[0-9]+([.][0-9]+)?([dDeE][+-]?[0-9]+)?$'
+      #if ! [[ "${cur}" =~ "${re}" ]]; then
+        #echo "Value of tau needs to be a float"
+      #fi
+      return 0
+      ;;
+    --subset)
+      _filedir
+      return 0
+      ;;
+    *)
+      _filedir
+      ;;
+  esac
+
+  if [[ ${cur} == -* ]] ; then
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+  elif [[ ${cur} == @* ]]; then
+    p=${cur#"@"}
+    COMPREPLY=( $(compgen -P @ -f $p) )
+    return 0
+  fi
+}
+complete -F _perprof perprof
+

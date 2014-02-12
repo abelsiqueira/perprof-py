@@ -1,6 +1,16 @@
 from distutils.core import setup
 from setuptools import setup
 
+import os
+
+if os.access('/usr/share/bash-completion/completions/', os.W_OK):
+    print('root')
+    data_files = [
+        ('/usr/share/bash-completion/completions/', ['bash-completion/perprof'])]
+else:
+    print('normal')
+    data_files = []
+
 setup(
     name='perprof',
     version='0.1.0',
@@ -12,5 +22,6 @@ setup(
     description='A python module for performance profiling (as described by Dolan and Moré)',
     long_description=open('README.md').read(),
     entry_points={
-        'console_scripts':['perprof = perprof.main:main']}
+        'console_scripts':['perprof = perprof.main:main']},
+    data_files=data_files
 )
