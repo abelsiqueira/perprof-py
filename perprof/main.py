@@ -3,6 +3,7 @@
 class PerProfSetup():
     """This is a class to store the files to be used."""
     def __init__(self, args):
+        self.lang = args.lang
         self.free_format = args.free_format
         self.cache = args.cache
         self.files = args.file_name
@@ -22,6 +23,12 @@ class PerProfSetup():
             self.output_format = 'tex'
         else:
             self.output_format = None
+
+    def using_lang(self):
+        return self.lang
+
+    def set_lang(self, lang):
+        self.lang = lang
 
     def using_free_format(self):
         return self.free_format
@@ -123,6 +130,8 @@ def main():
     output_format.add_argument('--pdf', action='store_true',
             help='The output file will be a PDF file')
 
+    parser.add_argument('-l', '--lang', choices=['en', 'pt_BR'], default='en',
+            help='Set language for axis label')
     parser.add_argument('--free-format', action='store_true',
             help='When parsing file handle all non `c` character as `d`')
     parser.add_argument('--pdf-verbose', action='store_true',

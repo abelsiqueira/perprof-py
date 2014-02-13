@@ -4,6 +4,7 @@ This handle the plot using tikz.
 
 import sys
 import os.path
+import plataform
 import subprocess
 import math
 from . import prof
@@ -18,6 +19,16 @@ class Profiler(prof.Pdata):
         self.tikz_header = tikz_header
         prof.Pdata.__init__(self, setup)
         self.output_format = setup.get_output_format()
+
+        # Language for the axis label
+        if plataform.system() == 'Windows':
+            from . import wintranslate
+            self.axis_lang = wintranslate.translate
+        else:
+            import gettext
+            t = gettext.translation('perprof', os.path.join(this_dir,
+                'locale'), [setup.lang])
+            self.axis_lang = t.gettext
 
     def scale(self):
         self.already_scaled = True
@@ -84,7 +95,9 @@ class Profiler(prof.Pdata):
         '    xlabel={{Performance Ratio}}, ylabel={{Problems solved}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
-        '    ]\n'.format(maxt)
+        '    ]\n'.format(maxt,
+                xlabel=self.axis_lang('Performance Ratio'),
+                ylabel=self.axis_lang('Problems solved'))
 
         for s in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
