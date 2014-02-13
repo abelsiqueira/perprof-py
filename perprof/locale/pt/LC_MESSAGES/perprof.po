@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-02-03 18:31+BRST\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: perprof/parse.py:32
+msgid ""
+"ERROR when reading line #{} of {}:\n"
+"    {}"
+msgstr "ERRO ao ler linha #{} de {}:\n    {}"
+
+#: perprof/parse.py:62
+msgid "This line must have at least 2 elements."
+msgstr "Essa linha precisa ter pelo menos 2 elementos."
+
+#: perprof/parse.py:70
+msgid "This line must have at least 3 elements."
+msgstr "Essa linha precisa ter pelo menos 3 elementos."
+
+#: perprof/parse.py:75
+msgid "Time spending can't be zero."
+msgstr "Tempo gasto não pode ser zero."
+
+#: perprof/parse.py:80
+msgid "The second element in this lime must be {} or d."
+msgstr "Segundo elemento nessa linha deve ser {} ou d."
+
+#: perprof/tikz.py:93
+msgid "Performance Ratio"
+msgstr "Raz\~{a}o de Desempenho"
+
+#: perprof/tikz.py:94
+msgid "Problems solved"
+msgstr "Problemas resolvidos"
