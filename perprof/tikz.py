@@ -25,6 +25,11 @@ class Profiler(prof.Pdata):
         prof.Pdata.__init__(self, setup)
         self.output_format = setup.get_output_format()
 
+        # Language for the axis label
+        t = gettext.translation('perprof', os.path.join(this_dir,
+            'locale'), [setup.lang])
+        self.axis_lang = t.gettext
+
     def scale(self):
         self.already_scaled = True
         super().scale()
@@ -90,8 +95,9 @@ class Profiler(prof.Pdata):
         '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
-        '    ]\n'.format(maxt, xlabel=_('Performance Ratio'),
-                ylabel=_('Problems solved'))
+        '    ]\n'.format(maxt,
+                xlabel=self.axis_lang('Performance Ratio'),
+                ylabel=self.axis_lang('Problems solved'))
 
         for s in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
