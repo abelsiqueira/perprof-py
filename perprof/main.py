@@ -1,5 +1,8 @@
 # This is the main file for perprof
 
+SUPPORT_MP = ['png']
+SUPPORT_TIKZ = ['tex','pdf']
+
 class PerProfSetup():
     """This is a class to store the files to be used."""
     def __init__(self, args):
@@ -19,10 +22,26 @@ class PerProfSetup():
 
         if args.pdf:
             self.output_format = 'pdf'
+        elif args.png:
+            self.output_format = 'png'
         elif args.tex:
             self.output_format = 'tex'
         else:
-            self.output_format = None
+            if args.mp:
+                self.output_format = 'png'
+            elif args.tikz:
+                self.output_format = 'pdf'
+            else:
+                self.output_format = None
+
+        if args.mp and self.output_format not in SUPPORT_MP:
+            raise Exception("Output option {} not supported by " \
+                    "matplotlib".format(self.output_format.upper()))
+        elif args.tikz and self.output_format not in SUPPORT_TIKZ:
+            raise Exception("Output option {} not supported by " \
+                    "TikZ".format(self.output_format.upper()))
+        elif args.raw and self.output_format:
+            raise Exception("--raw does not support output except standard output")
 
     def using_lang(self):
         return self.lang
@@ -116,19 +135,32 @@ def main():
             description='A python module for performance profiling (as described by Dolan and Moré).',
             fromfile_prefix_chars='@')
 
-    backend = parser.add_mutually_exclusive_group(required=True)
+    backend_args = parser.add_argument_group("Backend options")
+    backend = backend_args.add_mutually_exclusive_group(required=True)
     backend.add_argument('--mp', action='store_true',
-            help='Use matplotlib as backend for the plot')
-    backend.add_argument('--tikz', action='store_true',
-            help='Use LaTex/TikZ as backend for the plot (only generate the TeX file)')
+            help='Use matplotlib as backend for the plot. Default ' \
+            'output: PNG')
+    backend.add_argument('--tikz', action='store_true', 
+            help='Use LaTex/TikZ/pgfplots as backend for the plot. ' \
+            'Default output: PDF')
     backend.add_argument('--raw', action='store_true',
-            help='Print raw data')
+            help='Print raw data. Default output: standard output')
 
-    output_format = parser.add_mutually_exclusive_group()
+    output_format_args = parser.add_argument_group("Output formats")
+    output_format = output_format_args.add_mutually_exclusive_group()
+    output_format.add_argument('--png', action='store_true',
+            help='The output file will be a PNG file')
     output_format.add_argument('--tex', action='store_true',
             help='The output file will be a (La)TeX file')
     output_format.add_argument('--pdf', action='store_true',
             help='The output file will be a PDF file')
+
+    tikz_options = parser.add_argument_group("Tikz options");
+    tikz_options.add_argument('--standalone', action='store_true',
+            help='Create the header as a standalone to the tex file, " \
+                    "enabling compilation of the result')
+    tikz_options.add_argument('--pgfplotcompat', type=float, default=None,
+            help='Set pgfplots backwards compatibility mode to given version')
 
     parser.add_argument('-l', '--lang', choices=['en', 'pt_BR'], default='en',
             help='Set language for axis label')
@@ -142,10 +174,7 @@ def main():
             help='Use logarithmic scale for the x axis of the plot')
     parser.add_argument('--success', type=str, default='c',
             help='Flags that are interpreted as success, separated by commas.  Default: `c`')
-    parser.add_argument('--tikz-header', action='store_true',
-            help='Create the header to the tikz file, enabling compilation of the result')
-    parser.add_argument('--pgfplotcompat', type=float, default=None,
-            help='Set pgfplots backwards compatibility mode to given version')
+
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
     parser.add_argument('-s', '--subset',
@@ -161,7 +190,11 @@ def main():
 
     args = parser.parse_args()
 
-    s = PerProfSetup(args)
+    try:
+        s = PerProfSetup(args)
+    except Exception as error:
+        print(error)
+        exit(1)
 
     try:
         if args.mp:
@@ -171,13 +204,14 @@ def main():
             d = matplotlib.Profiler(s)
             d.plot()
         elif args.tikz:
-            if args.pdf and args.output is None:
-                print("ERROR: When using `--pdf` you need to provide the name of the output file.")
+            if s.get_output_format() == 'pdf' and args.output is None:
+                print("ERROR: When using PDF output, you need to provide " \
+                        "the name of the output file.")
             else:
                 # tikz
                 from . import tikz
 
-                d = tikz.Profiler(s, args.tikz_header)
+                d = tikz.Profiler(s, args.standalone)
                 d.plot()
         elif args.raw:
             # raw

@@ -15,13 +15,13 @@ t = gettext.translation('perprof', os.path.join(this_dir, 'locale'))
 _ = t.gettext
 
 class Profiler(prof.Pdata):
-    def __init__(self, setup, tikz_header):
+    def __init__(self, setup, standalone):
         if setup.get_output() is None:
             self.output = sys.stdout
         else:
             self.output = '{}.tex'.format(setup.get_output())
             self.output = os.path.abspath(self.output)
-        self.tikz_header = tikz_header
+        self.standalone = standalone
         prof.Pdata.__init__(self, setup)
         self.output_format = setup.get_output_format()
 
@@ -65,7 +65,7 @@ class Profiler(prof.Pdata):
 
         str2output = ''
 
-        if self.tikz_header or self.output_format == 'pdf':
+        if self.standalone or self.output_format == 'pdf':
             str2output += '\\documentclass{standalone}\n'
             str2output += '\\usepackage[utf8]{inputenc}\n'
             str2output += '\\usepackage[T1]{fontenc}\n'
@@ -115,7 +115,7 @@ class Profiler(prof.Pdata):
         else:
             str2output += '  \\end{axis}\n'
         str2output += '\\end{tikzpicture}\n'
-        if self.tikz_header or self.output_format == 'pdf':
+        if self.standalone or self.output_format == 'pdf':
             str2output += '\\end{document}'
         else:
             str2output += '\\end{center}\n'
