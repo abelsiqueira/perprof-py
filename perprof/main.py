@@ -192,11 +192,7 @@ def main():
 
     try:
         s = PerProfSetup(args)
-    except Exception as error:
-        print(error)
-        exit(1)
 
-    try:
         if args.mp:
             # matplotlib
             from . import matplotlib
@@ -219,6 +215,6 @@ def main():
             print('raw')
             
             print(prof.Pdata(s))
-    except ValueError as error:
+    except Exception as error:
         print(error)
 
