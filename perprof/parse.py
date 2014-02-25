@@ -16,14 +16,7 @@ is the elapsed time the solver used to reach the solution. If the solver did not
 converge, this column is ignored.
 """
 
-import os.path
-import re
-
-import gettext
-
-this_dir, this_filename = os.path.split(__file__)
-t = gettext.translation('perprof', os.path.join(this_dir, 'locale'))
-_ = t.gettext
+from .i18n import *
 
 def _error_message(filename, line_number, details):
     """
@@ -40,21 +33,21 @@ def str_sanitize(name):
 
     return name
 
-def parse_file(filename, subset=[], success='c', free_format=False):
+def parse_file(filename, subset=None, success='c', free_format=False):
     """
     This function parse one file.
     """
-    if len(subset) > 0:
-        has_subset = True;
+    if subset:
+        has_subset = True
     else:
-        has_subset = False;
+        has_subset = False
     data = {}
     algname = str_sanitize(filename)
-    with open(filename) as f:
+    with open(filename) as file_:
         line_number = 0
-        for l in f:
+        for line in file_:
             line_number += 1
-            ldata = l.split()
+            ldata = line.split()
             if ldata[0] == '#Name' and len(ldata) >= 2:
                 algname = str_sanitize(ldata[1])
             elif len(ldata) < 2:
@@ -80,5 +73,6 @@ def parse_file(filename, subset=[], success='c', free_format=False):
                             _('The second element in this lime must be {} or d.').format(
                                 ', '.join(success))))
     if not data:
-        raise ValueError("ERROR: List of problems (intersected with subset, if any) is empty")
+        raise ValueError(
+                _("ERROR: List of problems (intersected with subset, if any) is empty"))
     return data, algname

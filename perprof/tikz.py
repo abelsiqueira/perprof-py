@@ -5,14 +5,9 @@ This handle the plot using tikz.
 import sys
 import os.path
 import subprocess
-import math
-from . import prof
-
 import gettext
-
-this_dir, this_filename = os.path.split(__file__)
-t = gettext.translation('perprof', os.path.join(this_dir, 'locale'))
-_ = t.gettext
+from . import prof
+from .i18n import *
 
 class Profiler(prof.Pdata):
     def __init__(self, setup, standalone):
@@ -26,9 +21,10 @@ class Profiler(prof.Pdata):
         self.output_format = setup.get_output_format()
 
         # Language for the axis label
-        t = gettext.translation('perprof', os.path.join(this_dir,
-            'locale'), [setup.lang])
-        self.axis_lang = t.gettext
+        this_dir, this_filename = os.path.split(__file__)
+        translation = gettext.translation('perprof',
+                os.path.join(this_dir, 'locale'), [setup.lang])
+        self.axis_lang = translation.gettext
 
     def scale(self):
         self.already_scaled = True
@@ -37,8 +33,8 @@ class Profiler(prof.Pdata):
     def plot(self):
         if not self.force:
             try:
-                f = open(self.output, 'r')
-                f.close()
+                file_ = open(self.output, 'r')
+                file_.close()
                 raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite.').format(self.output))
             except FileNotFoundError:
                 pass
@@ -48,19 +44,18 @@ class Profiler(prof.Pdata):
 
         try:
             self.already_scaled
-        except:
+        except AttributeError:
             self.scale()
 
         try:
             self.ppsbt
-        except:
+        except AttributeError:
             self.set_percent_problems_solved_by_time()
 
         maxt = max(self.times)
         try:
-            self.tau
             maxt = min(maxt, self.tau)
-        except:
+        except (AttributeError, TypeError):
             self.tau = maxt
 
         str2output = ''
@@ -86,7 +81,7 @@ class Profiler(prof.Pdata):
             str2output += '  \\begin{semilogxaxis}[const plot, \n'
         else:
             str2output += '  \\begin{axis}[const plot, \n'
-        if self.bw:
+        if self.black_and_white:
             str2output += 'cycle list name=linestyles*,\n'
         str2output += '    xmin=1, xmax={:.2f},' \
         '    ymin=0, ymax=1,\n' \
@@ -99,17 +94,17 @@ class Profiler(prof.Pdata):
                 xlabel=self.axis_lang('Performance Ratio'),
                 ylabel=self.axis_lang('Problems solved'))
 
-        for s in self.solvers:
+        for solver in self.solvers:
             str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
             for i in range(len(self.times)):
                 if self.times[i] <= self.tau:
-                    t = self.times[i]
-                    p = self.ppsbt[s][i]
-                    str2output += '    ({:.4f},{:.4f})\n'.format(t,p)
+                    time = self.times[i]
+                    ppsbt = self.ppsbt[solver][i]
+                    str2output += '    ({:.4f},{:.4f})\n'.format(time, ppsbt)
                 else:
                     break
             str2output += '  };\n'
-            str2output += '  \\addlegendentry{' + s + '}\n'
+            str2output += '  \\addlegendentry{' + solver + '}\n'
         if self.semilog:
             str2output += '  \\end{semilogxaxis}\n'
         else:
@@ -121,8 +116,8 @@ class Profiler(prof.Pdata):
             str2output += '\\end{center}\n'
 
         try:
-            with open(self.output, 'w') as f:
-                f.write(str2output)
+            with open(self.output, 'w') as file_:
+                file_.write(str2output)
 
             if self.output_format == 'pdf':
                 if self.pdf_verbose:
