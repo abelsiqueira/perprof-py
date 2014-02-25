@@ -2,8 +2,15 @@
 This handle the plot using matplotlib.
 """
 
+import os.path
 from . import prof
 import matplotlib.pyplot as plt
+
+import gettext
+
+this_dir, this_filename = os.path.split(__file__)
+t = gettext.translation('perprof', os.path.join(this_dir, 'locale'))
+_ = t.gettext
 
 class Profiler(prof.Pdata):
     def __init__(self, setup):
@@ -22,7 +29,7 @@ class Profiler(prof.Pdata):
             try:
                 f = open(self.output, 'r')
                 f.close()
-                raise ValueError('ERROR: File {} exists. '.format(self.output) + 'Use `-f` to overwrite')
+                raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite').format(self.output))
             except FileNotFoundError:
                 pass
 
