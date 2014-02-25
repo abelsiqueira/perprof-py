@@ -39,9 +39,15 @@ translate you need to update the file `perprof/locale/perprof.pot` and for that 
 could use
 
     $ pygettext.py -p perprof/locale/ -o perprof.pot \
-    perprof/*.py
+    -k axis_lang perprof/*.py
 
 To update the translation
 
     $ msgmerge -U perprof/locale/xx_yy/LC_MESSAGES/perporf.po \
-    perporflocale/perprof.pot
+    perporf/locale/perprof.pot
+
+After translate the new strings in the file
+`perprof/locale/xx_yy/LC_MESSAGES/perprof.po` create the file
+`perprof/locale/xx_yy/LC_MESSAGES/perprof.mo` using
+
+    $ msgfmt.py -o perprof/locale/xx_yy/LC_MESSAGES/perprof.{mo,po}

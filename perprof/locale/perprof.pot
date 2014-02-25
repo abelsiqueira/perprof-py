@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-02-03 18:31+BRST\n"
+"POT-Creation-Date: 2014-02-25 17:05+BRT\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,11 +37,17 @@ msgstr ""
 msgid "The second element in this lime must be {} or d."
 msgstr ""
 
-#: perprof/tikz.py:93
+#: perprof/tikz.py:42
+msgid ""
+"ERROR: File {} exists.\n"
+"Use `-f` to overwrite."
+msgstr ""
+
+#: perprof/tikz.py:99
 msgid "Performance Ratio"
 msgstr ""
 
-#: perprof/tikz.py:94
+#: perprof/tikz.py:100
 msgid "Problems solved"
 msgstr ""
 

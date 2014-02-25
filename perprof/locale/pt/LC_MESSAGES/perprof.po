@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-02-03 18:31+BRST\n"
+"POT-Creation-Date: 2014-02-25 17:05+BRT\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,9 @@ msgstr ""
 msgid ""
 "ERROR when reading line #{} of {}:\n"
 "    {}"
-msgstr "ERRO ao ler linha #{} de {}:\n    {}"
+msgstr ""
+"ERRO ao ler linha #{} de {}:\n"
+"    {}"
 
 #: perprof/parse.py:62
 msgid "This line must have at least 2 elements."
@@ -37,10 +39,18 @@ msgstr "Tempo gasto não pode ser zero."
 msgid "The second element in this lime must be {} or d."
 msgstr "Segundo elemento nessa linha deve ser {} ou d."
 
-#: perprof/tikz.py:93
+#: perprof/tikz.py:42
+msgid ""
+"ERROR: File {} exists.\n"
+"Use `-f` to overwrite."
+msgstr ""
+"ERROR: Arquivo {} existe.\n"
+"Utilize `-f` para sobrescrever."
+
+#: perprof/tikz.py:99
 msgid "Performance Ratio"
 msgstr "Raz\~{a}o de Desempenho"
 
-#: perprof/tikz.py:94
+#: perprof/tikz.py:100
 msgid "Problems solved"
 msgstr "Problemas resolvidos"
