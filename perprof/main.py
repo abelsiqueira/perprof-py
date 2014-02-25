@@ -162,7 +162,7 @@ def main():
     tikz_options.add_argument('--pgfplotcompat', type=float, default=None,
             help='Set pgfplots backwards compatibility mode to given version')
 
-    parser.add_argument('-l', '--lang', choices=['en', 'pt_BR'], default='en',
+    parser.add_argument('--lang', '-l', choices=['en', 'pt_BR'], default='en',
             help='Set language for axis label')
     parser.add_argument('--free-format', action='store_true',
             help='When parsing file handle all non `c` character as `d`')
