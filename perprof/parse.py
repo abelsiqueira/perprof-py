@@ -79,4 +79,6 @@ def parse_file(filename, subset=[], success='c', free_format=False):
                     raise ValueError(_error_message(filename, line_number,
                             _('The second element in this lime must be {} or d.').format(
                                 ', '.join(success))))
+    if not data:
+        raise ValueError("ERROR: List of problems (intersected with subset, if any) is empty")
     return data, algname

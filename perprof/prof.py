@@ -16,7 +16,9 @@ def load_data(setup):
     try:
         with open(setup.get_subset(), 'r') as subset_file:
             subset = [l.strip() for l in subset_file]
-    except:
+        if len(subset) == 0:
+            raise AttributeError("ERROR: Subset is empty")
+    except IOError as error:
         subset = []
     data = {}
     for f in setup.get_files():

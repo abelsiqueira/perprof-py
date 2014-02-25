@@ -219,6 +219,6 @@ def main():
             print('raw')
             
             print(prof.Pdata(s))
-    except ValueError as error:
+    except Exception as error:
         print(error)
 
