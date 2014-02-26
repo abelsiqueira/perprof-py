@@ -18,7 +18,7 @@ setup(
     author_email='abel@ime.unicamp.br, raniere@ime.unicamp.br, lrsantos@ime.unicamp.br',
     packages=['perprof'],
     package_data={'perprof': ['locale/*/*/*.mo']},
-    url='https://github.com/abelsiqueira/perprof-py',
+    url='https://github.com/lpoo/perprof-py',
     license='LICENSE',
     description='A python module for performance profiling (as described by Dolan and Moré)',
     long_description=open('README.md').read(),
