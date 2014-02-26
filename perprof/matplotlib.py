@@ -22,10 +22,6 @@ class Profiler(prof.Pdata):
             self.output = '{}.png'.format(setup.get_output())
         prof.Pdata.__init__(self, setup)
 
-    def scale(self):
-        self.already_scaled = True
-        super().scale()
-
     def plot(self):
         if not self.force:
             try:
@@ -35,9 +31,7 @@ class Profiler(prof.Pdata):
             except FileNotFoundError:
                 pass
 
-        try:
-            self.already_scaled
-        except AttributeError:
+        if not self.already_scaled:
             self.scale()
 
         try:

@@ -45,6 +45,7 @@ class Pdata(object):
         self.output_format = setup.get_output_format()
         self.pgfplot_version = setup.get_pgfplot_version()
         self.tau = setup.get_tau()
+        self.already_scaled = False
 
     def __repr__(self):
         try:
@@ -132,6 +133,8 @@ class Pdata(object):
 
         self.times = [x for x in times_set]
         self.times.sort()
+
+        self.already_scaled = True
 
     def set_percent_problems_solved_by_time(self):
         # ppsbt = Percent Problems Solved By Time

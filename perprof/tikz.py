@@ -29,10 +29,6 @@ class Profiler(prof.Pdata):
                 os.path.join(THIS_DIR, 'locale'), [setup.lang])
         self.axis_lang = translation.gettext
 
-    def scale(self):
-        self.already_scaled = True
-        super().scale()
-
     def plot(self):
         if not self.force:
             try:
@@ -45,9 +41,7 @@ class Profiler(prof.Pdata):
                 # When using stdout
                 pass
 
-        try:
-            self.already_scaled
-        except AttributeError:
+        if not self.already_scaled:
             self.scale()
 
         try:
