@@ -33,7 +33,7 @@ def str_sanitize(name):
 
     return name
 
-def parse_file(filename, subset=None, success='c', free_format=False):
+def parse_file(filename, subset=None, success='c', maxtime=float('inf'), free_format=False):
     """
     This function parse one file.
     """
@@ -66,6 +66,9 @@ def parse_file(filename, subset=None, success='c', free_format=False):
                         if data[ldata[0]] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
+                        elif data[ldata[0]] >= maxtime:
+                            ldata[1] = 'd'
+                            data[ldata[0]] = float('inf')
                 elif free_format or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:

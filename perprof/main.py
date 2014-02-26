@@ -21,6 +21,7 @@ class PerProfSetup(object):
         self.tau = args.tau
         self.pdf_verbose = args.pdf_verbose
         self.success = args.success.split(',')
+        self.maxtime = args.maxtime
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -100,6 +101,12 @@ class PerProfSetup(object):
     def get_success(self):
         return self.success
 
+    def set_maxtime(self, val):
+        self.maxtime = val
+
+    def get_maxtime(self):
+        return self.maxtime
+
     def using_black_and_white(self):
         return self.black_and_white
 
@@ -160,8 +167,8 @@ def set_arguments():
 
     tikz_options = parser.add_argument_group("Tikz options")
     tikz_options.add_argument('--standalone', action='store_true',
-            help='Create the header as a standalone to the tex file, " \
-                    "enabling compilation of the result')
+            help='Create the header as a standalone to the tex file, ' \
+                    'enabling compilation of the result')
     tikz_options.add_argument('--pgfplotcompat', type=float, default=None,
             help='Set pgfplots backwards compatibility mode to given version')
 
@@ -178,6 +185,9 @@ def set_arguments():
     parser.add_argument('--success', type=str, default='c',
             help='Flags that are interpreted as success, ' \
                     'separated by commas.  Default: `c`')
+    parser.add_argument('--maxtime', type=float, default=float('inf'),
+            help='Sets a maximum time for a solved problem. Any problem with a ' \
+                    'time greater than this will be considered failed.')
 
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
