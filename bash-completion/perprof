@@ -4,10 +4,10 @@ _perprof()
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
-  opts="--help --mp --tikz --raw --tex --pdf --tikz-header --semilog \
+  opts="--help --mp --tikz --raw --png --tex --pdf --standalone --semilog \
   --black-and-white --free-format --pgfplotcompat --cache --tau --force \
-  --output --subset \
-  -h -c -s -f -o"
+  --output --subset --lang --success \
+  -h -c -s -f -o -l"
 
 
   case "${prev}" in
@@ -24,9 +24,17 @@ _perprof()
       #fi
       return 0
       ;;
-    --subset)
+    --subset | -s)
       _filedir
       return 0
+      ;;
+    --lang | -l)
+      languages="en pt_BR"
+      COMPREPLY=( $(compgen -W "$languages" ${cur}) )
+      return 0
+      ;;
+    --success)
+      return 0;
       ;;
     *)
       _filedir
