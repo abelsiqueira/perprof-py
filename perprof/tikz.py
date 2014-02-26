@@ -6,7 +6,6 @@ import sys
 import os.path
 import gettext
 import subprocess
-import gettext
 from . import prof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
@@ -26,9 +25,8 @@ class Profiler(prof.Pdata):
         self.output_format = setup.get_output_format()
 
         # Language for the axis label
-        this_dir, this_filename = os.path.split(__file__)
         translation = gettext.translation('perprof',
-                os.path.join(this_dir, 'locale'), [setup.lang])
+                os.path.join(THIS_DIR, 'locale'), [setup.lang])
         self.axis_lang = translation.gettext
 
     def scale(self):

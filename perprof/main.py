@@ -244,6 +244,7 @@ def main():
             print('raw')
 
             print(prof.Pdata(setup))
-    except NotImplementedError as error:
+    # TODO Fix this "Catching too general exception Exception"
+    except Exception as error:
         print(error)
 

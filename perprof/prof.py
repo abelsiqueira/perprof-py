@@ -123,7 +123,7 @@ class Pdata(object):
             for solver in self.solvers:
                 try:
                     self.data[solver][problem] = self.data[solver][problem] / min_time
-                except ZeroDivisionError:
+                except (KeyError, ZeroDivisionError):
                     self.data[solver][problem] = float('inf')
                 if self.data[solver][problem] < float('inf'):
                     times_set.add(self.data[solver][problem])
