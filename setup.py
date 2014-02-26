@@ -4,11 +4,9 @@ from setuptools import setup
 import os
 
 if os.access('/usr/share/bash-completion/completions/', os.W_OK):
-    print('root')
     data_files = [
         ('/usr/share/bash-completion/completions/', ['bash-completion/perprof'])]
 else:
-    print('normal')
     data_files = []
 
 setup(
