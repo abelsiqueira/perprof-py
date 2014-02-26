@@ -48,8 +48,8 @@ class Profiler(prof.Pdata):
             plt.gca().set_xscale('log')
 
         try:
-            maxt = min(max(self.times),self.tau)
-        except:
+            maxt = min(max(self.times), self.tau)
+        except (AttributeError, TypeError):
             maxt = max(self.times)
         plt.gca().set_xlim(1, maxt)
         plt.gca().set_ylim(0, 1)
