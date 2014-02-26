@@ -2,8 +2,14 @@
 The functions related with the perform (not the output).
 """
 
+import os.path
+import gettext
 from . import parse
-from .i18n import *
+
+THIS_DIR, THIS_FILENAME = os.path.split(__file__)
+THIS_TRANSLATION = gettext.translation('perprof',
+        os.path.join(THIS_DIR, 'locale'))
+_ = THIS_TRANSLATION.gettext
 
 def load_data(setup):
     """

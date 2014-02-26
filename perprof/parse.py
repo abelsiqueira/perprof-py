@@ -16,7 +16,13 @@ is the elapsed time the solver used to reach the solution. If the solver did not
 converge, this column is ignored.
 """
 
-from .i18n import *
+import os.path
+import gettext
+
+THIS_DIR, THIS_FILENAME = os.path.split(__file__)
+THIS_TRANSLATION = gettext.translation('perprof',
+        os.path.join(THIS_DIR, 'locale'))
+_ = THIS_TRANSLATION.gettext
 
 def _error_message(filename, line_number, details):
     """

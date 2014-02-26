@@ -4,10 +4,15 @@ This handle the plot using tikz.
 
 import sys
 import os.path
+import gettext
 import subprocess
 import gettext
 from . import prof
-from .i18n import *
+
+THIS_DIR, THIS_FILENAME = os.path.split(__file__)
+THIS_TRANSLATION = gettext.translation('perprof',
+        os.path.join(THIS_DIR, 'locale'))
+_ = THIS_TRANSLATION.gettext
 
 class Profiler(prof.Pdata):
     def __init__(self, setup, standalone):
