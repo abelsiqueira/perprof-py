@@ -19,6 +19,7 @@ class PerProfSetup():
         self.tau = args.tau
         self.pdf_verbose = args.pdf_verbose
         self.success = args.success.split(',')
+        self.maxtime = args.maxtime
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -97,6 +98,12 @@ class PerProfSetup():
     def get_success(self):
         return self.success
 
+    def set_maxtime(self, val):
+        self.maxtime = val
+
+    def get_maxtime(self):
+        return self.maxtime
+
     def using_black_and_white(self):
         return self.bw
 
@@ -174,6 +181,9 @@ def main():
             help='Use logarithmic scale for the x axis of the plot')
     parser.add_argument('--success', type=str, default='c',
             help='Flags that are interpreted as success, separated by commas.  Default: `c`')
+    parser.add_argument('--maxtime', type=float, default=float('inf'),
+            help='Sets a maximum time for a solved problem. Any problem with a ' \
+            'time greater than this will be considered failed.')
 
     parser.add_argument('-c', '--cache', action='store_true',
             help='Enable cache.')
