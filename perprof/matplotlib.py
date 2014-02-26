@@ -46,7 +46,12 @@ class Profiler(prof.Pdata):
 
         if self.semilog:
             plt.gca().set_xscale('log')
-        plt.gca().set_xlim(0, max(self.times))
+
+        try:
+            maxt = min(max(self.times),self.tau)
+        except:
+            maxt = max(self.times)
+        plt.gca().set_xlim(1, maxt)
         plt.gca().set_ylim(0, 1)
         plt.gca().legend(loc=4)
         plt.gca().grid(axis='y', color='0.5', linestyle='-')
