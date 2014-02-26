@@ -1,10 +1,12 @@
-Examples from http://plato.asu.edu/ftp/ampl-nlp.html
+# Examples
 
-- conpt-31.8.sample
-- ipopt-4.13.sample
+There are two files in this folder that correspond to the results of two
+solvers: Alpha and Beta.
 
-Examples from Abel Siqueira
+In addition, a third file is generated from the combination of these two, and
+is completely ficticious.
 
-- algencan.long
-- dcicpp.long
-- ipopt.long
+The simplest way to compare these files is
+
+    $ perprof --tikz alpha.table beta.table gamma.table -o compare
+
