@@ -19,38 +19,39 @@ In the terminal:
 
 ## How to use
 
-Some examples of input file are provided at `test`. You can get a list of they
-with
+With perprof installed, you will need to format your output to match a format
+handled by it.
+The simplest format is 
 
-    $ ls test/*.sample
+```
+#Name <Solver name>
+<Problem name> <exitflag> <time spent>
+<Problem name> <exitflag> <time spent>
+<Problem name> <exitflag> <time spent>
+...
+```
 
-To create a PNG file using matplotlib:
+where exitflag is `c` or `d`, meaning converged and diverged, respectively.
+You can then enter the command
 
-    $ perprof --mp file_name [file_name ...]
+    $ perprof BACKEND FILE1 FILE2 [FILE3 ...]
 
-Example:
-
-    $ perprof --mp test/*.long
-
-To create a PDF using LaTeX and TikZ:
-
-    $ perprof --tikz --tikz-header file_name [file_name ...]
-
-Example:
-
-    $ perprof --tikz --tikz-header test/*.long
-
-To create the `.tex` file to be include in another document:
-
-    $ perprof --tikz file_name [file_name ...]
-
-Example:
-
-    $ perprof --tikz test/*.long
-
-And for help
+With BACKEND being one of `--tikz`, `--mp` or `--raw`.
+To use another format for the exitflag, or set more options, you can use
 
     $ perprof -h
+
+to obtain all options. For examples, check the next section.
+
+## Examples
+
+Some examples of input file are provided at `samples`. 
+To see the examples already, enter the folder and enter
+
+    $ ./make-examples.sh
+
+This will generate 8 simple examples in the folder `samples/plots`.
+For more information, check the README.md in `samples`.
 
 ## Use a file for your flags
 
