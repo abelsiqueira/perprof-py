@@ -22,5 +22,6 @@ setup(
     long_description=open('README.md').read(),
     entry_points={
         'console_scripts':['perprof = perprof.main:main']},
-    data_files=data_files
+    data_files=data_files,
+    test_suite = 'perprof.tests.test_all'
 )

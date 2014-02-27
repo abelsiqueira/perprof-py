@@ -7,6 +7,7 @@ SUPPORT_TIKZ = ['tex', 'pdf']
 
 import os.path
 import gettext
+import sys
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
@@ -145,7 +146,7 @@ class PerProfSetup(object):
     def set_tau(self, tau):
         self.tau = tau
 
-def set_arguments():
+def set_arguments(args):
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -212,12 +213,12 @@ def set_arguments():
             help='The name of the files to be used for ' \
                     'the performance profiling')
 
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 def main():
     """This is the entry point when calling perprof."""
 
-    args = set_arguments()
+    args = set_arguments(sys.argv[1:])
 
     try:
         setup = PerProfSetup(args)
