@@ -1,4 +1,4 @@
-#perprof-py 
+#perprof-py
 
 A python module for performance profiling (as described by [Dolan and
 Moré](http://arxiv.org/abs/cs/0102001)) with tikz and matplotlib output.
@@ -21,7 +21,7 @@ In the terminal:
 
 With perprof installed, you will need to format your output to match a format
 handled by it.
-The simplest format is 
+The simplest format is
 
 ```
 #Name <Solver name>
@@ -45,7 +45,7 @@ to obtain all options. For examples, check the next section.
 
 ## Examples
 
-Some examples of input file are provided at `samples`. 
+Some examples of input file are provided at `samples`.
 To see the examples already, enter the folder and enter
 
     $ ./make-examples.sh
