@@ -9,6 +9,8 @@ GPLv3. See LICENSE.
 
 ## Install
 
+Note: This package requires Python3 and isn't compatible with Python2.
+
 Note: You will need *pip* and *setup_tools*. Use the package manager of your
 GNU/Linux distribution to install it.
 
