@@ -29,7 +29,8 @@ def load_data(setup):
     data = {}
     for file_ in setup.get_files():
         data_tmp, solver_name = parse.parse_file(file_, subset,
-                setup.get_success(), setup.get_maxtime(), setup.using_free_format())
+                setup.get_success(), setup.get_mintime(), setup.get_maxtime(),
+                setup.using_free_format())
         data[solver_name] = data_tmp
     return data
 

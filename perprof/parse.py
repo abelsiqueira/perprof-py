@@ -69,7 +69,7 @@ def _parse_yaml(config, yaml_header):
     if 'free_format' in metadata:
         config.free_format = metadata['free_format']
 
-def parse_file(filename, subset=None, success='c', maxtime=float('inf'), free_format=False):
+def parse_file(filename, subset=None, success='c', mintime=0, maxtime=float('inf'), free_format=False):
     """
     This function parse one file.
     """
@@ -109,6 +109,8 @@ def parse_file(filename, subset=None, success='c', maxtime=float('inf'), free_fo
                                 _('This line must have at least 3 elements.')))
                     else:
                         data[ldata[0]] = float(ldata[2])
+                        if data[ldata[0]] < mintime:
+                            data[ldata[0]] = mintime
                         if data[ldata[0]] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
