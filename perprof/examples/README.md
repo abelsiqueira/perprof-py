@@ -1,10 +1,9 @@
 # Examples
 
-There are two files in this folder that correspond to the results of two
-solvers: Alpha and Beta.
-
-In addition, a third file can be generated from the combination of these two, and
-is completely ficticious.
+There are three files in this folder that correspond to the results of three
+solvers: Alpha, Beta and Gamma. The results of Gamma is a mix of Alpha and Beta
+and was generated using `perprof/examples/gen-gamma.py` (you can rerun the
+script and it will overwrite the results with another mix).
 
 To generate some examples of use, execute
 
@@ -56,7 +55,6 @@ The files are:
 - ab-semilog - Compare solvers Alpha and Beta and plots on a semilog axis.
 - abc-semilog - Compare sovlers Alpha, Beta and Gamma and plots on a semilog
   axis.
-
 
 ## Each solver
 

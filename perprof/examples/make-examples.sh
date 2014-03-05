@@ -22,7 +22,6 @@ esac
 rm -rf plots
 mkdir -p plots
 
-[ -f gamma.table ] || echo "Generating gamma.table" && ./gen-gamma.py
 args="--free-format -l $lang"
 
 for backend in --tikz --mp

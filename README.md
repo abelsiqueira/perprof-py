@@ -46,14 +46,14 @@ to obtain all options. For examples, check the next section.
 
 ## Examples
 
-Some examples of input file are provided at `samples`.
-To see the examples already, enter the folder and enter
+Some examples of input file are provided at `perprof/examples`.
+To see the examples already
 
-    $ cd samples
+    $ cd perprof/examples
     $ ./make-examples.sh
 
-This will generate 8 simple examples in the folder `samples/plots`.
-For more information, check the `samples/README.md`.
+This will generate 8 simple examples in the folder `perprof/examples/plots`.
+For more information, check the `perprof/examples/README.md`.
 
 ## Use a file for your flags
 
