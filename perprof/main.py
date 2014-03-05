@@ -47,14 +47,14 @@ class PerProfSetup(object):
                 self.output_format = None
 
         if args.mp and self.output_format not in SUPPORT_MP:
-            raise NotImplementedError("Output option {} not supported by " \
-                    "matplotlib".format(self.output_format.upper()))
+            raise NotImplementedError(_("Output option {} not supported by "
+                    "matplotlib").format(self.output_format.upper()))
         elif args.tikz and self.output_format not in SUPPORT_TIKZ:
-            raise NotImplementedError("Output option {} not supported by " \
-                    "TikZ".format(self.output_format.upper()))
+            raise NotImplementedError(_("Output option {} not supported by "
+                    "TikZ").format(self.output_format.upper()))
         elif args.raw and self.output_format:
             raise NotImplementedError(
-                    "--raw does not support output except standard output")
+                    _("--raw does not support output except standard output"))
 
     def using_lang(self):
         return self.lang
@@ -150,68 +150,68 @@ def set_arguments(args):
     import argparse
 
     parser = argparse.ArgumentParser(
-            description='A python module for performance profiling ' \
-            '(as described by Dolan and Moré).',
+            description=_('A python module for performance profiling '
+            '(as described by Dolan and Moré).'),
             fromfile_prefix_chars='@')
 
-    backend_args = parser.add_argument_group("Backend options")
+    backend_args = parser.add_argument_group(_("Backend options"))
     backend = backend_args.add_mutually_exclusive_group(required=True)
     backend.add_argument('--mp', action='store_true',
-            help='Use matplotlib as backend for the plot. Default ' \
-            'output: PNG')
+            help=_('Use matplotlib as backend for the plot. Default '
+            'output: PNG'))
     backend.add_argument('--tikz', action='store_true',
-            help='Use LaTex/TikZ/pgfplots as backend for the plot. ' \
-            'Default output: PDF')
+            help=_('Use LaTex/TikZ/pgfplots as backend for the plot. '
+            'Default output: PDF'))
     backend.add_argument('--raw', action='store_true',
-            help='Print raw data. Default output: standard output')
+            help=_('Print raw data. Default output: standard output'))
 
-    output_format_args = parser.add_argument_group("Output formats")
+    output_format_args = parser.add_argument_group(_("Output formats"))
     output_format = output_format_args.add_mutually_exclusive_group()
     output_format.add_argument('--png', action='store_true',
-            help='The output file will be a PNG file')
+            help=_('The output file will be a PNG file'))
     output_format.add_argument('--tex', action='store_true',
-            help='The output file will be a (La)TeX file')
+            help=_('The output file will be a (La)TeX file'))
     output_format.add_argument('--pdf', action='store_true',
-            help='The output file will be a PDF file')
+            help=_('The output file will be a PDF file'))
 
-    tikz_options = parser.add_argument_group("Tikz options")
+    tikz_options = parser.add_argument_group(_("Tikz options"))
     tikz_options.add_argument('--standalone', action='store_true',
-            help='Create the header as a standalone to the tex file, ' \
-                    'enabling compilation of the result')
+            help=_('Create the header as a standalone to the tex file, '
+                    'enabling compilation of the result'))
     tikz_options.add_argument('--pgfplotcompat', type=float, default=None,
-            help='Set pgfplots backwards compatibility mode to given version')
+            help=_('Set pgfplots backwards compatibility mode to given version'))
 
     parser.add_argument('--lang', '-l', choices=['en', 'pt_BR'], default='en',
-            help='Set language for axis label')
+            help=_('Set language for axis label'))
     parser.add_argument('--free-format', action='store_true',
-            help='When parsing file handle all non `c` character as `d`')
+            help=_('When parsing file handle all non `c` character as `d`'))
     parser.add_argument('--pdf-verbose', action='store_true',
-            help='Print output of pdflatex')
+            help=_('Print output of pdflatex'))
     parser.add_argument('--black-and-white', action='store_true',
-            help='Use only black color.')
+            help=_('Use only black color.'))
     parser.add_argument('--semilog', action='store_true',
-            help='Use logarithmic scale for the x axis of the plot')
+            help=_('Use logarithmic scale for the x axis of the plot'))
     parser.add_argument('--success', type=str, default='c',
-            help='Flags that are interpreted as success, ' \
-                    'separated by commas.  Default: `c`')
+            help=_('Flags that are interpreted as success, '
+                    'separated by commas.  Default: `c`'))
     parser.add_argument('--maxtime', type=float, default=float('inf'),
-            help='Sets a maximum time for a solved problem. Any problem with a ' \
-                    'time greater than this will be considered failed.')
+            help=_('Sets a maximum time for a solved problem. Any problem with a '
+                    'time greater than this will be considered failed.'))
 
     parser.add_argument('-c', '--cache', action='store_true',
-            help='Enable cache.')
+            help=_('Enable cache.'))
     parser.add_argument('-s', '--subset',
-            help='Name of a file with a subset of problems to compare')
+            help=_('Name of a file with a subset of problems to compare'))
     parser.add_argument('--tau', type=float,
-            help='Limit the x-axis based this value')
+            help=_('Limit the x-axis based this value'))
     parser.add_argument('-f', '--force', action='store_true',
-            help='Force overwrite the output file')
+            help=_('Force overwrite the output file'))
     parser.add_argument('-o', '--output',
-            help='Name of the file to use as output ' \
-                    '(the correct extension will be add)')
+            help=_('Name of the file to use as output '
+                    '(the correct extension will be add)'))
     parser.add_argument('file_name', nargs='+',
-            help='The name of the files to be used for ' \
-                    'the performance profiling')
+            help=_('The name of the files to be used for '
+                    'the performance profiling'))
 
     return parser.parse_args(args)
 
@@ -231,8 +231,8 @@ def main():
             data.plot()
         elif args.tikz:
             if setup.get_output_format() == 'pdf' and args.output is None:
-                print("ERROR: When using PDF output, you need to provide " \
-                        "the name of the output file.")
+                print(_("ERROR: When using PDF output, you need to provide "
+                        "the name of the output file."))
             else:
                 # tikz
                 from . import tikz

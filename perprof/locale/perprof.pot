@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-02-25 17:05+BRT\n"
+"POT-Creation-Date: 2014-03-05 15:25+BRT\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,39 +15,173 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: perprof/parse.py:32
+#: perprof/main.py:50
+msgid "Output option {} not supported by matplotlib"
+msgstr ""
+
+#: perprof/main.py:53
+msgid "Output option {} not supported by TikZ"
+msgstr ""
+
+#: perprof/main.py:57
+msgid "--raw does not support output except standard output"
+msgstr ""
+
+#: perprof/main.py:153
+msgid "A python module for performance profiling (as described by Dolan and Moré)."
+msgstr ""
+
+#: perprof/main.py:157
+msgid "Backend options"
+msgstr ""
+
+#: perprof/main.py:160
+msgid "Use matplotlib as backend for the plot. Default output: PNG"
+msgstr ""
+
+#: perprof/main.py:163
+msgid "Use LaTex/TikZ/pgfplots as backend for the plot. Default output: PDF"
+msgstr ""
+
+#: perprof/main.py:166
+msgid "Print raw data. Default output: standard output"
+msgstr ""
+
+#: perprof/main.py:168
+msgid "Output formats"
+msgstr ""
+
+#: perprof/main.py:171
+msgid "The output file will be a PNG file"
+msgstr ""
+
+#: perprof/main.py:173
+msgid "The output file will be a (La)TeX file"
+msgstr ""
+
+#: perprof/main.py:175
+msgid "The output file will be a PDF file"
+msgstr ""
+
+#: perprof/main.py:177
+msgid "Tikz options"
+msgstr ""
+
+#: perprof/main.py:179
+msgid "Create the header as a standalone to the tex file, enabling compilation of the result"
+msgstr ""
+
+#: perprof/main.py:182
+msgid "Set pgfplots backwards compatibility mode to given version"
+msgstr ""
+
+#: perprof/main.py:185
+msgid "Set language for axis label"
+msgstr ""
+
+#: perprof/main.py:187
+msgid "When parsing file handle all non `c` character as `d`"
+msgstr ""
+
+#: perprof/main.py:189
+msgid "Print output of pdflatex"
+msgstr ""
+
+#: perprof/main.py:191
+msgid "Use only black color."
+msgstr ""
+
+#: perprof/main.py:193
+msgid "Use logarithmic scale for the x axis of the plot"
+msgstr ""
+
+#: perprof/main.py:195
+msgid "Flags that are interpreted as success, separated by commas.  Default: `c`"
+msgstr ""
+
+#: perprof/main.py:198
+msgid "Sets a maximum time for a solved problem. Any problem with a time greater than this will be considered failed."
+msgstr ""
+
+#: perprof/main.py:202
+msgid "Enable cache."
+msgstr ""
+
+#: perprof/main.py:204
+msgid "Name of a file with a subset of problems to compare"
+msgstr ""
+
+#: perprof/main.py:206
+msgid "Limit the x-axis based this value"
+msgstr ""
+
+#: perprof/main.py:208
+msgid "Force overwrite the output file"
+msgstr ""
+
+#: perprof/main.py:210
+msgid "Name of the file to use as output (the correct extension will be add)"
+msgstr ""
+
+#: perprof/main.py:213
+msgid "The name of the files to be used for the performance profiling"
+msgstr ""
+
+#: perprof/main.py:234
+msgid "ERROR: When using PDF output, you need to provide the name of the output file."
+msgstr ""
+
+#: perprof/matplotlib.py:30
+msgid ""
+"ERROR: File {} exists.\n"
+"Use `-f` to overwrite"
+msgstr ""
+
+#: perprof/parse.py:31
 msgid ""
 "ERROR when reading line #{} of {}:\n"
 "    {}"
 msgstr ""
 
-#: perprof/parse.py:62
+#: perprof/parse.py:61
 msgid "This line must have at least 2 elements."
 msgstr ""
 
-#: perprof/parse.py:70
+#: perprof/parse.py:69
 msgid "This line must have at least 3 elements."
 msgstr ""
 
-#: perprof/parse.py:75
+#: perprof/parse.py:74
 msgid "Time spending can't be zero."
 msgstr ""
 
-#: perprof/parse.py:80
+#: perprof/parse.py:82
 msgid "The second element in this lime must be {} or d."
 msgstr ""
 
-#: perprof/tikz.py:42
+#: perprof/parse.py:86
+msgid "ERROR: List of problems (intersected with subset, if any) is empty"
+msgstr ""
+
+#: perprof/prof.py:25
+msgid "ERROR: Subset is empty"
+msgstr ""
+
+#: perprof/prof.py:132
+msgid "ERROR: problem set is empty"
+msgstr ""
+
+#: perprof/tikz.py:37
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite."
 msgstr ""
 
-#: perprof/tikz.py:99
+#: perprof/tikz.py:91
 msgid "Performance Ratio"
 msgstr ""
 
-#: perprof/tikz.py:100
+#: perprof/tikz.py:92
 msgid "Problems solved"
 msgstr ""
 
