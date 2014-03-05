@@ -1,7 +1,7 @@
 #perprof-py
 
 A python module for performance profiling (as described by [Dolan and
-Moré](http://arxiv.org/abs/cs/0102001)) with tikz and matplotlib output.
+Moré](http://arxiv.org/abs/cs/0102001)) with TikZ and matplotlib output.
 
 ## License
 
@@ -21,25 +21,24 @@ In the terminal:
 
 ## How to use
 
-With perprof installed, you will need to format your output to match a format
-handled by it.
-The simplest format is
+With `perprof` installed, you will need to format your output to match a format
+handled by it. The simplest format is
 
 ```
 #Name <Solver name>
-<Problem name> <exitflag> <time spent>
-<Problem name> <exitflag> <time spent>
-<Problem name> <exitflag> <time spent>
+<Problem name> <exit flag> <time spent>
+<Problem name> <exit flag> <time spent>
+<Problem name> <exit flag> <time spent>
 ...
 ```
 
-where exitflag is `c` or `d`, meaning converged and diverged, respectively.
+where `exit flag` is `c` or `d`, meaning converged and diverged, respectively.
 You can then enter the command
 
     $ perprof BACKEND FILE1 FILE2 [FILE3 ...]
 
-With BACKEND being one of `--tikz`, `--mp` or `--raw`.
-To use another format for the exitflag, or set more options, you can use
+With `BACKEND` being one of `--tikz`, `--mp` or `--raw`.
+To use another format for the `exit flag`, or set more options, you can use
 
     $ perprof -h
 
@@ -50,22 +49,23 @@ to obtain all options. For examples, check the next section.
 Some examples of input file are provided at `samples`.
 To see the examples already, enter the folder and enter
 
+    $ cd samples
     $ ./make-examples.sh
 
 This will generate 8 simple examples in the folder `samples/plots`.
-For more information, check the README.md in `samples`.
+For more information, check the `samples/README.md`.
 
 ## Use a file for your flags
 
-To fully customize your needs, you may need to add a few flags for perprof. The
+To fully customize your needs, you may need to add a few flags for `perprof`. The
 best way to do this is to create a file with a flag in each line and calling
 `perprof` with that file as argument, with a `@` preceding the file name:
 
-    $ perprof @filename [more flags]
+    $ perprof @filename [more flags] FILE1 FILE2 [FILE3 ...]
 
-A file test/pdf.args in included as example. To use it, enter
+For a example you can look at `test/pdf.args`. To use it, enter
 
-    $ perprof test/*.long -f -o tmp @test/pdf.args
+    $ perprof @test/pdf.args -f -o tmp test/*.long 
 
-Please note that the arguments in the the file and in the command line are
-treated equally, so you can't add confliting options.
+Please note that the arguments in the file and in the command line are
+treated equally, so you can't add conflicting options.
