@@ -246,7 +246,7 @@ def set_arguments(args):
     parser.add_argument('--mintime', type=float, default=0,
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
-                
+
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

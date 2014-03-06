@@ -22,8 +22,8 @@ The columns are, in order:
 - Time spent: Self explanatory.
 - Objective function value: The function value at the solution.
 - Primal infeasibility: The infeasibility of the algorithm regarding the
-  constraints, not the variable bounds. 
-- Dual infeasibility: The measurement of optimality. 
+  constraints, not the variable bounds.
+- Dual infeasibility: The measurement of optimality.
 
 The objective function and infeasibilities are not currently used by `perprof`.
 
