@@ -1,4 +1,8 @@
-#Name Beta
+---
+algname: Beta
+success: success
+free_format: True
+---
 10FOLDTR fail        1.000000e+20 +0.000000e+00 +6.900000e+05 +1.900000e+04
 3PK      success     1.000000e-02 +1.720119e+00 +0.000000e+00 +8.800000e-07
 ACOPP118 success     1.460000e+00 +1.296607e+05 +2.800000e-08 +6.300000e-07

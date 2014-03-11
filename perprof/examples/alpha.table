@@ -1,4 +1,8 @@
-#Name Alpha
+---
+algname: Alpha
+success: converged
+free_format: True
+---
 3PK        converged  7.927420e-03 +1.720340e+00 +0.000000e+00 +9.737010e-07
 10FOLDTR   converged  4.597780e+01 +0.000000e+00 +6.828550e-07 +0.000000e+00
 ACOPP14    converged  5.254910e-01 +8.081530e+03 +9.504260e-07 +5.198360e-09
