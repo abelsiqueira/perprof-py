@@ -82,7 +82,7 @@ class Profiler(prof.Pdata):
             str2output += 'cycle list name=linestyles*,\n'
         if self.background:
             str2output += "axis background/.style=" \
-                    "{{fill={{rgb:red,{0};green,{1};blue,{2}}}}}, \n".format(
+                    "{{fill={{rgb,255:red,{0};green,{1};blue,{2}}}}}, \n".format(
                             self.background[0],
                             self.background[1],
                             self.background[2])

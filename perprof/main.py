@@ -208,7 +208,8 @@ def set_arguments(args):
     parser.add_argument('--black-and-white', action='store_true',
             help=_('Use only black color.'))
     parser.add_argument('--background',
-            help=_('RGB value separate by commas for the background color'))
+            help=_('RGB values separated by commas for the background color '
+                    'of the plot. (Values in the 0,255 range)'))
     parser.add_argument('--semilog', action='store_true',
             help=_('Use logarithmic scale for the x axis of the plot'))
     parser.add_argument('--success', type=str, default='c',
