@@ -69,6 +69,14 @@ class Profiler(prof.Pdata):
             else:
                 str2output += '\\pgfplotsset{compat=newest,compat/show ' \
                         'suggested version=false}\n'
+            if self.page_background:
+                str2output += '\\definecolor{pagebg}{RGB}{'
+                str2output += '{0},{1},{2}'.format(
+                        self.page_background[0],
+                        self.page_background[1],
+                        self.page_background[2])
+                str2output += '}\n'
+                str2output += '\\pagecolor{pagebg}\n'
             str2output += '\\begin{document}\n'
         else:
             str2output += '\\begin{center}\n'
