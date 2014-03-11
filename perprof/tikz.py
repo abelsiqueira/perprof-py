@@ -76,7 +76,7 @@ class Profiler(prof.Pdata):
                         self.page_background[1],
                         self.page_background[2])
                 str2output += '}\n'
-                str2output += '\\pagecolor{pagebg}'
+                str2output += '\\pagecolor{pagebg}\n'
             str2output += '\\begin{document}\n'
         else:
             str2output += '\\begin{center}\n'

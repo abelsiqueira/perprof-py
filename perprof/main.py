@@ -25,13 +25,13 @@ class PerProfSetup(object):
         self.semilog = args.semilog
         self.black_and_white = args.black_and_white
         if args.background is None:
-            self.background = args.background
+            self.background = None
         else:
             # Set a tuple of integer
             self.background = tuple([int(i) for i in args.background.split(',')])
             assert len(self.background) == 3, _("RGB for background must have 3 integers")
         if args.page_background is None:
-            self.page_background = args.background
+            self.page_background = None
         else:
             self.page_background = tuple([int(i) for i in args.page_background.split(',')])
             assert len(self.page_background) == 3, _("RGB for page background " \
