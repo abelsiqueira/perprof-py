@@ -22,16 +22,12 @@ esac
 rm -rf plots
 mkdir -p plots
 
-args="--free-format -l $lang"
+args="-l $lang"
 
 for backend in --tikz --mp
 do
-  perprof $backend $args alpha.table beta.table -o plots/ab \
-    --success "converged,success"
-  perprof $backend $args *.table -o plots/abc \
-    --success "converged,success"
-  perprof $backend $args alpha.table beta.table --semilog -o plots/ab-semilog \
-    --success "converged,success"
-  perprof $backend $args *.table --semilog -o plots/abc-semilog \
-    --success "converged,success"
+  perprof $backend $args alpha.table beta.table -o plots/ab
+  perprof $backend $args *.table -o plots/abc
+  perprof $backend $args alpha.table beta.table --semilog -o plots/ab-semilog
+  perprof $backend $args *.table --semilog -o plots/abc-semilog
 done
