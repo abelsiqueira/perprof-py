@@ -1,3 +1,4 @@
 name: perprof-py
 markdown: redcarpet
 pygments: true
+baseurl: /perprof-py
