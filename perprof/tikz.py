@@ -80,6 +80,12 @@ class Profiler(prof.Pdata):
             str2output += '  \\begin{axis}[const plot, \n'
         if self.black_and_white:
             str2output += 'cycle list name=linestyles*,\n'
+        if self.background:
+            str2output += "axis background/.style=" \
+                    "{{fill={{rgb:red,{0};green,{1};blue,{2}}}}}, \n".format(
+                            self.background[0],
+                            self.background[1],
+                            self.background[2])
         str2output += '    xmin=1, xmax={:.2f},' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \

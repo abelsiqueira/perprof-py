@@ -24,6 +24,12 @@ class PerProfSetup(object):
         self.force = args.force
         self.semilog = args.semilog
         self.black_and_white = args.black_and_white
+        if args.background is None:
+            self.background = args.background
+        else:
+            # Set a tuple of integer
+            self.background = tuple([int(i) for i in args.background.split(',')])
+            assert len(self.background) == 3, _("RGB for background must have 3 integers")
         self.output = args.output
         self.subset = args.subset
         self.pgfplot_version = args.pgfplotcompat
@@ -122,6 +128,15 @@ class PerProfSetup(object):
     def set_black_and_white(self, val):
         self.black_and_white = val
 
+    def get_background(self):
+        return self.background
+
+    def set_background(red, green, blue):
+        self.background = (red, green, blue)
+
+    def unset_background():
+        self.background = None
+
     def get_pdf_verbose(self):
         return self.pdf_verbose
 
@@ -147,6 +162,9 @@ class PerProfSetup(object):
         self.tau = tau
 
 def set_arguments(args):
+    """
+    Set all the arguments of perprof
+    """
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -189,6 +207,8 @@ def set_arguments(args):
             help=_('Print output of pdflatex'))
     parser.add_argument('--black-and-white', action='store_true',
             help=_('Use only black color.'))
+    parser.add_argument('--background',
+            help=_('RGB value separate by commas for the background color'))
     parser.add_argument('--semilog', action='store_true',
             help=_('Use logarithmic scale for the x axis of the plot'))
     parser.add_argument('--success', type=str, default='c',

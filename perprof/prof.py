@@ -41,6 +41,7 @@ class Pdata(object):
         self.force = setup.using_force()
         self.semilog = setup.using_semilog()
         self.black_and_white = setup.using_black_and_white()
+        self.background = setup.get_background()
         self.pdf_verbose = setup.get_pdf_verbose()
         self.output_format = setup.get_output_format()
         self.pgfplot_version = setup.get_pgfplot_version()
