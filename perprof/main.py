@@ -30,6 +30,12 @@ class PerProfSetup(object):
             # Set a tuple of integer
             self.background = tuple([int(i) for i in args.background.split(',')])
             assert len(self.background) == 3, _("RGB for background must have 3 integers")
+        if args.page_background is None:
+            self.page_background = args.background
+        else:
+            self.page_background = tuple([int(i) for i in args.page_background.split(',')])
+            assert len(self.page_background) == 3, _("RGB for page background " \
+                "must have 3 integers")
         self.output = args.output
         self.subset = args.subset
         self.pgfplot_version = args.pgfplotcompat
@@ -137,6 +143,15 @@ class PerProfSetup(object):
     def unset_background():
         self.background = None
 
+    def get_page_background(self):
+        return self.page_background
+
+    def set_page_background(red, green, blue):
+        self.page_background = (red, green, blue)
+
+    def unset_page_background():
+        self.page_background = None
+
     def get_pdf_verbose(self):
         return self.pdf_verbose
 
@@ -210,6 +225,9 @@ def set_arguments(args):
     parser.add_argument('--background',
             help=_('RGB values separated by commas for the background color '
                     'of the plot. (Values in the 0,255 range)'))
+    parser.add_argument('--page-background',
+            help=_('RGB values separated by commas for the background color '
+                    'of the page. (Values in the 0,255 range)'))
     parser.add_argument('--semilog', action='store_true',
             help=_('Use logarithmic scale for the x axis of the plot'))
     parser.add_argument('--success', type=str, default='c',
