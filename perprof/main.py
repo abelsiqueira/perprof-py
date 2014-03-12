@@ -5,9 +5,10 @@ This is the main file for perprof
 SUPPORT_MP = ['png']
 SUPPORT_TIKZ = ['tex', 'pdf']
 
-import os.path
 import gettext
+import os.path
 import sys
+import warnings
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
@@ -247,7 +248,6 @@ def set_arguments(args):
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
 
-
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))
     parser.add_argument('-s', '--subset',
@@ -259,18 +259,35 @@ def set_arguments(args):
     parser.add_argument('-o', '--output',
             help=_('Name of the file to use as output '
                     '(the correct extension will be add)'))
-    parser.add_argument('file_name', nargs='+',
-            help=_('The name of the files to be used for '
-                    'the performance profiling'))
 
-    return parser.parse_args(args)
+    parser.add_argument('--demo', action='store_true',
+            help=_('Use examples files as input'))
+    parser.add_argument('file_name', nargs='*',
+            help=_('The name of the files to be used for '
+                    'the performance profiling (for demo use `--demo`)'))
+
+    parsed_args = parser.parse_args(args)
+
+    # Set input files for demo
+    if parsed_args.demo:
+        if parsed_args.file_name:
+            warnings.warn(_("Using demo mode. Ignoring input files."),
+                    UserWarning)
+        parsed_args.file_name = [
+                os.path.join(THIS_DIR, 'examples/alpha.table'),
+                os.path.join(THIS_DIR, 'examples/beta.table'),
+                os.path.join(THIS_DIR, 'examples/gamma.table')]
+    elif len(parsed_args.file_name) <= 1:
+        raise ValueError(_("You must provide at least two input files."))
+
+    return parsed_args
 
 def main():
     """This is the entry point when calling perprof."""
 
-    args = set_arguments(sys.argv[1:])
-
     try:
+        args = set_arguments(sys.argv[1:])
+
         setup = PerProfSetup(args)
 
         if args.mp:
