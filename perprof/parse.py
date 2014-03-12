@@ -26,10 +26,11 @@ _ = THIS_TRANSLATION.gettext
 
 class _ParserConfig(object):
     """Store configuration for the parser."""
-    def __init__(self, algname, subset, success, maxtime, free_format):
+    def __init__(self, algname, subset, success, mintime, maxtime, free_format):
         self.algname = algname
         self.subset = subset
         self.success = success
+        self.mintime = mintime
         self.maxtime = maxtime
         self.free_format = free_format
 
@@ -64,16 +65,20 @@ def _parse_yaml(config, yaml_header):
         config.subset = metadata['subset']
     if 'success' in metadata:
         config.success = metadata['success']
+    if 'mintime' in metadata:
+        config.mintime = metadata['mintime']
     if 'maxtime' in metadata:
         config.maxtime = metadata['maxtime']
     if 'free_format' in metadata:
         config.free_format = metadata['free_format']
 
-def parse_file(filename, subset=None, success='c', mintime=0, maxtime=float('inf'), free_format=False):
+def parse_file(filename, subset=None, success='c', mintime=0,
+        maxtime=float('inf'), free_format=False):
     """
     This function parse one file.
     """
-    parse_config = _ParserConfig(str_sanitize(filename), subset, success, maxtime, free_format)
+    parse_config = _ParserConfig(str_sanitize(filename), subset, success,
+            mintime, maxtime, free_format)
 
     data = {}
     with open(filename) as file_:
@@ -109,8 +114,8 @@ def parse_file(filename, subset=None, success='c', mintime=0, maxtime=float('inf
                                 _('This line must have at least 3 elements.')))
                     else:
                         data[ldata[0]] = float(ldata[2])
-                        if data[ldata[0]] < mintime:
-                            data[ldata[0]] = mintime
+                        if data[ldata[0]] < parse_config.mintime:
+                            data[ldata[0]] = parse_config.mintime
                         if data[ldata[0]] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
