@@ -2,7 +2,7 @@
 This is the main file for perprof
 """
 
-SUPPORT_MP = ['png']
+SUPPORT_MP = ['eps', 'pdf', 'png', 'ps', 'svg']
 SUPPORT_TIKZ = ['tex', 'pdf']
 
 import gettext
@@ -46,10 +46,16 @@ class PerProfSetup(object):
         self.maxtime = args.maxtime
         self.mintime = args.mintime
 
-        if args.pdf:
+        if args.eps:
+            self.output_format = 'eps'
+        elif args.pdf:
             self.output_format = 'pdf'
         elif args.png:
             self.output_format = 'png'
+        elif args.ps:
+            self.output_format = 'ps'
+        elif args.svg:
+            self.output_format = 'svg'
         elif args.tex:
             self.output_format = 'tex'
         else:
@@ -208,12 +214,18 @@ def set_arguments(args):
 
     output_format_args = parser.add_argument_group(_("Output formats"))
     output_format = output_format_args.add_mutually_exclusive_group()
-    output_format.add_argument('--png', action='store_true',
-            help=_('The output file will be a PNG file'))
-    output_format.add_argument('--tex', action='store_true',
-            help=_('The output file will be a (La)TeX file'))
+    output_format.add_argument('--eps', action='store_true',
+            help=_('The output file will be a EPS file'))
     output_format.add_argument('--pdf', action='store_true',
             help=_('The output file will be a PDF file'))
+    output_format.add_argument('--png', action='store_true',
+            help=_('The output file will be a PNG file'))
+    output_format.add_argument('--ps', action='store_true',
+            help=_('The output file will be a PS file'))
+    output_format.add_argument('--svg', action='store_true',
+            help=_('The output file will be a SVG file'))
+    output_format.add_argument('--tex', action='store_true',
+            help=_('The output file will be a (La)TeX file'))
 
     tikz_options = parser.add_argument_group(_("Tikz options"))
     tikz_options.add_argument('--standalone', action='store_true',
@@ -315,4 +327,3 @@ def main():
     # TODO Fix this "Catching too general exception Exception"
     except Exception as error:
         print(error)
-
