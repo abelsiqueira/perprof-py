@@ -43,6 +43,7 @@ class PerProfSetup(object):
         self.pdf_verbose = args.pdf_verbose
         self.success = args.success.split(',')
         self.maxtime = args.maxtime
+        self.mintime = args.mintime
 
         if args.pdf:
             self.output_format = 'pdf'
@@ -127,6 +128,12 @@ class PerProfSetup(object):
 
     def get_maxtime(self):
         return self.maxtime
+
+    def set_mintime(self, val):
+        self.mintime = val
+
+    def get_mintime(self):
+        return self.mintime
 
     def using_black_and_white(self):
         return self.black_and_white
@@ -236,6 +243,10 @@ def set_arguments(args):
     parser.add_argument('--maxtime', type=float, default=float('inf'),
             help=_('Sets a maximum time for a solved problem. Any problem with a '
                     'time greater than this will be considered failed.'))
+    parser.add_argument('--mintime', type=float, default=0,
+            help=_('Sets a minimum time for a solved problem. Any problem with a '
+                    'time smaller than this will have the time set to this.'))
+
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))
