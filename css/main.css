@@ -170,3 +170,11 @@ div .postwall {
   padding: 0.5em;
   border: 1px solid #000;
 }
+
+div .image {
+  width; 100%;
+}
+
+div .image img {
+  width: 100%;
+}
