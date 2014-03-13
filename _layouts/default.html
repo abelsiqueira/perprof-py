@@ -15,9 +15,21 @@
     </head>
     <body>
 
+        <div class="title">
+          <h1> perprof-py - A Python Package for Performance Profiling </h1>
+        </div>
+
         <div class="site">
           <div class="header">
-            <h1 class="title"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+            <nav>
+              {% for page in site.data.pages %}
+              <div class="button"> 
+                <a href="{{ site.baseurl }}/{{ page.url }}">
+                  {{ page.name }} 
+                </a> 
+              </div>
+              {% endfor %}
+            </nav>
           </div>
 
           {{ content }}
