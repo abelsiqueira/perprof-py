@@ -65,7 +65,7 @@ name: <Solver name>
 ...
 ```
 
-### Input file xamples
+### Input file examples
 
 Some examples of input file are provided at `perprof/examples`.
 To see the examples already
