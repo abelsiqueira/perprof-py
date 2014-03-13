@@ -13,7 +13,7 @@
 html, body { height: 100%; }
 
 body {
-  background-color: #FFF;
+  background-color: #f0ffff;
   font: 13.34px Helvetica, Arial, sans-serif;
   font-size: small;
   text-align: center;
@@ -58,7 +58,7 @@ a:visited { color: #a0a; }
 .site {
   font-size: 115%;
   text-align: justify;
-  width: 42em;
+  width: 60em;
   margin: 3em auto 2em;
   line-height: 1.5em;
   border: 0px solid #000;
@@ -165,13 +165,38 @@ div .postwall {
 }
 
 div .image {
-  width; 100%;
+  width: 100%;
   text-align: center;
-  border: 1px solid #000;
+  border: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
 }
 
 div .image img {
-  width: 100%;
+  width: 92%;
+  margin: 4%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, td {
+  border: 1px solid #000;
+}
+
+.image-td {
+  width: 20%;
+}
+
+.desc {
+  padding: 1em;
+}
+
+.cmd {
+  font-family: "Inconsolata", "Courier New", "DejaVu Sans Mono", monospace;
 }
 
 nav {

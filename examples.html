@@ -4,15 +4,47 @@ title: perprof-py&#58; Examples
 ---
 
 <div class="wall">
-  In these examples, we consider three solvers: Alpha, Beta and Gamma, in part
+  <p>In these examples, we consider three solvers: Alpha, Beta and Gamma, in part
   ficticious.
   These solvers were run on a subset of the CUTEst problems.
-  The files with the result in the perprof format are available 
+  The files with the result in the perprof format are available
   <a href="https://github.com/lpoo/perprof-py/tree/master/perprof/examples">
   here</a>.
+  </p>
 
-  <div class="image">
-    <h2>Solvers comparison using a semi-logarithmic scale.</h2>
-    <img src="assets/abc-semilog.png">
-  </div>
+  <table class="image-tb">
+    <tr>
+      <td class="cmd" style="text-align: center;">
+        --tikz
+      </td>
+      <td class="cmd" style="text-align: center;">
+        --mp
+      </td>
+      <td class="desc">
+        BACKEND
+      </td>
+    </tr>
+    {% for image in site.data.examples %}
+    <tr>
+      <td class="image-td">
+        <div class="image">
+          <a href="{{ site.baseurl }}/assets/{{ image.name }}-tikz.png" target=_blank>
+            <img src="assets/{{ image.name }}-tikz.png">
+          </a>
+        </div>
+      </td>
+      <td class="image-td">
+        <div class="image">
+          <a href="{{ site.baseurl }}/assets/{{ image.name }}-mp.png" target=_blank>
+            <img src="assets/{{ image.name }}-mp.png">
+          </a>
+        </div>
+      </td>
+      <td class="desc">
+        <h2> {{ image.desc }} </h2>
+        <p class="cmd"> $ {{ image.cmd }} </p>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>
