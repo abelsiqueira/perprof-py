@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-05 15:25+BRT\n"
+"POT-Creation-Date: 2014-03-14 15:38+BRT\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,132 +15,198 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: perprof/main.py:50
+#: perprof/main.py:33
+msgid "RGB for background must have 3 integers"
+msgstr "RGB para a cor do fundo deve ser 3 inteiros"
+
+#: perprof/main.py:38
+msgid "RGB for page background must have 3 integers"
+msgstr "RGB para a cor da página deve ser 3 inteiros"
+
+#: perprof/main.py:70
 msgid "Output option {} not supported by matplotlib"
 msgstr "Opção de saída {} não suportada pela matplotlib"
 
-#: perprof/main.py:53
+#: perprof/main.py:73
 msgid "Output option {} not supported by TikZ"
 msgstr "Opção de saída não suportada pelo TikZ"
 
-#: perprof/main.py:57
+#: perprof/main.py:77
 msgid "--raw does not support output except standard output"
 msgstr "--raw apenas suporta como saída o terminal"
 
-#: perprof/main.py:153
+#: perprof/main.py:200
 msgid ""
 "A python module for performance profiling (as described by Dolan and Moré)."
-msgstr "Um módulo Python para perfis de desempenho (como descrito por Dolan e Moré)."
+msgstr ""
+"Um módulo Python para perfis de desempenho (como descrito por Dolan e Moré)."
 
-#: perprof/main.py:157
+#: perprof/main.py:204
 msgid "Backend options"
 msgstr "Opções de backend"
 
-#: perprof/main.py:160
+#: perprof/main.py:207
 msgid "Use matplotlib as backend for the plot. Default output: PNG"
 msgstr "Utiliza matplotlib como backend para o gráfico. Padrão de saída: PNG"
 
-#: perprof/main.py:163
+#: perprof/main.py:210
 msgid "Use LaTex/TikZ/pgfplots as backend for the plot. Default output: PDF"
-msgstr "Utiliza LaTeX/TikZ/pgfplots como backend para o gráfico. Padrão de saída: PDF"
+msgstr ""
+"Utiliza LaTeX/TikZ/pgfplots como backend para o gráfico. Padrão de saída: PDF"
 
-#: perprof/main.py:166
+#: perprof/main.py:213
 msgid "Print raw data. Default output: standard output"
 msgstr "Imprimir dado bruto. Padrão de saída: terminal"
 
-#: perprof/main.py:168
+#: perprof/main.py:215
 msgid "Output formats"
 msgstr "Formatos de saída"
 
-#: perprof/main.py:171
-msgid "The output file will be a PNG file"
-msgstr "O arquivo de saída será um PNG"
+#: perprof/main.py:218
+msgid "The output file will be a EPS file"
+msgstr "O arquivo de saída será um EPS"
 
-#: perprof/main.py:173
-msgid "The output file will be a (La)TeX file"
-msgstr "O arquivo de saída será um código (La)TeX"
-
-#: perprof/main.py:175
+#: perprof/main.py:220
 msgid "The output file will be a PDF file"
 msgstr "O arquivo de saída será um PDF"
 
-#: perprof/main.py:177
-msgid "Tikz options"
+#: perprof/main.py:222
+msgid "The output file will be a PNG file"
+msgstr "O arquivo de saída será um PNG"
+
+#: perprof/main.py:224
+#, fuzzy
+msgid "The output file will be a PS file"
+msgstr "O arquivo de saída será um PS"
+
+#: perprof/main.py:226
+#, fuzzy
+msgid "The output file will be a SVG file"
+msgstr "O arquivo de saída será um SVG"
+
+#: perprof/main.py:228
+msgid "The output file will be a (La)TeX file"
+msgstr "O arquivo de saída será um código (La)TeX"
+
+#: perprof/main.py:230
+#, fuzzy
+msgid "TikZ options"
 msgstr "Opções do TikZ"
 
-#: perprof/main.py:179
+#: perprof/main.py:232
 msgid ""
 "Create the header as a standalone to the tex file, enabling compilation of "
 "the result"
 msgstr "Criar um cabeçalho para o arquivo TeX e compilá-lo"
 
-#: perprof/main.py:182
+#: perprof/main.py:235
 msgid "Set pgfplots backwards compatibility mode to given version"
 msgstr "Configurar versão de compatibilidade do pgfplots"
 
-#: perprof/main.py:185
+#: perprof/main.py:238
 msgid "Set language for axis label"
 msgstr "Configurar língua dos título dos eixos"
 
-#: perprof/main.py:187
+#: perprof/main.py:240
 msgid "When parsing file handle all non `c` character as `d`"
 msgstr "No parse aceitar caracteres além do `c` e `d`"
 
-#: perprof/main.py:189
+#: perprof/main.py:242
 msgid "Print output of pdflatex"
 msgstr "Imprimir saída do pdflatex"
 
-#: perprof/main.py:191
+#: perprof/main.py:244
 msgid "Use only black color."
 msgstr "Utilizar apenas as cores preto e branco"
 
-#: perprof/main.py:193
+#: perprof/main.py:246
+msgid ""
+"RGB values separated by commas for the background color of the plot. (Values "
+"in the 0,255 range)"
+msgstr "Valores do RGB separados por vírgula para a cor de fundo do gráfico. "
+"(Valores no intervalo 0,255)"
+
+#: perprof/main.py:249
+msgid ""
+"RGB values separated by commas for the background color of the page. (Values "
+"in the 0,255 range)"
+msgstr "Valores do RGB separados por vírgula para a cor da página do gráfico. "
+"(Valores no intervalo 0,255)"
+
+#: perprof/main.py:252
 msgid "Use logarithmic scale for the x axis of the plot"
 msgstr "Utilizar escala logarítmica para o eixo x do gráfico"
 
-#: perprof/main.py:195
+#: perprof/main.py:254
 msgid ""
 "Flags that are interpreted as success, separated by commas.  Default: `c`"
-msgstr "Palavras que serão interpretadas como sucesso, separadas por vírgula.  Padrão: `c`"
+msgstr ""
+"Palavras que serão interpretadas como sucesso, separadas por vírgula.  "
+"Padrão: `c`"
 
-#: perprof/main.py:198
+#: perprof/main.py:257
 msgid ""
 "Sets a maximum time for a solved problem. Any problem with a time greater "
 "than this will be considered failed."
-msgstr "Configurar um tempo máximo de execução. Qualquer problema que utilizar"
-"mais que esse tempo será considerado como falha."
+msgstr ""
+"Configurar um tempo máximo de execução. Qualquer problema que utilizarmais "
+"que esse tempo será considerado como falha."
 
-#: perprof/main.py:202
+#: perprof/main.py:260
+msgid ""
+"Sets a minimum time for a solved problem. Any problem with a time smaller "
+"than this will have the time set to this."
+msgstr ""
+"Configurar um tempo máximo de execução. Qualquer problema que utiliza menos "
+"que esse tempo terá o tempo alterado para esse valor."
+
+#: perprof/main.py:264
 msgid "Enable cache."
 msgstr "Habilitar cache"
 
-#: perprof/main.py:204
+#: perprof/main.py:266
 msgid "Name of a file with a subset of problems to compare"
 msgstr "Nome do arquivo com subconjunto de problemas a serem comparados"
 
-#: perprof/main.py:206
+#: perprof/main.py:268
 msgid "Limit the x-axis based this value"
 msgstr "Limite do eixo x"
 
-#: perprof/main.py:208
+#: perprof/main.py:270
 msgid "Force overwrite the output file"
 msgstr "Forçar sobre escrever o arquivo de saída"
 
-#: perprof/main.py:210
+#: perprof/main.py:272
 msgid "Name of the file to use as output (the correct extension will be add)"
 msgstr "Nome do arquivo de saída (a extensão correta será adicionada)"
 
-#: perprof/main.py:213
-msgid "The name of the files to be used for the performance profiling"
-msgstr "Nome dos arquivos a serem utilizados no perfil de desempenho"
+#: perprof/main.py:276
+msgid "Use examples files as input"
+msgstr "Utiliza arquivos de exemplos como entrada"
 
-#: perprof/main.py:234
+#: perprof/main.py:278
+msgid ""
+"The name of the files to be used for the performance profiling (for demo use "
+"`--demo`)"
+msgstr "Nome dos arquivos a serem utilizados no perfil de desempenho "
+"(para demonstranstração utilize `--demo`)"
+
+#: perprof/main.py:286
+msgid "Using demo mode. Ignoring input files."
+msgstr "Utilizando mode de demonstração. Ignorando arquivos de entrada."
+
+#: perprof/main.py:293
+msgid "You must provide at least two input files."
+msgstr "Você deve informar pelo menos dois arquivos de entrada."
+
+#: perprof/main.py:313
 msgid ""
 "ERROR: When using PDF output, you need to provide the name of the output "
 "file."
-msgstr "ERRO: Ao utilizar a saída para PDF é necessário informar o arquivo de saída"
+msgstr ""
+"ERRO: Ao utilizar a saída para PDF é necessário informar o arquivo de saída"
 
-#: perprof/matplotlib.py:30
+#: perprof/matplotlib.py:36
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite"
@@ -148,7 +214,15 @@ msgstr ""
 "ERROR: Arquivo {} existe.\n"
 "Utilize `-f` para sobrescrever."
 
-#: perprof/parse.py:31
+#: perprof/matplotlib.py:85 perprof/tikz.py:106
+msgid "Performance Ratio"
+msgstr "Razão de Desempenho"
+
+#: perprof/matplotlib.py:87 perprof/tikz.py:107
+msgid "Problems solved"
+msgstr "Problemas resolvidos"
+
+#: perprof/parse.py:41
 msgid ""
 "ERROR when reading line #{} of {}:\n"
 "    {}"
@@ -156,23 +230,23 @@ msgstr ""
 "ERRO ao ler linha #{} de {}:\n"
 "    {}"
 
-#: perprof/parse.py:61
+#: perprof/parse.py:106
 msgid "This line must have at least 2 elements."
 msgstr "Essa linha precisa ter pelo menos 2 elementos."
 
-#: perprof/parse.py:69
+#: perprof/parse.py:114
 msgid "This line must have at least 3 elements."
 msgstr "Essa linha precisa ter pelo menos 3 elementos."
 
-#: perprof/parse.py:74
+#: perprof/parse.py:121
 msgid "Time spending can't be zero."
 msgstr "Tempo gasto não pode ser zero."
 
-#: perprof/parse.py:82
+#: perprof/parse.py:129
 msgid "The second element in this lime must be {} or d."
 msgstr "Segundo elemento nessa linha deve ser {} ou d."
 
-#: perprof/parse.py:86
+#: perprof/parse.py:133
 msgid "ERROR: List of problems (intersected with subset, if any) is empty"
 msgstr "ERRO: Lista de problema é vazia"
 
@@ -180,22 +254,14 @@ msgstr "ERRO: Lista de problema é vazia"
 msgid "ERROR: Subset is empty"
 msgstr "ERRO: Subconjunto é vazio"
 
-#: perprof/prof.py:132
+#: perprof/prof.py:135
 msgid "ERROR: problem set is empty"
 msgstr "ERRO: conjunto de problemas é vazio"
 
-#: perprof/tikz.py:37
+#: perprof/tikz.py:38
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite."
 msgstr ""
 "ERROR: Arquivo {} existe.\n"
 "Utilize `-f` para sobrescrever."
-
-#: perprof/tikz.py:91
-msgid "Performance Ratio"
-msgstr "Raz\~{a}o de Desempenho"
-
-#: perprof/tikz.py:92
-msgid "Problems solved"
-msgstr "Problemas resolvidos"

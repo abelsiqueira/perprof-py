@@ -21,13 +21,14 @@ class Profiler(prof.Pdata):
             self.output = '{}.tex'.format(setup.get_output())
             self.output = os.path.abspath(self.output)
         self.standalone = standalone
-        prof.Pdata.__init__(self, setup)
         self.output_format = setup.get_output_format()
 
         # Language for the axis label
         translation = gettext.translation('perprof',
                 os.path.join(THIS_DIR, 'locale'), [setup.lang])
         self.axis_lang = translation.gettext
+
+        prof.Pdata.__init__(self, setup)
 
     def plot(self):
         if not self.force:

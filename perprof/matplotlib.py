@@ -14,12 +14,18 @@ _ = THIS_TRANSLATION.gettext
 
 class Profiler(prof.Pdata):
     def __init__(self, setup):
-        self.already_scaled = False
-
         if setup.get_output() is None:
             self.output = 'performance-profile.png'
         else:
-            self.output = '{}.png'.format(setup.get_output())
+            self.output = '{}.{}'.format(setup.get_output(),
+                    setup.get_output_format())
+        self.output_format = setup.get_output_format()
+
+        # Language for the axis label
+        translation = gettext.translation('perprof',
+                os.path.join(THIS_DIR, 'locale'), [setup.lang])
+        self.axis_lang = translation.gettext
+
         prof.Pdata.__init__(self, setup)
 
     def plot(self):
@@ -39,21 +45,52 @@ class Profiler(prof.Pdata):
         except AttributeError:
             self.set_percent_problems_solved_by_time()
 
-        plt.hold(True)
-        for solver in self.solvers:
-            plt.plot(self.times, self.ppsbt[solver], label=solver)
+        # Hack need to background color
+        figure_ = plt.figure()
+        plot_ = figure_.add_subplot(111)
 
+        # Set configurations handle when saving the plot
+        save_configs = {}
+        save_configs['format'] = self.output_format
+
+        if self.background:
+            plot_.set_axis_bgcolor((self.background[0] / 255,
+                    self.background[1] / 255,
+                    self.background[2] / 255))
+        if self.page_background:
+            # RGB tuples must be in the range [0,1]
+            save_configs['facecolor'] = (self.page_background[0] / 255,
+                    self.page_background[1] / 255,
+                    self.page_background[2] / 255)
+        if not self.background and not self.page_background:
+            save_configs['transparent'] = True
+            save_configs['frameon'] = False
+
+        # We need to hold the plots
+        plot_.hold(True)
+        # Generate the plot for each solver
+        for solver in self.solvers:
+            plot_.plot(self.times, self.ppsbt[solver], label=solver)
+
+        # Change the xscale to log scale
         if self.semilog:
             plt.gca().set_xscale('log')
 
+        # Axis
         try:
             maxt = min(max(self.times), self.tau)
         except (AttributeError, TypeError):
             maxt = max(self.times)
         plt.gca().set_xlim(1, maxt)
+        plt.gca().set_xlabel(self.axis_lang('Performance Ratio'))
         plt.gca().set_ylim(0, 1)
-        plt.gca().legend(loc=4)
-        plt.gca().grid(axis='y', color='0.5', linestyle='-')
-        plt.gca().set_title('Performance profile')
+        plt.gca().set_ylabel(self.axis_lang('Problems solved'))
 
-        plt.savefig(self.output)
+        # Legend
+        plt.gca().legend(loc=4)
+
+        # Help lines
+        plt.gca().grid(axis='y', color='0.5', linestyle='-')
+
+        # Save the plot
+        plt.savefig(self.output, **save_configs)
