@@ -65,9 +65,6 @@ class Profiler(prof.Pdata):
         plt.gca().set_ylim(0, 1)
         plt.gca().set_ylabel(self.axis_lang('Problems solved'))
 
-        # Title
-        plt.gca().set_title(self.axis_lang('Performance Profile'))
-
         # Legend
         plt.gca().legend(loc=4)
 
