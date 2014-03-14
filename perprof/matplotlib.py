@@ -45,11 +45,32 @@ class Profiler(prof.Pdata):
         except AttributeError:
             self.set_percent_problems_solved_by_time()
 
+        # Hack need to background color
+        figure_ = plt.figure()
+        plot_ = figure_.add_subplot(111)
+
+        # Set configurations handle when saving the plot
+        save_configs = {}
+        save_configs['format'] = self.output_format
+
+        if self.background:
+            plot_.set_axis_bgcolor((self.background[0] / 255,
+                    self.background[1] / 255,
+                    self.background[2] / 255))
+        if self.page_background:
+            # RGB tuples must be in the range [0,1]
+            save_configs['facecolor'] = (self.page_background[0] / 255,
+                    self.page_background[1] / 255,
+                    self.page_background[2] / 255)
+        if not self.background and not self.page_background:
+            save_configs['transparent'] = True
+            save_configs['frameon'] = False
+
         # We need to hold the plots
-        plt.hold(True)
+        plot_.hold(True)
         # Generate the plot for each solver
         for solver in self.solvers:
-            plt.plot(self.times, self.ppsbt[solver], label=solver)
+            plot_.plot(self.times, self.ppsbt[solver], label=solver)
 
         # Change the xscale to log scale
         if self.semilog:
@@ -71,16 +92,5 @@ class Profiler(prof.Pdata):
         # Help lines
         plt.gca().grid(axis='y', color='0.5', linestyle='-')
 
-        # Set configurations handle when saving the plot
-        save_configs = {}
-        if self.page_background:
-            # RGB tuples must be in the range [0,1]
-            save_configs['facecolor'] = (self.page_background[0] / 255,
-                    self.page_background[1] / 255,
-                    self.page_background[2] / 255)
-        else:
-            save_configs['transparent'] = True
-            save_configs['frameon'] = False
-        save_configs['format'] = self.output_format
         # Save the plot
         plt.savefig(self.output, **save_configs)
