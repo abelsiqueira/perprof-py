@@ -227,7 +227,7 @@ def set_arguments(args):
     output_format.add_argument('--tex', action='store_true',
             help=_('The output file will be a (La)TeX file'))
 
-    tikz_options = parser.add_argument_group(_("Tikz options"))
+    tikz_options = parser.add_argument_group(_("TikZ options"))
     tikz_options.add_argument('--standalone', action='store_true',
             help=_('Create the header as a standalone to the tex file, '
                     'enabling compilation of the result'))
