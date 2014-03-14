@@ -6,7 +6,8 @@ _perprof()
   prev="${COMP_WORDS[COMP_CWORD-1]}"
   opts="--help --mp --tikz --raw --png --tex --pdf --standalone --semilog \
   --black-and-white --free-format --pgfplotcompat --cache --tau --force \
-  --output --subset --lang --success \
+  --output --subset --lang --success --pdf-verbose --maxtime --mintime \
+  --background --page-background --demo \
   -h -c -s -f -o -l"
 
 
@@ -16,12 +17,10 @@ _perprof()
       COMPREPLY=( $(compgen -W "$versions" ${cur}) )
       return 0
       ;;
-    --tau)
-      #[ -z "${cur}" ] && return 0
-      #re='^[0-9]+([.][0-9]+)?([dDeE][+-]?[0-9]+)?$'
-      #if ! [[ "${cur}" =~ "${re}" ]]; then
-        #echo "Value of tau needs to be a float"
-      #fi
+    --tau | --maxtime | --mintime)
+      return 0
+      ;;
+    --background | --page-background)
       return 0
       ;;
     --subset | -s)
