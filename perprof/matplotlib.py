@@ -68,9 +68,18 @@ class Profiler(prof.Pdata):
 
         # We need to hold the plots
         plot_.hold(True)
+
+        # Define the linestyles
+        if self.black_and_white:
+            linestyles = ['k-', 'k--', 'k:', 'k-.']
+        else:
+            linestyles = ['r', 'b', 'g', 'c', 'm', 'y', 'k', 'w']
+
         # Generate the plot for each solver
+        sc = 0
         for solver in self.solvers:
-            plot_.plot(self.times, self.ppsbt[solver], label=solver)
+            plot_.plot(self.times, self.ppsbt[solver], linestyles[sc], label=solver)
+            sc = sc + 1
 
         # Change the xscale to log scale
         if self.semilog:
