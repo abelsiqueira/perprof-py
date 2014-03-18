@@ -1,0 +1,27 @@
+---
+layout: default
+title: Related works
+---
+
+<div class="wall">
+  <h1> Works about perprof-py </h1>
+  <ul>
+    {% for work in site.data.worksabout %}
+    <li> <strong> {{ work.title }} </strong> <br>
+    {{ work.author }} <br>
+    <em>{{ work.what }}</em> at <em>{{ work.where }}</em> <br>
+    {{ work.when }}
+    </li>
+    {% endfor %}
+  </ul>
+  <h1> Works using perprof-py </h1>
+  <ul>
+    {% for work in site.data.works %}
+    <li> <strong> {{ work.title }} </strong> <br>
+    {{ work.author }} <br>
+    <em>{{ work.what }}</em> at <em>{{ work.where }}</em> <br>
+    {{ work.when }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>

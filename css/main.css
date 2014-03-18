@@ -22,7 +22,13 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%; }
 
-h1 { margin-bottom: 1em; }
+h1 {
+  margin: 1em;
+  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid #d0eeee;
+}
+
 p { margin: 1em 0; }
 
 a         { color: #00a; }
@@ -72,7 +78,7 @@ a:visited { color: #a0a; }
 
 .title {
   margin: 1em 0em 0em 0em;
-  font-size: 2.5em;
+  font-size: 3.5em;
   font-family: monospace;
 }
 
@@ -217,4 +223,3 @@ nav .button a {
 .button a:hover {
   color: #0aa;
 }
-
