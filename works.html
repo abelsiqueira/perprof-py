@@ -11,6 +11,10 @@ title: Related works
     {{ work.author }} <br>
     <em>{{ work.what }}</em> at <em>{{ work.where }}</em> <br>
     {{ work.when }}
+    {% if work.download %}
+      <br>
+      <a href="{{ site.baseurl }}/assets/works/{{ work.download }}">Download</a>
+    {% endif %}
     </li>
     {% endfor %}
   </ul>
