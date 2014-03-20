@@ -64,6 +64,8 @@ class Profiler(prof.Pdata):
             plot_.set_axis_bgcolor((self.background[0] / 255,
                     self.background[1] / 255,
                     self.background[2] / 255))
+            if not self.page_background:
+                figure_.patch.set_alpha(0.0)
         if not self.background and not self.page_background:
             save_configs['transparent'] = True
             save_configs['frameon'] = False
