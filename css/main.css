@@ -223,3 +223,13 @@ nav .button a {
 .button a:hover {
   color: #0aa;
 }
+
+div .slide {
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
+}
+
+div .slide img {
+  width: 45%;
+}

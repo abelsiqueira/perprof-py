@@ -1,0 +1,19 @@
+---
+layout: default
+title: Examples - Slideshow
+---
+
+<div class="wall">
+    {% for image in site.data.examples %}
+    <div class="slide">
+      <a href="{{ site.baseurl }}/assets/{{ image.name }}-tikz.png" target=_blank>
+        <img src="assets/{{ image.name }}-tikz.png">
+      </a>
+      <a href="{{ site.baseurl }}/assets/{{ image.name }}-mp.png" target=_blank>
+        <img src="assets/{{ image.name }}-mp.png">
+      </a>
+      <h2> {{ image.desc }} </h2>
+      <p class="cmd"> $ {{ image.cmd }} </p>
+    </div>
+    {% endfor %}
+</div>
