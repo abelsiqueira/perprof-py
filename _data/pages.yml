@@ -1,6 +1,9 @@
 - name: Home
   url: index.html
 
+- name: Download
+  url: download.html
+
 - name: Examples
   url: examples.html
 
