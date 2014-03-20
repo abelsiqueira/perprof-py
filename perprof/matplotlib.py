@@ -53,15 +53,17 @@ class Profiler(prof.Pdata):
         save_configs = {}
         save_configs['format'] = self.output_format
 
-        if self.background:
-            plot_.set_axis_bgcolor((self.background[0] / 255,
-                    self.background[1] / 255,
-                    self.background[2] / 255))
         if self.page_background:
+            if not self.background:
+                self.background = self.page_background
             # RGB tuples must be in the range [0,1]
             save_configs['facecolor'] = (self.page_background[0] / 255,
                     self.page_background[1] / 255,
                     self.page_background[2] / 255)
+        if self.background:
+            plot_.set_axis_bgcolor((self.background[0] / 255,
+                    self.background[1] / 255,
+                    self.background[2] / 255))
         if not self.background and not self.page_background:
             save_configs['transparent'] = True
             save_configs['frameon'] = False
