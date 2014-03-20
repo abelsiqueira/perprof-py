@@ -11,7 +11,7 @@ class TestPerprof(unittest.TestCase):
 
     def test_backends(self):
         for backend in ['tikz', 'mp', 'raw']:
-            args = '--' + backend + ' fakefile'
+            args = '--' + backend + ' --demo'
             isTrue = {'tikz': False, 'mp': False, 'raw': False }
             isTrue[backend] = True
             args = set_arguments(args.split())
@@ -26,25 +26,31 @@ class TestPerprof(unittest.TestCase):
         backends = ['tikz', 'mp']
         for backend in backends:
             for output in outputs[backend]:
-                args = '--' + backend + ' --' + output + ' fakefile'
+                args = '--' + backend + ' --' + output + ' --demo'
                 args = set_arguments(args.split())
                 setup = PerProfSetup(args)
                 self.assertEqual(setup.get_output_format(), output)
 
     def test_only_name(self):
-        args = '--tikz perprof/tests/only-name.sample'
+        args = '--tikz perprof/tests/only-name.sample ' + self.goodfiles
         args = set_arguments(args.split())
         setup = PerProfSetup(args)
         self.assertRaises(ValueError, tikz.Profiler, setup, args.standalone)
 
     def test_without_time(self):
-        args = '--tikz perprof/tests/without-time.sample'
+        args = '--tikz perprof/tests/without-time.sample ' + self.goodfiles
         args = set_arguments(args.split())
         setup = PerProfSetup(args)
         self.assertRaises(ValueError, tikz.Profiler, setup, args.standalone)
 
-    def test_no_free_format(self):
-        args = '--tikz ' + self.goodfiles
+    def test_without_c_or_d(self):
+        args = '--tikz perprof/tests/c-or-d.sample ' + self.goodfiles
+        args = set_arguments(args.split())
+        setup = PerProfSetup(args)
+        self.assertRaises(ValueError, tikz.Profiler, setup, args.standalone)
+
+    def test_zero_time(self):
+        args = '--tikz perprof/tests/zero-time.sample ' + self.goodfiles
         args = set_arguments(args.split())
         setup = PerProfSetup(args)
         self.assertRaises(ValueError, tikz.Profiler, setup, args.standalone)
