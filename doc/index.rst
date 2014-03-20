@@ -11,7 +11,11 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
+   install.rst
+   file-format.rst
+   old-file-format.rst
+   flags.rst
+   developers.rst
 
 Indices and tables
 ==================
