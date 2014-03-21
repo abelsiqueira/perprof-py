@@ -17,7 +17,7 @@ class Profiler(prof.Pdata):
     """
     The profiler using TikZ.
     """
-    def __init__(self, setup, standalone):
+    def __init__(self, setup):
         """
         :param setup main.PerProfSetup: configuration for the performance
         profile
@@ -28,7 +28,7 @@ class Profiler(prof.Pdata):
         else:
             self.output = '{}.tex'.format(setup.get_output())
             self.output = os.path.abspath(self.output)
-        self.standalone = standalone
+        self.standalone = setup.get_standalone()
         self.output_format = setup.get_output_format()
 
         # Language for the axis label
