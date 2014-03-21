@@ -13,16 +13,28 @@ src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <script>
   $(document).ready(function(){
-    $('.bxslider').bxSlider();
+      $('.bxslider').bxSlider({
+        mode: 'fade'
+        });
   });
 </script>
 
-<div class="wall">
+<div class="slideshow">
   <ul class="bxslider">
     {% for image in site.data.examples %}
-    <li> <img src="assets/{{ image.name }}-tikz.png">
+    <li>
+    <h2> {{ image.desc }} </h2>
+    <p class="cmd"> perprof --tikz {{ image.cmd }} </p>
+    <div class="image">
+      <img src="assets/{{ image.name }}-tikz.png">
+    </div>
     </li>
-    <li> <img src="assets/{{ image.name }}-mp.png">
+    <li>
+    <h2> {{ image.desc }} </h2>
+    <p class="cmd"> perprof --mp {{ image.cmd }} </p>
+    <div class="image">
+      <img src="assets/{{ image.name }}-mp.png">
+    </div>
     </li>
     {% endfor %}
   </ul>

@@ -224,12 +224,19 @@ nav .button a {
   color: #0aa;
 }
 
-div .slide {
-  border: 1px solid black;
+div .slideshow {
   padding: 1em;
   margin: 1em;
+  float: center;
+  width: 100%;
 }
 
-div .slide img {
-  width: 45%;
+div .slideshow h2, div .slideshow .cmd {
+  margin-top: 0.5em;
+  font-size: 1.4em;
 }
+
+div .slideshow li {
+  text-align: center;
+}
+
