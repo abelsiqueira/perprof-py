@@ -3,17 +3,27 @@ layout: default
 title: Examples - Slideshow
 ---
 
+<!-- jQuery library (served from Google) -->
+<script
+src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="/js/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="/lib/jquery.bxslider.css" rel="stylesheet" />
+
+<script>
+  $(document).ready(function(){
+    $('.bxslider').bxSlider();
+  });
+</script>
+
 <div class="wall">
+  <ul class="bxslider">
     {% for image in site.data.examples %}
-    <div class="slide">
-      <a href="{{ site.baseurl }}/assets/{{ image.name }}-tikz.png" target=_blank>
-        <img src="assets/{{ image.name }}-tikz.png">
-      </a>
-      <a href="{{ site.baseurl }}/assets/{{ image.name }}-mp.png" target=_blank>
-        <img src="assets/{{ image.name }}-mp.png">
-      </a>
-      <h2> {{ image.desc }} </h2>
-      <p class="cmd"> $ {{ image.cmd }} </p>
-    </div>
+    <li> <img src="assets/{{ image.name }}-tikz.png">
+    </li>
+    <li> <img src="assets/{{ image.name }}-mp.png">
+    </li>
     {% endfor %}
+  </ul>
 </div>
