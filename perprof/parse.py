@@ -64,18 +64,23 @@ def _parse_yaml(config, yaml_header):
     import yaml
 
     metadata = yaml.load(yaml_header)
-    if 'algname' in metadata:
-        config.algname = metadata['algname']
-    if 'subset' in metadata:
-        config.subset = metadata['subset']
-    if 'success' in metadata:
-        config.success = metadata['success']
-    if 'mintime' in metadata:
-        config.mintime = metadata['mintime']
-    if 'maxtime' in metadata:
-        config.maxtime = metadata['maxtime']
-    if 'free_format' in metadata:
-        config.free_format = metadata['free_format']
+    yaml_options = ['algname', 'subset', 'success', 'mintime', 'maxtime',
+            'free_format']
+    for opt in metadata:
+        if not opt in yaml_options:
+            raise ValueError(_("'" + opt + "'" + " is not a valid option for YAML."))
+        if 'algname' == opt:
+            config.algname = metadata['algname']
+        if 'subset' == opt:
+            config.subset = metadata['subset']
+        if 'success' == opt:
+            config.success = metadata['success']
+        if 'mintime' == opt:
+            config.mintime = metadata['mintime']
+        if 'maxtime' == opt:
+            config.maxtime = metadata['maxtime']
+        if 'free_format' == opt:
+            config.free_format = metadata['free_format']
 
 def parse_file(filename, subset=None, success='c', mintime=0,
         maxtime=float('inf'), free_format=False):
