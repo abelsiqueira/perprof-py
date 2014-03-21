@@ -95,5 +95,12 @@ class TestPerprof(unittest.TestCase):
             setup = PerProfSetup(args)
             self.assertRaises(ValueError, self.back_profilers[backend], setup)
 
+    def test_no_success(self):
+        for backend in self.backends:
+            args = '--tikz perprof/tests/no-success.sample ' + self.goodfiles
+            args = set_arguments(args.split())
+            setup = PerProfSetup(args)
+            self.assertRaises(ValueError, self.back_profilers[backend], setup)
+
 if __name__ == '__main__':
     unittest.main()
