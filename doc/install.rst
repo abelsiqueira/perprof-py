@@ -19,7 +19,7 @@ Install perprof-py in a Python environment with pip is easy::
 
 .. note::
 
-   You can install it locally if you want but to take advantage of bach
+   You can install it locally if you want but to take advantage of bash
    completion we recomend you to install it globablly.
 
 To see a demo::
@@ -33,8 +33,8 @@ The general instructions probably work for you if you already using Python3 as
 default.  Instructions for distributions that still using Python2 are found
 below.
 
-GNU Debian
-~~~~~~~~~~
+Debian
+~~~~~~
 ::
 
     # apt-get install python3 pip3

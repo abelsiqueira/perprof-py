@@ -1,10 +1,9 @@
-.. perprof-py documentation master file, created by
-   sphinx-quickstart on Thu Mar 20 11:24:11 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to perprof-py's documentation!
 ======================================
+
+perprof-py is a free/open source Python module for performance profiling (as
+described by `Dolan and Moré <http://arxiv.org/abs/cs/0102001>`_) with TikZ and
+matplotlib output.
 
 Contents:
 

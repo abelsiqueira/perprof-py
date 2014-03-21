@@ -13,7 +13,14 @@ THIS_TRANSLATION = gettext.translation('perprof',
 _ = THIS_TRANSLATION.gettext
 
 class Profiler(prof.Pdata):
+    """
+    The profiler using matplotlib.
+    """
     def __init__(self, setup):
+        """
+        :param setup main.PerProfSetup: configuration for the performance
+        profile
+        """
         if setup.get_output() is None:
             self.output = 'performance-profile.png'
         else:
@@ -29,6 +36,9 @@ class Profiler(prof.Pdata):
         prof.Pdata.__init__(self, setup)
 
     def plot(self):
+        """
+        Create the performance profile using matplotlib.
+        """
         if not self.force:
             try:
                 file_ = open(self.output, 'r')

@@ -3,17 +3,14 @@ Functions to parse the files
 
 The files must be in the following format::
 
-    problem-name c time-in-seconds
-    problem-name c time-in-seconds
-    problem-name d time-in-seconds
-    problem-name c time-in-seconds
-    problem-name d
-    problem-name c time-in-seconds
-
-The first column is the problem name.  The second column indicates if the
-problem converged, where ``c`` means yes, and ``d`` means no.  The third column
-is the elapsed time the solver used to reach the solution. If the solver did not
-converge, this column is ignored.
+    ---
+    <Metadata 01>: <Value 01>
+    <Metadata 02>: <Value 02>
+    ---
+    <Problem Name 01> <Exit Flag 01> <Cost 01>
+    <Problem Name 02> <Exit Flag 02> <Cost 02>
+    <Problem Name 03> <Exit Flag 03> <Cost 03>
+    ...
 """
 
 import os.path
@@ -25,7 +22,9 @@ THIS_TRANSLATION = gettext.translation('perprof',
 _ = THIS_TRANSLATION.gettext
 
 class _ParserConfig(object):
-    """Store configuration for the parser."""
+    """
+    Class to store configuration for the parser.
+    """
     def __init__(self, algname, subset, success, mintime, maxtime, free_format):
         self.algname = algname
         self.subset = subset
@@ -36,24 +35,30 @@ class _ParserConfig(object):
 
 def _error_message(filename, line_number, details):
     """
-    Return error message.
+    Format the error message.
+
+    :param str filename: name of the file with the error
+    :param int line_number: number of the line with the error
+    :param str details: details about the error
+    :return str: the error message
     """
     return _('ERROR when reading line #{} of {}:\n    {}').format(
             line_number, filename, details)
 
-def str_sanitize(name):
+def _str_sanitize(str2sanitize):
     """
-    This sanitize the problem name for LaTeX.
-    """
-    name = name.replace('_', '-')
+    Sanitize the problem name for LaTeX.
 
-    return name
+    :param str name: string to be sanitize
+    :return: sanitized string
+    """
+    return str2sanitize.replace('_', '-')
 
 def _parse_yaml(config, yaml_header):
     """
     Parse the yaml header
 
-    :param _ParserConfig config The configuration for the parser
+    :param _ParserConfig config: The configuration for the parser
     :param str yaml: The YAML header
     """
     import yaml
@@ -75,9 +80,17 @@ def _parse_yaml(config, yaml_header):
 def parse_file(filename, subset=None, success='c', mintime=0,
         maxtime=float('inf'), free_format=False):
     """
-    This function parse one file.
+    Parse one file.
+
+    :param str filename: name of the file to be parser
+    :param list subset: list with the name of the problems to use
+    :param list success: list with strings to mark sucess
+    :param int mintime: minimum time running the solver
+    :param int maxtime: maximum time running the solver
+    :param bool free_format: if False request that fail be mark with ``d``
+    :return: performance profile data and name of the solver
     """
-    parse_config = _ParserConfig(str_sanitize(filename), subset, success,
+    parse_config = _ParserConfig(_str_sanitize(filename), subset, success,
             mintime, maxtime, free_format)
 
     data = {}
@@ -90,7 +103,7 @@ def parse_file(filename, subset=None, success='c', mintime=0,
             ldata = line.split()
             # This is for backward compatibility
             if ldata[0] == '#Name' and len(ldata) >= 2:
-                parse_config.algname = str_sanitize(ldata[1])
+                parse_config.algname = _str_sanitize(ldata[1])
             # Handle YAML
             elif ldata[0] == '---':
                 if in_yaml:
@@ -105,7 +118,7 @@ def parse_file(filename, subset=None, success='c', mintime=0,
                 raise ValueError(_error_message(filename, line_number,
                         _('This line must have at least 2 elements.')))
             else:
-                ldata[0] = str_sanitize(ldata[0])
+                ldata[0] = _str_sanitize(ldata[0])
                 if parse_config.subset and ldata[0] not in parse_config.subset:
                     continue
                 if ldata[1] in parse_config.success:
