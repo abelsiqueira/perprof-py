@@ -97,10 +97,13 @@ class TestPerprof(unittest.TestCase):
 
     def test_no_success(self):
         for backend in self.backends:
+            if backend == "raw":
+                continue
             args = '--' + backend + ' perprof/tests/no-success.sample ' + self.goodfiles
             args = set_arguments(args.split())
             setup = PerProfSetup(args)
-            self.assertRaises(ValueError, self.back_profilers[backend], setup)
+            data = self.back_profilers[backend](setup)
+            self.assertRaises(ValueError, data.plot)
 
     def test_repeated_problem(self):
         for backend in self.backends:
