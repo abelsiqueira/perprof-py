@@ -36,7 +36,14 @@ def load_data(setup):
 
 #pylint: disable=R0921
 class Pdata(object):
+    """
+    Store data for performance profile.
+    """
     def __init__(self, setup):
+        """
+        :param setup main.PerProfSetup: configuration for the performance
+        profile
+        """
         self.data = load_data(setup)
         self.cache = setup.using_cache()
         self.force = setup.using_force()
@@ -83,6 +90,11 @@ class Pdata(object):
         return str2output[:-2]
 
     def get_set_solvers(self):
+        """
+        Get the set of solvers to use.
+
+        :return: list of solvers
+        """
         try:
             self.solvers
         except AttributeError:
@@ -90,6 +102,11 @@ class Pdata(object):
         return self.solvers
 
     def get_set_problems(self):
+        """
+        Get the set of problems to use.
+
+        :return: list of problems
+        """
         try:
             self.problems
             self.number_problems
@@ -140,6 +157,9 @@ class Pdata(object):
         self.already_scaled = True
 
     def set_percent_problems_solved_by_time(self):
+        """
+        Set the percent of problems solved by time.
+        """
         # ppsbt = Percent Problems Solved By Time
         self.ppsbt = {}
         for solver in self.solvers:
