@@ -126,6 +126,9 @@ def parse_file(filename, subset=None, success='c', mintime=0,
                 ldata[0] = _str_sanitize(ldata[0])
                 if parse_config.subset and ldata[0] not in parse_config.subset:
                     continue
+                if ldata[0] in data:
+                    raise ValueError(_error_message(filename, line_number,
+                        _('Problem {} is duplicated.'.format(ldata[0]))))
                 if ldata[1] in parse_config.success:
                     if len(ldata) < 3:
                         raise ValueError(_error_message(filename, line_number,
