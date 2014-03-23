@@ -1,0 +1,5 @@
+---
+name: yaml-fail
+fail: yes
+---
+problem c 1

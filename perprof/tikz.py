@@ -17,18 +17,17 @@ class Profiler(prof.Pdata):
     """
     The profiler using TikZ.
     """
-    def __init__(self, setup, standalone):
+    def __init__(self, setup):
         """
         :param setup main.PerProfSetup: configuration for the performance
         profile
-        :param standalone bool: if True add LaTeX header
         """
         if setup.get_output() is None:
             self.output = sys.stdout
         else:
             self.output = '{}.tex'.format(setup.get_output())
             self.output = os.path.abspath(self.output)
-        self.standalone = standalone
+        self.standalone = setup.get_standalone()
         self.output_format = setup.get_output_format()
 
         # Language for the axis label
