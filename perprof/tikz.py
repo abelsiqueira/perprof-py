@@ -21,7 +21,6 @@ class Profiler(prof.Pdata):
         """
         :param setup main.PerProfSetup: configuration for the performance
         profile
-        :param standalone bool: if True add LaTeX header
         """
         if setup.get_output() is None:
             self.output = sys.stdout
