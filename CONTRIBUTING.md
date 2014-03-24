@@ -9,7 +9,7 @@ Fork the project and check out your copy.
 
     $ git clone https://github.com/<your-username>/perprof-py.git
     $ cd perprof-py
-    $ git remote add upstream https://github.com/abelsiqueira/perprof-py.git
+    $ git remote add upstream https://github.com/lpoo/perprof-py.git
 
 ## BRANCH
 
