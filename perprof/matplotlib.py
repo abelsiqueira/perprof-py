@@ -22,7 +22,8 @@ class Profiler(prof.Pdata):
         profile
         """
         if setup.get_output() is None:
-            self.output = 'performance-profile.png'
+            self.output = 'performance-profile.{}'.format(
+                    setup.get_output_format())
         else:
             self.output = '{}.{}'.format(setup.get_output(),
                     setup.get_output_format())
