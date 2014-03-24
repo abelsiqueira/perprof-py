@@ -29,7 +29,7 @@ class TestPerprof(unittest.TestCase):
     def test_output_formats(self):
         outputs = {
                 "tikz": ["pdf", "tex"],
-                "mp": ["png"],
+                "mp": ["png", "eps", "pdf", "ps", "svg"],
                 "raw": [] }
         backends = self.backends
         for backend in backends:
