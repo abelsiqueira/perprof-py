@@ -23,6 +23,7 @@ class PerProfSetup(object):
         self.cache = args.cache
         self.files = args.file_name
         self.force = args.force
+        self.standalone = args.standalone
         self.semilog = args.semilog
         self.black_and_white = args.black_and_white
         if args.background is None:
@@ -105,6 +106,12 @@ class PerProfSetup(object):
 
     def set_force(self, force):
         self.force = force
+
+    def set_standalone(self, val):
+        self.standalone = val
+
+    def get_standalone(self):
+        return self.standalone
 
     def get_output(self):
         return self.output
@@ -316,7 +323,7 @@ def main():
                 # tikz
                 from . import tikz
 
-                data = tikz.Profiler(setup, args.standalone)
+                data = tikz.Profiler(setup)
                 data.plot()
         elif args.raw:
             # raw

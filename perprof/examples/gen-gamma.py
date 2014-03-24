@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+### WARNING
+# This will not work alone. You have to edit the YAML manually
+
 import random
 
 with open('alpha.table','r') as alphafile:

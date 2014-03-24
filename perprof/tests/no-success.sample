@@ -1,0 +1,8 @@
+---
+free_format: True
+---
+p1 d 1.0
+p2 fail 1.0
+p3 timeout 1.0
+p4 maxiter 1.0
+p5 d 1.0
