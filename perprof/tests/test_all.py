@@ -29,7 +29,7 @@ class TestPerprof(unittest.TestCase):
     def test_output_formats(self):
         outputs = {
                 "tikz": ["pdf", "tex"],
-                "mp": ["png"],
+                "mp": ["png", "eps", "pdf", "ps", "svg"],
                 "raw": [] }
         backends = self.backends
         for backend in backends:
@@ -38,6 +38,9 @@ class TestPerprof(unittest.TestCase):
                 args = set_arguments(args.split())
                 setup = PerProfSetup(args)
                 self.assertEqual(setup.get_output_format(), output)
+                data = self.back_profilers[backend](setup)
+                if backend != "tikz":
+                    self.assertEqual(data.output, 'performance-profile.{}'.format(output))
 
     def test_only_name(self):
         for backend in self.backends:
