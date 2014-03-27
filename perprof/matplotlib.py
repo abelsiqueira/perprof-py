@@ -117,5 +117,6 @@ class Profiler(prof.Pdata):
         plt.gca().grid(axis='y', color='0.5', linestyle='-')
 
         # Save the plot
+        # pylint: disable-msg=W0142
         plt.savefig(self.output, bbox_inches='tight', pad_inches=0.05,
                 **save_configs)

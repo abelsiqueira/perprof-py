@@ -158,19 +158,19 @@ class PerProfSetup(object):
     def get_background(self):
         return self.background
 
-    def set_background(red, green, blue):
+    def set_background(self, red, green, blue):
         self.background = (red, green, blue)
 
-    def unset_background():
+    def unset_background(self):
         self.background = None
 
     def get_page_background(self):
         return self.page_background
 
-    def set_page_background(red, green, blue):
+    def set_page_background(self, red, green, blue):
         self.page_background = (red, green, blue)
 
-    def unset_page_background():
+    def unset_page_background(self):
         self.page_background = None
 
     def get_pdf_verbose(self):
@@ -331,6 +331,7 @@ def main():
             print('raw')
 
             print(prof.Pdata(setup))
-    # TODO Fix this "Catching too general exception Exception"
-    except Exception as error:
+    except ValueError as error:
+        print(error)
+    except NotImplementedError as error:
         print(error)

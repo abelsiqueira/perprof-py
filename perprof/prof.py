@@ -57,6 +57,13 @@ class Pdata(object):
         self.tau = setup.get_tau()
         self.already_scaled = False
 
+        # Atributes that will be set later
+        self.ppsbt = None
+        self.problems = None
+        self.times = None
+        self.solvers = None
+        self.number_problems = None
+
     def __repr__(self):
         try:
             self.solvers
