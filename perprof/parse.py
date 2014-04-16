@@ -114,21 +114,29 @@ def parse_file(filename, parser_options):
                     raise ValueError(_error_message(filename, line_number,
                         _('Problem {} is duplicated.'.format(ldata[col["name"]]))))
                 if ldata[col["exit"]] in options['success']:
-                    if len(ldata) < 3:
+                    if (len(ldata) < 3 or
+                            (len(ldata) < 4 and parser_options['use_obj_func'])):
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
-                        data[ldata[col["name"]]] = float(ldata[col["time"]])
-                        if data[ldata[col["name"]]] < options['mintime']:
-                            data[ldata[col["name"]]] = options['mintime']
-                        if data[ldata[col["name"]]] == 0:
+                        data[ldata[col["name"]]] = {
+                                "time": float(ldata[col["time"]]),
+                                "fval": float('inf')}
+                        if parser_options['use_obj_func']:
+                            data[ldata[col["name"]]]["fval"] =\
+                                    float(ldata[col["fval"]])
+                        if data[ldata[col["name"]]]["time"] < options['mintime']:
+                            data[ldata[col["name"]]]["time"] = options['mintime']
+                        if data[ldata[col["name"]]]["time"] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
-                        elif data[ldata[col["name"]]] >= options['maxtime']:
+                        elif data[ldata[col["name"]]]["time"] >= options['maxtime']:
                             ldata[col["exit"]] = 'd'
-                            data[ldata[col["name"]]] = float('inf')
+                            data[ldata[col["name"]]]["time"] = float('inf')
                 elif options['free_format'] or ldata[col["exit"]] == 'd':
-                    data[ldata[col["name"]]] = float('inf')
+                    data[ldata[col["name"]]] = {
+                            "time": float('inf'),
+                            "fval": float('inf')}
                 else:
                     raise ValueError(_error_message(filename, line_number,
                             _('The second element in this lime must be {} or d.').format(
