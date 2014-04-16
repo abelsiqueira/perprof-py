@@ -19,8 +19,18 @@ Install perprof-py in a Python environment with pip is easy::
 
 .. note::
 
-   You can install it locally if you want but to take advantage of bash
+   You can `install it locally
+   <https://docs.python.org/3.3/install/index.html#alternate-installation-the-home-scheme>`_
+   if you want but to take advantage of bash
    completion we recomend you to install it globablly.
+
+.. note::
+
+   For developers you can use `the develop mode
+   <http://pythonhosted.org/setuptools/setuptools.html#develop-deploy-the-project-source-in-development-mode>`_
+   instead. ::
+
+    # python setup.py develop
 
 To see a demo::
 
