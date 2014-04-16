@@ -11,17 +11,15 @@ THIS_TRANSLATION = gettext.translation('perprof',
         os.path.join(THIS_DIR, 'locale'))
 _ = THIS_TRANSLATION.gettext
 
-def load_data(setup):
+def load_data(parser_options):
     """
     Load the data.
 
-    :param setup: the setup configurations
-    :type setup: main.PerProfSetup
+    :param dict parser_options: the configuration dicionary
     """
     data = {}
-    for file_ in setup.files:
-        data_tmp, solver_name = parse.parse_file(file_,
-                setup.parser_options)
+    for file_ in parser_options['files']:
+        data_tmp, solver_name = parse.parse_file(file_, parser_options)
         data[solver_name] = data_tmp
     return data
 
@@ -30,22 +28,22 @@ class Pdata(object):
     """
     Store data for performance profile.
     """
-    def __init__(self, setup):
+    def __init__(self, parser_options, profile_options):
         """
-        :param setup main.PerProfSetup: configuration for the performance
-        profile
+        :param dict parser_options: parser configuration
+        :param dict profile_options: profiler configuration
         """
-        self.data = load_data(setup)
-        self.cache = setup.cache
-        self.force = setup.force
-        self.semilog = setup.semilog
-        self.black_and_white = setup.black_and_white
-        self.background = setup.background
-        self.page_background = setup.page_background
-        self.pdf_verbose = setup.pdf_verbose
-        self.output_format = setup.output_format
-        self.pgfplot_version = setup.pgfplot_version
-        self.tau = setup.tau
+        self.data = load_data(parser_options)
+        self.cache = profile_options['cache']
+        self.force = profile_options['force']
+        self.semilog = profile_options['semilog']
+        self.black_and_white = profile_options['black_and_white']
+        self.background = profile_options['background']
+        self.page_background = profile_options['page_background']
+        self.pdf_verbose = profile_options['pdf_verbose']
+        self.output_format = profile_options['output_format']
+        self.pgfplot_version = profile_options['pgfplot_version']
+        self.tau = profile_options['tau']
         self.already_scaled = False
 
     def __repr__(self):

@@ -17,25 +17,25 @@ class Profiler(prof.Pdata):
     """
     The profiler using TikZ.
     """
-    def __init__(self, setup):
+    def __init__(self, parser_options, profiler_options):
         """
-        :param setup main.PerProfSetup: configuration for the performance
-        profile
+        :param dict parser_options: parser options
+        :param dict profiler_options: profiler options
         """
-        if setup.output is None:
+        if profiler_options['output'] is None:
             self.output = sys.stdout
         else:
-            self.output = '{}.tex'.format(setup.output)
+            self.output = '{}.tex'.format(profiler_options['output'])
             self.output = os.path.abspath(self.output)
-        self.standalone = setup.standalone
-        self.output_format = setup.output_format
+        self.standalone = profiler_options['standalone']
+        self.output_format = profiler_options['output_format']
 
         # Language for the axis label
         translation = gettext.translation('perprof',
-                os.path.join(THIS_DIR, 'locale'), [setup.lang])
+                os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
         self.axis_lang = translation.gettext
 
-        prof.Pdata.__init__(self, setup)
+        prof.Pdata.__init__(self, parser_options, profiler_options)
 
     def plot(self):
         """

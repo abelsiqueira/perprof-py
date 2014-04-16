@@ -15,82 +15,81 @@ THIS_TRANSLATION = gettext.translation('perprof',
         os.path.join(THIS_DIR, 'locale'))
 _ = THIS_TRANSLATION.gettext
 
-class PerProfSetup(object):
-    """This is a class to store the files to be used."""
-    def __init__(self, args):
-        self.lang = args.lang
-        self.free_format = args.free_format
-        self.cache = args.cache
-        self.files = args.file_name
-        self.force = args.force
-        self.standalone = args.standalone
-        self.semilog = args.semilog
-        self.black_and_white = args.black_and_white
-        if args.background is None:
-            self.background = None
-        else:
-            # Set a tuple of integer
-            self.background = tuple([int(i) for i in args.background.split(',')])
-            assert len(self.background) == 3, _("RGB for background must have 3 integers")
-        if args.page_background is None:
-            self.page_background = None
-        else:
-            self.page_background = tuple([int(i) for i in args.page_background.split(',')])
-            assert len(self.page_background) == 3, _("RGB for page background " \
-                "must have 3 integers")
-        self.output = args.output
-        self.subset = args.subset
-        self.pgfplot_version = args.pgfplotcompat
-        self.tau = args.tau
-        self.pdf_verbose = args.pdf_verbose
-        self.success = args.success.split(',')
-        self.maxtime = args.maxtime
-        self.mintime = args.mintime
+def process_arguments(args):
+    """Generates the dictionaries with options"""
+    parser_options = {}
+    parser_options['free_format'] = args.free_format
+    parser_options['files'] = args.file_name
+    parser_options['success'] = args.success.split(',')
+    parser_options['maxtime'] = args.maxtime
+    parser_options['mintime'] = args.mintime
 
-        if args.eps:
-            self.output_format = 'eps'
-        elif args.pdf:
-            self.output_format = 'pdf'
-        elif args.png:
-            self.output_format = 'png'
-        elif args.ps:
-            self.output_format = 'ps'
-        elif args.svg:
-            self.output_format = 'svg'
-        elif args.tex:
-            self.output_format = 'tex'
+    profiler_options = {}
+    profiler_options['lang'] = args.lang
+    profiler_options['cache'] = args.cache
+    profiler_options['files'] = args.file_name
+    profiler_options['force'] = args.force
+    profiler_options['standalone'] = args.standalone
+    profiler_options['semilog'] = args.semilog
+    profiler_options['black_and_white'] = args.black_and_white
+    if args.background is None:
+        profiler_options['background'] = None
+    else:
+        # Set a tuple of integer
+        profiler_options['background'] = tuple([int(i) for i in
+            args.background.split(',')])
+        assert len(profiler_options['background']) == 3, \
+                _("RGB for background must have 3 integers")
+    if args.page_background is None:
+        profiler_options['page_background'] = None
+    else:
+        profiler_options['page_background'] = tuple([int(i) for i in args.page_background.split(',')])
+        assert len(profiler_options['page_background']) == 3, \
+                _("RGB for page background must have 3 integers")
+    profiler_options['output'] = args.output
+    profiler_options['pgfplot_version'] = args.pgfplotcompat
+    profiler_options['tau'] = args.tau
+    profiler_options['pdf_verbose'] = args.pdf_verbose
+
+    if args.eps:
+        profiler_options['output_format'] = 'eps'
+    elif args.pdf:
+        profiler_options['output_format'] = 'pdf'
+    elif args.png:
+        profiler_options['output_format'] = 'png'
+    elif args.ps:
+        profiler_options['output_format'] = 'ps'
+    elif args.svg:
+        profiler_options['output_format'] = 'svg'
+    elif args.tex:
+        profiler_options['output_format'] = 'tex'
+    else:
+        if args.mp:
+            profiler_options['output_format'] = 'png'
+        elif args.tikz:
+            profiler_options['output_format'] = 'pdf'
         else:
-            if args.mp:
-                self.output_format = 'png'
-            elif args.tikz:
-                self.output_format = 'pdf'
-            else:
-                self.output_format = None
+            profiler_options['output_format'] = None
 
-        if args.mp and self.output_format not in SUPPORT_MP:
-            raise NotImplementedError(_("Output option {} not supported by "
-                    "matplotlib").format(self.output_format.upper()))
-        elif args.tikz and self.output_format not in SUPPORT_TIKZ:
-            raise NotImplementedError(_("Output option {} not supported by "
-                    "TikZ").format(self.output_format.upper()))
-        elif args.raw and self.output_format:
-            raise NotImplementedError(
-                    _("--raw does not support output except standard output"))
+    if args.mp and profiler_options['output_format'] not in SUPPORT_MP:
+        raise NotImplementedError(_("Output option {} not supported by "
+                "matplotlib").format(profiler_options['output_format'].upper()))
+    elif args.tikz and profiler_options['output_format'] not in SUPPORT_TIKZ:
+        raise NotImplementedError(_("Output option {} not supported by "
+                "TikZ").format(profiler_options['output_format'].upper()))
+    elif args.raw and profiler_options['output_format']:
+        raise NotImplementedError(
+                _("--raw does not support output except standard output"))
 
-        if self.subset:
-            with open(self.subset, 'r') as subset_file:
-                self.subset = [l.strip() for l in subset_file]
-            if len(self.subset) == 0:
-                raise AttributeError(_("ERROR: Subset is empty"))
-        else:
-            self.subset = []
+    if args.subset:
+        with open(args.subset, 'r') as subset_file:
+            parser_options['subset'] = [l.strip() for l in subset_file]
+        if len(parser_options['subset']) == 0:
+            raise AttributeError(_("ERROR: Subset is empty"))
+    else:
+        parser_options['subset'] = []
 
-        self.parser_options = {}
-        self.parser_options["subset"] = self.subset
-        self.parser_options["success"] = self.success
-        self.parser_options["mintime"] = self.mintime
-        self.parser_options["maxtime"] = self.maxtime
-        self.parser_options["free_format"] = self.free_format
+    return parser_options, profiler_options
 
 def set_arguments(args):
     """
@@ -202,30 +201,30 @@ def main():
     try:
         args = set_arguments(sys.argv[1:])
 
-        setup = PerProfSetup(args)
+        parser_options, profiler_options = process_arguments(args)
 
         if args.mp:
             # matplotlib
             from . import matplotlib
 
-            data = matplotlib.Profiler(setup)
+            data = matplotlib.Profiler(parser_options, profiler_options)
             data.plot()
         elif args.tikz:
-            if setup.output_format == 'pdf' and args.output is None:
+            if profiler_options['output_format'] == 'pdf' and args.output is None:
                 print(_("ERROR: When using PDF output, you need to provide "
                         "the name of the output file."))
             else:
                 # tikz
                 from . import tikz
 
-                data = tikz.Profiler(setup)
+                data = tikz.Profiler(parser_options, profiler_options)
                 data.plot()
         elif args.raw:
             # raw
             from . import prof
             print('raw')
 
-            print(prof.Pdata(setup))
+            print(prof.Pdata(parser_options, profiler_options))
     except ValueError as error:
         print(error)
     except NotImplementedError as error:
