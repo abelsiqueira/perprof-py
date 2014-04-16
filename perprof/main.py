@@ -22,7 +22,10 @@ def process_arguments(args):
             'files': args.file_name,
             'success': args.success.split(','),
             'maxtime': args.maxtime,
-            'mintime': args.mintime
+            'mintime': args.mintime,
+            'use_obj_func': args.use_objective_function,
+            'use_primal': args.use_primal_infeasibility,
+            'use_dual': args.use_dual_infeasibility
             }
 
     profiler_options = {
@@ -163,6 +166,12 @@ def set_arguments(args):
     parser.add_argument('--mintime', type=float, default=0,
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
+    parser.add_argument('--use-objective-function', action='store_true',
+            help=_('Use objective function value on comparison'))
+    parser.add_argument('--use-primal-infeasibility', action='store_true',
+            help=_('Use primal infeasibility value to determine convergence'))
+    parser.add_argument('--use-dual-infeasibility', action='store_true',
+            help=_('Use dual infeasibility value to determine convergence'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

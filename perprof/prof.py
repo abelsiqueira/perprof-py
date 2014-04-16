@@ -71,7 +71,7 @@ class Pdata(object):
             for solver in self.solvers:
                 try:
                     str2output += '{space}{:8.4} '.format(
-                            self.data[solver][problem], space=' ' * 8)
+                            self.data[solver][problem]["time"], space=' ' * 8)
                 except KeyError:
                     str2output += '{}inf  '.format(13 * ' ')
             str2output += '\n'
@@ -123,20 +123,31 @@ class Pdata(object):
 
         times_set = set()
         for problem in self.problems:
-            min_time = float('inf')
             for solver in self.solvers:
                 try:
-                    if self.data[solver][problem] < min_time:
-                        min_time = self.data[solver][problem]
-                except KeyError:
-                    pass
+                    self.data[solver][problem]["time"]
+                except (KeyError, TypeError):
+                    self.data[solver][problem] = {
+                            "time": float('inf'),
+                            "fval": float('inf') }
+            min_fval = min([self.data[s][problem]["fval"]
+                    for s in self.data.keys()])
+            if min_fval < float('inf'):
+                min_time = min([self.data[s][problem]["time"]
+                    for s in self.data.keys()
+                        if self.data[s][problem]["fval"] < min_fval +
+                        abs(min_fval)*1e-3 + 1e-6])
+            else:
+                min_time = min([self.data[s][problem]["time"]
+                    for s in self.data.keys()])
             for solver in self.solvers:
                 try:
-                    self.data[solver][problem] = self.data[solver][problem] / min_time
-                except (KeyError, ZeroDivisionError):
-                    self.data[solver][problem] = float('inf')
-                if self.data[solver][problem] < float('inf'):
-                    times_set.add(self.data[solver][problem])
+                    self.data[solver][problem]["time"] = \
+                            self.data[solver][problem]["time"] / min_time
+                except ZeroDivisionError:
+                    self.data[solver][problem] = {"time": float('inf')}
+                if self.data[solver][problem]["time"] < float('inf'):
+                    times_set.add(self.data[solver][problem]["time"])
         if not times_set:
             raise ValueError(_("ERROR: problem set is empty"))
 
@@ -156,7 +167,7 @@ class Pdata(object):
             for time in self.times:
                 aux = 0
                 for problem in self.problems:
-                    if time >= self.data[solver][problem]:
+                    if time >= self.data[solver][problem]["time"]:
                         aux += 1
                 self.ppsbt[solver].append(aux / self.number_problems)
             if self.ppsbt[solver][-1] == 0:

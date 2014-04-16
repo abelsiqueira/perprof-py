@@ -105,19 +105,23 @@ def parse_file(filename, parser_options):
                     raise ValueError(_error_message(filename, line_number,
                         _('Problem {} is duplicated.'.format(ldata[0]))))
                 if ldata[1] in options['success']:
-                    if len(ldata) < 3:
+                    if len(ldata) < 3 or (len(ldata) < 4 and
+                            parser_options['use_obj_func']):
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
-                        data[ldata[0]] = float(ldata[2])
-                        if data[ldata[0]] < options['mintime']:
-                            data[ldata[0]] = options['mintime']
-                        if data[ldata[0]] == 0:
+                        data[ldata[0]] = {"time": float(ldata[2]),
+                                "fval": float('inf')}
+                        if parser_options['use_obj_func']:
+                            data[ldata[0]]["fval"] = float(ldata[3])
+                        if data[ldata[0]]["time"] < options['mintime']:
+                            data[ldata[0]]["time"]= options['mintime']
+                        if data[ldata[0]]["time"] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
-                        elif data[ldata[0]] >= options['maxtime']:
+                        elif data[ldata[0]]["time"] >= options['maxtime']:
                             ldata[1] = 'd'
-                            data[ldata[0]] = float('inf')
+                            data[ldata[0]]["time"] = float('inf')
                 elif options['free_format'] or ldata[1] == 'd':
                     data[ldata[0]] = float('inf')
                 else:
