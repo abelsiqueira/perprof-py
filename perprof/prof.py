@@ -19,9 +19,9 @@ def load_data(setup):
     :type setup: main.PerProfSetup
     """
     data = {}
-    for file_ in setup.get_files():
+    for file_ in setup.files:
         data_tmp, solver_name = parse.parse_file(file_,
-                setup.get_parser_options())
+                setup.parser_options)
         data[solver_name] = data_tmp
     return data
 
@@ -36,16 +36,16 @@ class Pdata(object):
         profile
         """
         self.data = load_data(setup)
-        self.cache = setup.using_cache()
-        self.force = setup.using_force()
-        self.semilog = setup.using_semilog()
-        self.black_and_white = setup.using_black_and_white()
-        self.background = setup.get_background()
-        self.page_background = setup.get_page_background()
-        self.pdf_verbose = setup.get_pdf_verbose()
-        self.output_format = setup.get_output_format()
-        self.pgfplot_version = setup.get_pgfplot_version()
-        self.tau = setup.get_tau()
+        self.cache = setup.cache
+        self.force = setup.force
+        self.semilog = setup.semilog
+        self.black_and_white = setup.black_and_white
+        self.background = setup.background
+        self.page_background = setup.page_background
+        self.pdf_verbose = setup.pdf_verbose
+        self.output_format = setup.output_format
+        self.pgfplot_version = setup.pgfplot_version
+        self.tau = setup.tau
         self.already_scaled = False
 
     def __repr__(self):

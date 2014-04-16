@@ -21,13 +21,13 @@ class Profiler(prof.Pdata):
         :param setup main.PerProfSetup: configuration for the performance
         profile
         """
-        if setup.get_output() is None:
+        if setup.output is None:
             self.output = 'performance-profile.{}'.format(
-                    setup.get_output_format())
+                    setup.output_format)
         else:
-            self.output = '{}.{}'.format(setup.get_output(),
-                    setup.get_output_format())
-        self.output_format = setup.get_output_format()
+            self.output = '{}.{}'.format(setup.output,
+                    setup.output_format)
+        self.output_format = setup.output_format
 
         # Language for the axis label
         translation = gettext.translation('perprof',

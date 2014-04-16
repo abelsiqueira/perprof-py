@@ -37,7 +37,7 @@ class TestPerprof(unittest.TestCase):
                 args = '--' + backend + ' --' + output + ' --demo'
                 args = set_arguments(args.split())
                 setup = PerProfSetup(args)
-                self.assertEqual(setup.get_output_format(), output)
+                self.assertEqual(setup.output_format, output)
                 data = self.back_profilers[backend](setup)
                 if backend != "tikz":
                     self.assertEqual(data.output, 'performance-profile.{}'.format(output))

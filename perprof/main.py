@@ -92,129 +92,6 @@ class PerProfSetup(object):
         self.parser_options["maxtime"] = self.maxtime
         self.parser_options["free_format"] = self.free_format
 
-    def using_lang(self):
-        return self.lang
-
-    def set_lang(self, lang):
-        self.lang = lang
-
-    def using_free_format(self):
-        return self.free_format
-
-    def set_free_format(self, val):
-        self.free_format = val
-
-    def using_cache(self):
-        return self.cache
-
-    def set_cache(self, val):
-        self.cache = val
-
-    def get_files(self):
-        return self.files
-
-    def set_files(self, files):
-        self.files = files
-
-    def using_force(self):
-        return self.force
-
-    def set_force(self, force):
-        self.force = force
-
-    def set_standalone(self, val):
-        self.standalone = val
-
-    def get_standalone(self):
-        return self.standalone
-
-    def get_output(self):
-        return self.output
-
-    def set_output(self, output):
-        self.output = output
-
-    def get_output_format(self):
-        return self.output_format
-
-    def set_output_format(self, output_format):
-        self.output_format = output_format
-
-    def using_semilog(self):
-        return self.semilog
-
-    def set_semilog(self, val):
-        self.semilog = val
-
-    def set_success(self, val):
-        self.success = val
-
-    def get_success(self):
-        return self.success
-
-    def set_maxtime(self, val):
-        self.maxtime = val
-
-    def get_maxtime(self):
-        return self.maxtime
-
-    def set_mintime(self, val):
-        self.mintime = val
-
-    def get_mintime(self):
-        return self.mintime
-
-    def using_black_and_white(self):
-        return self.black_and_white
-
-    def set_black_and_white(self, val):
-        self.black_and_white = val
-
-    def get_background(self):
-        return self.background
-
-    def set_background(self, red, green, blue):
-        self.background = (red, green, blue)
-
-    def unset_background(self):
-        self.background = None
-
-    def get_page_background(self):
-        return self.page_background
-
-    def set_page_background(self, red, green, blue):
-        self.page_background = (red, green, blue)
-
-    def unset_page_background(self):
-        self.page_background = None
-
-    def get_pdf_verbose(self):
-        return self.pdf_verbose
-
-    def set_pdf_verbose(self, val):
-        self.pdf_verbose = val
-
-    def get_subset(self):
-        return self.subset
-
-    def set_subset(self, subset):
-        self.subset = subset
-
-    def get_pgfplot_version(self):
-        return self.pgfplot_version
-
-    def set_pgfplot_version(self, version):
-        self.pgfplot_version = version
-
-    def get_tau(self):
-        return self.tau
-
-    def set_tau(self, tau):
-        self.tau = tau
-
-    def get_parser_options(self):
-        return self.parser_options
-
 def set_arguments(args):
     """
     Set all the arguments of perprof
@@ -334,7 +211,7 @@ def main():
             data = matplotlib.Profiler(setup)
             data.plot()
         elif args.tikz:
-            if setup.get_output_format() == 'pdf' and args.output is None:
+            if setup.output_format == 'pdf' and args.output is None:
                 print(_("ERROR: When using PDF output, you need to provide "
                         "the name of the output file."))
             else:
