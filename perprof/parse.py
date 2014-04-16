@@ -46,24 +46,19 @@ def _parse_yaml(options, yaml_header):
     """
     Parse the yaml header
 
-    :param dict options: the options for the parser
+    :param dict options: the local options for the parser
     :param str yaml: The YAML header
     """
     import yaml
 
-    algname = None
     metadata = yaml.load(yaml_header)
     for opt in metadata:
-        if opt == 'algname':
-            algname = metadata['algname']
-        elif not opt in options:
+        if not opt in options:
             raise ValueError(_("'" + opt + "'" + " is not a valid option for YAML."))
         else:
             options[opt] = metadata[opt]
 
-    return algname
-
-def parse_file(filename, options):
+def parse_file(filename, parser_options):
     """
     Parse one file.
 
@@ -76,7 +71,8 @@ def parse_file(filename, options):
         bool free_format: if False request that fail be mark with ``d``
     :return: performance profile data and name of the solver
     """
-    algname = _str_sanitize(filename)
+    options = parser_options.copy()
+    options['algname'] = _str_sanitize(filename)
     data = {}
     with open(filename) as file_:
         line_number = 0
@@ -87,11 +83,11 @@ def parse_file(filename, options):
             ldata = line.split()
             # This is for backward compatibility
             if ldata[0] == '#Name' and len(ldata) >= 2:
-                algname = _str_sanitize(ldata[1])
+                options['algname'] = _str_sanitize(ldata[1])
             # Handle YAML
             elif ldata[0] == '---':
                 if in_yaml:
-                    algname = _parse_yaml(options, yaml_header) or algname
+                    _parse_yaml(options, yaml_header)
                     in_yaml = False
                 else:
                     in_yaml = True
@@ -131,4 +127,4 @@ def parse_file(filename, options):
     if not data:
         raise ValueError(
                 _("ERROR: List of problems (intersected with subset, if any) is empty"))
-    return data, algname
+    return data, options['algname']
