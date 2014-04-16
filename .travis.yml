@@ -3,3 +3,8 @@ python:
   - "3.3"
 install: pip install -r REQUIREMENTS
 script: python setup.py test
+notifications:
+  email:
+    - raniere@ime.unicamp.br
+    - abel.s.siqueira@gmail.com
+  irc: "chat.freenode.net#perprof"
