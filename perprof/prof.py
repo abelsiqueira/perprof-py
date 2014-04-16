@@ -18,19 +18,10 @@ def load_data(setup):
     :param setup: the setup configurations
     :type setup: main.PerProfSetup
     """
-    if setup.get_subset():
-        with open(setup.get_subset(), 'r') as subset_file:
-            subset = [l.strip() for l in subset_file]
-        if len(subset) == 0:
-            raise AttributeError(_("ERROR: Subset is empty"))
-    else:
-        subset = []
-
     data = {}
     for file_ in setup.get_files():
-        data_tmp, solver_name = parse.parse_file(file_, subset,
-                setup.get_success(), setup.get_mintime(), setup.get_maxtime(),
-                setup.using_free_format())
+        data_tmp, solver_name = parse.parse_file(file_,
+                setup.get_parser_options())
         data[solver_name] = data_tmp
     return data
 

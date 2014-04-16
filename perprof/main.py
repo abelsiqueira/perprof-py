@@ -77,6 +77,21 @@ class PerProfSetup(object):
             raise NotImplementedError(
                     _("--raw does not support output except standard output"))
 
+        if self.subset:
+            with open(self.subset, 'r') as subset_file:
+                self.subset = [l.strip() for l in subset_file]
+            if len(self.subset) == 0:
+                raise AttributeError(_("ERROR: Subset is empty"))
+        else:
+            self.subset = []
+
+        self.parser_options = {}
+        self.parser_options["subset"] = self.subset
+        self.parser_options["success"] = self.success
+        self.parser_options["mintime"] = self.mintime
+        self.parser_options["maxtime"] = self.maxtime
+        self.parser_options["free_format"] = self.free_format
+
     def using_lang(self):
         return self.lang
 
@@ -196,6 +211,9 @@ class PerProfSetup(object):
 
     def set_tau(self, tau):
         self.tau = tau
+
+    def get_parser_options(self):
+        return self.parser_options
 
 def set_arguments(args):
     """

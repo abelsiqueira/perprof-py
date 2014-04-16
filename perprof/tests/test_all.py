@@ -88,8 +88,7 @@ class TestPerprof(unittest.TestCase):
         for backend in self.backends:
             args = '--' + backend + ' --demo --subset perprof/tests/empty.subset'
             args = set_arguments(args.split())
-            setup = PerProfSetup(args)
-            self.assertRaises(AttributeError, self.back_profilers[backend], setup)
+            self.assertRaises(AttributeError, PerProfSetup, args)
 
     def test_empty_intersection(self):
         for backend in self.backends:
