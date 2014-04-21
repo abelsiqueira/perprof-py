@@ -115,7 +115,9 @@ def parse_file(filename, parser_options):
                         _('Problem {} is duplicated.'.format(ldata[col["name"]]))))
                 if ldata[col["exit"]] in options['success']:
                     if (len(ldata) < 3 or
-                            (len(ldata) < 4 and parser_options['use_obj_func'])):
+                        (len(ldata) < 4 and parser_options['use_obj_func']) or
+                        (len(ldata) < 5 and parser_options['use_primal']) or
+                        (len(ldata) < 6 and parser_options['use_dual'])):
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
