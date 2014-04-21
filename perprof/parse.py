@@ -110,12 +110,22 @@ def parse_file(filename, parser_options):
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
+                        if parser_options['use_primal']:
+                            primal = float(ldata[4])
+                        else:
+                            primal = 0.0
+                        if parser_options['use_dual']:
+                            dual = float(ldata[5])
+                        else:
+                            dual = 0.0
+                        if max(primal, dual) > parser_options['infeas_tol']:
+                            continue
                         data[ldata[0]] = {"time": float(ldata[2]),
                                 "fval": float('inf')}
                         if parser_options['use_obj_func']:
                             data[ldata[0]]["fval"] = float(ldata[3])
                         if data[ldata[0]]["time"] < options['mintime']:
-                            data[ldata[0]]["time"]= options['mintime']
+                            data[ldata[0]]["time"] = options['mintime']
                         if data[ldata[0]]["time"] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
