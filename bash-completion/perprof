@@ -8,6 +8,8 @@ _perprof()
   --standalone --semilog --black-and-white --free-format --pgfplotcompat \
   --cache --tau --force --output --subset --lang --success --pdf-verbose \
   --maxtime --mintime --background --page-background --demo \
+  --use-objective-function --use-primal-infeasibility --use-dual-infeasibility \
+  --infeasibility-tolerance \
   -h -c -s -f -o -l"
 
 
@@ -17,7 +19,7 @@ _perprof()
       COMPREPLY=( $(compgen -W "$versions" ${cur}) )
       return 0
       ;;
-    --tau | --maxtime | --mintime)
+    --tau | --maxtime | --mintime | --infeasibility-tolerance)
       return 0
       ;;
     --background | --page-background)
