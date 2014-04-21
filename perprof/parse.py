@@ -119,6 +119,16 @@ def parse_file(filename, parser_options):
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
+                        if parser_options['use_primal']:
+                            primal = float(ldata[col["primal"]])
+                        else:
+                            primal = 0.0
+                        if parser_options['use_dual']:
+                            dual = float(ldata[col["dual"]])
+                        else:
+                            dual = 0.0
+                        if max(primal, dual) > parser_options['infeas_tol']:
+                            continue
                         data[ldata[col["name"]]] = {
                                 "time": float(ldata[col["time"]]),
                                 "fval": float('inf')}
