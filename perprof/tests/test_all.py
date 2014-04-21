@@ -51,6 +51,19 @@ class TestPerprof(unittest.TestCase):
             self.assertRaises(ValueError, self.back_profilers[backend],
                     parser_options, profiler_options)
 
+    def test_columns(self):
+        for backend in self.backends:
+            baseargs = '--' + backend + ' ' + self.goodfiles
+            moreargs = ['--use-objective-function',
+                    '--use-primal-infeasibility', '--use-dual-infeasibility']
+            for n in [0,1,2,3]:
+                args = baseargs + ' perprof/tests/{}-col.sample '.format(n+2) +\
+                        ' '.join(moreargs[0:n])
+                args = set_arguments(args.split())
+                parser_options, profiler_options = process_arguments(args)
+                self.assertRaises(ValueError, self.back_profilers[backend],
+                        parser_options, profiler_options)
+
     def test_without_time(self):
         for backend in self.backends:
             args = '--' + backend + ' perprof/tests/without-time.sample ' + self.goodfiles
