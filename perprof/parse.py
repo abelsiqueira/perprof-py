@@ -152,7 +152,7 @@ def parse_file(filename, parser_options):
                             raise ValueError(_error_message(filename, line_number,
                                     _('This line must have at least 3 elements.')))
                         data[pname] = {
-                                "time": float(ldata[col["time"]]),
+                                "time": time,
                                 "fval": float('inf')}
                     elif options['free_format'] or ldata[col["exit"]] == 'd':
                         data[pname] = {
