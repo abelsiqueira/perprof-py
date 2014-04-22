@@ -2,12 +2,12 @@
 algname: Gamma
 success: converged,success
 free_format: True
-col-name: 5
-col-exit: 3
-col-time: 2
-col-fval: 6
-col-primal: 1
-col-dual: 4
+col_name: 5
+col_exit: 3
+col_time: 2
+col_fval: 6
+col_primal: 1
+col_dual: 4
 ---
 +6.900000e+05 1.000000e+20 fail +1.900000e+04 10FOLDTR +0.000000e+00
 +0.000000e+00 1.000000e-02 success +8.800000e-07 3PK +1.720119e+00

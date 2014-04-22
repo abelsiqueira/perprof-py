@@ -17,7 +17,7 @@ where
 
 ``<Metadata XX>``
     is the name of metadata field
-``<Vallue XX>``
+``<Value XX>``
     is the value of the metadata field
 ``<Problem Name XX>``
     is the name of the problem
@@ -45,17 +45,25 @@ Metadata
 
 ``algname``
     The name of the algorithmic/solver to be used in the plot.
-
-Configuration
-^^^^^^^^^^^^^
-
+``col-dual``
+    The column corresponding to the dual feasibility at the solution.
+``col-exit``
+    The column corresponding to the exit flag.
+``col-fval``
+    The column corresponding to the objective function value at the solution.
+``col-name``
+    The column corresponding to the problem names.
+``col-primal``
+    The column corresponding to the primal feasibility at the solution.
+``col-time``
+    The column corresponding to the time/cost spent on the problem.
+``free_format``
+    Only check for mark of success.
+``maxtime``
+    The maximum time that a algorithmic/solver can run.
+``mintime``
+    The minimum time that a algorithmic/solver need to run.
 ``subset``
     The name of the file to be used for the subset.
 ``success``
     List of strings to mark success.
-``mintime``
-    The minimum time that a algorithmic/solver need to run.
-``maxtime``
-    The maximum time that a algorithmic/solver can run.
-``free_format``
-    Only check for mark of success.

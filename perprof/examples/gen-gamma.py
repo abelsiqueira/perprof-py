@@ -24,12 +24,12 @@ with open('alpha.table','r') as alphafile:
                     gammafile.write("#Name Gamma\n")
                 elif line[0] == "---":
                     if open_yaml:
-                        gammafile.write("col-name: 5\n")
-                        gammafile.write("col-exit: 3\n")
-                        gammafile.write("col-time: 2\n")
-                        gammafile.write("col-fval: 6\n")
-                        gammafile.write("col-primal: 1\n")
-                        gammafile.write("col-dual: 4\n")
+                        gammafile.write("col_name: 5\n")
+                        gammafile.write("col_exit: 3\n")
+                        gammafile.write("col_time: 2\n")
+                        gammafile.write("col_fval: 6\n")
+                        gammafile.write("col_primal: 1\n")
+                        gammafile.write("col_dual: 4\n")
                     gammafile.write("---\n")
                     open_yaml = not open_yaml
                 elif line[0] == "algname:":
