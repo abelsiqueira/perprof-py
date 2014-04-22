@@ -130,6 +130,7 @@ class Pdata(object):
                     self.data[solver][problem] = {
                             "time": float('inf'),
                             "fval": float('inf') }
+
             min_fval = min([self.data[s][problem]["fval"]
                     for s in self.data.keys()])
             if min_fval < float('inf'):
@@ -140,6 +141,7 @@ class Pdata(object):
             else:
                 min_time = min([self.data[s][problem]["time"]
                     for s in self.data.keys()])
+
             for solver in self.solvers:
                 try:
                     self.data[solver][problem]["time"] = \

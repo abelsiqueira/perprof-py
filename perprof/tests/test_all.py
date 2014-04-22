@@ -54,7 +54,7 @@ class TestPerprof(unittest.TestCase):
     def test_columns(self):
         for backend in self.backends:
             baseargs = '--' + backend + ' ' + self.goodfiles
-            moreargs = ['--use-objective-function',
+            moreargs = ['--compare optimalvalues --use-objective-function',
                     '--use-primal-infeasibility', '--use-dual-infeasibility']
             for n in [0,1,2,3]:
                 args = baseargs + ' perprof/tests/{}-col.sample '.format(n+2) +\

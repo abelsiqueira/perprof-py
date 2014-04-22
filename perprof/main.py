@@ -23,6 +23,7 @@ def process_arguments(args):
             'success': args.success.split(','),
             'maxtime': args.maxtime,
             'mintime': args.mintime,
+            'compare': args.compare,
             'use_obj_func': args.use_objective_function,
             'use_primal': args.use_primal_infeasibility,
             'use_dual': args.use_dual_infeasibility,
@@ -167,6 +168,8 @@ def set_arguments(args):
     parser.add_argument('--mintime', type=float, default=0,
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
+    parser.add_argument('--compare', choices=['exitflag', 'optimalvalues'],
+            default='exitflag', help=_('Choose the type of comparison to be made.'))
     parser.add_argument('--use-objective-function', action='store_true',
             help=_('Use objective function value on comparison'))
     parser.add_argument('--use-primal-infeasibility', action='store_true',
