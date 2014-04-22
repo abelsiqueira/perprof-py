@@ -17,21 +17,28 @@ _ = THIS_TRANSLATION.gettext
 
 def process_arguments(args):
     """Generates the dictionaries with options"""
-    parser_options = {}
-    parser_options['free_format'] = args.free_format
-    parser_options['files'] = args.file_name
-    parser_options['success'] = args.success.split(',')
-    parser_options['maxtime'] = args.maxtime
-    parser_options['mintime'] = args.mintime
+    parser_options = {
+            'free_format': args.free_format,
+            'files': args.file_name,
+            'success': args.success.split(','),
+            'maxtime': args.maxtime,
+            'mintime': args.mintime
+            }
 
-    profiler_options = {}
-    profiler_options['lang'] = args.lang
-    profiler_options['cache'] = args.cache
-    profiler_options['files'] = args.file_name
-    profiler_options['force'] = args.force
-    profiler_options['standalone'] = args.standalone
-    profiler_options['semilog'] = args.semilog
-    profiler_options['black_and_white'] = args.black_and_white
+    profiler_options = {
+            'lang': args.lang,
+            'cache': args.cache,
+            'files': args.file_name,
+            'force': args.force,
+            'standalone': args.standalone,
+            'semilog': args.semilog,
+            'black_and_white': args.black_and_white,
+            'output': args.output,
+            'pgfplot_version': args.pgfplotcompat,
+            'tau': args.tau,
+            'pdf_verbose': args.pdf_verbose
+            }
+
     if args.background is None:
         profiler_options['background'] = None
     else:
@@ -46,10 +53,6 @@ def process_arguments(args):
         profiler_options['page_background'] = tuple([int(i) for i in args.page_background.split(',')])
         assert len(profiler_options['page_background']) == 3, \
                 _("RGB for page background must have 3 integers")
-    profiler_options['output'] = args.output
-    profiler_options['pgfplot_version'] = args.pgfplotcompat
-    profiler_options['tau'] = args.tau
-    profiler_options['pdf_verbose'] = args.pdf_verbose
 
     if args.eps:
         profiler_options['output_format'] = 'eps'
