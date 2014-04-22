@@ -17,7 +17,7 @@ where
 
 ``<Metadata XX>``
     is the name of metadata field
-``<Vallue XX>``
+``<Value XX>``
     is the value of the metadata field
 ``<Problem Name XX>``
     is the name of the problem
@@ -45,17 +45,37 @@ Metadata
 
 ``algname``
     The name of the algorithmic/solver to be used in the plot.
-
-Configuration
-^^^^^^^^^^^^^
-
-``subset``
-    The name of the file to be used for the subset.
-``success``
-    List of strings to mark success.
-``mintime``
-    The minimum time that a algorithmic/solver need to run.
-``maxtime``
-    The maximum time that a algorithmic/solver can run.
+    Default: File name.
+``col-dual``
+    The column corresponding to the dual feasibility at the solution.
+    Default: 6
+``col-exit``
+    The column corresponding to the exit flag.
+    Default: 2
+``col-fval``
+    The column corresponding to the objective function value at the solution.
+    Default: 4
+``col-name``
+    The column corresponding to the problem names.
+    Default: 1
+``col-primal``
+    The column corresponding to the primal feasibility at the solution.
+    Default: 5
+``col-time``
+    The column corresponding to the time/cost spent on the problem.
+    Default: 6
 ``free_format``
     Only check for mark of success.
+    Default: False
+``maxtime``
+    The maximum time that a algorithmic/solver can run.
+    Default: inf (i.e. not verified)
+``mintime``
+    The minimum time that a algorithmic/solver need to run.
+    Default: 0
+``subset``
+    The name of the file to be used for the subset.
+    Default: None
+``success``
+    List of strings to mark success.
+    Default: 'c'
