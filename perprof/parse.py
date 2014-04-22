@@ -125,14 +125,11 @@ def parse_file(filename, parser_options):
                     continue
                 if parser_options['compare'] == 'optimalvalues':
                     try:
-                        if parser_options['use_primal']:
-                            primal = float(ldata[col["primal"]])
-                        else:
+                        if parser_options['unc']:
                             primal = 0.0
-                        if parser_options['use_dual']:
-                            dual = float(ldata[col["dual"]])
                         else:
-                            dual = 0.0
+                            primal = float(ldata[col["primal"]])
+                        dual = float(ldata[col["dual"]])
                     except:
                         raise ValueError(_error_message(filename,
                             line_number, _("Column for primal or dual is out of bounds")))
@@ -141,12 +138,11 @@ def parse_file(filename, parser_options):
                     data[pname] = {
                             "time": time,
                             "fval": float('inf')}
-                    if parser_options['use_obj_func']:
-                        try:
-                            data[pname]["fval"] = float(ldata[col["fval"]])
-                        except:
-                            raise ValueError(_error_message(filename,
-                                line_number, _("Column for fval is out of bounds")))
+                    try:
+                        data[pname]["fval"] = float(ldata[col["fval"]])
+                    except:
+                        raise ValueError(_error_message(filename,
+                            line_number, _("Column for fval is out of bounds")))
                 elif parser_options['compare'] == 'exitflag':
                     if time == 0:
                         raise ValueError(_error_message(filename, line_number,

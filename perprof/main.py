@@ -24,9 +24,7 @@ def process_arguments(args):
             'maxtime': args.maxtime,
             'mintime': args.mintime,
             'compare': args.compare,
-            'use_obj_func': args.use_objective_function,
-            'use_primal': args.use_primal_infeasibility,
-            'use_dual': args.use_dual_infeasibility,
+            'unc': args.unconstrained,
             'infeas_tol': args.infeasibility_tolerance
             }
 
@@ -170,12 +168,9 @@ def set_arguments(args):
                     'time smaller than this will have the time set to this.'))
     parser.add_argument('--compare', choices=['exitflag', 'optimalvalues'],
             default='exitflag', help=_('Choose the type of comparison to be made.'))
-    parser.add_argument('--use-objective-function', action='store_true',
-            help=_('Use objective function value on comparison'))
-    parser.add_argument('--use-primal-infeasibility', action='store_true',
-            help=_('Use primal infeasibility value to determine convergence'))
-    parser.add_argument('--use-dual-infeasibility', action='store_true',
-            help=_('Use dual infeasibility value to determine convergence'))
+    parser.add_argument('--unconstrained', action='store_true',
+            help=_('Set the problems to unconstrained, which implies that there '
+                    'is no primal feasibility to check.'))
     parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
             help=_('Tolerance for the primal and dual infeasibilities'))
 
