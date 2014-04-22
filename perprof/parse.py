@@ -73,6 +73,11 @@ def parse_file(filename, parser_options):
     """
     options = parser_options.copy()
     options['algname'] = _str_sanitize(filename)
+    colopts = ['name', 'exit', 'time', 'fval', 'primal', 'dual']
+    col = {}
+    for colopt in colopts:
+        options['col-'+colopt] = colopts.index(colopt)+1
+        col[colopt] = colopts.index(colopt)
     data = {}
     with open(filename) as file_:
         line_number = 0
@@ -88,6 +93,8 @@ def parse_file(filename, parser_options):
             elif ldata[0] == '---':
                 if in_yaml:
                     _parse_yaml(options, yaml_header)
+                    for colopt in colopts:
+                        col[colopt] = options['col-'+colopt]-1
                     in_yaml = False
                 else:
                     in_yaml = True
@@ -98,28 +105,28 @@ def parse_file(filename, parser_options):
                 raise ValueError(_error_message(filename, line_number,
                         _('This line must have at least 2 elements.')))
             else:
-                ldata[0] = _str_sanitize(ldata[0])
-                if options['subset'] and ldata[0] not in options['subset']:
+                ldata[col["name"]] = _str_sanitize(ldata[col["name"]])
+                if options['subset'] and ldata[col["name"]] not in options['subset']:
                     continue
-                if ldata[0] in data:
+                if ldata[col["name"]] in data:
                     raise ValueError(_error_message(filename, line_number,
-                        _('Problem {} is duplicated.'.format(ldata[0]))))
-                if ldata[1] in options['success']:
+                        _('Problem {} is duplicated.'.format(ldata[col["name"]]))))
+                if ldata[col["exit"]] in options['success']:
                     if len(ldata) < 3:
                         raise ValueError(_error_message(filename, line_number,
                                 _('This line must have at least 3 elements.')))
                     else:
-                        data[ldata[0]] = float(ldata[2])
-                        if data[ldata[0]] < options['mintime']:
-                            data[ldata[0]] = options['mintime']
-                        if data[ldata[0]] == 0:
+                        data[ldata[col["name"]]] = float(ldata[col["time"]])
+                        if data[ldata[col["name"]]] < options['mintime']:
+                            data[ldata[col["name"]]] = options['mintime']
+                        if data[ldata[col["name"]]] == 0:
                             raise ValueError(_error_message(filename,
                                     line_number, _("Time spending can't be zero.")))
-                        elif data[ldata[0]] >= options['maxtime']:
-                            ldata[1] = 'd'
-                            data[ldata[0]] = float('inf')
-                elif options['free_format'] or ldata[1] == 'd':
-                    data[ldata[0]] = float('inf')
+                        elif data[ldata[col["name"]]] >= options['maxtime']:
+                            ldata[col["exit"]] = 'd'
+                            data[ldata[col["name"]]] = float('inf')
+                elif options['free_format'] or ldata[col["exit"]] == 'd':
+                    data[ldata[col["name"]]] = float('inf')
                 else:
                     raise ValueError(_error_message(filename, line_number,
                             _('The second element in this lime must be {} or d.').format(
