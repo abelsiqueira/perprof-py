@@ -76,6 +76,7 @@ def parse_file(filename, parser_options):
     colopts = ['name', 'exit', 'time', 'fval', 'primal', 'dual']
     col = {}
     for colopt in colopts:
+        # Columns starts at 1 but indexing at 0
         options['col_'+colopt] = colopts.index(colopt)+1
         col[colopt] = colopts.index(colopt)
     data = {}
@@ -94,6 +95,7 @@ def parse_file(filename, parser_options):
                 if in_yaml:
                     _parse_yaml(options, yaml_header)
                     for colopt in colopts:
+                        # Columns starts at 1 but indexing at 0
                         col[colopt] = options['col_'+colopt]-1
                     in_yaml = False
                 else:
