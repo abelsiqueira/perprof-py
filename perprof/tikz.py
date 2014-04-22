@@ -66,80 +66,80 @@ class Profiler(prof.Pdata):
         except (AttributeError, TypeError):
             self.tau = maxt
 
-        str2output = ''
+        str2output = []
 
         if self.standalone or self.output_format == 'pdf':
-            str2output += '\\documentclass{standalone}\n'
-            str2output += '\\usepackage[utf8]{inputenc}\n'
-            str2output += '\\usepackage[T1]{fontenc}\n'
-            str2output += '\\usepackage{tikz}\n'
-            str2output += '\\usepackage{pgfplots}\n'
+            str2output.append('\\documentclass{standalone}')
+            str2output.append('\\usepackage[utf8]{inputenc}')
+            str2output.append('\\usepackage[T1]{fontenc}')
+            str2output.append('\\usepackage{tikz}')
+            str2output.append('\\usepackage{pgfplots}')
             if self.pgfplot_version is not None:
-                str2output += '\\pgfplotsset{{compat={0}}}\n'.format(
-                        self.pgfplot_version)
+                str2output.append('\\pgfplotsset{{compat={0}}}'.format(
+                        self.pgfplot_version))
             else:
-                str2output += '\\pgfplotsset{compat=newest,compat/show ' \
-                        'suggested version=false}\n'
+                str2output.append('\\pgfplotsset{compat=newest,compat/show ' \
+                        'suggested version=false}')
             if self.page_background:
-                str2output += '\\definecolor{pagebg}{RGB}{'
-                str2output += '{0},{1},{2}'.format(
-                        self.page_background[0],
-                        self.page_background[1],
-                        self.page_background[2])
-                str2output += '}\n'
-                str2output += '\\pagecolor{pagebg}\n'
-            str2output += '\\begin{document}\n'
+                str2output.append('\\definecolor{pagebg}{RGB}{{' \
+                        '{0},{1},{2}}}'.format(
+                                self.page_background[0],
+                                self.page_background[1],
+                                self.page_background[2]))
+                str2output.append('\\pagecolor{pagebg}')
+            str2output.append('\\begin{document}')
         else:
-            str2output += '\\begin{center}\n'
-        str2output += '\\begin{tikzpicture}\n'
+            str2output.append('\\begin{center}')
+        str2output.append('\\begin{tikzpicture}')
 
         if self.semilog:
-            str2output += '  \\begin{semilogxaxis}[const plot, \n'
+            str2output.append('  \\begin{semilogxaxis}[const plot,')
         else:
-            str2output += '  \\begin{axis}[const plot, \n'
+            str2output.append('  \\begin{axis}[const plot,')
         if self.black_and_white:
-            str2output += 'cycle list name=linestyles*,\n'
+            str2output.append('cycle list name=linestyles*,')
         if self.background:
-            str2output += "axis background/.style=" \
-                    "{{fill={{rgb,255:red,{0};green,{1};blue,{2}}}}}, \n".format(
+            str2output.append("axis background/.style=" \
+                    "{{fill={{rgb,255:red,{0};green,{1};blue,{2}}}}},".format(
                             self.background[0],
                             self.background[1],
-                            self.background[2])
-        str2output += '    xmin=1, xmax={:.2f},' \
+                            self.background[2]))
+        str2output.append('    xmin=1, xmax={:.2f},\n' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
-        '    ]\n'.format(maxt,
+        '    ]'.format(maxt,
                 xlabel=self.axis_lang('Performance Ratio'),
-                ylabel=self.axis_lang('Problems solved'))
+                ylabel=self.axis_lang('Problems solved')))
 
         for solver in self.solvers:
-            str2output += '  \\addplot+[mark=none, thick] coordinates {\n'
+            str2output.append('  \\addplot+[mark=none, thick] coordinates {')
             for i in range(len(self.times)):
                 if self.times[i] <= self.tau:
                     time = self.times[i]
                     ppsbt = self.ppsbt[solver][i]
-                    str2output += '    ({:.4f},{:.4f})\n'.format(time, ppsbt)
+                    str2output.append('    ({:.4f},{:.4f})'.format(time,
+                        ppsbt))
                 else:
                     break
-            str2output += '  };\n'
-            str2output += '  \\addlegendentry{' + solver + '}\n'
+            str2output.append('  };')
+            str2output.append('  \\addlegendentry{{{0}}}'.format(solver))
         if self.semilog:
-            str2output += '  \\end{semilogxaxis}\n'
+            str2output.append('  \\end{semilogxaxis}')
         else:
-            str2output += '  \\end{axis}\n'
-        str2output += '\\end{tikzpicture}\n'
+            str2output.append('  \\end{axis}')
+        str2output.append('\\end{tikzpicture}')
         if self.standalone or self.output_format == 'pdf':
-            str2output += '\\end{document}'
+            str2output.append('\\end{document}')
         else:
-            str2output += '\\end{center}\n'
+            str2output.append('\\end{center}\n')
 
         try:
             with open(self.output, 'w') as file_:
-                file_.write(str2output)
+                file_.write('\n'.join(str2output))
 
             if self.output_format == 'pdf':
                 if self.pdf_verbose:
