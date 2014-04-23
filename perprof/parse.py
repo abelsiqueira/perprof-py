@@ -162,6 +162,9 @@ def parse_file(filename, parser_options):
                         raise ValueError(_error_message(filename, line_number,
                             _('The second element in this lime must be {} or d.').format(
                                 ', '.join(options['success']))))
+                else:
+                    raise KeyError(_("The parser option 'compare' should be"
+                                    "'exitflag' or 'optimalvalues'"))
 
     if not data:
         raise ValueError(
