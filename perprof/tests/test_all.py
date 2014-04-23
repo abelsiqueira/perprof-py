@@ -51,6 +51,28 @@ class TestPerprof(unittest.TestCase):
             self.assertRaises(ValueError, self.back_profilers[backend],
                     parser_options, profiler_options)
 
+    def test_columns(self):
+        for backend in self.backends:
+            baseargs = '--' + backend + ' ' + self.goodfiles
+            #Default comparison needs 3 columns
+            args = baseargs + ' perprof/tests/2-col.sample '
+            args = set_arguments(args.split())
+            parser_options, profiler_options = process_arguments(args)
+            self.assertRaises(ValueError, self.back_profilers[backend],
+                    parser_options, profiler_options)
+            #Default values should fail with 5 or less columns.
+            #Unconstrained Default values should fail with 5 or less columns
+            #(because dual default column is 5).
+            baseargs = '--compare optimalvalues ' + baseargs
+            for xtra in ['', '--unconstrained ']:
+                baseargs = xtra + baseargs
+                for n in [2,3,4,5]:
+                    args = baseargs + ' perprof/tests/{}-col.sample '.format(n)
+                    args = set_arguments(args.split())
+                    parser_options, profiler_options = process_arguments(args)
+                    self.assertRaises(ValueError, self.back_profilers[backend],
+                            parser_options, profiler_options)
+
     def test_without_time(self):
         for backend in self.backends:
             args = '--' + backend + ' perprof/tests/without-time.sample ' + self.goodfiles

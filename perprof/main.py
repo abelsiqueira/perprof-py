@@ -22,7 +22,10 @@ def process_arguments(args):
             'files': args.file_name,
             'success': args.success.split(','),
             'maxtime': args.maxtime,
-            'mintime': args.mintime
+            'mintime': args.mintime,
+            'compare': args.compare,
+            'unc': args.unconstrained,
+            'infeas_tol': args.infeasibility_tolerance
             }
 
     profiler_options = {
@@ -163,6 +166,13 @@ def set_arguments(args):
     parser.add_argument('--mintime', type=float, default=0,
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
+    parser.add_argument('--compare', choices=['exitflag', 'optimalvalues'],
+            default='exitflag', help=_('Choose the type of comparison to be made.'))
+    parser.add_argument('--unconstrained', action='store_true',
+            help=_('Set the problems to unconstrained, which implies that there '
+                    'is no primal feasibility to check.'))
+    parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
+            help=_('Tolerance for the primal and dual infeasibilities'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

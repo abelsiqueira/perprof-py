@@ -8,16 +8,22 @@ _perprof()
   --standalone --semilog --black-and-white --free-format --pgfplotcompat \
   --cache --tau --force --output --subset --lang --success --pdf-verbose \
   --maxtime --mintime --background --page-background --demo \
+  --compare --unconstrained --infeasibility-tolerance \
   -h -c -s -f -o -l"
 
 
   case "${prev}" in
+    --compare)
+      options="exitflag optimalvalues"
+      COMPREPLY=( $(compgen -W "$options" ${cur}) )
+      return 0
+      ;;
     --pgfplotcompat)
       versions="1.7 1.8 1.9"
       COMPREPLY=( $(compgen -W "$versions" ${cur}) )
       return 0
       ;;
-    --tau | --maxtime | --mintime)
+    --tau | --maxtime | --mintime | --infeasibility-tolerance)
       return 0
       ;;
     --background | --page-background)

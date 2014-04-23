@@ -108,31 +108,64 @@ def parse_file(filename, parser_options):
                         _('This line must have at least 2 elements.')))
             else:
                 ldata[col["name"]] = _str_sanitize(ldata[col["name"]])
-                if options['subset'] and ldata[col["name"]] not in options['subset']:
+                pname = ldata[col["name"]]
+                if options['subset'] and pname not in options['subset']:
                     continue
-                if ldata[col["name"]] in data:
+                if pname in data:
                     raise ValueError(_error_message(filename, line_number,
-                        _('Problem {} is duplicated.'.format(ldata[col["name"]]))))
-                if ldata[col["exit"]] in options['success']:
-                    if len(ldata) < 3:
+                        _('Problem {} is duplicated.'.format(pname))))
+                try:
+                    time = float(ldata[col["time"]])
+                except:
+                    raise ValueError(_error_message(filename, line_number,
+                        _('Problem {} has no time/cost.'.format(pname))))
+                if time < options['mintime']:
+                    time = options['mintime']
+                if time >= options['maxtime']:
+                    continue
+                if parser_options['compare'] == 'optimalvalues':
+                    try:
+                        if parser_options['unc']:
+                            primal = 0.0
+                        else:
+                            primal = float(ldata[col["primal"]])
+                        dual = float(ldata[col["dual"]])
+                    except:
+                        raise ValueError(_error_message(filename,
+                            line_number, _("Column for primal or dual is out of bounds")))
+                    if max(primal, dual) > parser_options['infeas_tol']:
+                        continue
+                    data[pname] = {
+                            "time": time,
+                            "fval": float('inf')}
+                    try:
+                        data[pname]["fval"] = float(ldata[col["fval"]])
+                    except:
+                        raise ValueError(_error_message(filename,
+                            line_number, _("Column for fval is out of bounds")))
+                elif parser_options['compare'] == 'exitflag':
+                    if time == 0:
                         raise ValueError(_error_message(filename, line_number,
-                                _('This line must have at least 3 elements.')))
+                            _("Time spending can't be zero.")))
+                    if ldata[col["exit"]] in options['success']:
+                        if len(ldata) < 3:
+                            raise ValueError(_error_message(filename, line_number,
+                                    _('This line must have at least 3 elements.')))
+                        data[pname] = {
+                                "time": time,
+                                "fval": float('inf')}
+                    elif options['free_format'] or ldata[col["exit"]] == 'd':
+                        data[pname] = {
+                                "time": float('inf'),
+                                "fval": float('inf')}
                     else:
-                        data[ldata[col["name"]]] = float(ldata[col["time"]])
-                        if data[ldata[col["name"]]] < options['mintime']:
-                            data[ldata[col["name"]]] = options['mintime']
-                        if data[ldata[col["name"]]] == 0:
-                            raise ValueError(_error_message(filename,
-                                    line_number, _("Time spending can't be zero.")))
-                        elif data[ldata[col["name"]]] >= options['maxtime']:
-                            ldata[col["exit"]] = 'd'
-                            data[ldata[col["name"]]] = float('inf')
-                elif options['free_format'] or ldata[col["exit"]] == 'd':
-                    data[ldata[col["name"]]] = float('inf')
-                else:
-                    raise ValueError(_error_message(filename, line_number,
+                        raise ValueError(_error_message(filename, line_number,
                             _('The second element in this lime must be {} or d.').format(
                                 ', '.join(options['success']))))
+                else:
+                    raise KeyError(_("The parser option 'compare' should be"
+                                    "'exitflag' or 'optimalvalues'"))
+
     if not data:
         raise ValueError(
                 _("ERROR: List of problems (intersected with subset, if any) is empty"))
