@@ -152,12 +152,12 @@ class TestPerprof(unittest.TestCase):
         filename = ''.join([random.choice(string.ascii_letters +
             string.digits) for n in range(16)])
         for profile in ['data', 'performance']:
-            args = '--tikz --demo --profile '+profile+' -f -o /tmp/'+filename
+            args = '--mp --demo --profile '+profile+' -f -o /tmp/'+filename
             args = set_arguments(args.split())
             parser_options, profiler_options = process_arguments(args)
-            data = tikz.Profiler(parser_options, profiler_options)
+            data = matplotlib.Profiler(parser_options, profiler_options)
             data.plot()
-            self.assertTrue(os.path.isfile('/tmp/'+filename+'.pdf'))
+            self.assertTrue(os.path.isfile('/tmp/'+filename+'.png'))
 
 if __name__ == '__main__':
     unittest.main()
