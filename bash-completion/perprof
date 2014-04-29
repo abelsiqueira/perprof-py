@@ -8,13 +8,19 @@ _perprof()
   --standalone --semilog --black-and-white --free-format --pgfplotcompat \
   --cache --tau --force --output --subset --lang --success --pdf-verbose \
   --maxtime --mintime --background --page-background --demo \
-  --compare --unconstrained --infeasibility-tolerance \
+  --compare --unconstrained --infeasibility-tolerance --profile \
+  --data-file \
   -h -c -s -f -o -l"
 
 
   case "${prev}" in
     --compare)
       options="exitflag optimalvalues"
+      COMPREPLY=( $(compgen -W "$options" ${cur}) )
+      return 0
+      ;;
+    --profile)
+      options="performance data"
       COMPREPLY=( $(compgen -W "$options" ${cur}) )
       return 0
       ;;
@@ -29,7 +35,7 @@ _perprof()
     --background | --page-background)
       return 0
       ;;
-    --subset | -s)
+    --subset | -s | --data-file)
       _filedir
       return 0
       ;;

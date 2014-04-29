@@ -104,15 +104,22 @@ class Profiler(prof.Pdata):
                             self.background[0],
                             self.background[1],
                             self.background[2]))
-        str2output.append('    xmin=1, xmax={:.2f},\n' \
-        '    ymin=0, ymax=1,\n' \
+        if self.profile == 'data':
+            if self.semilog:
+                str2output.append('    xmin=1e-4, xmax={:.2f},'.format(maxt))
+            else:
+                str2output.append('    xmin=0, xmax={:.2f},'.format(maxt))
+        elif self.profile == 'performance':
+            str2output.append('    xmin=1, xmax={:.2f},'.format(maxt))
+        else:
+            raise ValueError(_("ERROR: profile must be 'data' or 'performance'"))
+        str2output.append('    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
-        '    ]'.format(maxt,
-                xlabel=self.axis_lang('Performance Ratio'),
+        '    ]'.format(xlabel=self.axis_lang('Performance Ratio'),
                 ylabel=self.axis_lang('Problems solved')))
 
         for solver in self.solvers:

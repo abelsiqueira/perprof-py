@@ -39,7 +39,9 @@ def process_arguments(args):
             'output': args.output,
             'pgfplot_version': args.pgfplotcompat,
             'tau': args.tau,
-            'pdf_verbose': args.pdf_verbose
+            'pdf_verbose': args.pdf_verbose,
+            'profile': args.profile,
+            'datafile': args.data_file
             }
 
     if args.background is None:
@@ -173,6 +175,12 @@ def set_arguments(args):
                     'is no primal feasibility to check.'))
     parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
             help=_('Tolerance for the primal and dual infeasibilities'))
+    parser.add_argument('--profile', choices=['performance', 'data'],
+            default='performance', help=_('Choose the type of profile required.'))
+    parser.add_argument('--data-file', type=str,
+            help=_('Data file containing the number of variables for each '
+                    'problem, as required by the data profile. Ignored if '
+                    'performance profile is chosen.'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

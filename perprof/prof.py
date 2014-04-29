@@ -44,6 +44,8 @@ class Pdata(object):
         self.output_format = profile_options['output_format']
         self.pgfplot_version = profile_options['pgfplot_version']
         self.tau = profile_options['tau']
+        self.profile = profile_options['profile']
+        self.datafile = profile_options['datafile']
         self.already_scaled = False
 
     def __repr__(self):
@@ -108,6 +110,27 @@ class Pdata(object):
             self.number_problems = len(problems)
         return self.problems
 
+    def get_problem_sizes(self):
+        """
+        Get the size of problems to use.
+
+        :return: dict with problem as key and size as value
+        """
+        try:
+            self.problem_sizes
+        except AttributeError:
+            self.problem_sizes = {}
+            with open(self.datafile) as datafile:
+                linenumber = 0
+                for line in datafile:
+                    linenumber += 1
+                    line = line.split()
+                    if len(line) < 2:
+                        raise ValueError(_("ERROR when readline line #{} of #{}:"
+                            " each line of the data file must have at least two "
+                            " columns".format(linenumber, self.data_file)))
+                    self.problem_sizes[line[0]] = int(line[1])
+
     def scale(self):
         """
         Scale time.
@@ -121,7 +144,13 @@ class Pdata(object):
         except AttributeError:
             self.get_set_problems()
 
-        times_set = set()
+        if self.profile == 'data':
+            try:
+                self.problem_sizes
+            except AttributeError:
+                self.get_problem_sizes()
+
+        times_set = set([0])
         for problem in self.problems:
             for solver in self.solvers:
                 try:
@@ -144,10 +173,18 @@ class Pdata(object):
 
             for solver in self.solvers:
                 try:
-                    self.data[solver][problem]["time"] = \
-                            self.data[solver][problem]["time"] / min_time
+                    self.data[solver][problem]
                 except ZeroDivisionError:
                     self.data[solver][problem] = {"time": float('inf')}
+
+                if self.profile == 'data':
+                    self.data[solver][problem]["time"] = \
+                            self.data[solver][problem]["time"] / \
+                            (self.problem_sizes[problem] + 1)
+                else:
+                    self.data[solver][problem]["time"] = \
+                            self.data[solver][problem]["time"] / min_time
+
                 if self.data[solver][problem]["time"] < float('inf'):
                     times_set.add(self.data[solver][problem]["time"])
         if not times_set:
