@@ -211,6 +211,11 @@ def set_arguments(args):
                 os.path.join(THIS_DIR, 'examples/alpha.table'),
                 os.path.join(THIS_DIR, 'examples/beta.table'),
                 os.path.join(THIS_DIR, 'examples/gamma.table')]
+        if parsed_args.profile == 'data':
+            if parsed_args.data_file:
+                warnings.warn(_("Using demo mode. Ignoring data file."),
+                        UserWarning)
+            parsed_args.data_file = os.path.join(THIS_DIR, 'examples/nvars')
     elif len(parsed_args.file_name) <= 1:
         raise ValueError(_("You must provide at least two input files."))
 
