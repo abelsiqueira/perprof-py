@@ -1,3 +1,6 @@
+import os.path
+import random
+import string
 import unittest
 import perprof
 from perprof.main import process_arguments
@@ -144,6 +147,17 @@ class TestPerprof(unittest.TestCase):
             parser_options, profiler_options = process_arguments(args)
             self.assertRaises(ValueError, self.back_profilers[backend],
                     parser_options, profiler_options)
+
+    def test_profiles(self):
+        filename = ''.join([random.choice(string.ascii_letters +
+            string.digits) for n in range(16)])
+        for profile in ['data', 'performance']:
+            args = '--tikz --demo --profile '+profile+' -f -o /tmp/'+filename
+            args = set_arguments(args.split())
+            parser_options, profiler_options = process_arguments(args)
+            data = tikz.Profiler(parser_options, profiler_options)
+            data.plot()
+            self.assertTrue(os.path.isfile('/tmp/'+filename+'.pdf'))
 
 if __name__ == '__main__':
     unittest.main()
