@@ -46,24 +46,24 @@ Metadata
 ``algname``
     The name of the algorithmic/solver to be used in the plot.
     Default: File name.
-``col-dual``
+``col_dual``
     The column corresponding to the dual feasibility at the solution.
     Default: 6
-``col-exit``
+``col_exit``
     The column corresponding to the exit flag.
     Default: 2
-``col-fval``
+``col_fval``
     The column corresponding to the objective function value at the solution.
     Default: 4
-``col-name``
+``col_name``
     The column corresponding to the problem names.
     Default: 1
-``col-primal``
+``col_primal``
     The column corresponding to the primal feasibility at the solution.
     Default: 5
-``col-time``
+``col_time``
     The column corresponding to the time/cost spent on the problem.
-    Default: 6
+    Default: 3
 ``free_format``
     Only check for mark of success.
     Default: False
