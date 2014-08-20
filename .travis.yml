@@ -1,8 +1,9 @@
 language: python
 python:
   - "3.3"
+  - "3.4"
 install: pip install -r REQUIREMENTS
-script: python setup.py test
+script: nosetests
 notifications:
   email:
     - raniere@ime.unicamp.br
