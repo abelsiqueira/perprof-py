@@ -81,11 +81,13 @@ class Profiler(prof.Pdata):
                 str2output.append('\\pgfplotsset{compat=newest,compat/show ' \
                         'suggested version=false}')
             if self.page_background:
-                str2output.append('\\definecolor{pagebg}{RGB}{{' \
-                        '{0},{1},{2}}}'.format(
+                str = '\\definecolor{pagebg}{RGB}{'
+                str += '{},{},{}'.format(
                                 self.page_background[0],
                                 self.page_background[1],
-                                self.page_background[2]))
+                                self.page_background[2])
+                str += '}'
+                str2output.append(str)
                 str2output.append('\\pagecolor{pagebg}')
             str2output.append('\\begin{document}')
         else:
