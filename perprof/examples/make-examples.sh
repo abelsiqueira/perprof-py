@@ -28,15 +28,19 @@ for backend in --tikz --mp
 do
   perprof $backend $args --demo -o plots/abc
   perprof $backend $args --demo --semilog -o plots/abc-semilog
-  perprof $backend $args --demo --semilog --black-and-white -o plots/abc-semilog-bw
-  perprof $backend $args --demo --semilog --subset hs.subset -o plots/abc-semilog-hs
+  perprof $backend $args --demo --semilog --black-and-white -o \
+    plots/abc-semilog-bw
+  perprof $backend $args --demo --semilog --subset hs.subset -o \
+    plots/abc-semilog-hs
   perprof $backend $args --demo --tau 100 --semilog -o plots/abc-100
   perprof $backend $args --demo --maxtime 100 --semilog -o plots/abc-t100
   perprof $backend $args --demo --mintime 1 --semilog -o plots/abc-m1
   perprof $backend $args --demo --background 255,255,255 --semilog \
-  -o plots/abc-whiteplot
+    -o plots/abc-whiteplot
   perprof $backend $args --demo --page-background 0,0,0 --semilog \
-  -o plots/abc-blackpage
+    -o plots/abc-blackpage
   perprof $backend $args --demo --page-background 0,0,0 --background \
-  255,255,255 --semilog -o plots/abc-blackpage-whiteplot
+    255,255,255 --semilog -o plots/abc-blackpage-whiteplot
+  perprof $backend $args --demo --semilog --compare optimalvalues \
+    --infeasibility-tolerance 1e-8 -o plots/abc-optimalvalues
 done
