@@ -88,7 +88,7 @@ class Profiler(prof.Pdata):
         if self.black_and_white:
             linestyles = ['k-', 'k--', 'k:', 'k-.']
         else:
-            linestyles = ['r', 'b', 'g', 'c', 'm', 'y', 'k', 'w']
+            linestyles = ['b', 'g', 'r', 'c', 'm', 'y']
 
         # Generate the plot for each solver
         sc = 0
