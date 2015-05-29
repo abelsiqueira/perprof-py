@@ -2,6 +2,7 @@ import unittest
 import perprof
 from perprof.main import process_arguments
 from perprof.main import set_arguments
+from perprof import bokeh
 from perprof import tikz
 from perprof import matplotlib
 from perprof import prof
@@ -10,8 +11,9 @@ class TestPerprof(unittest.TestCase):
 
     goodfiles = ' '.join(['perprof/examples/' + s + '.table' \
             for s in ['alpha', 'beta', 'gamma']])
-    backends = ['tikz', 'mp', 'raw']
+    backends = ['bokeh', 'tikz', 'mp', 'raw']
     back_profilers = {
+            "bokeh": bokeh.Profiler,
             "tikz": tikz.Profiler,
             "mp": matplotlib.Profiler,
             "raw": prof.Pdata }
@@ -19,15 +21,17 @@ class TestPerprof(unittest.TestCase):
     def test_backends(self):
         for backend in self.backends:
             args = '--' + backend + ' --demo'
-            isTrue = {'tikz': False, 'mp': False, 'raw': False }
+            isTrue = {'bokeh': False, 'tikz': False, 'mp': False, 'raw': False }
             isTrue[backend] = True
             args = set_arguments(args.split())
+            self.assertEqual(args.bokeh, isTrue['bokeh'])
             self.assertEqual(args.tikz, isTrue['tikz'])
             self.assertEqual(args.mp,   isTrue['mp'])
             self.assertEqual(args.raw,  isTrue['raw'])
 
     def test_output_formats(self):
         outputs = {
+                "bokeh": ["html"],
                 "tikz": ["pdf", "tex"],
                 "mp": ["png", "eps", "pdf", "ps", "svg"],
                 "raw": [] }

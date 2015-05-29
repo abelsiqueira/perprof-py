@@ -2,6 +2,7 @@
 This is the main file for perprof
 """
 
+SUPPORT_BOKEH = ['html']
 SUPPORT_MP = ['eps', 'pdf', 'png', 'ps', 'svg']
 SUPPORT_TIKZ = ['tex', 'pdf']
 
@@ -57,7 +58,9 @@ def process_arguments(args):
         assert len(profiler_options['page_background']) == 3, \
                 _("RGB for page background must have 3 integers")
 
-    if args.eps:
+    if args.html:
+        profiler_options['output_format'] = 'html'
+    elif args.eps:
         profiler_options['output_format'] = 'eps'
     elif args.pdf:
         profiler_options['output_format'] = 'pdf'
@@ -70,14 +73,19 @@ def process_arguments(args):
     elif args.tex:
         profiler_options['output_format'] = 'tex'
     else:
-        if args.mp:
+        if args.bokeh:
+            profiler_options['output_format'] = 'html'
+        elif args.mp:
             profiler_options['output_format'] = 'png'
         elif args.tikz:
             profiler_options['output_format'] = 'pdf'
         else:
             profiler_options['output_format'] = None
 
-    if args.mp and profiler_options['output_format'] not in SUPPORT_MP:
+    if args.bokeh and profiler_options['output_format'] not in SUPPORT_BOKEH:
+        raise NotImplementedError(_("Output option {} not supported by "
+                "bokeh").format(profiler_options['output_format'].upper()))
+    elif args.mp and profiler_options['output_format'] not in SUPPORT_MP:
         raise NotImplementedError(_("Output option {} not supported by "
                 "matplotlib").format(profiler_options['output_format'].upper()))
     elif args.tikz and profiler_options['output_format'] not in SUPPORT_TIKZ:
@@ -110,6 +118,9 @@ def set_arguments(args):
 
     backend_args = parser.add_argument_group(_("Backend options"))
     backend = backend_args.add_mutually_exclusive_group(required=True)
+    backend.add_argument('--bokeh', action='store_true',
+            help=_('Use bokeh as backend for the plot. Default '
+            'output: HTML'))
     backend.add_argument('--mp', action='store_true',
             help=_('Use matplotlib as backend for the plot. Default '
             'output: PNG'))
@@ -121,6 +132,8 @@ def set_arguments(args):
 
     output_format_args = parser.add_argument_group(_("Output formats"))
     output_format = output_format_args.add_mutually_exclusive_group()
+    output_format.add_argument('--html', action='store_true',
+            help=_('The output file will be a HTML file'))
     output_format.add_argument('--eps', action='store_true',
             help=_('The output file will be a EPS file'))
     output_format.add_argument('--pdf', action='store_true',
@@ -216,6 +229,12 @@ def main():
 
         parser_options, profiler_options = process_arguments(args)
 
+        if args.bokeh:
+            # bokeh
+            from . import bokeh
+
+            data = bokeh.Profiler(parser_options, profiler_options)
+            data.plot()
         if args.mp:
             # matplotlib
             from . import matplotlib
