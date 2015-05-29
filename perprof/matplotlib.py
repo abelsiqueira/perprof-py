@@ -91,10 +91,8 @@ class Profiler(prof.Pdata):
             linestyles = ['b', 'g', 'r', 'c', 'm', 'y']
 
         # Generate the plot for each solver
-        sc = 0
-        for solver in self.solvers:
-            plot_.plot(self.times, self.ppsbt[solver], linestyles[sc], label=solver)
-            sc = sc + 1
+        for idx, solver in enumerate(self.solvers):
+            plot_.plot(self.times, self.ppsbt[solver], linestyles[idx], label=solver)
 
         # Change the xscale to log scale
         if self.semilog:
