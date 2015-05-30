@@ -1,11 +1,4 @@
 # For input format
 pyyaml
-# For test
-nose
 # For support to matplotlib
 matplotlib
-numpy
-pyparsing
-python-dateutil
-six
-tornado
