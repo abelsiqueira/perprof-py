@@ -1,4 +1,6 @@
 # For input format
 pyyaml
-# For support to matplotlib
+# Support to matplotlib
 matplotlib
+# Support to Bokeh
+bokeh
