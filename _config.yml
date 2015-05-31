@@ -1,4 +1,7 @@
 name: perprof-py
 markdown: redcarpet
 pygments: true
+git-host: https://github.com
+git-user: ufpr-opt
+git-project: perprof-py
 baseurl: /perprof-py
