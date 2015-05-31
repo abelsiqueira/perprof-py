@@ -4,8 +4,8 @@
 - name: Download
   url: download.html
 
-- name: Examples
-  url: examples.html
+- name: Gallery
+  url: gallery.html
 
 - name: Documentation
   url: documentation.html
