@@ -27,3 +27,10 @@ Please use `perprof` help:
 #### Input file format
 
 See [all the instructions at documentation](https://perprof-py.readthedocs.org/en/latest/file-format.html).
+
+## Getting Help
+
+If you didn't find something at the documentation,
+want to report a bug,
+or request a new feature,
+please open a [issue](https://github.com/ufpr-opt/perprof-py/issues).
