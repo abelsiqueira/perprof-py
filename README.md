@@ -8,18 +8,22 @@ Moré](http://arxiv.org/abs/cs/0102001)) with TikZ and matplotlib output.
 
 GPLv3. See [LICENSE](LICENSE).
 
-## Install
+## Documentation
 
-See [all the instructions at documentation](doc/install.rst).
+Read the documentation on [Read the Docs](https://perprof-py.readthedocs.org/en/latest/).
 
-## How to use
+### Install
 
-### Calling `perprof`
+See [all the instructions at documentation](https://perprof-py.readthedocs.org/en/latest/install.html).
+
+### How to use
+
+#### Calling `perprof`
 
 Please use `perprof` help:
 
     $ perprof -h
 
-### Input file format
+#### Input file format
 
-See [all the instructions at documentation](doc/file-format.rst).
+See [all the instructions at documentation](https://perprof-py.readthedocs.org/en/latest/file-format.html).
