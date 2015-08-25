@@ -26,13 +26,14 @@ where
 ``<Cost XX>``
     is the "cost" (e.g. time spent) to be used for the performance profile until solve the problem or give up.
 
-Some examples of input file are provided at `perprof/examples`.
+Some examples of input file are provided at ``perprof/examples`` (`see it on
+GitHub <https://github.com/ufpr-opt/perprof-py/tree/master/perprof/examples>`_).
 To see the examples already ::
 
     $ cd perprof/examples
     $ ./make-examples.sh
 
-This will generate 8 simple examples in the folder `perprof/examples/plots`.
+This will generate 8 simple examples in the folder ``perprof/examples/plots``.
 
 YAML header
 -----------
