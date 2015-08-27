@@ -1,6 +1,9 @@
 #!/bin/bash
 
-[ -x perprof ] && echo "perprof not installed or I could not find it" && exit 1
+set -e
+
+command -v perprof > /dev/null 2>&1 || { \
+  echo >&2 "perprof not installed or I could not find it"; exit 1; }
 
 lang=en
 case $1 in
@@ -22,7 +25,7 @@ esac
 rm -rf plots
 mkdir -p plots
 
-args="-l $lang"
+args="-l $lang --pgfplotcompat 1.5"
 
 for backend in --tikz --mp
 do
