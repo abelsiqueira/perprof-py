@@ -4,6 +4,8 @@ This handle the plot using matplotlib.
 
 import os.path
 import gettext
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from . import prof
 

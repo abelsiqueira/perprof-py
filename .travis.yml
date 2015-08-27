@@ -2,9 +2,20 @@ language: python
 python:
   - "3.3"
   - "3.4"
+before_install:
+  - sudo add-apt-repository ppa:texlive-backports/ppa -y
+  - sudo apt-get update -qq
+  - sudo apt-get install -y texlive-pictures
+  - wget http://mirror.ctan.org/install/macros/latex/contrib/standalone.tds.zip
+  - unzip standalone.tds.zip -d ~/texmf
+  - sudo texhash
 install:
   - pip install -r REQUIREMENTS
-script: python setup.py test
+  - python setup.py install
+script:
+  - python setup.py test
+  - cd perprof/examples
+  - ./make-examples.sh
 notifications:
   email:
     - raniere@ime.unicamp.br
