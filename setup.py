@@ -13,7 +13,7 @@ setup(
     name='perprof',
     version='1.1.1',
     author='Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luiz Rafael dos Santos',
-    author_email='abel@ime.unicamp.br, raniere@ime.unicamp.br, lrsantos@ime.unicamp.br',
+    author_email='abel.s.siqueira@gmail.com, raniere@ime.unicamp.br, l.r.santos@ufsc.br',
     packages=['perprof'],
     package_data={'perprof': ['locale/*/*/*.mo', 'examples/*.table']},
     url='https://github.com/ufpr-opt/perprof-py',
