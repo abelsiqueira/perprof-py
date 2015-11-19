@@ -8,7 +8,7 @@ _perprof()
   --standalone --semilog --black-and-white --free-format --pgfplotcompat \
   --cache --tau --force --output --subset --lang --success --pdf-verbose \
   --maxtime --mintime --background --page-background --demo --html \
-  --compare --unconstrained --infeasibility-tolerance \
+  --compare --unconstrained --infeasibility-tolerance --title \
   -h -c -s -f -o -l"
 
 
@@ -39,6 +39,9 @@ _perprof()
       return 0
       ;;
     --success)
+      return 0;
+      ;;
+    --title)
       return 0;
       ;;
     *)
