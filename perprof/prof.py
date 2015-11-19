@@ -44,6 +44,7 @@ class Pdata(object):
         self.output_format = profile_options['output_format']
         self.pgfplot_version = profile_options['pgfplot_version']
         self.tau = profile_options['tau']
+        self.title = profile_options['title']
         self.already_scaled = False
 
     def __repr__(self):

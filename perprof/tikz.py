@@ -109,11 +109,13 @@ class Profiler(prof.Pdata):
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
+        '    title={{{title}}},\n' \
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
         '    ]'.format(maxt,
                 xlabel=self.axis_lang('Performance Ratio'),
-                ylabel=self.axis_lang('Problems solved')))
+                ylabel=self.axis_lang('Problems solved'),
+                title=self.title))
 
         for solver in self.solvers:
             str2output.append('  \\addplot+[mark=none, thick] coordinates {')

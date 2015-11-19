@@ -40,7 +40,8 @@ def process_arguments(args):
             'output': args.output,
             'pgfplot_version': args.pgfplotcompat,
             'tau': args.tau,
-            'pdf_verbose': args.pdf_verbose
+            'pdf_verbose': args.pdf_verbose,
+            'title': _(args.title)
             }
 
     if args.background is None:
@@ -186,6 +187,8 @@ def set_arguments(args):
                     'is no primal feasibility to check.'))
     parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
             help=_('Tolerance for the primal and dual infeasibilities'))
+    parser.add_argument('--title', type=str, default='Performance Profile',
+            help=_('Sets the performance profile title'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))
