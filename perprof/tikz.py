@@ -104,6 +104,10 @@ class Profiler(prof.Pdata):
                             self.background[0],
                             self.background[1],
                             self.background[2]))
+        if self.title is None:
+            title = self.axis_lang('Performance Profile')
+        else:
+            title = self.title
         str2output.append('    xmin=1, xmax={:.2f},\n' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
@@ -115,7 +119,7 @@ class Profiler(prof.Pdata):
         '    ]'.format(maxt,
                 xlabel=self.axis_lang('Performance Ratio'),
                 ylabel=self.axis_lang('Problems solved'),
-                title=self.title))
+                title=title))
 
         for solver in self.solvers:
             str2output.append('  \\addplot+[mark=none, thick] coordinates {')
