@@ -40,9 +40,8 @@ msgid "RGB for page background must have 3 integers"
 msgstr "RGB para a cor da página deve ser 3 inteiros"
 
 #: perprof/main.py:86
-#, fuzzy
 msgid "Output option {} not supported by bokeh"
-msgstr "Opção de saída não suportada pelo TikZ"
+msgstr "Opção de saída {} não suportada pelo TikZ"
 
 #: perprof/main.py:89
 msgid "Output option {} not supported by matplotlib"
@@ -71,9 +70,8 @@ msgid "Backend options"
 msgstr "Opções de backend"
 
 #: perprof/main.py:122
-#, fuzzy
 msgid "Use bokeh as backend for the plot. Default output: HTML"
-msgstr "Utiliza matplotlib como backend para o gráfico. Padrão de saída: PNG"
+msgstr "Utiliza bokeh como backend para o gráfico. Padrão de saída: HTML"
 
 #: perprof/main.py:125
 msgid "Use matplotlib as backend for the plot. Default output: PNG"
@@ -93,9 +91,8 @@ msgid "Output formats"
 msgstr "Formatos de saída"
 
 #: perprof/main.py:136
-#, fuzzy
 msgid "The output file will be a HTML file"
-msgstr "O arquivo de saída será um PS"
+msgstr "O arquivo de saída será um HTML"
 
 #: perprof/main.py:138
 msgid "The output file will be a EPS file"
@@ -110,12 +107,10 @@ msgid "The output file will be a PNG file"
 msgstr "O arquivo de saída será um PNG"
 
 #: perprof/main.py:144
-#, fuzzy
 msgid "The output file will be a PS file"
 msgstr "O arquivo de saída será um PS"
 
 #: perprof/main.py:146
-#, fuzzy
 msgid "The output file will be a SVG file"
 msgstr "O arquivo de saída será um SVG"
 
@@ -124,7 +119,6 @@ msgid "The output file will be a (La)TeX file"
 msgstr "O arquivo de saída será um código (La)TeX"
 
 #: perprof/main.py:150
-#, fuzzy
 msgid "TikZ options"
 msgstr "Opções do TikZ"
 
@@ -186,7 +180,7 @@ msgid ""
 "Sets a maximum time for a solved problem. Any problem with a time greater "
 "than this will be considered failed."
 msgstr ""
-"Configurar um tempo máximo de execução. Qualquer problema que utilizarmais "
+"Configurar um tempo máximo de execução. Qualquer problema que utilizar mais "
 "que esse tempo será considerado como falha."
 
 #: perprof/main.py:180
@@ -206,7 +200,7 @@ msgid ""
 "Set the problems to unconstrained, which implies that there is no primal "
 "feasibility to check."
 msgstr ""
-"Marca os problemas como irrestrito, implicando que não existe factibilidad "
+"Marca os problemas como irrestrito, implicando que não existe factibilidade "
 "primal para verificar."
 
 #: perprof/main.py:188
