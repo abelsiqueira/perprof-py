@@ -173,8 +173,8 @@ class Pdata(object):
                         aux += 1
                 self.ppsbt[solver].append(aux / self.number_problems)
             if self.ppsbt[solver][-1] == 0:
-                raise ValueError(_("ERROR: solver " + solver +
-                    " has no solved problems. Verify the 'success' flag."))
+                raise ValueError(_("ERROR:") + solver +
+                    _(" has no solved problems. Verify the 'success' flag."))
 
     def plot(self):
         """
