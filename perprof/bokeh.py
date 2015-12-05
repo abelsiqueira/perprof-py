@@ -79,11 +79,7 @@ class Profiler(prof.Pdata):
         if self.semilog:
             boken_plot_options["x_axis_type"] = "log"
 
-        if self.title is None:
-            title = self.axis_lang('Performance Profile')
-        else:
-            title = self.title
-        p = plt.figure(title=title,
+        p = plt.figure(title=self.title,
                 x_axis_label=self.axis_lang('Performance Ratio'),
                 y_axis_label=self.axis_lang('Problems solved'),
                 **boken_plot_options)

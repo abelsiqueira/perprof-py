@@ -188,7 +188,8 @@ def set_arguments(args):
     parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
             help=_('Tolerance for the primal and dual infeasibilities'))
     parser.add_argument('--title', type=str,
-            help=_('Sets the performance profile title'))
+            default=_("Performance Profile"),
+            help=_('Set the title to be show on top of the performance profile'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))
