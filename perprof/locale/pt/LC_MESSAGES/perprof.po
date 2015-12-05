@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-11-23 17:36-0200\n"
+"POT-Creation-Date: 2015-12-05 09:34+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,11 @@ msgstr ""
 "ERROR: Arquivo {} existe.\n"
 "Utilize `-f` para sobrescrever."
 
-#: perprof/bokeh.py:83 perprof/matplotlib.py:113 perprof/tikz.py:108
-msgid "Performance Profile"
-msgstr "Perfil de Desempenho"
-
-#: perprof/bokeh.py:87 perprof/matplotlib.py:109 perprof/tikz.py:120
+#: perprof/bokeh.py:83 perprof/matplotlib.py:109 perprof/tikz.py:116
 msgid "Performance Ratio"
 msgstr "Razão de Desempenho"
 
-#: perprof/bokeh.py:88 perprof/matplotlib.py:111 perprof/tikz.py:121
+#: perprof/bokeh.py:84 perprof/matplotlib.py:111 perprof/tikz.py:117
 msgid "Problems solved"
 msgstr "Problemas resolvidos"
 
@@ -218,34 +214,38 @@ msgid "Tolerance for the primal and dual infeasibilities"
 msgstr "Tolerância para as factibilidades primal e dual."
 
 #: perprof/main.py:191
-msgid "Sets the performance profile title"
+msgid "Performance Profile"
+msgstr "Perfil de Desempenho"
+
+#: perprof/main.py:192
+msgid "Set the title to be show on top of the performance profile"
 msgstr ""
 
-#: perprof/main.py:194
+#: perprof/main.py:195
 msgid "Enable cache."
 msgstr "Habilitar cache"
 
-#: perprof/main.py:196
+#: perprof/main.py:197
 msgid "Name of a file with a subset of problems to compare"
 msgstr "Nome do arquivo com subconjunto de problemas a serem comparados"
 
-#: perprof/main.py:198
+#: perprof/main.py:199
 msgid "Limit the x-axis based this value"
 msgstr "Limite do eixo x"
 
-#: perprof/main.py:200
+#: perprof/main.py:201
 msgid "Force overwrite the output file"
 msgstr "Forçar sobre escrever o arquivo de saída"
 
-#: perprof/main.py:202
+#: perprof/main.py:203
 msgid "Name of the file to use as output (the correct extension will be add)"
 msgstr "Nome do arquivo de saída (a extensão correta será adicionada)"
 
-#: perprof/main.py:206
+#: perprof/main.py:207
 msgid "Use examples files as input"
 msgstr "Utiliza arquivos de exemplos como entrada"
 
-#: perprof/main.py:208
+#: perprof/main.py:209
 msgid ""
 "The name of the files to be used for the performance profiling (for demo use "
 "`--demo`)"
@@ -253,15 +253,15 @@ msgstr ""
 "Nome dos arquivos a serem utilizados no perfil de desempenho (para "
 "demonstranstração utilize `--demo`)"
 
-#: perprof/main.py:216
+#: perprof/main.py:217
 msgid "Using demo mode. Ignoring input files."
 msgstr "Utilizando mode de demonstração. Ignorando arquivos de entrada."
 
-#: perprof/main.py:223
+#: perprof/main.py:224
 msgid "You must provide at least two input files."
 msgstr "Você deve informar pelo menos dois arquivos de entrada."
 
-#: perprof/main.py:249
+#: perprof/main.py:250
 msgid ""
 "ERROR: When using PDF output, you need to provide the name of the output "
 "file."
