@@ -38,10 +38,10 @@ class Profiler(prof.Pdata):
                     profiler_options['output_format'])
         self.output_format = profiler_options['output_format']
 
-        # Language for the axis label
+        # Language for the plot
         translation = gettext.translation('perprof',
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
-        self.axis_lang = translation.gettext
+        self.plot_lang = translation.gettext
 
         prof.Pdata.__init__(self, parser_options, profiler_options)
 
@@ -65,7 +65,7 @@ class Profiler(prof.Pdata):
         except AttributeError:
             self.set_percent_problems_solved_by_time()
 
-        plt.output_file(self.output, title="")
+        plt.output_file(self.output, title=self.plot_lang(self.title))
 
         # Axis
         try:
@@ -79,9 +79,9 @@ class Profiler(prof.Pdata):
         if self.semilog:
             boken_plot_options["x_axis_type"] = "log"
 
-        p = plt.figure(title=self.title,
-                x_axis_label=self.axis_lang('Performance Ratio'),
-                y_axis_label=self.axis_lang('Problems solved'),
+        p = plt.figure(title=self.plot_lang(self.title),
+                x_axis_label=self.plot_lang('Performance Ratio'),
+                y_axis_label=self.plot_lang('Problems solved'),
                 **boken_plot_options)
 
         for idx, solver in enumerate(self.solvers):

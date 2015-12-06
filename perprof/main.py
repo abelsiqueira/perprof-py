@@ -156,7 +156,7 @@ def set_arguments(args):
             help=_('Set pgfplots backwards compatibility mode to given version'))
 
     parser.add_argument('--lang', '-l', choices=['en', 'pt_BR'], default='en',
-            help=_('Set language for axis label'))
+            help=_('Set language for plot'))
     parser.add_argument('--free-format', action='store_true',
             help=_('When parsing file handle all non `c` character as `d`'))
     parser.add_argument('--pdf-verbose', action='store_true',
