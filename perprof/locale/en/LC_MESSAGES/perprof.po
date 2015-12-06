@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-12-06 08:09+BRST\n"
+"POT-Creation-Date: 2015-12-06 08:18+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite"
+msgstr ""
+
+#: perprof/bokeh.py:83 perprof/matplotlib.py:109 perprof/tikz.py:116
+msgid "Performance Ratio"
+msgstr ""
+
+#: perprof/bokeh.py:84 perprof/matplotlib.py:111 perprof/tikz.py:117
+msgid "Problems solved"
 msgstr ""
 
 #: perprof/main.py:54
