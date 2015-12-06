@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-14 15:38+BRT\n"
+"POT-Creation-Date: 2015-12-06 08:18+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,215 +15,279 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: perprof/main.py:33
-msgid "RGB for background must have 3 integers"
-msgstr ""
-
-#: perprof/main.py:38
-msgid "RGB for page background must have 3 integers"
-msgstr ""
-
-#: perprof/main.py:70
-msgid "Output option {} not supported by matplotlib"
-msgstr ""
-
-#: perprof/main.py:73
-msgid "Output option {} not supported by TikZ"
-msgstr ""
-
-#: perprof/main.py:77
-msgid "--raw does not support output except standard output"
-msgstr ""
-
-#: perprof/main.py:200
-msgid "A python module for performance profiling (as described by Dolan and Moré)."
-msgstr ""
-
-#: perprof/main.py:204
-msgid "Backend options"
-msgstr ""
-
-#: perprof/main.py:207
-msgid "Use matplotlib as backend for the plot. Default output: PNG"
-msgstr ""
-
-#: perprof/main.py:210
-msgid "Use LaTex/TikZ/pgfplots as backend for the plot. Default output: PDF"
-msgstr ""
-
-#: perprof/main.py:213
-msgid "Print raw data. Default output: standard output"
-msgstr ""
-
-#: perprof/main.py:215
-msgid "Output formats"
-msgstr ""
-
-#: perprof/main.py:218
-msgid "The output file will be a EPS file"
-msgstr ""
-
-#: perprof/main.py:220
-msgid "The output file will be a PDF file"
-msgstr ""
-
-#: perprof/main.py:222
-msgid "The output file will be a PNG file"
-msgstr ""
-
-#: perprof/main.py:224
-msgid "The output file will be a PS file"
-msgstr ""
-
-#: perprof/main.py:226
-msgid "The output file will be a SVG file"
-msgstr ""
-
-#: perprof/main.py:228
-msgid "The output file will be a (La)TeX file"
-msgstr ""
-
-#: perprof/main.py:230
-msgid "TikZ options"
-msgstr ""
-
-#: perprof/main.py:232
-msgid "Create the header as a standalone to the tex file, enabling compilation of the result"
-msgstr ""
-
-#: perprof/main.py:235
-msgid "Set pgfplots backwards compatibility mode to given version"
-msgstr ""
-
-#: perprof/main.py:238
-msgid "Set language for axis label"
-msgstr ""
-
-#: perprof/main.py:240
-msgid "When parsing file handle all non `c` character as `d`"
-msgstr ""
-
-#: perprof/main.py:242
-msgid "Print output of pdflatex"
-msgstr ""
-
-#: perprof/main.py:244
-msgid "Use only black color."
-msgstr ""
-
-#: perprof/main.py:246
-msgid "RGB values separated by commas for the background color of the plot. (Values in the 0,255 range)"
-msgstr ""
-
-#: perprof/main.py:249
-msgid "RGB values separated by commas for the background color of the page. (Values in the 0,255 range)"
-msgstr ""
-
-#: perprof/main.py:252
-msgid "Use logarithmic scale for the x axis of the plot"
-msgstr ""
-
-#: perprof/main.py:254
-msgid "Flags that are interpreted as success, separated by commas.  Default: `c`"
-msgstr ""
-
-#: perprof/main.py:257
-msgid "Sets a maximum time for a solved problem. Any problem with a time greater than this will be considered failed."
-msgstr ""
-
-#: perprof/main.py:260
-msgid "Sets a minimum time for a solved problem. Any problem with a time smaller than this will have the time set to this."
-msgstr ""
-
-#: perprof/main.py:264
-msgid "Enable cache."
-msgstr ""
-
-#: perprof/main.py:266
-msgid "Name of a file with a subset of problems to compare"
-msgstr ""
-
-#: perprof/main.py:268
-msgid "Limit the x-axis based this value"
-msgstr ""
-
-#: perprof/main.py:270
-msgid "Force overwrite the output file"
-msgstr ""
-
-#: perprof/main.py:272
-msgid "Name of the file to use as output (the correct extension will be add)"
-msgstr ""
-
-#: perprof/main.py:276
-msgid "Use examples files as input"
-msgstr ""
-
-#: perprof/main.py:278
-msgid "The name of the files to be used for the performance profiling (for demo use `--demo`)"
-msgstr ""
-
-#: perprof/main.py:286
-msgid "Using demo mode. Ignoring input files."
-msgstr ""
-
-#: perprof/main.py:293
-msgid "You must provide at least two input files."
-msgstr ""
-
-#: perprof/main.py:313
-msgid "ERROR: When using PDF output, you need to provide the name of the output file."
-msgstr ""
-
-#: perprof/matplotlib.py:36
+#: perprof/bokeh.py:56 perprof/matplotlib.py:49
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite"
 msgstr ""
 
-#: perprof/matplotlib.py:85 perprof/tikz.py:106
+#: perprof/bokeh.py:83 perprof/matplotlib.py:109 perprof/tikz.py:116
 msgid "Performance Ratio"
 msgstr ""
 
-#: perprof/matplotlib.py:87 perprof/tikz.py:107
+#: perprof/bokeh.py:84 perprof/matplotlib.py:111 perprof/tikz.py:117
 msgid "Problems solved"
 msgstr ""
 
-#: perprof/parse.py:41
+#: perprof/main.py:54
+msgid "RGB for background must have 3 integers"
+msgstr ""
+
+#: perprof/main.py:60
+msgid "RGB for page background must have 3 integers"
+msgstr ""
+
+#: perprof/main.py:87
+msgid "Output option {} not supported by bokeh"
+msgstr ""
+
+#: perprof/main.py:90
+msgid "Output option {} not supported by matplotlib"
+msgstr ""
+
+#: perprof/main.py:93
+msgid "Output option {} not supported by TikZ"
+msgstr ""
+
+#: perprof/main.py:97
+msgid "--raw does not support output except standard output"
+msgstr ""
+
+#: perprof/main.py:103
+msgid "ERROR: Subset is empty"
+msgstr ""
+
+#: perprof/main.py:116
+msgid "A python module for performance profiling (as described by Dolan and Moré)."
+msgstr ""
+
+#: perprof/main.py:120
+msgid "Backend options"
+msgstr ""
+
+#: perprof/main.py:123
+msgid "Use bokeh as backend for the plot. Default output: HTML"
+msgstr ""
+
+#: perprof/main.py:126
+msgid "Use matplotlib as backend for the plot. Default output: PNG"
+msgstr ""
+
+#: perprof/main.py:129
+msgid "Use LaTex/TikZ/pgfplots as backend for the plot. Default output: PDF"
+msgstr ""
+
+#: perprof/main.py:132
+msgid "Print raw data. Default output: standard output"
+msgstr ""
+
+#: perprof/main.py:134
+msgid "Output formats"
+msgstr ""
+
+#: perprof/main.py:137
+msgid "The output file will be a HTML file"
+msgstr ""
+
+#: perprof/main.py:139
+msgid "The output file will be a EPS file"
+msgstr ""
+
+#: perprof/main.py:141
+msgid "The output file will be a PDF file"
+msgstr ""
+
+#: perprof/main.py:143
+msgid "The output file will be a PNG file"
+msgstr ""
+
+#: perprof/main.py:145
+msgid "The output file will be a PS file"
+msgstr ""
+
+#: perprof/main.py:147
+msgid "The output file will be a SVG file"
+msgstr ""
+
+#: perprof/main.py:149
+msgid "The output file will be a (La)TeX file"
+msgstr ""
+
+#: perprof/main.py:151
+msgid "TikZ options"
+msgstr ""
+
+#: perprof/main.py:153
+msgid "Create the header as a standalone to the tex file, enabling compilation of the result"
+msgstr ""
+
+#: perprof/main.py:156
+msgid "Set pgfplots backwards compatibility mode to given version"
+msgstr ""
+
+#: perprof/main.py:159
+msgid "Set language for plot"
+msgstr ""
+
+#: perprof/main.py:161
+msgid "When parsing file handle all non `c` character as `d`"
+msgstr ""
+
+#: perprof/main.py:163
+msgid "Print output of pdflatex"
+msgstr ""
+
+#: perprof/main.py:165
+msgid "Use only black color."
+msgstr ""
+
+#: perprof/main.py:167
+msgid "RGB values separated by commas for the background color of the plot. (Values in the 0,255 range)"
+msgstr ""
+
+#: perprof/main.py:170
+msgid "RGB values separated by commas for the background color of the page. (Values in the 0,255 range)"
+msgstr ""
+
+#: perprof/main.py:173
+msgid "Use logarithmic scale for the x axis of the plot"
+msgstr ""
+
+#: perprof/main.py:175
+msgid "Flags that are interpreted as success, separated by commas.  Default: `c`"
+msgstr ""
+
+#: perprof/main.py:178
+msgid "Sets a maximum time for a solved problem. Any problem with a time greater than this will be considered failed."
+msgstr ""
+
+#: perprof/main.py:181
+msgid "Sets a minimum time for a solved problem. Any problem with a time smaller than this will have the time set to this."
+msgstr ""
+
+#: perprof/main.py:184
+msgid "Choose the type of comparison to be made."
+msgstr ""
+
+#: perprof/main.py:186
+msgid "Set the problems to unconstrained, which implies that there is no primal feasibility to check."
+msgstr ""
+
+#: perprof/main.py:189
+msgid "Tolerance for the primal and dual infeasibilities"
+msgstr ""
+
+#: perprof/main.py:191
+msgid "Performance Profile"
+msgstr ""
+
+#: perprof/main.py:192
+msgid "Set the title to be show on top of the performance profile"
+msgstr ""
+
+#: perprof/main.py:195
+msgid "Enable cache."
+msgstr ""
+
+#: perprof/main.py:197
+msgid "Name of a file with a subset of problems to compare"
+msgstr ""
+
+#: perprof/main.py:199
+msgid "Limit the x-axis based this value"
+msgstr ""
+
+#: perprof/main.py:201
+msgid "Force overwrite the output file"
+msgstr ""
+
+#: perprof/main.py:203
+msgid "Name of the file to use as output (the correct extension will be add)"
+msgstr ""
+
+#: perprof/main.py:207
+msgid "Use examples files as input"
+msgstr ""
+
+#: perprof/main.py:209
+msgid "The name of the files to be used for the performance profiling (for demo use `--demo`)"
+msgstr ""
+
+#: perprof/main.py:217
+msgid "Using demo mode. Ignoring input files."
+msgstr ""
+
+#: perprof/main.py:224
+msgid "You must provide at least two input files."
+msgstr ""
+
+#: perprof/main.py:250
+msgid "ERROR: When using PDF output, you need to provide the name of the output file."
+msgstr ""
+
+#: perprof/parse.py:33
 msgid ""
 "ERROR when reading line #{} of {}:\n"
 "    {}"
 msgstr ""
 
-#: perprof/parse.py:106
+#: perprof/parse.py:57
+msgid " is not a valid option for YAML."
+msgstr ""
+
+#: perprof/parse.py:108
 msgid "This line must have at least 2 elements."
 msgstr ""
 
-#: perprof/parse.py:114
-msgid "This line must have at least 3 elements."
+#: perprof/parse.py:116
+msgid "Duplicated problem: "
 msgstr ""
 
 #: perprof/parse.py:121
+msgid "Problem has no time/cost: "
+msgstr ""
+
+#: perprof/parse.py:135
+msgid "Column for primal or dual is out of bounds"
+msgstr ""
+
+#: perprof/parse.py:145
+msgid "Column for fval is out of bounds"
+msgstr ""
+
+#: perprof/parse.py:149
 msgid "Time spending can't be zero."
 msgstr ""
 
-#: perprof/parse.py:129
+#: perprof/parse.py:153
+msgid "This line must have at least 3 elements."
+msgstr ""
+
+#: perprof/parse.py:163
 msgid "The second element in this lime must be {} or d."
 msgstr ""
 
-#: perprof/parse.py:133
+#: perprof/parse.py:166
+msgid "The parser option 'compare' should be 'exitflag' or 'optimalvalues'"
+msgstr ""
+
+#: perprof/parse.py:171
 msgid "ERROR: List of problems (intersected with subset, if any) is empty"
 msgstr ""
 
-#: perprof/prof.py:25
-msgid "ERROR: Subset is empty"
-msgstr ""
-
-#: perprof/prof.py:135
+#: perprof/prof.py:155
 msgid "ERROR: problem set is empty"
 msgstr ""
 
-#: perprof/tikz.py:38
+#: perprof/prof.py:177
+msgid "ERROR:"
+msgstr ""
+
+#: perprof/prof.py:178
+msgid " has no solved problems. Verify the 'success' flag."
+msgstr ""
+
+#: perprof/tikz.py:48
 msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite."

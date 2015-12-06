@@ -54,7 +54,7 @@ def _parse_yaml(options, yaml_header):
     metadata = yaml.load(yaml_header)
     for opt in metadata:
         if not opt in options:
-            raise ValueError(_("'" + opt + "'" + " is not a valid option for YAML."))
+            raise ValueError("'" + opt + "'" + _(" is not a valid option for YAML."))
         else:
             options[opt] = metadata[opt]
 
@@ -113,12 +113,12 @@ def parse_file(filename, parser_options):
                     continue
                 if pname in data:
                     raise ValueError(_error_message(filename, line_number,
-                        _('Problem {} is duplicated.'.format(pname))))
+                        _('Duplicated problem: ') + pname + "."))
                 try:
                     time = float(ldata[col["time"]])
                 except:
                     raise ValueError(_error_message(filename, line_number,
-                        _('Problem {} has no time/cost.'.format(pname))))
+                        _('Problem has no time/cost: ') + pname + "."))
                 if time < options['mintime']:
                     time = options['mintime']
                 if time >= options['maxtime']:
@@ -163,7 +163,7 @@ def parse_file(filename, parser_options):
                             _('The second element in this lime must be {} or d.').format(
                                 ', '.join(options['success']))))
                 else:
-                    raise KeyError(_("The parser option 'compare' should be"
+                    raise KeyError(_("The parser option 'compare' should be "
                                     "'exitflag' or 'optimalvalues'"))
 
     if not data:

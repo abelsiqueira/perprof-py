@@ -44,6 +44,7 @@ class Pdata(object):
         self.output_format = profile_options['output_format']
         self.pgfplot_version = profile_options['pgfplot_version']
         self.tau = profile_options['tau']
+        self.title = profile_options['title']
         self.already_scaled = False
 
     def __repr__(self):
@@ -173,8 +174,8 @@ class Pdata(object):
                         aux += 1
                 self.ppsbt[solver].append(aux / self.number_problems)
             if self.ppsbt[solver][-1] == 0:
-                raise ValueError(_("ERROR: solver " + solver +
-                    " has no solved problems. Verify the 'success' flag."))
+                raise ValueError(_("ERROR:") + solver +
+                    _(" has no solved problems. Verify the 'success' flag."))
 
     def plot(self):
         """
