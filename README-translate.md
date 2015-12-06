@@ -39,7 +39,7 @@ translate you need to update the file `perprof/locale/perprof.pot` and for that 
 could use
 
     $ pygettext.py -p perprof/locale/ -o perprof.pot \
-    -k axis_lang perprof/*.py
+    -k plot_lang perprof/*.py
 
 To update the translation
 
