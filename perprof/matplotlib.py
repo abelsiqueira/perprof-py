@@ -31,10 +31,10 @@ class Profiler(prof.Pdata):
                     profiler_options['output_format'])
         self.output_format = profiler_options['output_format']
 
-        # Language for the axis label
+        # Language for the plot
         translation = gettext.translation('perprof',
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
-        self.axis_lang = translation.gettext
+        self.plot_lang = translation.gettext
 
         prof.Pdata.__init__(self, parser_options, profiler_options)
 
@@ -106,14 +106,10 @@ class Profiler(prof.Pdata):
         except (AttributeError, TypeError):
             maxt = max(self.times)
         plt.gca().set_xlim(1, maxt)
-        plt.gca().set_xlabel(self.axis_lang('Performance Ratio'))
+        plt.gca().set_xlabel(self.plot_lang('Performance Ratio'))
         plt.gca().set_ylim(0, 1)
-        plt.gca().set_ylabel(self.axis_lang('Problems solved'))
-        if self.title is None:
-            title = self.axis_lang('Performance Profile')
-        else:
-            title = self.title
-        plt.gca().set_title(title)
+        plt.gca().set_ylabel(self.plot_lang('Problems solved'))
+        plt.gca().set_title(self.plot_lang(self.title))
 
         # Legend
         plt.gca().legend(loc=4)

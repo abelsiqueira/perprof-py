@@ -156,7 +156,7 @@ def set_arguments(args):
             help=_('Set pgfplots backwards compatibility mode to given version'))
 
     parser.add_argument('--lang', '-l', choices=['en', 'pt_BR'], default='en',
-            help=_('Set language for axis label'))
+            help=_('Set language for plot'))
     parser.add_argument('--free-format', action='store_true',
             help=_('When parsing file handle all non `c` character as `d`'))
     parser.add_argument('--pdf-verbose', action='store_true',
@@ -188,7 +188,8 @@ def set_arguments(args):
     parser.add_argument('--infeasibility-tolerance', type=float, default=1e-4,
             help=_('Tolerance for the primal and dual infeasibilities'))
     parser.add_argument('--title', type=str,
-            help=_('Sets the performance profile title'))
+            default=_("Performance Profile"),
+            help=_('Set the title to be show on top of the performance profile'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

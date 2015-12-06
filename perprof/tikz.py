@@ -30,10 +30,10 @@ class Profiler(prof.Pdata):
         self.standalone = profiler_options['standalone']
         self.output_format = profiler_options['output_format']
 
-        # Language for the axis label
+        # Language for the plot
         translation = gettext.translation('perprof',
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
-        self.axis_lang = translation.gettext
+        self.plot_lang = translation.gettext
 
         prof.Pdata.__init__(self, parser_options, profiler_options)
 
@@ -104,10 +104,6 @@ class Profiler(prof.Pdata):
                             self.background[0],
                             self.background[1],
                             self.background[2]))
-        if self.title is None:
-            title = self.axis_lang('Performance Profile')
-        else:
-            title = self.title
         str2output.append('    xmin=1, xmax={:.2f},\n' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
@@ -117,9 +113,9 @@ class Profiler(prof.Pdata):
         '    legend pos= south east,\n' \
         '    width=\\textwidth\n' \
         '    ]'.format(maxt,
-                xlabel=self.axis_lang('Performance Ratio'),
-                ylabel=self.axis_lang('Problems solved'),
-                title=title))
+                xlabel=self.plot_lang('Performance Ratio'),
+                ylabel=self.plot_lang('Problems solved'),
+                title=self.plot_lang(self.title)))
 
         for solver in self.solvers:
             str2output.append('  \\addplot+[mark=none, thick] coordinates {')

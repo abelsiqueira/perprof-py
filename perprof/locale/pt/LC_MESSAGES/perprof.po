@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-11-23 17:36-0200\n"
+"POT-Creation-Date: 2015-12-06 08:18+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,11 @@ msgstr ""
 "ERROR: Arquivo {} existe.\n"
 "Utilize `-f` para sobrescrever."
 
-#: perprof/bokeh.py:83 perprof/matplotlib.py:113 perprof/tikz.py:108
-msgid "Performance Profile"
-msgstr "Perfil de Desempenho"
-
-#: perprof/bokeh.py:87 perprof/matplotlib.py:109 perprof/tikz.py:120
+#: perprof/bokeh.py:83 perprof/matplotlib.py:109 perprof/tikz.py:116
 msgid "Performance Ratio"
 msgstr "Razão de Desempenho"
 
-#: perprof/bokeh.py:88 perprof/matplotlib.py:111 perprof/tikz.py:121
+#: perprof/bokeh.py:84 perprof/matplotlib.py:111 perprof/tikz.py:117
 msgid "Problems solved"
 msgstr "Problemas resolvidos"
 
@@ -44,9 +40,8 @@ msgid "RGB for page background must have 3 integers"
 msgstr "RGB para a cor da página deve ser 3 inteiros"
 
 #: perprof/main.py:87
-#, fuzzy
 msgid "Output option {} not supported by bokeh"
-msgstr "Opção de saída não suportada pelo TikZ"
+msgstr "Opção de saída {} não suportada pelo bokeh"
 
 #: perprof/main.py:90
 msgid "Output option {} not supported by matplotlib"
@@ -75,9 +70,8 @@ msgid "Backend options"
 msgstr "Opções de backend"
 
 #: perprof/main.py:123
-#, fuzzy
 msgid "Use bokeh as backend for the plot. Default output: HTML"
-msgstr "Utiliza matplotlib como backend para o gráfico. Padrão de saída: PNG"
+msgstr "Utiliza bokeh como backend para o gráfico. Padrão de saída: HTML"
 
 #: perprof/main.py:126
 msgid "Use matplotlib as backend for the plot. Default output: PNG"
@@ -97,9 +91,8 @@ msgid "Output formats"
 msgstr "Formatos de saída"
 
 #: perprof/main.py:137
-#, fuzzy
 msgid "The output file will be a HTML file"
-msgstr "O arquivo de saída será um PS"
+msgstr "O arquivo de saída será um HTML"
 
 #: perprof/main.py:139
 msgid "The output file will be a EPS file"
@@ -114,12 +107,10 @@ msgid "The output file will be a PNG file"
 msgstr "O arquivo de saída será um PNG"
 
 #: perprof/main.py:145
-#, fuzzy
 msgid "The output file will be a PS file"
 msgstr "O arquivo de saída será um PS"
 
 #: perprof/main.py:147
-#, fuzzy
 msgid "The output file will be a SVG file"
 msgstr "O arquivo de saída será um SVG"
 
@@ -128,7 +119,6 @@ msgid "The output file will be a (La)TeX file"
 msgstr "O arquivo de saída será um código (La)TeX"
 
 #: perprof/main.py:151
-#, fuzzy
 msgid "TikZ options"
 msgstr "Opções do TikZ"
 
@@ -143,8 +133,8 @@ msgid "Set pgfplots backwards compatibility mode to given version"
 msgstr "Configurar versão de compatibilidade do pgfplots"
 
 #: perprof/main.py:159
-msgid "Set language for axis label"
-msgstr "Configurar língua dos título dos eixos"
+msgid "Set language for plot"
+msgstr "Configurar língua utilizada no gráfico"
 
 #: perprof/main.py:161
 msgid "When parsing file handle all non `c` character as `d`"
@@ -190,7 +180,7 @@ msgid ""
 "Sets a maximum time for a solved problem. Any problem with a time greater "
 "than this will be considered failed."
 msgstr ""
-"Configurar um tempo máximo de execução. Qualquer problema que utilizarmais "
+"Configurar um tempo máximo de execução. Qualquer problema que utilizar mais "
 "que esse tempo será considerado como falha."
 
 #: perprof/main.py:181
@@ -218,50 +208,54 @@ msgid "Tolerance for the primal and dual infeasibilities"
 msgstr "Tolerância para as factibilidades primal e dual."
 
 #: perprof/main.py:191
-msgid "Sets the performance profile title"
-msgstr ""
+msgid "Performance Profile"
+msgstr "Perfil de Desempenho"
 
-#: perprof/main.py:194
+#: perprof/main.py:192
+msgid "Set the title to be show on top of the performance profile"
+msgstr "Configura o título a ser mostrado no topo do perfil de desempenho"
+
+#: perprof/main.py:195
 msgid "Enable cache."
 msgstr "Habilitar cache"
 
-#: perprof/main.py:196
+#: perprof/main.py:197
 msgid "Name of a file with a subset of problems to compare"
 msgstr "Nome do arquivo com subconjunto de problemas a serem comparados"
 
-#: perprof/main.py:198
+#: perprof/main.py:199
 msgid "Limit the x-axis based this value"
 msgstr "Limite do eixo x"
 
-#: perprof/main.py:200
+#: perprof/main.py:201
 msgid "Force overwrite the output file"
 msgstr "Forçar sobre escrever o arquivo de saída"
 
-#: perprof/main.py:202
+#: perprof/main.py:203
 msgid "Name of the file to use as output (the correct extension will be add)"
 msgstr "Nome do arquivo de saída (a extensão correta será adicionada)"
 
-#: perprof/main.py:206
+#: perprof/main.py:207
 msgid "Use examples files as input"
 msgstr "Utiliza arquivos de exemplos como entrada"
 
-#: perprof/main.py:208
+#: perprof/main.py:209
 msgid ""
 "The name of the files to be used for the performance profiling (for demo use "
 "`--demo`)"
 msgstr ""
 "Nome dos arquivos a serem utilizados no perfil de desempenho (para "
-"demonstranstração utilize `--demo`)"
+"demonstração utilize `--demo`)"
 
-#: perprof/main.py:216
+#: perprof/main.py:217
 msgid "Using demo mode. Ignoring input files."
 msgstr "Utilizando mode de demonstração. Ignorando arquivos de entrada."
 
-#: perprof/main.py:223
+#: perprof/main.py:224
 msgid "You must provide at least two input files."
 msgstr "Você deve informar pelo menos dois arquivos de entrada."
 
-#: perprof/main.py:249
+#: perprof/main.py:250
 msgid ""
 "ERROR: When using PDF output, you need to provide the name of the output "
 "file."

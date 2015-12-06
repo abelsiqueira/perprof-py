@@ -26,7 +26,7 @@ Now you translate the strings in the file
 Testing
 -------
 
-To test add `LC_MESSAGES=xx_yy` before the normal call of `perprof`.
+To test add `LANG=xx_yy` before the normal call of `perprof`.
 
 **Note**: if `perprof/locale/xx_yy/LC_MESSAGES/perprof.mo` don't exist it will
 raise a error.
@@ -39,7 +39,7 @@ translate you need to update the file `perprof/locale/perprof.pot` and for that 
 could use
 
     $ pygettext.py -p perprof/locale/ -o perprof.pot \
-    -k axis_lang perprof/*.py
+    -k plot_lang perprof/*.py
 
 To update the translation
 
