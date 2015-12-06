@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-12-05 09:34+BRST\n"
+"POT-Creation-Date: 2015-12-06 08:09+BRST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,14 +22,6 @@ msgid ""
 msgstr ""
 "ERROR: Arquivo {} existe.\n"
 "Utilize `-f` para sobrescrever."
-
-#: perprof/bokeh.py:83 perprof/matplotlib.py:109 perprof/tikz.py:116
-msgid "Performance Ratio"
-msgstr "Razão de Desempenho"
-
-#: perprof/bokeh.py:84 perprof/matplotlib.py:111 perprof/tikz.py:117
-msgid "Problems solved"
-msgstr "Problemas resolvidos"
 
 #: perprof/main.py:54
 msgid "RGB for background must have 3 integers"
@@ -133,8 +125,8 @@ msgid "Set pgfplots backwards compatibility mode to given version"
 msgstr "Configurar versão de compatibilidade do pgfplots"
 
 #: perprof/main.py:159
-msgid "Set language for axis label"
-msgstr "Configurar língua dos título dos eixos"
+msgid "Set language for plot"
+msgstr "Configurar língua utilizada no gráfico"
 
 #: perprof/main.py:161
 msgid "When parsing file handle all non `c` character as `d`"
@@ -213,7 +205,7 @@ msgstr "Perfil de Desempenho"
 
 #: perprof/main.py:192
 msgid "Set the title to be show on top of the performance profile"
-msgstr ""
+msgstr "Configura o título a ser mostrado no topo do perfil de desempenho"
 
 #: perprof/main.py:195
 msgid "Enable cache."
