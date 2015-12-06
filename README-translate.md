@@ -26,7 +26,7 @@ Now you translate the strings in the file
 Testing
 -------
 
-To test add `LC_MESSAGES=xx_yy` before the normal call of `perprof`.
+To test add `LANG=xx_yy` before the normal call of `perprof`.
 
 **Note**: if `perprof/locale/xx_yy/LC_MESSAGES/perprof.mo` don't exist it will
 raise a error.
