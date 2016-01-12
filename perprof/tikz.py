@@ -39,7 +39,7 @@ class Profiler(prof.Pdata):
 
     def plot(self):
         """
-        Create the performance profile using matplotlib.
+        Create the performance profile using TikZ/PgfPlots.
         """
         if not self.force:
             try:
@@ -59,6 +59,13 @@ class Profiler(prof.Pdata):
             self.ppsbt
         except AttributeError:
             self.set_percent_problems_solved_by_time()
+
+        if self.black_and_white and len(self.solvers) > 13:
+            raise ValueError(_("ERROR: Maximum numbers of solvers in black" \
+                " and white plot is 13."))
+        if not self.black_and_white and len(self.solvers) > 30:
+            raise ValueError(_("ERROR: Maximum numbers of solvers in color" \
+                " plot is 30."))
 
         maxt = max(self.times)
         try:
@@ -97,36 +104,75 @@ class Profiler(prof.Pdata):
         else:
             str2output.append('  \\begin{axis}[const plot,')
         if self.black_and_white:
-            str2output.append('cycle list name=linestyles*,')
+            lines = ["dashed", "dotted", "dashdotted", "dashdotdotted"]
+            types = ["", "loosely ", "densely "]
+            str2output.append('  cycle list={')
+            aux = ["solid"]
+            for k in range(0,len(self.solvers)):
+                i = k % len(lines)
+                j = k // len(lines)
+                aux.append('  {{{}{}}}'.format(types[j], lines[i]))
+            str2output.append(',\n'.join(aux) + '},')
+        else:
+            colors = ["blue", "red", "black", "brown", "green!80!black",
+                    "magenta!80!black"]
+            lines = ["solid", "dashed", "dotted", "dashdotted", "dashdotdotted"]
+            str2output.append('  cycle list={')
+            aux = []
+            for k in range(0,len(self.solvers)):
+                i = k % len(colors)
+                j = k // len(colors)
+                aux.append('  {{{},{}}}'.format(colors[i], lines[j]))
+            str2output.append(',\n'.join(aux) + '},')
         if self.background:
             str2output.append("axis background/.style=" \
                     "{{fill={{rgb,255:red,{0};green,{1};blue,{2}}}}},".format(
                             self.background[0],
                             self.background[1],
                             self.background[2]))
+        if len(self.solvers) > 5:
+            legend_pos = 'outer north east'
+        else:
+            legend_pos = 'south east'
         str2output.append('    xmin=1, xmax={:.2f},\n' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
         '    title={{{title}}},\n' \
-        '    legend pos= south east,\n' \
+        '    legend pos={{{legend_pos}}},\n' \
         '    width=\\textwidth\n' \
         '    ]'.format(maxt,
                 xlabel=self.plot_lang('Performance Ratio'),
                 ylabel=self.plot_lang('Problems solved'),
+                legend_pos=legend_pos,
                 title=self.plot_lang(self.title)))
 
         for solver in self.solvers:
+            this_ppsbt = self.ppsbt[solver]
             str2output.append('  \\addplot+[mark=none, thick] coordinates {')
-            for i in range(len(self.times)):
+            str2output.append('    ({:.4f},{:.4f})'.format(self.times[0],
+                this_ppsbt[0]))
+            last_t = round(self.times[0], 4)
+            last_p = round(self.ppsbt[solver][0], 4)
+            for i in range(1,len(self.times)-1):
+                dx = round(self.times[i], 4) - last_t
+                dx2 = round(self.times[i+1], 4) - last_t
+                dy = round(this_ppsbt[i], 4) - last_p
+                dy2 = round(this_ppsbt[i+1], 4) - last_p
+                if dx*dy2 == dy*dx2:
+                    continue
                 if self.times[i] <= self.tau:
-                    time = self.times[i]
-                    ppsbt = self.ppsbt[solver][i]
-                    str2output.append('    ({:.4f},{:.4f})'.format(time,
-                        ppsbt))
+                    time = round(self.times[i], 4)
+                    ppsbt = round(self.ppsbt[solver][i], 4)
+                    str2output.append('    ({:.4f},{:.4f})'.format(time, ppsbt))
+                    last_t = time
+                    last_p = ppsbt
                 else:
                     break
+            j = len(self.times)-1
+            str2output.append('    ({:.4f},{:.4f})'.format(self.times[j],
+                this_ppsbt[j]))
             str2output.append('  };')
             str2output.append('  \\addlegendentry{{{0}}}'.format(solver))
         if self.semilog:
