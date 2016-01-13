@@ -28,24 +28,26 @@ class Pdata(object):
     """
     Store data for performance profile.
     """
-    def __init__(self, parser_options, profile_options):
+    def __init__(self, parser_options, profiler_options):
         """
         :param dict parser_options: parser configuration
-        :param dict profile_options: profiler configuration
+        :param dict profiler_options: profiler configuration
         """
         self.data = load_data(parser_options)
-        self.cache = profile_options['cache']
-        self.force = profile_options['force']
-        self.semilog = profile_options['semilog']
-        self.black_and_white = profile_options['black_and_white']
-        self.background = profile_options['background']
-        self.page_background = profile_options['page_background']
-        self.pdf_verbose = profile_options['pdf_verbose']
-        self.output_format = profile_options['output_format']
-        self.pgfplot_version = profile_options['pgfplot_version']
-        self.tau = profile_options['tau']
-        self.title = profile_options['title']
+        self.cache = profiler_options['cache']
+        self.force = profiler_options['force']
+        self.semilog = profiler_options['semilog']
+        self.black_and_white = profiler_options['black_and_white']
+        self.background = profiler_options['background']
+        self.page_background = profiler_options['page_background']
+        self.pdf_verbose = profiler_options['pdf_verbose']
+        self.output_format = profiler_options['output_format']
+        self.pgfplot_version = profiler_options['pgfplot_version']
+        self.tau = profiler_options['tau']
+        self.title = profiler_options['title']
         self.already_scaled = False
+
+        self.output = profiler_options['output']
 
     def __repr__(self):
         try:
@@ -182,3 +184,35 @@ class Pdata(object):
         This should be implemented by a child of this class.
         """
         raise NotImplementedError()
+
+    def print_rob_eff_table(self):
+        if not self.already_scaled:
+            self.scale()
+
+        try:
+            self.ppsbt
+        except AttributeError:
+            self.set_percent_problems_solved_by_time()
+
+        import sys
+        if self.output is None:
+            output = sys.stdout
+            print("Solvers    | Robust  | Effic")
+            for solver in self.solvers:
+                print('{:10s} | {:6.3f}% | {:6.3f}%'.format(solver,
+                    round(100*self.ppsbt[solver][-1],3),
+                    round(100*self.ppsbt[solver][0],3)))
+        else:
+            output = '{}.tex'.format(self.output)
+            output = os.path.abspath(output)
+
+            str2output = ['\\begin{tabular}{|c|r|} \\hline',
+                    'Solver & Robustness & Efficiency \\\\ \\hline']
+            for solver in self.solvers:
+                str2output.append('{} & {} % & {} % \\\\ \\hline'.format(solver,
+                    round(100*self.ppsbt[solver][-1],3),
+                    round(100*self.ppsbt[solver][0],3)))
+            str2output.append('\\end{tabular}')
+
+            with open(output, 'w') as file_:
+                file_.write('\n'.join(str2output))
