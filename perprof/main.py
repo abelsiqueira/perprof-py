@@ -97,7 +97,7 @@ def process_arguments(args):
                 _("--raw does not support output except standard output"))
     elif args.table and profiler_options['output_format']:
         raise NotImplementedError(
-                _("--table only write to .txt or to standard output"))
+                _("--table only write to .tex or to standard output"))
 
     if args.subset:
         with open(args.subset, 'r') as subset_file:
