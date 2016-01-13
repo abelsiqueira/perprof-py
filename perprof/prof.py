@@ -206,10 +206,10 @@ class Pdata(object):
             output = '{}.tex'.format(self.output)
             output = os.path.abspath(output)
 
-            str2output = ['\\begin{tabular}{|c|r|} \\hline',
+            str2output = ['\\begin{tabular}{|c|r|r|} \\hline',
                     'Solver & Robustness & Efficiency \\\\ \\hline']
             for solver in self.solvers:
-                str2output.append('{} & {} % & {} % \\\\ \\hline'.format(solver,
+                str2output.append('{} & {} \% & {} \% \\\\ \\hline'.format(solver,
                     round(100*self.ppsbt[solver][-1],3),
                     round(100*self.ppsbt[solver][0],3)))
             str2output.append('\\end{tabular}')
