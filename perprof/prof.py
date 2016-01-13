@@ -47,7 +47,7 @@ class Pdata(object):
         self.title = profiler_options['title']
         self.already_scaled = False
 
-        self.output = profiler_options['output']
+        self.tablename = profiler_options['output']
 
     def __repr__(self):
         try:
@@ -195,7 +195,7 @@ class Pdata(object):
             self.set_percent_problems_solved_by_time()
 
         import sys
-        if self.output is None:
+        if self.tablename is None:
             output = sys.stdout
             print("Solvers    | Robust  | Effic")
             for solver in self.solvers:
@@ -203,7 +203,7 @@ class Pdata(object):
                     round(100*self.ppsbt[solver][-1],3),
                     round(100*self.ppsbt[solver][0],3)))
         else:
-            output = '{}.tex'.format(self.output)
+            output = '{}.tex'.format(self.tablename)
             output = os.path.abspath(output)
 
             str2output = ['\\begin{tabular}{|c|r|r|} \\hline',
