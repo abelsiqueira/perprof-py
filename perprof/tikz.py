@@ -138,13 +138,14 @@ class Profiler(prof.Pdata):
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
-        '    xlabel={{{xlabel}}}, ylabel={{{ylabel}}},\n' \
+        '    xlabel={{{xlabel}}},\n' \
+        '    ylabel={{{ylabel}}},\n' \
         '    title={{{title}}},\n' \
         '    legend pos={{{legend_pos}}},\n' \
         '    width=\\textwidth\n' \
         '    ]'.format(maxt,
-                xlabel=self.plot_lang('Performance Ratio'),
-                ylabel=self.plot_lang('Problems solved'),
+                xlabel=self.plot_lang(self.xlabel),
+                ylabel=self.plot_lang(self.ylabel),
                 legend_pos=legend_pos,
                 title=self.plot_lang(self.title)))
 

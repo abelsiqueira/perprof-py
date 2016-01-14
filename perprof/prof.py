@@ -45,6 +45,8 @@ class Pdata(object):
         self.pgfplot_version = profiler_options['pgfplot_version']
         self.tau = profiler_options['tau']
         self.title = profiler_options['title']
+        self.xlabel = profiler_options['xlabel']
+        self.ylabel = profiler_options['ylabel']
         self.already_scaled = False
 
         self.tablename = profiler_options['output']
