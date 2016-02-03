@@ -95,6 +95,9 @@ def process_arguments(args):
     elif args.raw and profiler_options['output_format']:
         raise NotImplementedError(
                 _("--raw does not support output except standard output"))
+    elif args.table and profiler_options['output_format']:
+        raise NotImplementedError(
+                _("--table only write to .tex or to standard output"))
 
     if args.subset:
         with open(args.subset, 'r') as subset_file:
@@ -130,6 +133,8 @@ def set_arguments(args):
             'Default output: PDF'))
     backend.add_argument('--raw', action='store_true',
             help=_('Print raw data. Default output: standard output'))
+    backend.add_argument('--table', action='store_true',
+            help=_('Print table of robustness and efficiency'))
 
     output_format_args = parser.add_argument_group(_("Output formats"))
     output_format = output_format_args.add_mutually_exclusive_group()
@@ -261,6 +266,11 @@ def main():
             print('raw')
 
             print(prof.Pdata(parser_options, profiler_options))
+        elif args.table:
+            # table
+            from . import prof
+            data = prof.Pdata(parser_options, profiler_options)
+            data.print_rob_eff_table()
     except ValueError as error:
         print(error)
     except NotImplementedError as error:
