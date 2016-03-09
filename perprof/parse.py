@@ -143,6 +143,25 @@ def parse_file(filename, parser_options):
                     except:
                         raise ValueError(_error_message(filename,
                             line_number, _("Column for fval is out of bounds")))
+                elif parser_options['compare'] == 'f_and_h':
+                    try:
+                        f = float(ldata[col["fval"]])
+                    except:
+                        raise ValueError(_error_message(filename,
+                            line_number, _("Column for fval is out of bounds")))
+                    try:
+                        if parser_options['unc']:
+                            h = 0.0
+                        else:
+                            h = float(ldata[col["primal"]])
+                    except:
+                        raise ValueError(_error_message(filename,
+                            line_number, _("Column for primal infeasibility is out of bounds")))
+                    if h > parser_options['infeas_tol']:
+                        continue
+                    data[pname] = {
+                            "time": time,
+                            "fval": f }
                 elif parser_options['compare'] == 'exitflag':
                     if time == 0:
                         raise ValueError(_error_message(filename, line_number,
@@ -164,7 +183,7 @@ def parse_file(filename, parser_options):
                                 ', '.join(options['success']))))
                 else:
                     raise KeyError(_("The parser option 'compare' should be "
-                                    "'exitflag' or 'optimalvalues'"))
+                                    "'exitflag', 'f_and_h' or 'optimalvalues'"))
 
     if not data:
         raise ValueError(

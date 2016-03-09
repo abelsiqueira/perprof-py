@@ -136,11 +136,15 @@ class Pdata(object):
 
             min_fval = min([self.data[s][problem]["fval"]
                     for s in self.data.keys()])
+            # If fval was set, then f comparison is to be made
             if min_fval < float('inf'):
-                min_time = min([self.data[s][problem]["time"]
+                L = [self.data[s][problem]["time"]
                     for s in self.data.keys()
                         if self.data[s][problem]["fval"] < min_fval +
-                        abs(min_fval)*1e-3 + 1e-6])
+                        abs(min_fval)*1e-3 + 1e-6]
+                if len(L) == 0:
+                    raise ValueError(_("ERROR: Problem {} has some wrong value".format(problem)))
+                min_time = min(L)
             else:
                 min_time = min([self.data[s][problem]["time"]
                     for s in self.data.keys()])

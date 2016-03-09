@@ -185,7 +185,7 @@ def set_arguments(args):
     parser.add_argument('--mintime', type=float, default=0,
             help=_('Sets a minimum time for a solved problem. Any problem with a '
                     'time smaller than this will have the time set to this.'))
-    parser.add_argument('--compare', choices=['exitflag', 'optimalvalues'],
+    parser.add_argument('--compare', choices=['exitflag', 'f_and_h', 'optimalvalues'],
             default='exitflag', help=_('Choose the type of comparison to be made.'))
     parser.add_argument('--unconstrained', action='store_true',
             help=_('Set the problems to unconstrained, which implies that there '
