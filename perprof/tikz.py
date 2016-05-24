@@ -135,7 +135,7 @@ class Profiler(prof.Pdata):
         else:
             legend_pos = 'south east'
         str2output.append('    xmin=1, xmax={:.2f},\n' \
-        '    ymin=0, ymax=1,\n' \
+        '    ymin=-0.003, ymax=1.003,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}},\n' \
@@ -176,6 +176,7 @@ class Profiler(prof.Pdata):
                 this_ppsbt[j]))
             str2output.append('  };')
             str2output.append('  \\addlegendentry{{{0}}}'.format(solver))
+
         if self.semilog:
             str2output.append('  \\end{semilogxaxis}')
         else:
