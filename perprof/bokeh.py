@@ -80,8 +80,8 @@ class Profiler(prof.Pdata):
             boken_plot_options["x_axis_type"] = "log"
 
         p = plt.figure(title=self.plot_lang(self.title),
-                x_axis_label=self.plot_lang('Performance Ratio'),
-                y_axis_label=self.plot_lang('Problems solved'),
+                x_axis_label=self.plot_lang(self.ylabel),
+                y_axis_label=self.plot_lang(self.xlabel),
                 **boken_plot_options)
 
         for idx, solver in enumerate(self.solvers):

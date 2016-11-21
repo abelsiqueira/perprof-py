@@ -41,7 +41,9 @@ def process_arguments(args):
             'pgfplot_version': args.pgfplotcompat,
             'tau': args.tau,
             'pdf_verbose': args.pdf_verbose,
-            'title': args.title
+            'title': args.title,
+            'xlabel': args.xlabel,
+            'ylabel': args.ylabel
             }
 
     if args.background is None:
@@ -195,6 +197,12 @@ def set_arguments(args):
     parser.add_argument('--title', type=str,
             default=_("Performance Profile"),
             help=_('Set the title to be show on top of the performance profile'))
+    parser.add_argument('--xlabel', type=str,
+            default=_("Performance ratio"),
+            help=_('Set the x label of the performance profile'))
+    parser.add_argument('--ylabel', type=str,
+            default=_("Percentage of problems solved"),
+            help=_('Set the y label of the performance profile'))
 
     parser.add_argument('-c', '--cache', action='store_true',
             help=_('Enable cache.'))

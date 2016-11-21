@@ -106,9 +106,9 @@ class Profiler(prof.Pdata):
         except (AttributeError, TypeError):
             maxt = max(self.times)
         plt.gca().set_xlim(1, maxt)
-        plt.gca().set_xlabel(self.plot_lang('Performance Ratio'))
+        plt.gca().set_xlabel(self.plot_lang(self.xlabel))
         plt.gca().set_ylim(0, 1)
-        plt.gca().set_ylabel(self.plot_lang('Problems solved'))
+        plt.gca().set_ylabel(self.plot_lang(self.ylabel))
         plt.gca().set_title(self.plot_lang(self.title))
 
         # Legend
