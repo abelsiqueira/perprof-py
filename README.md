@@ -4,6 +4,16 @@
 A Python module for performance profiling (as described by [Dolan and
 Moré](http://arxiv.org/abs/cs/0102001)) with TikZ and matplotlib output.
 
+## Reference
+
+When using this software for publications, please cite the paper below, which
+describes this project:
+
+> Siqueira, A. S., Costa da Silva, R. G. and Santos, L.-R., (2016).
+Perprof-py: A Python Package for Performance Profile of Mathematical
+Optimization Software. Journal of Open Research Software. 4(1), p.e12.
+DOI: [http://doi.org/10.5334/jors.81](http://doi.org/10.5334/jors.81).
+
 ## License
 
 GPLv3. See [LICENSE](LICENSE).
