@@ -46,6 +46,9 @@ def process_arguments(args):
             'ylabel': args.ylabel
             }
 
+    if args.no_title:
+        profiler_options['title'] = None
+
     if args.background is None:
         profiler_options['background'] = None
     else:
@@ -197,6 +200,8 @@ def set_arguments(args):
     parser.add_argument('--title', type=str,
             default=_("Performance Profile"),
             help=_('Set the title to be show on top of the performance profile'))
+    parser.add_argument('--no-title', action='store_true',
+            help=_('Removes title'))
     parser.add_argument('--xlabel', type=str,
             default=_("Performance ratio"),
             help=_('Set the x label of the performance profile'))

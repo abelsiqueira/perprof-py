@@ -109,7 +109,8 @@ class Profiler(prof.Pdata):
         plt.gca().set_xlabel(self.plot_lang(self.xlabel))
         plt.gca().set_ylim(0, 1)
         plt.gca().set_ylabel(self.plot_lang(self.ylabel))
-        plt.gca().set_title(self.plot_lang(self.title))
+        if self.title is not None:
+            plt.gca().set_title(self.plot_lang(self.title))
 
         # Legend
         plt.gca().legend(loc=4)

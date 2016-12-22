@@ -134,20 +134,25 @@ class Profiler(prof.Pdata):
             legend_pos = 'outer north east'
         else:
             legend_pos = 'south east'
+        if self.title is None:
+            title = ''
+        else:
+            title = ',\n    title={{{}}},\n'.format(self.plot_lang(self.title))
+
         str2output.append('    xmin=1, xmax={:.2f},\n' \
         '    ymin=0, ymax=1,\n' \
         '    ymajorgrids,\n' \
         '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
         '    xlabel={{{xlabel}}},\n' \
         '    ylabel={{{ylabel}}},\n' \
-        '    title={{{title}}},\n' \
+        '{title}' \
         '    legend pos={{{legend_pos}}},\n' \
         '    width=\\textwidth\n' \
         '    ]'.format(maxt,
                 xlabel=self.plot_lang(self.xlabel),
                 ylabel=self.plot_lang(self.ylabel),
-                legend_pos=legend_pos,
-                title=self.plot_lang(self.title)))
+                title=title,
+                legend_pos=legend_pos))
 
         for solver in self.solvers:
             this_ppsbt = self.ppsbt[solver]
