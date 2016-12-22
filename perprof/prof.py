@@ -160,6 +160,8 @@ class Pdata(object):
 
         self.times = [x for x in times_set]
         self.times.sort()
+        maxt = self.times[-1]
+        self.times.append(maxt * 1.05)
 
         self.already_scaled = True
 

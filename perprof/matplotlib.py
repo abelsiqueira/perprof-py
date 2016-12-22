@@ -94,7 +94,7 @@ class Profiler(prof.Pdata):
 
         # Generate the plot for each solver
         for idx, solver in enumerate(self.solvers):
-            plot_.plot(self.times, self.ppsbt[solver], linestyles[idx], label=solver)
+            plot_.step(self.times, self.ppsbt[solver], linestyles[idx], label=solver)
 
         # Change the xscale to log scale
         if self.semilog:
@@ -107,7 +107,7 @@ class Profiler(prof.Pdata):
             maxt = max(self.times)
         plt.gca().set_xlim(1, maxt)
         plt.gca().set_xlabel(self.plot_lang(self.xlabel))
-        plt.gca().set_ylim(0, 1)
+        plt.gca().set_ylim(-0.002, 1.006)
         plt.gca().set_ylabel(self.plot_lang(self.ylabel))
         if self.title is not None:
             plt.gca().set_title(self.plot_lang(self.title))
