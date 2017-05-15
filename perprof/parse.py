@@ -87,8 +87,10 @@ def parse_file(filename, parser_options):
         for line in file_:
             line_number += 1
             ldata = line.split()
+            if len(ldata) == 0:
+                continue # Empty line
             # This is for backward compatibility
-            if ldata[0] == '#Name' and len(ldata) >= 2:
+            elif ldata[0] == '#Name' and len(ldata) >= 2:
                 options['algname'] = _str_sanitize(ldata[1])
             # Handle YAML
             elif ldata[0] == '---':
