@@ -54,7 +54,7 @@ class Profiler(prof.Pdata):
             self.scale()
 
         try:
-            self.ppsbt
+            self.prof
         except AttributeError:
             self.set_percent_problems_solved_by_time()
 
@@ -94,7 +94,7 @@ class Profiler(prof.Pdata):
 
         # Generate the plot for each solver
         for idx, solver in enumerate(self.solvers):
-            plot_.step(self.times, self.ppsbt[solver], linestyles[idx], label=solver, where='post')
+            plot_.step(self.profx, self.prof[solver], linestyles[idx], label=solver, where='post')
 
         # Change the xscale to log scale
         if self.semilog:
@@ -102,9 +102,9 @@ class Profiler(prof.Pdata):
 
         # Axis
         try:
-            maxt = min(max(self.times), self.tau)
+            maxt = min(max(self.profx), self.tau)
         except (AttributeError, TypeError):
-            maxt = max(self.times)
+            maxt = max(self.profx)
         plt.gca().set_xlim(1, maxt)
         plt.gca().set_xlabel(self.plot_lang(self.xlabel))
         plt.gca().set_ylim(-0.002, 1.006)

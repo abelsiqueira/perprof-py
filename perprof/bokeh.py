@@ -61,7 +61,7 @@ class Profiler(prof.Pdata):
             self.scale()
 
         try:
-            self.ppsbt
+            self.prof
         except AttributeError:
             self.set_percent_problems_solved_by_time()
 
@@ -69,9 +69,9 @@ class Profiler(prof.Pdata):
 
         # Axis
         try:
-            maxt = min(max(self.times), self.tau)
+            maxt = min(max(self.profx), self.tau)
         except (AttributeError, TypeError):
-            maxt = max(self.times)
+            maxt = max(self.profx)
 
         boken_plot_options = {"x_range":[1,maxt], "y_range":[0,1]}
 
@@ -85,8 +85,8 @@ class Profiler(prof.Pdata):
                 **boken_plot_options)
 
         for idx, solver in enumerate(self.solvers):
-            p.line(self.times,
-                    self.ppsbt[solver],
+            p.line(self.profx,
+                    self.prof[solver],
                     legend=solver,
                     line_width=2,
                     line_color=BOKEH_COLOR_LIST[idx % len(BOKEH_COLOR_LIST)])

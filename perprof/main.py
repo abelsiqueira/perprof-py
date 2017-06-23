@@ -40,6 +40,7 @@ def process_arguments(args):
             'output': args.output,
             'pgfplot_version': args.pgfplotcompat,
             'tau': args.tau,
+            'type': args.type,
             'pdf_verbose': args.pdf_verbose,
             'title': args.title,
             'xlabel': args.xlabel,
@@ -124,6 +125,19 @@ def set_arguments(args):
             description=_('A python module for performance profiling '
             '(as described by Dolan and Moré).'),
             fromfile_prefix_chars='@')
+
+    proftype_args = parser.add_argument_group(_("Profile types"))
+    proftype = proftype_args.add_mutually_exclusive_group(required=False)
+    proftype.add_argument('--performance-profile', dest='type',
+            action='store_const', const='perf',
+            help=_('Performance profile (classic). Default'))
+    proftype.add_argument('--data-profile', dest='type',
+            action='store_const', const='data',
+            help=_('Data profile.'))
+    proftype.add_argument('--extended-profile', dest='type',
+            action='store_const', const='extended',
+            help=_('Extended performance profile. Not implemented'))
+    proftype.set_defaults(type='perf')
 
     backend_args = parser.add_argument_group(_("Backend options"))
     backend = backend_args.add_mutually_exclusive_group(required=True)
@@ -226,6 +240,8 @@ def set_arguments(args):
     parser.add_argument('file_name', nargs='*',
             help=_('The name of the files to be used for '
                     'the performance profiling (for demo use `--demo`)'))
+    parser.add_argument('--problem-sizes', default='',
+            help=_('The sizes of each problem. Required only for data profile'))
 
     parsed_args = parser.parse_args(args)
 
@@ -234,12 +250,25 @@ def set_arguments(args):
         if parsed_args.file_name:
             warnings.warn(_("Using demo mode. Ignoring input files."),
                     UserWarning)
-        parsed_args.file_name = [
-                os.path.join(THIS_DIR, 'examples/alpha.table'),
-                os.path.join(THIS_DIR, 'examples/beta.table'),
-                os.path.join(THIS_DIR, 'examples/gamma.table')]
+        if parsed_args.type == 'perf':
+            parsed_args.file_name = [
+                    os.path.join(THIS_DIR, 'examples/alpha.table'),
+                    os.path.join(THIS_DIR, 'examples/beta.table'),
+                    os.path.join(THIS_DIR, 'examples/gamma.table')]
+        elif parsed_args.type == 'data':
+            parsed_args.file_name = [
+                    os.path.join(THIS_DIR, 'examples/df-alpha'),
+                    os.path.join(THIS_DIR, 'examples/df-beta')]
+            parsed_args.problem_sizes = os.path.join(THIS_DIR, 'examples/df.sizes')
+        else:
+            raise ValueError("Type {} not implemented".format(parsed_args.type))
     elif len(parsed_args.file_name) <= 1:
         raise ValueError(_("You must provide at least two input files."))
+    elif parsed_args.type == 'data' and not os.path.isfile(parsed_args.problem_sizes):
+        if parsed_args.problem_sizes == '':
+            raise ValueError("Data profile needs problems sizes. (--problem-sizes FILE)")
+        else:
+            raise ValueError("File {} passed for problem sizes not found.".format(parsed_args.problem_sizes))
 
     return parsed_args
 

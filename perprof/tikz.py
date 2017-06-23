@@ -6,14 +6,14 @@ import sys
 import os.path
 import gettext
 import subprocess
-from . import prof
+from . import perfprof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
         os.path.join(THIS_DIR, 'locale'))
 _ = THIS_TRANSLATION.gettext
 
-class Profiler(prof.Pdata):
+class Profiler(perfprof.PerfProfile):
     """
     The profiler using TikZ.
     """
@@ -35,7 +35,7 @@ class Profiler(prof.Pdata):
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
         self.plot_lang = translation.gettext
 
-        prof.Pdata.__init__(self, parser_options, profiler_options)
+        perfprof.PerfProfile.__init__(self, parser_options, profiler_options)
 
     def plot(self):
         """
@@ -52,13 +52,10 @@ class Profiler(prof.Pdata):
                 # When using stdout
                 pass
 
-        if not self.already_scaled:
-            self.scale()
-
         try:
-            self.ppsbt
+            self.prof
         except AttributeError:
-            self.set_percent_problems_solved_by_time()
+            self.compute_profile()
 
         if self.black_and_white and len(self.solvers) > 13:
             raise ValueError(_("ERROR: Maximum numbers of solvers in black" \
@@ -67,7 +64,7 @@ class Profiler(prof.Pdata):
             raise ValueError(_("ERROR: Maximum numbers of solvers in color" \
                 " plot is 30."))
 
-        maxt = max(self.times)
+        maxt = max(self.profx)
         try:
             maxt = min(maxt, self.tau)
         except (AttributeError, TypeError):
@@ -155,30 +152,30 @@ class Profiler(prof.Pdata):
                 legend_pos=legend_pos))
 
         for solver in self.solvers:
-            this_ppsbt = self.ppsbt[solver]
+            this_prof = self.prof[solver]
             str2output.append('  \\addplot+[mark=none, thick] coordinates {')
-            str2output.append('    ({:.4f},{:.4f})'.format(self.times[0],
-                this_ppsbt[0]))
-            last_t = round(self.times[0], 4)
-            last_p = round(self.ppsbt[solver][0], 4)
-            for i in range(1,len(self.times)-1):
-                dx = round(self.times[i], 4) - last_t
-                dx2 = round(self.times[i+1], 4) - last_t
-                dy = round(this_ppsbt[i], 4) - last_p
-                dy2 = round(this_ppsbt[i+1], 4) - last_p
+            str2output.append('    ({:.4f},{:.4f})'.format(self.profx[0],
+                this_prof[0]))
+            last_t = round(self.profx[0], 4)
+            last_p = round(self.prof[solver][0], 4)
+            for i in range(1,len(self.profx)-1):
+                dx = round(self.profx[i], 4) - last_t
+                dx2 = round(self.profx[i+1], 4) - last_t
+                dy = round(this_prof[i], 4) - last_p
+                dy2 = round(this_prof[i+1], 4) - last_p
                 if dx*dy2 == dy*dx2:
                     continue
-                if self.times[i] <= self.tau:
-                    time = round(self.times[i], 4)
-                    ppsbt = round(self.ppsbt[solver][i], 4)
-                    str2output.append('    ({:.4f},{:.4f})'.format(time, ppsbt))
+                if self.profx[i] <= self.tau:
+                    time = round(self.profx[i], 4)
+                    prof = round(self.prof[solver][i], 4)
+                    str2output.append('    ({:.4f},{:.4f})'.format(time, prof))
                     last_t = time
-                    last_p = ppsbt
+                    last_p = prof
                 else:
                     break
-            j = len(self.times)-1
-            str2output.append('    ({:.4f},{:.4f})'.format(self.times[j],
-                this_ppsbt[j]))
+            j = len(self.profx)-1
+            str2output.append('    ({:.4f},{:.4f})'.format(self.profx[j],
+                this_prof[j]))
             str2output.append('  };')
             str2output.append('  \\addlegendentry{{{0}}}'.format(solver))
 
