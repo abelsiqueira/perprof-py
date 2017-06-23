@@ -6,7 +6,6 @@ import os.path
 import gettext
 import bokeh.models.formatters
 import bokeh.plotting as plt
-from . import perfprof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
@@ -21,78 +20,62 @@ BOKEH_COLOR_LIST = ["blue",
                     "magenta",
                     "yellow"]
 
-class Profiler(perfprof.PerfProfile):
+def plot(x, y, options):
     """
-    The profiler using bokeh
+    Create the profile using matplotlib.
     """
-    def __init__(self, options):
-        """
-        :param dict options: options
-        """
-        if options['output'] is None:
-            self.output = 'performance-profile.{}'.format(
-                    options['output_format'])
-        else:
-            self.output = '{}.{}'.format(options['output'],
-                    options['output_format'])
-        self.output_format = options['output_format']
+    if options['output'] is None:
+        output = 'performance-profile.{}'.format(options['output_format'])
+    else:
+        output = '{}.{}'.format(options['output'], options['output_format'])
 
-        # Language for the plot
-        translation = gettext.translation('perprof',
-                os.path.join(THIS_DIR, 'locale'), [options['lang']])
-        self.plot_lang = translation.gettext
+    # Language for the plot
+    translation = gettext.translation('perprof',
+            os.path.join(THIS_DIR, 'locale'), [options['lang']])
+    plot_lang = translation.gettext
 
-        perfprof.PerfProfile.__init__(self, options)
+    solvers = y.keys()
+    tau = options['tau']
 
-    def plot(self):
-        """
-        Create the performance profile using matplotlib.
-        """
-        if not self.force:
-            try:
-                file_ = open(self.output, 'r')
-                file_.close()
-                raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite').format(self.output))
-            except FileNotFoundError:
-                pass
-
+    if not options['force']:
         try:
-            self.prof
-        except AttributeError:
-            self.compute_profile()
+            file_ = open(output, 'r')
+            file_.close()
+            raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite').format(output))
+        except FileNotFoundError:
+            pass
 
-        plt.output_file(self.output, title=self.plot_lang(self.title))
+    plt.output_file(output, title=plot_lang(options['title']))
 
-        # Axis
-        try:
-            maxt = min(max(self.profx), self.tau)
-        except (AttributeError, TypeError):
-            maxt = max(self.profx)
+    # Axis
+    try:
+        maxt = min(max(x), tau)
+    except (AttributeError, TypeError):
+        maxt = max(x)
 
-        boken_plot_options = {"x_range":[1,maxt], "y_range":[0,1]}
+    boken_plot_options = {"x_range":[1,maxt], "y_range":[0,1]}
 
-        # Change the xscale to log scale
-        if self.semilog:
-            boken_plot_options["x_axis_type"] = "log"
+    # Change the xscale to log scale
+    if options['semilog']:
+        boken_plot_options["x_axis_type"] = "log"
 
-        p = plt.figure(title=self.plot_lang(self.title),
-                x_axis_label=self.plot_lang(self.ylabel),
-                y_axis_label=self.plot_lang(self.xlabel),
-                **boken_plot_options)
+    p = plt.figure(title=plot_lang(options['title']),
+            x_axis_label=plot_lang(options['ylabel']),
+            y_axis_label=plot_lang(options['xlabel']),
+            **boken_plot_options)
 
-        for idx, solver in enumerate(self.solvers):
-            p.line(self.profx,
-                    self.prof[solver],
-                    legend=solver,
-                    line_width=2,
-                    line_color=BOKEH_COLOR_LIST[idx % len(BOKEH_COLOR_LIST)])
+    for idx, solver in enumerate(solvers):
+        p.line(x, y[solver],
+                legend=solver,
+                line_width=2,
+                line_color=BOKEH_COLOR_LIST[idx % len(BOKEH_COLOR_LIST)])
 
-        # Legend
-        p.legend.orientation = "horizontal"
+    # Legend
+    p.legend.orientation = "horizontal"
 
-        # Help lines
-        p.grid.grid_line_color = "black"
-        p.grid.grid_line_alpha = 0.5
+    # Help lines
+    p.grid.grid_line_color = "black"
+    p.grid.grid_line_alpha = 0.5
 
-        # Save the plot
-        plt.save(p)
+    # Save the plot
+    plt.save(p)

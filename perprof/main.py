@@ -256,9 +256,11 @@ def set_arguments(args):
                     os.path.join(THIS_DIR, 'examples/df-beta')]
             parsed_args.problem_sizes = os.path.join(THIS_DIR, 'examples/df.sizes')
         else:
-            raise ValueError("Type {} not implemented".format(parsed_args.type))
+            raise ValueError("Profile type {} not implemented".format(parsed_args.type))
     elif len(parsed_args.file_name) <= 1:
         raise ValueError(_("You must provide at least two input files."))
+    elif not parsed_args.type in ['perf', 'data']:
+        raise ValueError("Profile type {} not implemented".format(parsed_args.type))
     elif parsed_args.type == 'data' and not os.path.isfile(parsed_args.problem_sizes):
         if parsed_args.problem_sizes == '':
             raise ValueError("Data profile needs problems sizes. (--problem-sizes FILE)")
@@ -275,18 +277,23 @@ def main():
 
         options = process_arguments(args)
 
+        if args.type == 'perf':
+            from .import perfprof
+            profile = perfprof.PerfProfile(options)
+        else:
+            raise NotImplementedError(_("Profile type {} not implemented".format(options.type)))
+
+        x, y = profile.get_plot_data()
+
         if args.bokeh:
             # bokeh
             from . import bokeh
 
-            data = bokeh.Profiler(options)
-            data.plot()
-        if args.mp:
+            bokeh.plot(x, y, options)
+        elif args.mp:
             # matplotlib
             from . import matplotlib
-
-            data = matplotlib.Profiler(options)
-            data.plot()
+            matplotlib.plot(x, y, options)
         elif args.tikz:
             if options['output_format'] == 'pdf' and args.output is None:
                 print(_("ERROR: When using PDF output, you need to provide "
@@ -294,20 +301,19 @@ def main():
             else:
                 # tikz
                 from . import tikz
-
-                data = tikz.Profiler(options)
-                data.plot()
+                tikz.plot(x, y, options)
         elif args.raw:
             # raw
-            from . import prof
+            from . import perfprof
             print('raw')
 
-            print(prof.Pdata(options))
+            print(perfprof.PerfProfile(options))
         elif args.table:
+            raise NotImplementedError("Currently broken")
             # table
-            from . import prof
-            data = prof.Pdata(options)
-            data.print_rob_eff_table()
+            #from . import prof
+            #data = prof.Pdata(options)
+            #data.print_rob_eff_table()
     except ValueError as error:
         print(error)
     except NotImplementedError as error:

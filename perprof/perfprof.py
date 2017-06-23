@@ -41,6 +41,38 @@ class PerfProfile(prof.Pdata):
             data_tmp, solver_name = self.parse_file(file_)
             self.data[solver_name] = data_tmp
 
+    def __repr__(self):
+        try:
+            self.solvers
+        except AttributeError:
+            self.get_set_solvers()
+        try:
+            self.problems
+        except AttributeError:
+            self.get_set_problems()
+
+        str2output = ' ' * 18
+
+        for solver in self.solvers:
+            if len(solver) > 16:
+                str2output += '{:>16}  '.format(solver[-16:])
+            else:
+                str2output += '{space}{:>16}  '.format(solver,
+                        space=' ' * (len(solver) - 16))
+        str2output += '\n'
+
+        for problem in self.problems:
+            str2output += '{:>16}  '.format(problem)
+            for solver in self.solvers:
+                try:
+                    str2output += '{space}{:8.4} '.format(
+                            self.data[solver][problem]["time"], space=' ' * 8)
+                except KeyError:
+                    str2output += '{}inf  '.format(13 * ' ')
+            str2output += '\n'
+
+        return str2output[:-2]
+
     def compute_profile(self, frtol=1e-3, fatol=1e-6):
         """
         Compute the performance function

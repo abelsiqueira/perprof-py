@@ -7,114 +7,96 @@ import gettext
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from . import perfprof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
         os.path.join(THIS_DIR, 'locale'))
 _ = THIS_TRANSLATION.gettext
 
-class Profiler(perfprof.PerfProfile):
+def plot(x, y, options):
     """
-    The profiler using matplotlib.
+    Create the profile using matplotlib.
     """
-    def __init__(self, options):
-        """
-        :param dict options: options
-        """
-        if options['output'] is None:
-            self.output = 'performance-profile.{}'.format(
-                    options['output_format'])
-        else:
-            self.output = '{}.{}'.format(options['output'],
-                    options['output_format'])
-        self.output_format = options['output_format']
+    if options['output'] is None:
+        output = 'performance-profile.{}'.format(options['output_format'])
+    else:
+        output = '{}.{}'.format(options['output'], options['output_format'])
 
-        # Language for the plot
-        translation = gettext.translation('perprof',
-                os.path.join(THIS_DIR, 'locale'), [options['lang']])
-        self.plot_lang = translation.gettext
+    # Language for the plot
+    translation = gettext.translation('perprof',
+            os.path.join(THIS_DIR, 'locale'), [options['lang']])
+    plot_lang = translation.gettext
 
-        perfprof.PerfProfile.__init__(self, options)
-
-    def plot(self):
-        """
-        Create the performance profile using matplotlib.
-        """
-        if not self.force:
-            try:
-                file_ = open(self.output, 'r')
-                file_.close()
-                raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite').format(self.output))
-            except FileNotFoundError:
-                pass
-
+    if not options['force']:
         try:
-            self.prof
-        except AttributeError:
-            self.compute_profile()
+            file_ = open(output, 'r')
+            file_.close()
+            raise ValueError(_('ERROR: File {} exists.\nUse `-f` to overwrite').format(output))
+        except FileNotFoundError:
+            pass
 
-        # Hack need to background color
-        figure_ = plt.figure()
-        plot_ = figure_.add_subplot(111)
+    solvers = y.keys()
+    tau = options['tau']
 
-        # Set configurations handle when saving the plot
-        save_configs = {}
-        save_configs['format'] = self.output_format
+    # Hack need to background color
+    figure_ = plt.figure()
+    plot_ = figure_.add_subplot(111)
 
-        if self.page_background:
-            if not self.background:
-                self.background = self.page_background
-            # RGB tuples must be in the range [0,1]
-            save_configs['facecolor'] = (self.page_background[0] / 255,
-                    self.page_background[1] / 255,
-                    self.page_background[2] / 255)
-        if self.background:
-            plot_.set_axis_bgcolor((self.background[0] / 255,
-                    self.background[1] / 255,
-                    self.background[2] / 255))
-            if not self.page_background:
-                figure_.patch.set_alpha(0.0)
-        if not self.background and not self.page_background:
-            save_configs['transparent'] = True
-            save_configs['frameon'] = False
+    # Set configurations handle when saving the plot
+    save_configs = {}
+    save_configs['format'] = options['output_format']
 
-        # We need to hold the plots
-        plot_.hold(True)
+    pg_bg = options['page_background']
+    bg = options['background']
+    if pg_bg:
+        if not bg:
+            bg = options['page_background']
+        # RGB tuples must be in the range [0,1]
+        save_configs['facecolor'] = (pg_bg[0] / 255, pg_bg[1] / 255, pg_bg[2] / 255)
+    if bg:
+        plot_.set_axis_bgcolor((bg[0] / 255, bg[1] / 255, bg[2] / 255))
+        if not pg_bg:
+            figure_.patch.set_alpha(0.0)
+    if not bg and not pg_bg:
+        save_configs['transparent'] = True
+        save_configs['frameon'] = False
 
-        # Define the linestyles
-        if self.black_and_white:
-            linestyles = ['k-', 'k--', 'k:', 'k-.']
-        else:
-            linestyles = ['b', 'g', 'r', 'c', 'm', 'y']
+    # We need to hold the plots
+    plot_.hold(True)
 
-        # Generate the plot for each solver
-        for idx, solver in enumerate(self.solvers):
-            plot_.step(self.profx, self.prof[solver], linestyles[idx], label=solver, where='post')
+    # Define the linestyles
+    if options['black_and_white']:
+        linestyles = ['k-', 'k--', 'k:', 'k-.']
+    else:
+        linestyles = ['b', 'g', 'r', 'c', 'm', 'y']
 
-        # Change the xscale to log scale
-        if self.semilog:
-            plt.gca().set_xscale('log')
+    # Generate the plot for each solver
+    for idx, solver in enumerate(solvers):
+        plot_.step(x, y[solver], linestyles[idx], label=solver, where='post')
 
-        # Axis
-        try:
-            maxt = min(max(self.profx), self.tau)
-        except (AttributeError, TypeError):
-            maxt = max(self.profx)
-        plt.gca().set_xlim(1, maxt)
-        plt.gca().set_xlabel(self.plot_lang(self.xlabel))
-        plt.gca().set_ylim(-0.002, 1.006)
-        plt.gca().set_ylabel(self.plot_lang(self.ylabel))
-        if self.title is not None:
-            plt.gca().set_title(self.plot_lang(self.title))
+    # Change the xscale to log scale
+    if options['semilog']:
+        plt.gca().set_xscale('log')
 
-        # Legend
-        plt.gca().legend(loc=4)
+    # Axis
+    try:
+        maxt = min(max(x), tau)
+    except (AttributeError, TypeError):
+        maxt = max(x)
+    plt.gca().set_xlim(1, maxt)
+    plt.gca().set_xlabel(plot_lang(options['xlabel']))
+    plt.gca().set_ylim(-0.002, 1.006)
+    plt.gca().set_ylabel(plot_lang(options['ylabel']))
+    if options['title'] is not None:
+        plt.gca().set_title(plot_lang(options['title']))
 
-        # Help lines
-        plt.gca().grid(axis='y', color='0.5', linestyle='-')
+    # Legend
+    plt.gca().legend(loc=4)
 
-        # Save the plot
-        # pylint: disable-msg=W0142
-        plt.savefig(self.output, bbox_inches='tight', pad_inches=0.05,
-                **save_configs)
+    # Help lines
+    plt.gca().grid(axis='y', color='0.5', linestyle='-')
+
+    # Save the plot
+    # pylint: disable-msg=W0142
+    plt.savefig(output, bbox_inches='tight', pad_inches=0.05,
+            **save_configs)
