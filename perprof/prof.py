@@ -15,36 +15,33 @@ class Pdata(object):
     """
     Store data for performance profile.
     """
-    def __init__(self, parser_options, profiler_options):
+    def __init__(self, options):
         """
-        :param dict parser_options: parser configuration
-        :param dict profiler_options: profiler configuration
+        :param dict options: configuration
         """
-        self.cache = profiler_options['cache']
-        self.force = profiler_options['force']
-        self.semilog = profiler_options['semilog']
-        self.black_and_white = profiler_options['black_and_white']
-        self.background = profiler_options['background']
-        self.page_background = profiler_options['page_background']
-        self.pdf_verbose = profiler_options['pdf_verbose']
-        self.output_format = profiler_options['output_format']
-        self.pgfplot_version = profiler_options['pgfplot_version']
-        self.tau = profiler_options['tau']
-        self.title = profiler_options['title']
-        self.xlabel = profiler_options['xlabel']
-        self.ylabel = profiler_options['ylabel']
-        self.already_scaled = False
-        self.subset = parser_options['subset']
-        self.mintime = parser_options['mintime']
-        self.maxtime = parser_options['maxtime']
-        self.compare = parser_options['compare']
-        self.unc = parser_options['unc']
-        self.infeas_tol = parser_options['infeas_tol']
-        self.success = parser_options['success']
-        self.free_format = parser_options['free_format']
-        self.files = parser_options['files']
-
-        self.tablename = profiler_options['output']
+        self.background = options['background']
+        self.black_and_white = options['black_and_white']
+        self.cache = options['cache']
+        self.compare = options['compare']
+        self.files = options['files']
+        self.force = options['force']
+        self.free_format = options['free_format']
+        self.infeas_tol = options['infeas_tol']
+        self.maxtime = options['maxtime']
+        self.mintime = options['mintime']
+        self.output_format = options['output_format']
+        self.page_background = options['page_background']
+        self.pdf_verbose = options['pdf_verbose']
+        self.pgfplot_version = options['pgfplot_version']
+        self.semilog = options['semilog']
+        self.subset = options['subset']
+        self.success = options['success']
+        self.tablename = options['output']
+        self.tau = options['tau']
+        self.title = options['title']
+        self.unc = options['unc']
+        self.xlabel = options['xlabel']
+        self.ylabel = options['ylabel']
 
     def __repr__(self):
         try:

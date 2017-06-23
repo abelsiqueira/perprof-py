@@ -31,14 +31,13 @@ class PerfProfile(prof.Pdata):
     """
     Store data for performance profile.
     """
-    def __init__(self, parser_options, profiler_options):
+    def __init__(self, options):
         """
-        :param dict parser_options: parser configuration
-        :param dict profiler_options: profiler configuration
+        :param dict options: configuration
         """
-        prof.Pdata.__init__(self, parser_options, profiler_options)
+        prof.Pdata.__init__(self, options)
         self.data = {}
-        for file_ in parser_options['files']:
+        for file_ in options['files']:
             data_tmp, solver_name = self.parse_file(file_)
             self.data[solver_name] = data_tmp
 

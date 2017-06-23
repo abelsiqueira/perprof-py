@@ -25,25 +25,24 @@ class Profiler(perfprof.PerfProfile):
     """
     The profiler using bokeh
     """
-    def __init__(self, parser_options, profiler_options):
+    def __init__(self, options):
         """
-        :param dict parser_options: parser options
-        :param dict profiler_options: profiler options
+        :param dict options: options
         """
-        if profiler_options['output'] is None:
+        if options['output'] is None:
             self.output = 'performance-profile.{}'.format(
-                    profiler_options['output_format'])
+                    options['output_format'])
         else:
-            self.output = '{}.{}'.format(profiler_options['output'],
-                    profiler_options['output_format'])
-        self.output_format = profiler_options['output_format']
+            self.output = '{}.{}'.format(options['output'],
+                    options['output_format'])
+        self.output_format = options['output_format']
 
         # Language for the plot
         translation = gettext.translation('perprof',
-                os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
+                os.path.join(THIS_DIR, 'locale'), [options['lang']])
         self.plot_lang = translation.gettext
 
-        perfprof.PerfProfile.__init__(self, parser_options, profiler_options)
+        perfprof.PerfProfile.__init__(self, options)
 
     def plot(self):
         """
