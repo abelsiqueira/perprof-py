@@ -5,7 +5,7 @@ from perprof.main import set_arguments
 from perprof import bokeh
 from perprof import tikz
 from perprof import matplotlib
-from perprof import prof
+from perprof import perfprof
 
 class TestPerprof(unittest.TestCase):
 
@@ -16,7 +16,7 @@ class TestPerprof(unittest.TestCase):
             "bokeh": bokeh.Profiler,
             "tikz": tikz.Profiler,
             "mp": matplotlib.Profiler,
-            "raw": prof.Pdata }
+            "raw": perfprof.PerfProfile }
 
     def test_backends(self):
         for backend in self.backends:
