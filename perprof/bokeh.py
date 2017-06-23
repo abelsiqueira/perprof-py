@@ -6,7 +6,7 @@ import os.path
 import gettext
 import bokeh.models.formatters
 import bokeh.plotting as plt
-from . import prof
+from . import perfprof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
@@ -21,7 +21,7 @@ BOKEH_COLOR_LIST = ["blue",
                     "magenta",
                     "yellow"]
 
-class Profiler(prof.Pdata):
+class Profiler(perfprof.PerfProfile):
     """
     The profiler using bokeh
     """
@@ -43,7 +43,7 @@ class Profiler(prof.Pdata):
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
         self.plot_lang = translation.gettext
 
-        prof.Pdata.__init__(self, parser_options, profiler_options)
+        perfprof.PerfProfile.__init__(self, parser_options, profiler_options)
 
     def plot(self):
         """
@@ -57,13 +57,10 @@ class Profiler(prof.Pdata):
             except FileNotFoundError:
                 pass
 
-        if not self.already_scaled:
-            self.scale()
-
         try:
             self.prof
         except AttributeError:
-            self.set_percent_problems_solved_by_time()
+            self.compute_profile()
 
         plt.output_file(self.output, title=self.plot_lang(self.title))
 
@@ -92,7 +89,7 @@ class Profiler(prof.Pdata):
                     line_color=BOKEH_COLOR_LIST[idx % len(BOKEH_COLOR_LIST)])
 
         # Legend
-        p.legend.orientation = "bottom_right"
+        p.legend.orientation = "horizontal"
 
         # Help lines
         p.grid.grid_line_color = "black"

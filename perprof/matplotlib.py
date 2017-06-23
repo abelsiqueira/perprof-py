@@ -7,14 +7,14 @@ import gettext
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from . import prof
+from . import perfprof
 
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation('perprof',
         os.path.join(THIS_DIR, 'locale'))
 _ = THIS_TRANSLATION.gettext
 
-class Profiler(prof.Pdata):
+class Profiler(perfprof.PerfProfile):
     """
     The profiler using matplotlib.
     """
@@ -36,7 +36,7 @@ class Profiler(prof.Pdata):
                 os.path.join(THIS_DIR, 'locale'), [profiler_options['lang']])
         self.plot_lang = translation.gettext
 
-        prof.Pdata.__init__(self, parser_options, profiler_options)
+        perfprof.PerfProfile.__init__(self, parser_options, profiler_options)
 
     def plot(self):
         """
@@ -50,13 +50,10 @@ class Profiler(prof.Pdata):
             except FileNotFoundError:
                 pass
 
-        if not self.already_scaled:
-            self.scale()
-
         try:
             self.prof
         except AttributeError:
-            self.set_percent_problems_solved_by_time()
+            self.compute_profile()
 
         # Hack need to background color
         figure_ = plt.figure()
