@@ -94,7 +94,7 @@ class Profiler(prof.Pdata):
 
         # Generate the plot for each solver
         for idx, solver in enumerate(self.solvers):
-            plot_.step(self.times, self.ppsbt[solver], linestyles[idx], label=solver)
+            plot_.step(self.times, self.ppsbt[solver], linestyles[idx], label=solver, where='post')
 
         # Change the xscale to log scale
         if self.semilog:
