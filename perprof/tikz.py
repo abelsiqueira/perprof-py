@@ -120,7 +120,7 @@ def plot(x, y, options):
     else:
         title = ',\n    title={{{}}},\n'.format(plot_lang(options['title']))
 
-    str2output.append('    xmin=1, xmax={:.2f},\n' \
+    str2output.append('    xmin={}, xmax={:.2f},\n' \
     '    ymin=-0.003, ymax=1.003,\n' \
     '    ymajorgrids,\n' \
     '    ytick={{0,0.2,0.4,0.6,0.8,1.0}},\n' \
@@ -129,7 +129,7 @@ def plot(x, y, options):
     '{title}' \
     '    legend pos={{{legend_pos}}},\n' \
     '    width=\\textwidth\n' \
-    '    ]'.format(maxt,
+    '    ]'.format(x[0], maxt,
             xlabel=plot_lang(options['xlabel']),
             ylabel=plot_lang(options['ylabel']),
             title=title,

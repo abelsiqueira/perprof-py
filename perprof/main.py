@@ -32,6 +32,7 @@ def process_arguments(args):
             'output': args.output,
             'pdf_verbose': args.pdf_verbose,
             'pgfplot_version': args.pgfplotcompat,
+            'problem_sizes': args.problem_sizes,
             'semilog': args.semilog,
             'standalone': args.standalone,
             'success': args.success.split(','),
@@ -278,10 +279,13 @@ def main():
         options = process_arguments(args)
 
         if args.type == 'perf':
-            from .import perfprof
+            from . import perfprof
             profile = perfprof.PerfProfile(options)
+        elif args.type == 'data':
+            from . import dataprof
+            profile = dataprof.DataProfile(options)
         else:
-            raise NotImplementedError(_("Profile type {} not implemented".format(options.type)))
+            raise NotImplementedError(_("Profile type {} not implemented".format(args.type)))
 
         x, y = profile.get_plot_data()
 
