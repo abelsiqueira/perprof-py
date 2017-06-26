@@ -131,8 +131,8 @@ def set_arguments(args):
             action='store_const', const='data',
             help=_('Data profile.'))
     proftype.add_argument('--extended-profile', dest='type',
-            action='store_const', const='extended',
-            help=_('Extended performance profile. Not implemented'))
+            action='store_const', const='ext',
+            help=_('Extended performance profile.'))
     proftype.set_defaults(type='perf')
 
     backend_args = parser.add_argument_group(_("Backend options"))
@@ -246,7 +246,7 @@ def set_arguments(args):
         if parsed_args.file_name:
             warnings.warn(_("Using demo mode. Ignoring input files."),
                     UserWarning)
-        if parsed_args.type == 'perf':
+        if parsed_args.type in ['perf', 'ext']:
             parsed_args.file_name = [
                     os.path.join(THIS_DIR, 'examples/alpha.table'),
                     os.path.join(THIS_DIR, 'examples/beta.table'),
@@ -260,7 +260,7 @@ def set_arguments(args):
             raise ValueError("Profile type {} not implemented".format(parsed_args.type))
     elif len(parsed_args.file_name) <= 1:
         raise ValueError(_("You must provide at least two input files."))
-    elif not parsed_args.type in ['perf', 'data']:
+    elif not parsed_args.type in ['perf', 'data', 'ext']:
         raise ValueError("Profile type {} not implemented".format(parsed_args.type))
     elif parsed_args.type == 'data' and not os.path.isfile(parsed_args.problem_sizes):
         if parsed_args.problem_sizes == '':
@@ -284,6 +284,9 @@ def main():
         elif args.type == 'data':
             from . import dataprof
             profile = dataprof.DataProfile(options)
+        elif args.type == 'ext':
+            from . import extprof
+            profile = extprof.ExtProfile(options)
         else:
             raise NotImplementedError(_("Profile type {} not implemented".format(args.type)))
 

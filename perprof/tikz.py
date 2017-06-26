@@ -143,6 +143,7 @@ def plot(x, y, options):
         last_t = round(x[0], 4)
         last_p = round(y[solver][0], 4)
         for i in range(1,len(x)-1):
+            j = i
             dx = round(x[i], 4) - last_t
             dx2 = round(x[i+1], 4) - last_t
             dy = round(this_prof[i], 4) - last_p
@@ -157,7 +158,7 @@ def plot(x, y, options):
                 last_p = prof
             else:
                 break
-        j = len(x)-1
+        j += 1
         str2output.append('    ({:.4f},{:.4f})'.format(x[j],
             this_prof[j]))
         str2output.append('  };')

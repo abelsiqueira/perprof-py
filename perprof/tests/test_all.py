@@ -7,13 +7,15 @@ from perprof import tikz
 from perprof import matplotlib
 from perprof import perfprof
 from perprof import dataprof
+from perprof import extprof
 
 class TestPerprof(unittest.TestCase):
 
     fileargs = {
             "perf": ' '.join(['perprof/examples/' + s + '.table' for s in ['alpha', 'beta', 'gamma']]),
             "data": ' '.join(['perprof/examples/' + s for s in ['df-alpha', 'df-beta']]) + \
-                    ' --problem-sizes perprof/examples/df.sizes'
+                    ' --problem-sizes perprof/examples/df.sizes',
+            "ext":  ' '.join(['perprof/examples/' + s + '.table' for s in ['alpha', 'beta', 'gamma']])
             }
     backends = ['bokeh', 'tikz', 'mp', 'raw']
     backend_plots = {
@@ -23,11 +25,13 @@ class TestPerprof(unittest.TestCase):
             }
     profiles = {
             "perf": perfprof.PerfProfile,
-            "data": dataprof.DataProfile
+            "data": dataprof.DataProfile,
+            "ext":  extprof.ExtProfile
             }
     profile_args = {
             "perf": "--performance-profile",
-            "data": "--data-profile"
+            "data": "--data-profile",
+            "ext":  "--extended-profile"
             }
 
     def test_backends(self):

@@ -40,4 +40,5 @@ with open('alpha.table','r') as alphafile:
                     gammafile.write("free_format: True\n")
                 else:
                     line[4], line[2], line[1], line[5], line[0], line[3] = line
+                    line[1] = str(float(line[1]) * random.uniform(0.5,2.0))
                     gammafile.write(' '.join(line) + '\n')
