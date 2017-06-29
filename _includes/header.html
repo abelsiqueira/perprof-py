@@ -1,0 +1,53 @@
+<div id="spacer" class="row"></div>
+
+<header class="header row">
+  <nav class="col-xs-12">
+    <span>
+      <a href="#spacer">Perprof-py</a>
+    </span>
+    <span>
+      <a href="#install">Installation</a>
+    </span>
+    <span>
+      <a href="#examples">Examples</a>
+    </span>
+    <span>
+      <a href="#works">Works</a>
+    </span>
+
+    <span class="pull-right">
+      <a href="https://github.com/ufpr-opt/perprof-py">
+        <i class="fa fa-github fa-lg"></i>
+      </a>
+    </span>
+  </nav>
+</header>
+
+<script>
+  ( function () {
+    var nav = $( '.header' )[0],
+      top = $( nav ).offset().top,
+      height = $( nav ).outerHeight(),
+      width = $( nav ).outerWidth(),
+      fixedClass = 'fixed';
+
+    function pageOffset() {
+      return window.pageYOffset || document.body.scrollTop;
+    }
+
+    $( window ).
+      scroll( function () {
+        $( nav ).toggleClass( fixedClass, pageOffset() > top );
+
+        if ( $( nav ).hasClass( fixedClass ) ) {
+          $( nav ).
+            css({ 'width': width }).
+            prev().css({ 'marginBottom': height });
+        } else {
+          $( nav ).
+            prev().andSelf().removeAttr( 'style' );
+        }
+      }).
+      trigger( 'resize' );
+  })();
+</script>

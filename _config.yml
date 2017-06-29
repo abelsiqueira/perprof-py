@@ -1,7 +1,9 @@
-name: perprof-py
-markdown: redcarpet
-pygments: true
-git-host: https://github.com
-git-user: ufpr-opt
-git-project: perprof-py
-baseurl: /perprof-py
+title: Perprof-py
+description: Perprof-py
+baseurl: "/perprof-py" # the subpath of your site, e.g. /blog
+url: "https://ufpr-opt.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock

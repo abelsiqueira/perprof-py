@@ -1,11 +1,191 @@
 ---
 layout: default
-title: perprof-py&#58; A Python Package for Performance Profiling
 ---
 
-<div class="wall">
-  <p>Benchmarking optimization packages is very important in the optimization
-  field, not only because it is one of the ways to compare solvers, but also to
-  unconver deficiencies that could be overlooked.
-  </p>
+<!-- Introduction -->
+<div id="intro" class="row section">
+  <div class="introduction col-xs-12 text-center">
+    <h1 class="title"> Perprof-py </h1>
+    <h2 class="subtitle">
+      A Python Package for Profiling Optimization Software
+    </h2>
+  </div>
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10 abstract text-justify">
+    <p>
+      In the Mathematical Programming field, we are frequently required to
+      compare two solvers. An usual way to do so, is the performance profile [1].
+      This tools implements the performance profile, as well as the
+      data profile [2] and the extended performance profile [3].
+    </p>
+    <p>
+      For more information, check the
+      <a href="http://perprof-py.readthedocs.io/">documentation</a>,
+      the
+      <a href="https://github.com/ufpr-opt/perprof-py">GitHub repository</a>,
+      or ping us at
+      <a href="https://gitter.im/ufpr-opt/perprof-py">Gitter</a>.
+    </p>
+  </div>
+  <div class="col-xs-1"></div>
+</div>
+
+<!-- Installation -->
+<div id="install" class="row section">
+  <div class="col-xs-12">
+    <h1> Installation</h1>
+    <ul>
+      <li>
+        Install <strong>Python 3</strong>. <span class="comment">The python and
+          pip commands below are for Python 3. Your system may them python3 and
+          pip3.</span>
+      </li>
+      <li>
+        Download <strong> perprof-py v1.1.2 </strong> (
+        <a href="https://github.com/ufpr-opt/perprof-py/archive/v1.1.2.zip">
+          zip
+        </a>,
+        <a href="https://github.com/ufpr-opt/perprof-py/archive/v1.1.2.tar.gz">
+          tar.gz
+        </a>)
+      </li>
+      <li>
+        Uncompress the file and enter the folder perprof-py-1.1.2
+      </li>
+      <li>
+        Enter the commands
+        <pre><code>
+          sudo pip install -r REQUIREMENTS
+          sudo python setup.py install
+        </code></pre>
+      </li>
+      <li>
+        (Optional) Test with
+        <code>
+          sudo python setup.py test
+        </code>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Examples -->
+<div id="examples" class="row section">
+  <div class="col-xs-12">
+    <h1> Examples </h1>
+  </div>
+  <div class="col-xs-12 col-md-6 img-example">
+    <img class="img-responsive" src="{{site.baseurl}}/assets/abc-100-tikz.png">
+    <span>
+      With <strong>TikZ</strong> backend, limited to ratio 100.
+    </span>
+  </div>
+  <div class="col-xs-12 col-md-6 img-example">
+    <img class="img-responsive" src="{{site.baseurl}}/assets/abc-semilog-bw-tikz.png">
+    <span>
+      With <strong>TikZ</strong> backend, on semilog axis, black and white.
+    </span>
+  </div>
+  <div class="col-xs-12 col-md-6 img-example">
+    <img class="img-responsive" src="{{site.baseurl}}/assets/abc-semilog-mp.png">
+    <span>
+      With <strong>MatPlotLib</strong> backend, on semilog axis.
+    </span>
+  </div>
+  <div class="col-xs-12 col-md-6 img-example">
+    <img class="img-responsive" src="{{site.baseurl}}/assets/abc-semilog-hs-mp.png">
+    <span>
+      With <strong>MatPlotLib</strong> backend, on semilog axis, but only a subset
+      of problems.
+    </span>
+  </div>
+</div>
+
+<!-- Works -->
+<div id="works" class="row section">
+  <div class="col-xs-12">
+    <h1> Works </h1>
+    <h2> About Perprof-py </h2>
+    <ul>
+      <li>
+        Siqueira, A. S., da Silva, R. G. C., Santos, L.-R.,
+        <strong>Perprof-py: A Python Package for Performance Profile of
+          Mathematical Optimization Software</strong>.
+        Journal of Open Research Software, 4(1):p.e12, 2016.
+        DOI: <a href="http://doi.org/10.5334/jors.81">10.5334/jors.81</a>
+      </li>
+      <li>
+        da Silva, R. G. C.,
+        <strong>Perprof-py: A Python Package for Performance
+          Profiling</strong>.
+        Poster at X Brazilian Workshop on Continuous Optimization,
+        March 20, 2014.
+        <a href="{{site.baseurl}}/assets/works/xbrazopt.pdf">Download</a>.
+      </li>
+    </ul>
+    <h2> Using Perprof-py </h2>
+    <ul>
+      <li>
+        Behling, R., Cruz, J. Y. B., Santos, L.-R.,
+        <strong>Circumcentering the Douglas-Rachford method</strong>.
+        Technical Report, arXiv:1704.06737. Apr/2017.
+        <a href="https://arxiv.org/abs/1704.06737">Link</a>.
+      </li>
+      <li>
+        Siqueira, A. S., Grapiglia, G. N.,
+        <strong>Numerical Experience with a Class of Trust-Region Algorithms for
+          Unconstrained Smooth Optimization</strong>.
+        Technical Report, Department of Mathematics, Federal University of
+        Paraná, Curitiba, Paraná, Brazil. Nov/2016.
+        <a href="http://www.optimization-online.org/DB_HTML/2016/11/5721.html">
+          Link
+        </a>.
+      </li>
+      <li>
+        Siqueira, A. S.,
+        <strong>Dynamic Control of Infeasibility for Nonlinear Programming
+        </strong>.
+        Technical Report 11-16, Department of Mathematics, State University of
+        Campinas. Jun/2016.
+        <a href="http://www.ime.unicamp.br/sites/default/files/rp11-16.pdf">
+          Link
+        </a>.
+      </li>
+      <li>
+        Siqueira, A. S.,
+        <strong>Controle Dinâmico da Infactibilidade para Programação Não
+          Linear</strong>.
+        PhD thesis at State University of Campinas. December 02, 2013.
+      </li>
+    </ul>
+    <h2> References </h2>
+    <ol>
+      <li>
+        Dolan, E. D., Moré, J. J.,
+        <strong>Benchmarking Optimization Software with Performance
+          Profiles</strong>.
+        Mathematical Programming, 92(2):201-213, 2002.
+        DOI: <a href="https://doi.org/10.1007/s101070100263">
+          10.1007/s101070100263
+        </a>.
+      </li>
+      <li>
+        Moré, J. J., Wild, S. M.,
+        <strong>Benchmarking Derivative-Free Optimization Algorithms</strong>.
+        SIAM Journal on Optimization 20: 172-191, 2009.
+        DOI: <a href="https://doi.org/10.1137/080724083">
+          10.1137/080724083
+        </a>.
+      </li>
+      <li>
+        Mahajan, A., Leyffer, S., Kirches, C.,
+        <strong>Solving Mixed-Integer Nonlinear Programs by QP-Diving</strong>.
+        Technical Report, Argonne National Laboratory ANL/MCS-P2071-0312,
+        Mar/2012.
+        <a href="http://www.optimization-online.org/DB_HTML/2012/03/3409.html">
+          Link
+        </a>.
+      </li>
+    </ol>
+  </div>
 </div>
