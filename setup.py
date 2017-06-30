@@ -11,7 +11,7 @@ else:
 
 setup(
     name='perprof',
-    version='1.1.1',
+    version='1.1.2',
     author='Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luiz Rafael dos Santos',
     author_email='abel.s.siqueira@gmail.com, raniere@ime.unicamp.br, l.r.santos@ufsc.br',
     packages=['perprof'],
