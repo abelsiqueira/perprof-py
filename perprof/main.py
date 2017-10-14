@@ -18,101 +18,97 @@ _ = THIS_TRANSLATION.gettext
 
 def process_arguments(args):
     """Generates the dictionaries with options"""
-    parser_options = {
+    options = {
+            'black_and_white': args.black_and_white,
+            'cache': args.cache,
+            'compare': args.compare,
             'free_format': args.free_format,
             'files': args.file_name,
-            'success': args.success.split(','),
+            'force': args.force,
+            'infeas_tol': args.infeasibility_tolerance,
+            'lang': args.lang,
             'maxtime': args.maxtime,
             'mintime': args.mintime,
-            'compare': args.compare,
-            'unc': args.unconstrained,
-            'infeas_tol': args.infeasibility_tolerance
-            }
-
-    profiler_options = {
-            'lang': args.lang,
-            'cache': args.cache,
-            'files': args.file_name,
-            'force': args.force,
-            'standalone': args.standalone,
-            'semilog': args.semilog,
-            'black_and_white': args.black_and_white,
             'output': args.output,
-            'pgfplot_version': args.pgfplotcompat,
-            'tau': args.tau,
             'pdf_verbose': args.pdf_verbose,
+            'pgfplot_version': args.pgfplotcompat,
+            'semilog': args.semilog,
+            'standalone': args.standalone,
+            'success': args.success.split(','),
+            'unc': args.unconstrained,
+            'tau': args.tau,
             'title': args.title,
             'xlabel': args.xlabel,
             'ylabel': args.ylabel
             }
 
     if args.no_title:
-        profiler_options['title'] = None
+        options['title'] = None
 
     if args.background is None:
-        profiler_options['background'] = None
+        options['background'] = None
     else:
         # Set a tuple of integer
-        profiler_options['background'] = tuple([int(i) for i in
+        options['background'] = tuple([int(i) for i in
             args.background.split(',')])
-        assert len(profiler_options['background']) == 3, \
+        assert len(options['background']) == 3, \
                 _("RGB for background must have 3 integers")
     if args.page_background is None:
-        profiler_options['page_background'] = None
+        options['page_background'] = None
     else:
-        profiler_options['page_background'] = tuple([int(i) for i in args.page_background.split(',')])
-        assert len(profiler_options['page_background']) == 3, \
+        options['page_background'] = tuple([int(i) for i in args.page_background.split(',')])
+        assert len(options['page_background']) == 3, \
                 _("RGB for page background must have 3 integers")
 
     if args.html:
-        profiler_options['output_format'] = 'html'
+        options['output_format'] = 'html'
     elif args.eps:
-        profiler_options['output_format'] = 'eps'
+        options['output_format'] = 'eps'
     elif args.pdf:
-        profiler_options['output_format'] = 'pdf'
+        options['output_format'] = 'pdf'
     elif args.png:
-        profiler_options['output_format'] = 'png'
+        options['output_format'] = 'png'
     elif args.ps:
-        profiler_options['output_format'] = 'ps'
+        options['output_format'] = 'ps'
     elif args.svg:
-        profiler_options['output_format'] = 'svg'
+        options['output_format'] = 'svg'
     elif args.tex:
-        profiler_options['output_format'] = 'tex'
+        options['output_format'] = 'tex'
     else:
         if args.bokeh:
-            profiler_options['output_format'] = 'html'
+            options['output_format'] = 'html'
         elif args.mp:
-            profiler_options['output_format'] = 'png'
+            options['output_format'] = 'png'
         elif args.tikz:
-            profiler_options['output_format'] = 'pdf'
+            options['output_format'] = 'pdf'
         else:
-            profiler_options['output_format'] = None
+            options['output_format'] = None
 
-    if args.bokeh and profiler_options['output_format'] not in SUPPORT_BOKEH:
+    if args.bokeh and options['output_format'] not in SUPPORT_BOKEH:
         raise NotImplementedError(_("Output option {} not supported by "
-                "bokeh").format(profiler_options['output_format'].upper()))
-    elif args.mp and profiler_options['output_format'] not in SUPPORT_MP:
+                "bokeh").format(options['output_format'].upper()))
+    elif args.mp and options['output_format'] not in SUPPORT_MP:
         raise NotImplementedError(_("Output option {} not supported by "
-                "matplotlib").format(profiler_options['output_format'].upper()))
-    elif args.tikz and profiler_options['output_format'] not in SUPPORT_TIKZ:
+                "matplotlib").format(options['output_format'].upper()))
+    elif args.tikz and options['output_format'] not in SUPPORT_TIKZ:
         raise NotImplementedError(_("Output option {} not supported by "
-                "TikZ").format(profiler_options['output_format'].upper()))
-    elif args.raw and profiler_options['output_format']:
+                "TikZ").format(options['output_format'].upper()))
+    elif args.raw and options['output_format']:
         raise NotImplementedError(
                 _("--raw does not support output except standard output"))
-    elif args.table and profiler_options['output_format']:
+    elif args.table and options['output_format']:
         raise NotImplementedError(
                 _("--table only write to .tex or to standard output"))
 
     if args.subset:
         with open(args.subset, 'r') as subset_file:
-            parser_options['subset'] = [l.strip() for l in subset_file]
-        if len(parser_options['subset']) == 0:
+            options['subset'] = [l.strip() for l in subset_file]
+        if len(options['subset']) == 0:
             raise AttributeError(_("ERROR: Subset is empty"))
     else:
-        parser_options['subset'] = []
+        options['subset'] = []
 
-    return parser_options, profiler_options
+    return options
 
 def set_arguments(args):
     """
@@ -124,6 +120,13 @@ def set_arguments(args):
             description=_('A python module for performance profiling '
             '(as described by Dolan and Moré).'),
             fromfile_prefix_chars='@')
+
+    proftype_args = parser.add_argument_group(_("Profile types"))
+    proftype = proftype_args.add_mutually_exclusive_group(required=False)
+    proftype.add_argument('--performance-profile', dest='type',
+            action='store_const', const='perf',
+            help=_('Performance profile (classic). Default'))
+    proftype.set_defaults(type='perf')
 
     backend_args = parser.add_argument_group(_("Backend options"))
     backend = backend_args.add_mutually_exclusive_group(required=True)
@@ -234,12 +237,17 @@ def set_arguments(args):
         if parsed_args.file_name:
             warnings.warn(_("Using demo mode. Ignoring input files."),
                     UserWarning)
-        parsed_args.file_name = [
-                os.path.join(THIS_DIR, 'examples/alpha.table'),
-                os.path.join(THIS_DIR, 'examples/beta.table'),
-                os.path.join(THIS_DIR, 'examples/gamma.table')]
+        if parsed_args.type == 'perf':
+            parsed_args.file_name = [
+                    os.path.join(THIS_DIR, 'examples/alpha.table'),
+                    os.path.join(THIS_DIR, 'examples/beta.table'),
+                    os.path.join(THIS_DIR, 'examples/gamma.table')]
+        else:
+            raise ValueError("Profile type {} not implemented".format(parsed_args.type))
     elif len(parsed_args.file_name) <= 1:
         raise ValueError(_("You must provide at least two input files."))
+    elif not parsed_args.type in ['perf']:
+        raise ValueError("Profile type {} not implemented".format(parsed_args.type))
 
     return parsed_args
 
@@ -249,41 +257,45 @@ def main():
     try:
         args = set_arguments(sys.argv[1:])
 
-        parser_options, profiler_options = process_arguments(args)
+        options = process_arguments(args)
+
+        if args.type == 'perf':
+            from . import perfprof
+            profile = perfprof.PerfProfile(options)
+        else:
+            raise NotImplementedError(_("Profile type {} not implemented".format(args.type)))
+
+        x, y = profile.get_plot_data()
 
         if args.bokeh:
             # bokeh
             from . import bokeh
 
-            data = bokeh.Profiler(parser_options, profiler_options)
-            data.plot()
-        if args.mp:
+            bokeh.plot(x, y, options)
+        elif args.mp:
             # matplotlib
             from . import matplotlib
-
-            data = matplotlib.Profiler(parser_options, profiler_options)
-            data.plot()
+            matplotlib.plot(x, y, options)
         elif args.tikz:
-            if profiler_options['output_format'] == 'pdf' and args.output is None:
+            if options['output_format'] == 'pdf' and args.output is None:
                 print(_("ERROR: When using PDF output, you need to provide "
                         "the name of the output file."))
             else:
                 # tikz
                 from . import tikz
-
-                data = tikz.Profiler(parser_options, profiler_options)
-                data.plot()
+                tikz.plot(x, y, options)
         elif args.raw:
             # raw
-            from . import prof
+            from . import perfprof
             print('raw')
 
-            print(prof.Pdata(parser_options, profiler_options))
+            print(perfprof.PerfProfile(options))
         elif args.table:
+            raise NotImplementedError("Currently broken")
             # table
-            from . import prof
-            data = prof.Pdata(parser_options, profiler_options)
-            data.print_rob_eff_table()
+            #from . import prof
+            #data = prof.Pdata(options)
+            #data.print_rob_eff_table()
     except ValueError as error:
         print(error)
     except NotImplementedError as error:
