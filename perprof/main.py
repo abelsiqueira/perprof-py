@@ -126,6 +126,9 @@ def set_arguments(args):
     proftype.add_argument('--performance-profile', dest='type',
             action='store_const', const='perf',
             help=_('Performance profile (classic). Default'))
+    proftype.add_argument('--performance-profile-multiple-files', dest='type',
+            action='store_const', const='perf-mf',
+            help=_('Performance profile (classic) from multiple files'))
     proftype.set_defaults(type='perf')
 
     backend_args = parser.add_argument_group(_("Backend options"))
@@ -238,15 +241,17 @@ def set_arguments(args):
             warnings.warn(_("Using demo mode. Ignoring input files."),
                     UserWarning)
         if parsed_args.type == 'perf':
+            parsed_args.file_name = [os.path.join(THIS_DIR, 'examples/perf.example')]
+        elif parsed_args.type == 'perf-mf':
             parsed_args.file_name = [
                     os.path.join(THIS_DIR, 'examples/alpha.table'),
                     os.path.join(THIS_DIR, 'examples/beta.table'),
                     os.path.join(THIS_DIR, 'examples/gamma.table')]
         else:
             raise ValueError("Profile type {} not implemented".format(parsed_args.type))
-    elif len(parsed_args.file_name) <= 1:
+    elif len(parsed_args.file_name) <= 1 and parsed_args.type is not 'perf':
         raise ValueError(_("You must provide at least two input files."))
-    elif not parsed_args.type in ['perf']:
+    elif not parsed_args.type in ['perf', 'perf-mf']:
         raise ValueError("Profile type {} not implemented".format(parsed_args.type))
 
     return parsed_args
@@ -259,7 +264,7 @@ def main():
 
         options = process_arguments(args)
 
-        if args.type == 'perf':
+        if args.type in ['perf', 'perf-mf']:
             from . import perfprof
             profile = perfprof.PerfProfile(options)
         else:

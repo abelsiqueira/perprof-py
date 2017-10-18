@@ -2,10 +2,18 @@
 Performance profile class, and related functions.
 
 A performance profile requires information about the solution for each problem.
-At least whether the problem converged or not, and how long it took/how much it
-cost.
+The simplest way to do this is the single file information
 
-The input are files, one for each solver, with the following format::
+    ---
+    solver_names: ["Name 1", "Name 2"]
+    other metadata
+    ---
+    <Problem Name 01> <Cost of Solver 1> <Cost of Solver 2>
+
+The cost of a solver can't be zero. To symbolize failure, one can use 'inf'.
+
+Another option is to use multiple files, one for each solver, with the
+following format::
 
     ---
     <Metadata 01>: <Value 01>
@@ -37,9 +45,12 @@ class PerfProfile(prof.Pdata):
         """
         prof.Pdata.__init__(self, options)
         self.data = {}
-        for file_ in options['files']:
-            data_tmp, solver_name = self.parse_file(file_)
-            self.data[solver_name] = data_tmp
+        if len(options['files']) == 1:
+            self.data = self.parse_single_file(options['files'][0])
+        else:
+            for file_ in options['files']:
+                data_tmp, solver_name = self.parse_file(file_)
+                self.data[solver_name] = data_tmp
 
     def __repr__(self):
         try:
@@ -168,7 +179,7 @@ class PerfProfile(prof.Pdata):
         """
         Parse one performance profile file.
 
-        :param str filename: name of the file to be parser
+        :param str filename: name of the file to be parsed
         :param dict options: dictionary with the options:
             list subset: list with the name of the problems to use
             list success: list with strings to mark sucess
@@ -282,3 +293,42 @@ class PerfProfile(prof.Pdata):
             raise ValueError(
                     _("ERROR: List of problems (intersected with subset, if any) is empty"))
         return data, solver_info['algname']
+
+    def parse_single_file(self, filename):
+        """
+        Parse a single-file performance profile
+
+        :param str filename: name of the file to be parsed
+        :return: data of performance profile for each solver in the list
+        """
+        with open(filename) as file_:
+            in_yaml = False
+            yaml = ""
+            for line in file_:
+                sline = line.split()
+                if sline[0] == "---":
+                    if in_yaml:
+                        break
+                    in_yaml = True
+                else:
+                    yaml += line
+
+            options = { 'solver_names': [] }
+            aux._parse_yaml(options, yaml)
+            solvers = options['solver_names']
+            if len(solvers) == 0:
+                error("AH")
+            data = {}
+            for s in solvers:
+                data[s] = {}
+
+            for line in file_:
+                sline = line.split()
+                p = sline[0]
+                for i in range(0, len(solvers)):
+                    data[solvers[i]][p] = {
+                            'time': float(sline[i+1]),
+                            'fval': float('inf')
+                            }
+
+        return data

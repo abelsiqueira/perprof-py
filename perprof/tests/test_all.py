@@ -10,7 +10,8 @@ from perprof import perfprof
 class TestPerprof(unittest.TestCase):
 
     fileargs = {
-            "perf": ' '.join(['perprof/examples/' + s + '.table' for s in ['alpha', 'beta', 'gamma']])
+            "perf": 'perprof/examples/perf.example',
+            "perf-mf": ' '.join(['perprof/examples/' + s + '.table' for s in ['alpha', 'beta', 'gamma']])
             }
     backends = ['bokeh', 'tikz', 'mp', 'raw']
     backend_plots = {
@@ -19,10 +20,12 @@ class TestPerprof(unittest.TestCase):
             "mp": matplotlib.plot
             }
     profiles = {
-            "perf": perfprof.PerfProfile
+            "perf": perfprof.PerfProfile,
+            "perf-mf": perfprof.PerfProfile
             }
     profile_args = {
-            "perf": "--performance-profile"
+            "perf": "--performance-profile",
+            "perf-mf": "--performance-profile-multiple-files"
             }
 
     def test_backends(self):
@@ -62,18 +65,18 @@ class TestPerprof(unittest.TestCase):
 
     # Performance profile tests
     def test_only_name(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/only-name.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/only-name.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_columns(self):
-        baseargs = self.profile_args["perf"] + ' --tikz ' + self.fileargs["perf"]
+        baseargs = self.profile_args["perf-mf"] + ' --tikz ' + self.fileargs["perf-mf"]
         #Default comparison needs 3 columns
         args = baseargs + ' perprof/tests/2-col.sample '
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
         #Default values should fail with 5 or less columns.
         #Unconstrained Default values should fail with 5 or less columns
         #(because dual default column is 5).
@@ -84,58 +87,58 @@ class TestPerprof(unittest.TestCase):
                 args = baseargs + ' perprof/tests/{}-col.sample '.format(n)
                 args = set_arguments(args.split())
                 options = process_arguments(args)
-                self.assertRaises(ValueError, self.profiles["perf"], options)
+                self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_without_time(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/without-time.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/without-time.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_without_c_or_d(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/c-or-d.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/c-or-d.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_zero_time(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/zero-time.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/zero-time.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_empty_file(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/empty.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/empty.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_empty_subset(self):
-        args = self.profile_args["perf"] + ' --tikz --demo --subset perprof/tests/empty.subset'
+        args = self.profile_args["perf-mf"] + ' --tikz --demo --subset perprof/tests/empty.subset'
         args = set_arguments(args.split())
         self.assertRaises(AttributeError, process_arguments, args)
 
     def test_empty_intersection(self):
-        args = self.profile_args["perf"] + ' --tikz --demo --subset perprof/tests/fantasy.subset'
+        args = self.profile_args["perf-mf"] + ' --tikz --demo --subset perprof/tests/fantasy.subset'
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_no_success(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/no-success.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/no-success.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        prof = self.profiles["perf"](options)
+        prof = self.profiles["perf-mf"](options)
         self.assertRaises(ValueError, prof.compute_profile)
 
     def test_repeated_problem(self):
-        args = self.profile_args["perf"] + ' --tikz perprof/tests/repeat.sample ' + self.fileargs["perf"]
+        args = self.profile_args["perf-mf"] + ' --tikz perprof/tests/repeat.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
-        self.assertRaises(ValueError, self.profiles["perf"], options)
+        self.assertRaises(ValueError, self.profiles["perf-mf"], options)
 
     def test_yaml_fail(self):
-        args = '--tikz perprof/tests/yaml-fail.sample ' + self.fileargs["perf"]
+        args = '--tikz perprof/tests/yaml-fail.sample ' + self.fileargs["perf-mf"]
         args = set_arguments(args.split())
         options = process_arguments(args)
         self.assertRaises(ValueError, perfprof.PerfProfile, options)
