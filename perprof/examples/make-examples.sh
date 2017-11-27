@@ -27,7 +27,7 @@ mkdir -p plots
 
 args="-l $lang --pgfplotcompat 1.5"
 
-for p in --performance-profile
+for p in --performance-profile --performance-profile-multiple-files
 do
   suffix=$(echo $p | sed 's/--\(.*\)-.*/\1/g')
   for backend in --tikz --mp
@@ -45,7 +45,9 @@ do
       perprof $p $backend $args --demo --tau 100 --semilog -o plots/abc-100-$suffix
       perprof $p $backend $args --demo --maxtime 100 --semilog -o plots/abc-t100-$suffix
       perprof $p $backend $args --demo --mintime 1 --semilog -o plots/abc-m1-$suffix
-      perprof $p $backend $args --demo --semilog --compare optimalvalues --infeasibility-tolerance 1e-8 -o plots/abc-optimalvalues-$suffix
+      if [ $p == "--performance-profile-multiple-files" ]; then
+        perprof $p $backend $args --demo --semilog --compare optimalvalues --infeasibility-tolerance 1e-8 -o plots/abc-optimalvalues-$suffix
+      fi
     fi
   done
 done
