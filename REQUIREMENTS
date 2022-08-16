@@ -1,6 +1,6 @@
 # For input format
 pyyaml<6
 # Support to matplotlib
-matplotlib
+matplotlib>=3
 # Support to Bokeh
-bokeh
+bokeh>=2
