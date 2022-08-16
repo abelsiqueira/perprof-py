@@ -1,0 +1,65 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: perprof-py
+message: Please cite this software using the metadata from 'preferred-citation'.
+type: software
+authors:
+  - given-names: Abel
+    family-names: Soares Siqueira
+    email: abel.s.siqueira@gmail.com
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0003-4451-281X'
+  - given-names: Raniere Gaia
+    family-names: Costa da Silva
+    email: raniere.silva@my.cityu.edu.hk
+    affiliation: City University of Hong Kong
+    orcid: 'https://orcid.org/0000-0002-8381-3749'
+  - given-names: Luiz-Rafael
+    family-names: Santos
+    email: lrsantos11@gmail.com
+    affiliation: Universidade Federal de Santa Catarina
+    orcid: 'https://orcid.org/0000-0002-0083-5871'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.593666
+    description: Zenodo concept DOI
+repository-code: 'https://github.com/ufpr-opt/perprof-py'
+url: 'https://ufpr-opt.github.io/perprof-py'
+abstract: >-
+  A Python module for performance profiling (as
+  described by Dolan and Moré) with TikZ and
+  matplotlib output.
+keywords:
+  - Software Benchmarking
+  - Mathematical Optimization
+  - Performance Profile
+  - Python 3
+license: GPL-3.0
+preferred-citation:
+  authors:
+    - given-names: Abel
+      family-names: Soares Siqueira
+      email: abel.s.siqueira@gmail.com
+      affiliation: Netherlands eScience Center
+      orcid: 'https://orcid.org/0000-0003-4451-281X'
+    - given-names: Raniere Gaia
+      family-names: Costa da Silva
+      email: raniere.silva@my.cityu.edu.hk
+      affiliation: City University of Hong Kong
+      orcid: 'https://orcid.org/0000-0002-8381-3749'
+    - given-names: Luiz-Rafael
+      family-names: Santos
+      email: lrsantos11@gmail.com
+      affiliation: Universidade Federal de Santa Catarina
+      orcid: 'https://orcid.org/0000-0002-0083-5871'
+  doi: "10.5334/jors.81"
+  journal: "Journal of Open Research Software"
+  number: 1
+  pages: 12
+  title: "Perprof-py: A Python Package for Performance Profile of Mathematical Optimization Software"
+  type: article
+  volume: 4
+  year: 2016
+
