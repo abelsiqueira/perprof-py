@@ -13,7 +13,7 @@ on:
 jobs:
   tests:
     name: Tests
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
@@ -28,10 +28,7 @@ jobs:
       - name: Install Tex stuff
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y texlive-pictures texlive-fonts-recommended
-          wget http://mirror.ctan.org/install/macros/latex/contrib/standalone.tds.zip
-          unzip standalone.tds.zip -d ~/texmf
-          sudo texhash
+          sudo apt-get install -y texlive-pictures texlive-fonts-recommended texlive-latex-extra
 
       - name: Requirements
         run: |
