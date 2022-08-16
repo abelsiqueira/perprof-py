@@ -74,7 +74,7 @@ class Profiler(prof.Pdata):
                     self.page_background[1] / 255,
                     self.page_background[2] / 255)
         if self.background:
-            plot_.set_axis_bgcolor((self.background[0] / 255,
+            plot_.set_facecolor((self.background[0] / 255,
                     self.background[1] / 255,
                     self.background[2] / 255))
             if not self.page_background:
@@ -82,9 +82,6 @@ class Profiler(prof.Pdata):
         if not self.background and not self.page_background:
             save_configs['transparent'] = True
             save_configs['frameon'] = False
-
-        # We need to hold the plots
-        plot_.hold(True)
 
         # Define the linestyles
         if self.black_and_white:

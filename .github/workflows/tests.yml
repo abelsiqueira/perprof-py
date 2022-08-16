@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - dev-*
+  pull_request:
+    branches:
+      - main
+      - dev-*
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10']
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Tex stuff
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y texlive-pictures texlive-fonts-recommended texlive-latex-extra
+
+      - name: Requirements
+        run: |
+          pip install -r REQUIREMENTS
+          python setup.py install
+
+      - name: Run tests
+        run: |
+          python setup.py test
+          cd perprof/examples
+          ./make-examples.sh
