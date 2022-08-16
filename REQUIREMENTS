@@ -1,5 +1,5 @@
 # For input format
-pyyaml
+pyyaml<6
 # Support to matplotlib
 matplotlib
 # Support to Bokeh
