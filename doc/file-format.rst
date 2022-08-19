@@ -27,7 +27,7 @@ where
     is the "cost" (e.g. time spent) to be used for the performance profile until solve the problem or give up.
 
 Some examples of input file are provided at ``perprof/examples`` (`see it on
-GitHub <https://github.com/ufpr-opt/perprof-py/tree/master/perprof/examples>`_).
+GitHub <https://github.com/abelsiqueira/perprof-py/tree/master/perprof/examples>`_).
 To see the examples already ::
 
     $ cd perprof/examples

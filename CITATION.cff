@@ -25,8 +25,8 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.593666
     description: Zenodo concept DOI
-repository-code: 'https://github.com/ufpr-opt/perprof-py'
-url: 'https://ufpr-opt.github.io/perprof-py'
+repository-code: 'https://github.com/abelsiqueira/perprof-py'
+url: 'https://abelsiqueira.github.io/perprof-py'
 abstract: >-
   A Python module for performance profiling (as
   described by Dolan and Moré) with TikZ and

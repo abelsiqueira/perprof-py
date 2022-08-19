@@ -1,5 +1,5 @@
 #perprof-py
-[![Build Status](https://travis-ci.org/ufpr-opt/perprof-py.svg?branch=master)](https://travis-ci.org/ufpr-opt/perprof-py)
+[![Build Status](https://travis-ci.org/abelsiqueira/perprof-py.svg?branch=master)](https://travis-ci.org/abelsiqueira/perprof-py)
 
 A Python module for performance profiling (as described by [Dolan and
 Moré](http://arxiv.org/abs/cs/0102001)) with TikZ and matplotlib output.
@@ -54,4 +54,4 @@ See [all the instructions at documentation](https://perprof-py.readthedocs.org/e
 If you didn't find something at the documentation,
 want to report a bug,
 or request a new feature,
-please open a [issue](https://github.com/ufpr-opt/perprof-py/issues).
+please open a [issue](https://github.com/abelsiqueira/perprof-py/issues).
