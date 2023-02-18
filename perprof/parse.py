@@ -51,7 +51,7 @@ def _parse_yaml(options, yaml_header):
     """
     import yaml
 
-    metadata = yaml.load(yaml_header)
+    metadata = yaml.load(yaml_header, Loader=yaml.FullLoader)
     for opt in metadata:
         if not opt in options:
             raise ValueError("'" + opt + "'" + _(" is not a valid option for YAML."))

@@ -81,7 +81,7 @@ class Profiler(prof.Pdata):
                 figure_.patch.set_alpha(0.0)
         if not self.background and not self.page_background:
             save_configs['transparent'] = True
-            save_configs['frameon'] = False
+            save_configs['facecolor'] = 'none'
 
         # Define the linestyles
         if self.black_and_white:
