@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "perprof"
+authors = [
+  {name = "Abel Soares Siqueira", email = "abel.s.siqueira@gmail.com"},
+  {name = "Raniere Gaia Costa da Silva", email = "raniere@ime.unicamp.br"},
+  {name = "Luiz Rafael dos Santos", email = "l.r.santos@ufsc.br"},
+]
+description = "A python module for performance profiling (as described by Dolan and Moré)"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["benchmark", "comparison", "performance profile"]
+license = {file = "LICENSE"}
+classifiers = [
+  "Programming Language :: Python"
+]
+dependencies = [
+  "pyyaml<6",
+  "matplotlib>=3",
+  "bokeh>=2",
+]
+version = "1.1.2"
+
+[project.optional-dependencies]
+dev = [
+  "isort",
+  "prospector",
+  "pytest",
+  "pytest-cov",
+]
+
+[project.scripts]
+perprof = "perprof.main:main"
+
+[project.urls]
+repository = "https://github.com/abelsiqueira/perprof-py"
+documentation = "https://perprof-py.readthedocs.org/en/latest/"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+perprof = ["locale/*/*/*.mo", "examples/*.table"]
