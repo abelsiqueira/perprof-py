@@ -11,6 +11,18 @@ Fork the project and check out your copy.
     $ cd perprof-py
     $ git remote add upstream https://github.com/abelsiqueira/perprof-py.git
 
+## DEVELOPMENT INSTALL
+
+We use Python 3. Your system might require that you write `python3` to be explicit.
+
+```bash
+python -m venv env
+. env/bin/activate
+pip install --upgrade pip setuptools
+pip install --no-cache-dir --editable .
+pip install --no-cache-dir --editable '.[dev]'
+```
+
 ## BRANCH
 
 Create a feature or bug-fix branch and start hacking:

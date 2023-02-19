@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v3
 
@@ -30,13 +30,16 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y texlive-pictures texlive-fonts-recommended texlive-latex-extra
 
-      - name: Requirements
+      - name: Upgrade pip and install dependencies
         run: |
-          pip install -r REQUIREMENTS
-          python setup.py install
+          pip install --upgrade pip setuptools
+          pip install '.[dev]'
 
       - name: Run tests
         run: |
-          python setup.py test
+          pytest -v
+
+      - name: Run examples
+        run: |
           cd perprof/examples
           ./make-examples.sh

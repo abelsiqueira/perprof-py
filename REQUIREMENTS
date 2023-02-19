@@ -1,6 +1,0 @@
-# For input format
-pyyaml<6
-# Support to matplotlib
-matplotlib>=3
-# Support to Bokeh
-bokeh>=2
