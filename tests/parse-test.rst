@@ -38,4 +38,3 @@ Test for parser::
     >>> data, algname = parse.parse_file('tests/str-sanitize.sample')
     >>> data
     {'3-K': 0.0133}
-

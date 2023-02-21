@@ -1,0 +1,24 @@
+output-format: grouped
+
+strictness: medium
+doc-warnings: true
+test-warnings: false
+member-warnings: false
+
+ignore-paths:
+  - docs
+
+mccabe:
+  disable: [MC0001]
+
+pycodestyle:
+  full: true
+
+pydocstyle:
+  disable: [D203, D212]
+
+pylint:
+  disable: [I0021]
+
+pyroma:
+  run: true

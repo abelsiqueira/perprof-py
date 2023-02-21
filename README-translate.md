@@ -10,18 +10,18 @@ To setup a translation to a new language you need to create the directory
 `locale/xx_yy/LC_MESSAGES` where `xx_yy` is the location code of your
 translation. To create the directory you can use
 
-    $ mkdir -p perprof/locale/xx_yy/LC_MESSAGES
+    mkdir -p perprof/locale/xx_yy/LC_MESSAGES
 
 After create the directory you need to create the file
 `perprof/locale/xx_yy/LC_MESSAGES/perprof.po` and for that you can use
 
-    $ cp perprof/locale/perprof.pot perprof/locale/xx_yy/LC_MESSAGES/perprof.po
+    cp perprof/locale/perprof.pot perprof/locale/xx_yy/LC_MESSAGES/perprof.po
 
 Now you translate the strings in the file
 `perprof/locale/xx_yy/LC_MESSAGES/perprof.po` and after that create the file
 `perprof/locale/xx_yy/LC_MESSAGES/perprof.mo` using
 
-    $ msgfmt.py -o perprof/locale/xx_yy/LC_MESSAGES/perprof.{mo,po}
+    msgfmt.py -o perprof/locale/xx_yy/LC_MESSAGES/perprof.{mo,po}
 
 Testing
 -------
@@ -50,4 +50,4 @@ After translate the new strings in the file
 `perprof/locale/xx_yy/LC_MESSAGES/perprof.po` create the file
 `perprof/locale/xx_yy/LC_MESSAGES/perprof.mo` using
 
-    $ msgfmt.py -o perprof/locale/xx_yy/LC_MESSAGES/perprof.{mo,po}
+    msgfmt.py -o perprof/locale/xx_yy/LC_MESSAGES/perprof.{mo,po}
