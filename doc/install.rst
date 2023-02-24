@@ -12,10 +12,17 @@ operation system.
 General
 -------
 
-Install perprof-py in a Python environment with pip is easy::
+Install perprof-py in a Python environment with pip by cloning it and running the install command.
 
-    # pip install -r REQUIREMENTS
-    # python setup.py install
+    $ git clone https://github.com/abelsiqueira/perprof-py
+    $ cd perprof-py
+    $ python -m pip install .
+
+You can also use the docker image:
+
+    $ docker run perprof:latest OPTIONS
+
+In this case, you will need to pass a volume with your data and to receive the plots.
 
 .. note::
 

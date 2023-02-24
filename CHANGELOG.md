@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning].
 
 - Constraints on the versions of packages.
 - CITATION.cff
+- Docker image
 
 ### Removed
 
