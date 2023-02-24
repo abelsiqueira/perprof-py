@@ -26,8 +26,10 @@ version = "1.1.2"
 
 [project.optional-dependencies]
 dev = [
-  "isort",
-  "prospector",
+  "black",
+  "pre-commit",
+  "prospector[with_pyroma]",
+  "pylint",
   "pytest",
   "pytest-cov",
 ]
@@ -38,6 +40,11 @@ perprof = "perprof.main:main"
 [project.urls]
 repository = "https://github.com/abelsiqueira/perprof-py"
 documentation = "https://perprof-py.readthedocs.org/en/latest/"
+
+[tool.isort]
+lines_after_impots = 2
+force_single_line = 1
+src_paths = "bird_cloud_gnn,tests"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

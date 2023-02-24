@@ -1,0 +1,30 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+      - dev-*
+  pull_request:
+    branches:
+      - main
+      - dev-*
+
+jobs:
+  tests:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Upgrade pip and install dependencies
+        run: |
+          pip install --upgrade pip setuptools
+          pip install '.[dev]'
+
+      - name: pre-commit checks
+        run: pre-commit run -a

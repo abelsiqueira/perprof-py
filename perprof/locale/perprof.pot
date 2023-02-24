@@ -292,4 +292,3 @@ msgid ""
 "ERROR: File {} exists.\n"
 "Use `-f` to overwrite."
 msgstr ""
-

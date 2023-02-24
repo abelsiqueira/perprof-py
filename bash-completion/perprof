@@ -59,4 +59,3 @@ _perprof()
   fi
 }
 complete -F _perprof perprof
-
