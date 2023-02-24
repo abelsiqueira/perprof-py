@@ -49,5 +49,11 @@ src_paths = "bird_cloud_gnn,tests"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["perprof*"]
+exclude = ["docker", "tests*"]
+namespaces = false
+
 [tool.setuptools.package-data]
 perprof = ["locale/*/*/*.mo", "examples/*.table"]
