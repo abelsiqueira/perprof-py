@@ -61,3 +61,44 @@ the 'Pull Request' button and fill out the form.
 Pull requests are usually reviewed within a few days. If there are comments
 to address, apply your changes in a separate commit and push that to your
 feature branch.
+
+## RELEASE
+
+Make sure that
+
+- <CHANGELOG.md> is updated (create a new release from the unreleased changes)
+- The version have been updated in <pyproject.toml>, <doc/conf.py>, <perprof/__init__.py>.
+- Tests pass (run with `pytest -v`)
+- You have a commit with the new version pushed.
+
+Then, in a new terminal
+
+    cd $(mktemp -d)
+    git clone https://github.com/abelsiqueira/perprof-py .
+    python -m venv env
+    source env/bin/activate
+    pip install --upgrade pip setuptools
+    pip install --no-cache-dir .
+    pip install --no-cache-dir '.[dev]'
+    pip install --no-cache-dir '.[publishing]'
+    python -m build
+    twine upload -u __token__ -p THETOKEN -r testpypi dist/*
+
+Visit <https://test.pypi.org/project/perprof-py> to check that it was uploaded.
+
+Then, in another terminal (don't close the old one):
+
+    cd $(mktemp -d)
+    python -m venv env
+    source env/bin/activate
+    pip install --upgrade pip setuptools
+    pip -v install --no-cache-dir \
+        --index-url https://test.pypi.org/simple \
+        --extra-index-url https://pypi.org/simple perprof-py
+
+Finally, upload to pypi org, by going back to the first terminal and running:
+
+    twine puload -u __token__ -p THETOKEN dist/*
+
+You also have to manually create a GitHub release.
+After the release on GitHub, the Docker image should be uploaded automatically to <https://hub.docker.com/r/abelsiqueira/perprof-py>.
