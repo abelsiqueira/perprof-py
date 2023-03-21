@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.3] - 2023-03-21
+
 ### Added
 
 - Constraints on the versions of packages.
@@ -53,7 +55,8 @@ Please check the commit list.
 [JORS paper]: https://openresearchsoftware.metajnl.com/articles/10.5334/jors.81/
 
 <!-- Versions -->
-[unreleased]: https://github.com/abelsiqueira/perprof-py/compare/v1.1.2...HEAD
+[unreleased]: https://github.com/abelsiqueira/perprof-py/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/abelsiqueira/perprof-py/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/abelsiqueira/perprof-py/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/abelsiqueira/perprof-py/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/abelsiqueira/perprof-py/compare/v1.0.0...v1.1.0
