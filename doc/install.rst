@@ -20,7 +20,7 @@ Install perprof-py in a Python environment with pip by cloning it and running th
 
 You can also use the docker image:
 
-    $ docker run perprof:latest OPTIONS
+    $ docker run abelsiqueira/perprof-py:latest OPTIONS
 
 In this case, you will need to pass a volume with your data and to receive the plots.
 

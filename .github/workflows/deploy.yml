@@ -25,7 +25,7 @@ jobs:
       - uses: docker/metadata-action@v4
         id: meta
         with:
-          images: abelsiqueira/perprof
+          images: abelsiqueira/perprof-py
 
       - uses: docker/build-push-action@v4
         with:

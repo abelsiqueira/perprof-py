@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning].
 - CITATION.cff
 - Docker image
 
+### Changed
+
+- Package name is now perprof-py because of name clashes in PyPI.
+
 ### Removed
 
 - Support for Python < 3.7

@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "perprof"
+name = "perprof-py"
 authors = [
   {name = "Abel Soares Siqueira", email = "abel.s.siqueira@gmail.com"},
   {name = "Raniere Gaia Costa da Silva", email = "raniere@ime.unicamp.br"},
@@ -32,6 +32,9 @@ dev = [
   "pylint",
   "pytest",
   "pytest-cov",
+]
+publishing = [
+  "twine"
 ]
 
 [project.scripts]
