@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Changes
+
+- Allow PyYAML 0.6.0
+- Add upper bounds to dependency versions
+
 ## [1.1.3] - 2023-03-21
 
 ### Added

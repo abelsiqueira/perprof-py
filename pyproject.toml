@@ -18,9 +18,9 @@ classifiers = [
   "Programming Language :: Python"
 ]
 dependencies = [
-  "pyyaml<6",
-  "matplotlib>=3",
-  "bokeh>=2",
+  "pyyaml>=5,<7",
+  "matplotlib>=3,<4",
+  "bokeh>=2,<3",
 ]
 version = "1.1.3"
 
