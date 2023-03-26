@@ -14,6 +14,10 @@ repos:
       - id: markdownlint
         args: [ -r, "~MD013,~MD029" ]
         exclude: "^.git"
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.11.0
+    hooks:
+      - id: markdown-link-check
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.12.1
     hooks:
