@@ -7,7 +7,9 @@ script and it will overwrite the results with another mix).
 
 To generate some examples of use, execute
 
-    $ ./make-examples.sh [-l LANG]
+```bash
+./make-examples.sh [-l LANG]
+```
 
 The optional argument LANG can be `en` or `pt_BR` currently.
 
@@ -31,11 +33,11 @@ The objective function and infeasibilities are not currently used by `perprof`.
 
 The `perprof` call used is
 
-    $ perprof BACKEND --free-format -l LANG SOLVERS SEMILOG -o plots/NAME \
-    --success "converged,success"
+```bash
+perprof BACKEND --free-format -l LANG SOLVERS SEMILOG -o plots/NAME --success "converged,success"
+```
 
-- BACKEND is either `--tikz` or `--mp`, which generates a PDF or a PNG,
-respectively.
+- BACKEND is either `--tikz` or `--mp`, which generates a PDF or a PNG, respectively.
 - LANG is obtained from the input. Defaults to `en`.
 - SOLVERS are the solvers used, as explained below.
 - SEMILOG is either empty or `--semilog` to indicate the use of a semilog axis.
