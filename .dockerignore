@@ -5,6 +5,7 @@ docker
 env
 output
 perprof.egg-info
+site
 tests
 .dockerignore
 .editorconfig
