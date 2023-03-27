@@ -1,0 +1,51 @@
+site_name: perprof-py
+site_url: https://abelsiqueira.com/perprof-py
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Command Line Usage: cli.md
+  - File Format: file-format.md
+  - Public API: api.md
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          import:
+            - https://docs.python.org/3/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+            - https://docs.scipy.org/doc/scipy/objects.inv
+            - https://pandas.pydata.org/docs/objects.inv
+          options:
+            docstring_options:
+              ignore_init_summary: yes
+            docstring_section_style: list
+            docstring_style: sphinx
+            heading_level: 3
+            members_order: alphabetical
+            merge_init_into_class: yes
+            separate_signature: no
+            show_category_heading: no
+            show_if_no_docstring: no
+            show_root_members_full_path: yes
+            show_source: yes
+            show_submodules: no
+
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: blue
+  font:
+    text: "Lato"
+    code: "Fira Mono"
+
+extra_css:
+  - css/extra.css
+
+markdown_extensions:
+  - smarty
+  - toc:
+      permalink: true
+      toc_depth: 3

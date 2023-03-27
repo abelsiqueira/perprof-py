@@ -36,6 +36,11 @@ dev = [
 publishing = [
   "twine"
 ]
+docs = [
+  "mkdocs",
+  "mkdocstrings[python]",
+  "mkdocs-material"
+]
 
 [project.scripts]
 perprof = "perprof.main:main"
