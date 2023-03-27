@@ -39,7 +39,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           mike delete dev
-          mike deploy --push -t "Latest docs updated based on $GITHUB_SHA" dev
+          mike deploy --push --rebase -t "Documentation for branch main (commit ${GITHUB_SHA::8})" dev
 
       - name: Deploy docs (tag and latest)
         if: github.ref != 'refs/heads/main'
