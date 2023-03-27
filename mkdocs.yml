@@ -31,6 +31,7 @@ plugins:
             show_root_members_full_path: yes
             show_source: yes
             show_submodules: no
+  - mike
 
 theme:
   name: material
@@ -40,6 +41,10 @@ theme:
   font:
     text: "Lato"
     code: "Fira Mono"
+
+extra:
+  version:
+    provider: mike
 
 extra_css:
   - css/extra.css

@@ -39,7 +39,8 @@ publishing = [
 docs = [
   "mkdocs",
   "mkdocstrings[python]",
-  "mkdocs-material"
+  "mkdocs-material",
+  "mike"
 ]
 
 [project.scripts]
