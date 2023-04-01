@@ -8,7 +8,11 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
-### Changes
+### Added
+
+- Class `solver_data.SolverData`, which stores a single solver information.
+
+### Changed
 
 - Allow PyYAML 0.6.0
 - Add upper bounds to dependency versions
