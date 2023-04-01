@@ -4,22 +4,6 @@ Here you will find the API provide for developers.
 
 [TOC]
 
-## Entry point
+## Solver Data
 
-::: perprof.main
-
-## File parse
-
-::: perprof.parse
-
-## Profile interface
-
-::: perprof.prof
-
-## Profiler using TikZ
-
-::: perprof.tikz
-
-## Profiler using matplotlib
-
-::: perprof.matplotlib
+::: perprof.solver_data

@@ -7,6 +7,7 @@ nav:
   - Command Line Usage: cli.md
   - File Format: file-format.md
   - Public API: api.md
+  - Old public API: old-api.md
 
 plugins:
   - mkdocstrings:
