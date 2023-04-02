@@ -19,10 +19,11 @@ class Profiler(prof.Pdata):
     """The profiler using matplotlib."""
 
     def __init__(self, parser_options, profiler_options):
-        """
-        :param dict parser_options: parser options.
+        """Intialize Profiler with Matplotlib.
 
-        :param dict profiler_options: profiler options
+        Args:
+            parser_options (dict): parser options.
+            profiler_options (dict): profiler options
         """
         if profiler_options["output"] is None:
             self.output = f'performance-profile.{profiler_options["output_format"]}'

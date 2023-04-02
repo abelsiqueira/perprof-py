@@ -16,10 +16,11 @@ class Profiler(prof.Pdata):
     """The profiler using TikZ."""
 
     def __init__(self, parser_options, profiler_options):
-        """
-        :param dict parser_options: parser options.
+        """Initialize Profiler with TikZ.
 
-        :param dict profiler_options: profiler options
+        Args:
+            parser_options (dict): parser options.
+            profiler_options (dict): profiler options
         """
         if profiler_options["output"] is None:
             self.output = sys.stdout

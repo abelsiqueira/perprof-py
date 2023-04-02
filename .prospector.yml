@@ -15,7 +15,7 @@ pycodestyle:
   full: true
 
 pydocstyle:
-  disable: [D203, D212]
+  disable: [D203, D212, D213, D413, D407, D406]
 
 pylint:
   disable: [I0021]

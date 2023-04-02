@@ -27,10 +27,13 @@ def _error_message(filename, line_number, details):
     """
     Format the error message.
 
-    :param str filename: name of the file with the error
-    :param int line_number: number of the line with the error
-    :param str details: details about the error
-    :return str: the error message
+    Args:
+        filename (str): name of the file with the error
+        line_number (int): number of the line with the error
+        details (str): details about the error
+
+    Returns:
+        error (str): the error message
     """
     return _("ERROR when reading line #{} of {}:\n    {}").format(
         line_number, filename, details
@@ -41,8 +44,10 @@ def _str_sanitize(str2sanitize):
     """
     Sanitize the problem name for LaTeX.
 
-    :param str str2sanitize: string to be sanitize
-    :return: sanitized string
+    Args:
+        str2sanitize (str): string to be sanitize
+    Returns:
+        output (std): sanitized string
     """
     return str2sanitize.replace("_", "-")
 
@@ -51,8 +56,9 @@ def _parse_yaml(options, yaml_header):
     """
     Parse the yaml header.
 
-    :param dict options: the local options for the parser
-    :param str yaml_header: The YAML header
+    Args:
+        options (dict): the local options for the parser
+        yaml_header (str): The YAML header
     """
     import yaml
 
@@ -68,14 +74,20 @@ def parse_file(filename, parser_options):
     """
     Parse one file.
 
-    :param str filename: name of the file to be parser
-    :param dict parser_options: dictionary with the options:
-        list subset: list with the name of the problems to use
-        list success: list with strings to mark sucess
-        int mintime: minimum time running the solver
-        int maxtime: maximum time running the solver
+    Args:
+        filename (str): name of the file to be parser
+        parser_options (dict):
+            dictionary with the following keys:
+
+            - subset (list): list with the name of the problems to use
+            - success (list): list with strings to mark sucess
+            - mintime (float): minimum time running the solver
+            - maxtime (float): maximum time running the solver
         bool free_format: if False request that fail be mark with ``d``
-    :return: performance profile data and name of the solver
+
+    Returns:
+        data (dict): performance profile data
+        algname (str): name of the solver
     """
     options = parser_options.copy()
     options["algname"] = _str_sanitize(filename)
