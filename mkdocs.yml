@@ -21,14 +21,15 @@ plugins:
             docstring_options:
               ignore_init_summary: yes
             docstring_section_style: list
-            docstring_style: sphinx
+            docstring_style: google
             heading_level: 3
             members_order: alphabetical
-            merge_init_into_class: yes
+            merge_init_into_class: no
             separate_signature: no
-            show_category_heading: no
+            show_category_heading: yes
             show_if_no_docstring: no
             show_root_members_full_path: yes
+            show_signature: yes
             show_source: yes
             show_submodules: no
   - mike

@@ -15,7 +15,8 @@ def load_data(parser_options):
     """
     Load the data.
 
-    :param dict parser_options: the configuration dicionary
+    Args:
+        parser_options (dict): the configuration dicionary
     """
     data = {}
     for file_ in parser_options["files"]:
@@ -28,10 +29,11 @@ class Pdata:
     """Store data for performance profile."""
 
     def __init__(self, parser_options, profiler_options):
-        """
-        :param dict parser_options: parser configuration.
+        """Initialize Pdata.
 
-        :param dict profiler_options: profiler configuration
+        Args:
+            parser_options (dict): parser configuration.
+            profiler_options (dict): profiler configuration
         """
         self.data = load_data(parser_options)
         self.cache = profiler_options["cache"]
@@ -77,7 +79,8 @@ class Pdata:
         """
         Get the set of solvers to use.
 
-        :return: list of solvers
+        Returns:
+            solvers (list[dict]): list of solvers
         """
         return self.solvers
 
@@ -85,7 +88,8 @@ class Pdata:
         """
         Get the set of problems to use.
 
-        :return: list of problems
+        Returns:
+            problems (list[str]): list of problems
         """
         return self.problems
 

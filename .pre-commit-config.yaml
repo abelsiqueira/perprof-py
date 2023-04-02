@@ -12,7 +12,7 @@ repos:
     rev: v0.12.0
     hooks:
       - id: markdownlint
-        args: [ -r, "~MD013,~MD029" ]
+        args: [ -r, "~MD013,~MD029,~MD024" ]
         exclude: "^.git"
   - repo: https://github.com/tcort/markdown-link-check
     rev: v3.11.0
