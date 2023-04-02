@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning].
 ### Added
 
 - Class `solver_data.SolverData`, which stores a single solver information.
+- Class `profile_data.ProfileData`, which stores the basic performance profile data.
 
 ### Changed
 
