@@ -113,7 +113,7 @@ pip -v install --no-cache-dir \
 Finally, upload to pypi org, by going back to the first terminal and running:
 
 ```bash
-twine puload -u __token__ -p THETOKEN dist/*
+twine upload -u __token__ -p THETOKEN dist/*
 ```
 
 You also have to manually create a GitHub release.
