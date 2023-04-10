@@ -35,13 +35,14 @@ dev = [
   "pytest-cov",
 ]
 publishing = [
-  "twine"
+  "build",
+  "twine",
 ]
 docs = [
   "mkdocs",
   "mkdocstrings[python]",
   "mkdocs-material",
-  "mike"
+  "mike",
 ]
 
 [project.scripts]
