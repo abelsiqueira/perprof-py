@@ -74,14 +74,19 @@ feature branch.
 
 ## RELEASE
 
-Make sure that
+- Branch into `release-vx.y.z`.
+- Update `CHANGELOG.md` (create a new release from the unreleased changes).
+- Update `x.y.z`in `pyproject.toml`, `perprof/__init__.py`.
+- Run the tests and the pre-commit for all files: `pytest -v` and `pre-commit run -a`.
+- Commit.
+- Create a pull request.
+- Merge the pull request after the tests pass.
+- Create a GitHub tag and release. It should trigger the deployment.
+- Check <https://pypi.org/project/perprof-py>.
 
-- `CHANGELOG.md` is updated (create a new release from the unreleased changes)
-- The version have been updated in `pyproject.toml`, `doc/conf.py`, `perprof/__init__.py`.
-- Tests pass (run with `pytest -v`)
-- You have a commit with the new version pushed.
+### Manual package deployment
 
-Then, in a new terminal
+If the PyPI deployment did not work, these are the instructions to do it manually:
 
 ```bash
 cd $(mktemp -d)
