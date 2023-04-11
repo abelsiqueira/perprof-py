@@ -21,7 +21,7 @@ DOI: [http://doi.org/10.5334/jors.81](http://doi.org/10.5334/jors.81).
 
 ## License
 
-Copyright (C) 2013-2017 Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luiz Rafael dos Santos.
+Copyright (C) 2013-2023 Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luiz Rafael dos Santos.
 Licensed under the GNU GPL v3.
 
 This program is free software: you can redistribute it and/or modify it under
