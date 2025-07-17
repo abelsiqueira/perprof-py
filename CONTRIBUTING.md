@@ -15,15 +15,17 @@ git remote add upstream https://github.com/abelsiqueira/perprof-py.git
 
 ## DEVELOPMENT INSTALL
 
-We use Python 3. Your system might require that you write `python3` to be explicit.
+We use Python 3 and uv for fast dependency management. Install uv first:
 
 ```bash
-python -m venv env
-. env/bin/activate
-pip install --upgrade pip setuptools
-pip install --no-cache-dir --editable .
-pip install --no-cache-dir --editable '.[dev]'
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create virtual environment and install dependencies
+uv sync --extra dev
 ```
+
+This will automatically create a virtual environment and install all development dependencies.
 
 ## BRANCH
 
@@ -77,7 +79,7 @@ feature branch.
 - Branch into `release-vx.y.z`.
 - Update `CHANGELOG.md` (create a new release from the unreleased changes).
 - Update `x.y.z`in `pyproject.toml`, `perprof/__init__.py`.
-- Run the tests and the pre-commit for all files: `pytest -v` and `pre-commit run -a`.
+- Run the tests and the pre-commit for all files: `uv run pytest -v` and `uv run pre-commit run -a`.
 - Commit.
 - Create a pull request.
 - Merge the pull request after the tests pass.
@@ -91,14 +93,10 @@ If the PyPI deployment did not work, these are the instructions to do it manuall
 ```bash
 cd $(mktemp -d)
 git clone https://github.com/abelsiqueira/perprof-py .
-python -m venv env
-source env/bin/activate
-pip install --upgrade pip setuptools
-pip install --no-cache-dir .
-pip install --no-cache-dir '.[dev]'
-pip install --no-cache-dir '.[publishing]'
-python -m build
-twine upload -u __token__ -p THETOKEN -r testpypi dist/*
+curl -LsSf https://astral.sh/uv/install.sh | sh  # Install uv if needed
+uv sync --extra dev --extra publishing
+uv build
+uv run twine upload -u __token__ -p THETOKEN -r testpypi dist/*
 ```
 
 Visit <https://test.pypi.org/project/perprof-py> to check that it was uploaded.
@@ -107,18 +105,15 @@ Then, in another terminal (don't close the old one):
 
 ```bash
 cd $(mktemp -d)
-python -m venv env
-source env/bin/activate
-pip install --upgrade pip setuptools
-pip -v install --no-cache-dir \
-    --index-url https://test.pypi.org/simple \
+curl -LsSf https://astral.sh/uv/install.sh | sh  # Install uv if needed
+uv pip install --index-url https://test.pypi.org/simple \
     --extra-index-url https://pypi.org/simple perprof-py
 ```
 
 Finally, upload to pypi org, by going back to the first terminal and running:
 
 ```bash
-twine upload -u __token__ -p THETOKEN dist/*
+uv run twine upload -u __token__ -p THETOKEN dist/*
 ```
 
 You also have to manually create a GitHub release.

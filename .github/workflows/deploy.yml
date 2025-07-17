@@ -45,14 +45,15 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Pre-requisites
-        run: |
-          pip install --upgrade pip setuptools
-          pip install '.[publishing]'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
 
-      - name: Build
+      - name: Install dependencies and build
         run: |
-          python -m build
+          uv sync --extra publishing
+          uv build
 
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

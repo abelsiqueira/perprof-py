@@ -1,6 +1,8 @@
 build
 dist
 env
+.venv
+.claude/
 perprof/examples/plots
 site
 
