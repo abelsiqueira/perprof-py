@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -15,29 +15,29 @@ repos:
         args: [ -r, "~MD013,~MD029,~MD024" ]
         exclude: "^.git"
   - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.11.0
+    rev: v3.13.7
     hooks:
       - id: markdown-link-check
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.12.1
+    rev: v0.24.1
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 25.1.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.0.2
+    rev: v2.3.1
     hooks:
       - id: autoflake
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.20.0
     hooks:
       - id: pyupgrade
         args:
           - --py37-plus
   - repo: https://github.com/DanielNoord/pydocstringformatter
-    rev: v0.7.3
+    rev: v0.7.5
     hooks:
       - id: pydocstringformatter
   - repo: local
@@ -48,6 +48,6 @@ repos:
         language: system
         types: [python]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 6.0.1
     hooks:
       - id: isort
