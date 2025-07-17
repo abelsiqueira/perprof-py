@@ -1,4 +1,5 @@
 """Setup has moved to pyproject.toml."""
+
 from setuptools import setup
 
 # import os

@@ -94,10 +94,10 @@ The CLI supports multiple backends via flags:
 - **test_solver_data.py** - Unit tests for SolverData class
 - Tests include error cases (invalid files, missing data, etc.)
 
-### Known Issues
-- pandas/numpy compatibility issues may affect bokeh backend and some tests
-- Core functionality (raw, matplotlib backends) works correctly
-- Use `uv run perprof --raw --demo` or `uv run perprof --mp --demo` for testing
+### Dependency Notes
+- numpy is pinned to `<2.0` due to ABI incompatibility with pandas 1.x and bokeh 2.x
+- This constraint resolves import errors and ensures all tests pass
+- All backends (raw, matplotlib, bokeh, tikz) are fully functional
 
 ## Release Process
 
