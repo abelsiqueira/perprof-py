@@ -9,6 +9,7 @@ perprof-py is a Python package for generating performance profiles as described 
 ## Development Setup
 
 ### Installation
+
 This project uses uv for dependency management. Install uv if not already available:
 
 ```bash
@@ -20,7 +21,9 @@ uv sync --extra dev
 ```
 
 ### Required System Dependencies
+
 For full functionality (TikZ backend), install TeX dependencies:
+
 ```bash
 sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-extra
 ```
@@ -28,24 +31,30 @@ sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-ex
 ## Common Development Commands
 
 ### Testing
+
 - Run all tests: `uv run pytest -v`
 - Run tests with coverage: `uv run pytest -v --cov`
 - Run single test file: `uv run pytest tests/test_profile_data.py -v`
 
 ### Code Quality
+
 - Run all pre-commit checks: `uv run pre-commit run -a`
 - Run specific linter: `uv run pylint perprof/`
-- Format code: `uv run black perprof/ tests/`
+- Format code: `uv run ruff format perprof/ tests/`
+- Lint code: `uv run ruff check perprof/ tests/ --fix`
 
 ### Examples and Demo
+
 - Run example generation: `cd perprof/examples && uv run ./make-examples.sh`
 - Test CLI with demo data: `uv run perprof --bokeh --demo`
 
 ### Documentation
+
 - Build docs: `uv run mkdocs build`
 - Serve docs locally: `uv run mkdocs serve`
 
 ### Package Management
+
 - Add new dependency: `uv add package-name`
 - Add development dependency: `uv add --dev package-name`
 - Update dependencies: `uv lock --upgrade`
@@ -57,21 +66,26 @@ sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-ex
 ### Core Components
 
 #### Data Processing Pipeline
+
 1. **parse.py** - Parses solver data files in YAML format with problem results
 2. **solver_data.py** - `SolverData` class representing individual solver performance
 3. **profile_data.py** - `ProfileData` class computing performance profiles from multiple solvers
 4. **prof.py** - Legacy `Pdata` class and data loading utilities
 
 #### Output Backends
+
 - **matplotlib.py** - `Profiler` class for matplotlib/pyplot output (png, pdf, svg, etc.)
 - **tikz.py** - `Profiler` class for TikZ/LaTeX output (tex, pdf)
 - **bokeh.py** - `Profiler` class for interactive HTML output
 
 #### Main Entry Point
+
 - **main.py** - CLI argument parsing and backend selection logic
 
 ### File Format
+
 Input files use YAML front matter followed by problem results:
+
 ```
 ---
 Solver Name: MySolver
@@ -81,7 +95,9 @@ problem2 failed 5.67
 ```
 
 ### Backend Selection
+
 The CLI supports multiple backends via flags:
+
 - `--mp` or `--matplotlib` - matplotlib backend
 - `--tikz` - TikZ/LaTeX backend
 - `--bokeh` - Bokeh HTML backend
@@ -95,9 +111,23 @@ The CLI supports multiple backends via flags:
 - Tests include error cases (invalid files, missing data, etc.)
 
 ### Dependency Notes
+
 - numpy is pinned to `<2.0` due to ABI incompatibility with pandas 1.x and bokeh 2.x
 - This constraint resolves import errors and ensures all tests pass
 - All backends (raw, matplotlib, bokeh, tikz) are fully functional
+- The project has migrated from pip to uv for dependency management
+
+## Pre-commit Configuration
+
+This project uses modern pre-commit hooks for code quality:
+
+- **ruff** - Fast Python linting and formatting (replaces black, autoflake, pyupgrade)
+- **lychee** - Fast link checking for markdown files
+- **isort** - Import sorting
+- **prospector** - Static analysis
+- **markdownlint** - Markdown formatting
+- **check-toml** - TOML validation
+- **validate-pyproject** - pyproject.toml validation
 
 ## Release Process
 

@@ -25,7 +25,7 @@ class Profiler(prof.Pdata):
         if profiler_options["output"] is None:
             self.output = sys.stdout
         else:
-            self.output = f'{profiler_options["output"]}.tex'
+            self.output = f"{profiler_options['output']}.tex"
             self.output = os.path.abspath(self.output)
         self.standalone = profiler_options["standalone"]
         self.output_format = profiler_options["output_format"]
@@ -70,8 +70,7 @@ class Profiler(prof.Pdata):
                 str2output.append(f"\\pgfplotsset{{compat={self.pgfplot_version}}}")
             else:
                 str2output.append(
-                    "\\pgfplotsset{compat=newest,compat/show "
-                    "suggested version=false}"
+                    "\\pgfplotsset{compat=newest,compat/show suggested version=false}"
                 )
             if self.page_background:
                 str2output.append(
