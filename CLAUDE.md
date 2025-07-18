@@ -48,6 +48,8 @@ sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-ex
 
 - Run example generation: `cd perprof/examples && uv run ./make-examples.sh`
 - Test CLI with demo data: `uv run perprof --bokeh --demo`
+- Test with verbose logging: `uv run perprof --verbose --mp --demo -o output`
+- Debug mode with file logging: `uv run perprof --debug --log-file debug.log --mp --demo -o output`
 
 ### Documentation
 
