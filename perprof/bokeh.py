@@ -26,10 +26,10 @@ class Profiler(prof.Pdata):
             profiler_options (dict): profiler options
         """
         if profiler_options["output"] is None:
-            self.output = f'performance-profile.{profiler_options["output_format"]}'
+            self.output = f"performance-profile.{profiler_options['output_format']}"
         else:
             self.output = (
-                f'{profiler_options["output"]}.{profiler_options["output_format"]}'
+                f"{profiler_options['output']}.{profiler_options['output_format']}"
             )
         self.output_format = profiler_options["output_format"]
 

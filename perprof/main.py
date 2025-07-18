@@ -252,8 +252,7 @@ def set_arguments(args):
         type=str,
         default="c",
         help=_(
-            "Flags that are interpreted as success, "
-            "separated by commas.  Default: `c`"
+            "Flags that are interpreted as success, separated by commas.  Default: `c`"
         ),
     )
     parser.add_argument(

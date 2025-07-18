@@ -7,46 +7,35 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-toml
       - id: check-added-large-files
   - repo: https://github.com/markdownlint/markdownlint
     rev: v0.12.0
     hooks:
       - id: markdownlint
-        args: [ -r, "~MD013,~MD029,~MD024" ]
+        args: [-r, "~MD013,~MD029,~MD024"]
         exclude: "^.git"
-  - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.13.7
-    hooks:
-      - id: markdown-link-check
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.24.1
     hooks:
       - id: validate-pyproject
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.4
     hooks:
-      - id: black
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v2.3.1
-    hooks:
-      - id: autoflake
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.20.0
-    hooks:
-      - id: pyupgrade
-        args:
-          - --py37-plus
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
   - repo: https://github.com/DanielNoord/pydocstringformatter
     rev: v0.7.5
     hooks:
       - id: pydocstringformatter
-  - repo: local
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.0
     hooks:
-      - id: prospector
-        name: prospector
-        entry: prospector
-        language: system
-        types: [python]
+      - id: mypy
+        args: [--ignore-missing-imports, --no-strict-optional]
+        additional_dependencies: [types-PyYAML, types-requests]
+        exclude: ^perprof/examples/
   - repo: https://github.com/PyCQA/isort
     rev: 6.0.1
     hooks:

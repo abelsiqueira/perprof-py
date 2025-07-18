@@ -68,7 +68,7 @@ class Pdata:
             str2output += f"{problem:>16}  "
             for solver in self.solvers:
                 try:
-                    str2output += " " * 8 + f'{self.data[solver][problem]["time"]:8.4} '
+                    str2output += " " * 8 + f"{self.data[solver][problem]['time']:8.4} "
                 except KeyError:
                     str2output += " " * 13 + "inf  "
             str2output += "\n"

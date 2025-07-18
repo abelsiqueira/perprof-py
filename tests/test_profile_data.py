@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 from perprof.profile_data import ProfileData
-from perprof.solver_data import SolverData, read_table
+from perprof.solver_data import SolverData
 
 DATA_DIR = Path(__file__).resolve().parent / "test_data/"
 

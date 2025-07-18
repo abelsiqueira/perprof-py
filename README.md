@@ -36,8 +36,26 @@ details.
 
 ## Install
 
+### For Users
+
 ```bash
-python -m pip install perprof-py
+pip install perprof-py
+```
+
+### For Development
+
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management:
+
+```bash
+# Install uv if not already available
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone the repository
+git clone https://github.com/abelsiqueira/perprof-py.git
+cd perprof-py
+
+# Create virtual environment and install dependencies
+uv sync --extra dev
 ```
 
 For more details, see the [documentation](https://abelsiqueira.github.io/perprof-py/latest).
@@ -45,10 +63,33 @@ For more details, see the [documentation](https://abelsiqueira.github.io/perprof
 ## How to use
 
 ```bash
-perprof-py FILES BACKEND
+perprof [OPTIONS] FILES
 ```
 
-For more details on the FILES format and the available backends, see the [documentation](https://abelsiqueira.github.io/perprof-py/latest).
+### Quick Start
+
+```bash
+# Generate performance profile using matplotlib backend
+perprof --mp solver1.table solver2.table solver3.table
+
+# Generate interactive HTML profile with Bokeh
+perprof --bokeh solver1.table solver2.table solver3.table
+
+# Generate TikZ/LaTeX output
+perprof --tikz solver1.table solver2.table solver3.table
+
+# Try the demo data
+perprof --demo --bokeh
+```
+
+### Available Backends
+
+- `--mp` or `--matplotlib`: Generate plots using matplotlib (PNG, PDF, SVG)
+- `--bokeh`: Generate interactive HTML plots using Bokeh
+- `--tikz`: Generate TikZ/LaTeX code for publication-quality plots
+- `--raw`: Process data without generating plots
+
+For more details on the file format and options, see the [documentation](https://abelsiqueira.github.io/perprof-py/latest).
 
 ## Getting Help
 
