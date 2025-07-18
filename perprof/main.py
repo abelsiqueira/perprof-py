@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import gettext
+import logging
 import os.path
 import sys
 import warnings
@@ -20,6 +21,50 @@ SUPPORT_TIKZ = ["tex", "pdf"]
 THIS_DIR, THIS_FILENAME = os.path.split(__file__)
 THIS_TRANSLATION = gettext.translation("perprof", os.path.join(THIS_DIR, "locale"))
 _ = THIS_TRANSLATION.gettext
+
+
+def setup_logging(
+    verbose: bool = False, debug: bool = False, log_file: str | None = None
+) -> None:
+    """Configure logging for the application.
+
+    Args:
+        verbose: Enable INFO level logging
+        debug: Enable DEBUG level logging (overrides verbose)
+        log_file: Optional file path for logging output
+    """
+    # Determine logging level
+    if debug:
+        level = logging.DEBUG
+    elif verbose:
+        level = logging.INFO
+    else:
+        level = logging.WARNING
+
+    # Create formatter
+    formatter = logging.Formatter("[%(levelname)s] %(name)s: %(message)s")
+
+    # Configure root logger
+    logger = logging.getLogger("perprof")
+    logger.setLevel(level)
+
+    # Remove existing handlers to avoid duplicates
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
+
+    # Console handler
+    console_handler = logging.StreamHandler(sys.stderr)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    # File handler if specified
+    if log_file:
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+    # Prevent propagation to root logger
+    logger.propagate = False
 
 
 class ParserOptions(TypedDict):
@@ -370,6 +415,21 @@ def set_arguments(args: list[str]) -> argparse.Namespace:
         help=_("Name of the file to use as output (the correct extension will be add)"),
     )
 
+    # Logging options
+    logging_group = parser.add_argument_group(_("Logging options"))
+    logging_group.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help=_("Enable verbose output (INFO level)"),
+    )
+    logging_group.add_argument(
+        "--debug", action="store_true", help=_("Enable debug output (DEBUG level)")
+    )
+    logging_group.add_argument(
+        "--log-file", help=_("Write log output to specified file")
+    )
+
     parser.add_argument(
         "--demo", action="store_true", help=_("Use examples files as input")
     )
@@ -404,48 +464,81 @@ def main() -> None:
     try:
         args = set_arguments(sys.argv[1:])
 
+        # Initialize logging
+        setup_logging(verbose=args.verbose, debug=args.debug, log_file=args.log_file)
+
+        logger = logging.getLogger("perprof.main")
+        logger.info("Starting perprof with %d input files", len(args.file_name))
+
+        if args.debug:
+            logger.debug("Arguments: %s", vars(args))
+
         parser_options, profiler_options = process_arguments(args)
 
+        if args.debug:
+            logger.debug("Parser options: %s", parser_options)
+            logger.debug("Profiler options: %s", profiler_options)
+
         if args.bokeh:
-            # bokeh
+            logger.info(
+                "Using Bokeh backend for %s output", profiler_options["output_format"]
+            )
             from . import bokeh
 
             bokeh_profiler = bokeh.Profiler(parser_options, profiler_options)
             bokeh_profiler.plot()
+            logger.info("Bokeh plot generation completed")
         elif args.mp:
-            # matplotlib
+            logger.info(
+                "Using matplotlib backend for %s output",
+                profiler_options["output_format"],
+            )
             from . import matplotlib
 
             mp_profiler = matplotlib.Profiler(parser_options, profiler_options)
             mp_profiler.plot()
+            logger.info("Matplotlib plot generation completed")
         elif args.tikz:
             if profiler_options["output_format"] == "pdf" and args.output is None:
-                print(
-                    _(
-                        "ERROR: When using PDF output, you need to provide "
-                        "the name of the output file."
-                    )
+                error_msg = _(
+                    "ERROR: When using PDF output, you need to provide "
+                    "the name of the output file."
                 )
+                logger.error(error_msg)
+                print(error_msg)
             else:
-                # tikz
+                logger.info(
+                    "Using TikZ backend for %s output",
+                    profiler_options["output_format"],
+                )
                 from . import tikz
 
                 tikz_profiler = tikz.Profiler(parser_options, profiler_options)
                 tikz_profiler.plot()
+                logger.info("TikZ plot generation completed")
         elif args.raw:
-            # raw
+            logger.info("Generating raw data output")
             from . import prof
 
             print("raw")
 
             print(prof.Pdata(parser_options, profiler_options))
         elif args.table:
-            # table
+            logger.info("Generating robustness/efficiency table")
             from . import prof
 
             pdata = prof.Pdata(parser_options, profiler_options)
             pdata.print_rob_eff_table()
     except ValueError as error:
+        logger = logging.getLogger("perprof.main")
+        logger.error("Input validation error: %s", error)
         print(error)
     except NotImplementedError as error:
+        logger = logging.getLogger("perprof.main")
+        logger.error("Feature not implemented: %s", error)
         print(error)
+    except Exception as error:
+        logger = logging.getLogger("perprof.main")
+        logger.exception("Unexpected error occurred")
+        print(f"Unexpected error: {error}")
+        sys.exit(1)
