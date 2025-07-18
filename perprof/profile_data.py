@@ -1,8 +1,12 @@
 """Class to store the profile configuration and data."""
 
+from __future__ import annotations
+
 from pathlib import Path
+from typing import Union
 
 import numpy as np
+import pandas as pd
 
 from .solver_data import SolverData, read_table
 
@@ -26,7 +30,9 @@ class ProfileData:
             Matrix of the cumulative distribution of problems. Dimensions and len(breakpoints) by len(solvers).
     """
 
-    def __init__(self, *solvers, subset=None):
+    def __init__(
+        self, *solvers: Union[str, Path, SolverData], subset: list[str] | None = None
+    ) -> None:
         """Initialize the profile structure with solver_data.SolverData or files.
 
         Args:
@@ -46,14 +52,14 @@ class ProfileData:
         self.subset = subset
 
         # Variables that will be filled by self.process()
-        self._solvers_data = None
-        self.ratio = None
-        self._best_times = None
-        self.breakpoints = None
-        self.cumulative = None
+        self._solvers_data: pd.DataFrame | None = None
+        self.ratio: np.ndarray | None = None
+        self._best_times: np.ndarray | None = None
+        self.breakpoints: np.ndarray | None = None
+        self.cumulative: np.ndarray | None = None
         self.process()
 
-    def process(self):
+    def process(self) -> None:
         """
         Process the solver data.
 
@@ -62,11 +68,6 @@ class ProfileData:
         """
         if len(self.solvers) <= 1:
             raise ValueError("A Profile needs two solvers, at least")
-
-        problems = set(self.solvers[0].data["name"].values)
-        for solver in self.solvers[1:]:
-            problems = problems.union(set(solver.data["name"].values))
-        problems = sorted(list(problems))
 
         # create the reduced dataset: |subset| x |solvers|
         cols = ["name", "time"]

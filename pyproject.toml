@@ -63,6 +63,21 @@ src_paths = "bird_cloud_gnn,tests"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.coverage.run]
+source = ["perprof"]
+omit = ["*/tests/*", "*/examples/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+fail_under = 60
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["perprof*"]
@@ -75,4 +90,6 @@ perprof = ["locale/*/*/*.mo", "examples/*.table"]
 [dependency-groups]
 dev = [
     "mypy>=1.4.1",
+    "pandas-stubs>=1.2.0.62",
+    "types-pyyaml>=6.0.12.12",
 ]

@@ -1,12 +1,29 @@
 """Class and functions related to storing the solver's results."""
 
+from __future__ import annotations
+
 from io import StringIO
 from pathlib import Path
+from typing import TypedDict, Union
 
 import numpy as np
 import pandas as pd
 
 from .parse import _parse_yaml
+
+
+class _ParseOptions(TypedDict):
+    """Type definition for parse options dictionary."""
+
+    algname: str | None
+    success: str
+    free_format: bool
+    col_name: int
+    col_exit: int
+    col_time: int
+    col_fval: int
+    col_primal: int
+    col_dual: int
 
 
 class SolverData:
@@ -30,11 +47,11 @@ class SolverData:
 
     def __init__(
         self,
-        algname,
-        data,
-        success=None,
-        read_csv_args=None,
-    ):
+        algname: str,
+        data: Union[str, Path, pd.DataFrame],
+        success: list[str] | None = None,
+        read_csv_args: dict | None = None,
+    ) -> None:
         """Initializes the SolverData from files or DataFrames.
 
         Args:
@@ -72,7 +89,7 @@ class SolverData:
                 self.data[col] = np.nan
 
 
-def read_table(filename):
+def read_table(filename: Union[str, Path]) -> SolverData:
     """
     Read a table file as described in the documentation section [File Format](file-format).
 
@@ -83,7 +100,7 @@ def read_table(filename):
     Returns:
         solver (SolverData): Parsed data
     """
-    options = {
+    options: _ParseOptions = {
         "algname": None,
         "success": "c,converged,solved,success",
         "free_format": True,
@@ -108,7 +125,7 @@ def read_table(filename):
                 in_yaml = True
 
     _parse_yaml(options, "".join(yaml_header))
-    options["success"] = options["success"].split(",")
+    success_list = options["success"].split(",")
     data_header = ["name", "exit", "time", "fval", "primal", "dual"]
     header_order = [
         options["col_name"],
@@ -125,7 +142,7 @@ def read_table(filename):
     )
 
     return SolverData(
-        options["algname"],
+        options["algname"] or "Unknown",
         data,
-        success=options["success"],
+        success=success_list,
     )
