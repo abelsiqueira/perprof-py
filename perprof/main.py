@@ -1,11 +1,16 @@
 """Main file for perprof."""
 
-# pylint: disable=import-outside-toplevel
+from __future__ import annotations
 
+import argparse
 import gettext
 import os.path
 import sys
 import warnings
+from typing import TypedDict
+
+# pylint: disable=import-outside-toplevel
+
 
 SUPPORT_BOKEH = ["html"]
 SUPPORT_MP = ["eps", "pdf", "png", "ps", "svg"]
@@ -17,10 +22,48 @@ THIS_TRANSLATION = gettext.translation("perprof", os.path.join(THIS_DIR, "locale
 _ = THIS_TRANSLATION.gettext
 
 
+class ParserOptions(TypedDict):
+    """Type definition for parser options dictionary."""
+
+    free_format: bool
+    files: list[str]
+    success: list[str]
+    maxtime: float
+    mintime: float
+    compare: str
+    unc: bool
+    infeas_tol: float
+    subset: list[str]
+
+
+class ProfilerOptions(TypedDict):
+    """Type definition for profiler options dictionary."""
+
+    lang: str
+    cache: bool
+    files: list[str]
+    force: bool
+    standalone: bool
+    semilog: bool
+    black_and_white: bool
+    output: str | None
+    pgfplot_version: float | None
+    tau: float | None
+    pdf_verbose: bool
+    title: str | None
+    xlabel: str
+    ylabel: str
+    background: tuple[int, int, int] | None
+    page_background: tuple[int, int, int] | None
+    output_format: str | None
+
+
 # pylint: disable=too-many-statements,too-many-branches
-def process_arguments(args):
+def process_arguments(
+    args: argparse.Namespace,
+) -> tuple[ParserOptions, ProfilerOptions]:
     """Generate the dictionaries with options."""
-    parser_options = {
+    parser_options: ParserOptions = {
         "free_format": args.free_format,
         "files": args.file_name,
         "success": args.success.split(","),
@@ -29,9 +72,10 @@ def process_arguments(args):
         "compare": args.compare,
         "unc": args.unconstrained,
         "infeas_tol": args.infeasibility_tolerance,
+        "subset": [],  # Will be set below if args.subset exists
     }
 
-    profiler_options = {
+    profiler_options: ProfilerOptions = {
         "lang": args.lang,
         "cache": args.cache,
         "files": args.file_name,
@@ -46,6 +90,9 @@ def process_arguments(args):
         "title": args.title,
         "xlabel": args.xlabel,
         "ylabel": args.ylabel,
+        "background": None,  # Will be set below if args.background exists
+        "page_background": None,  # Will be set below if args.page_background exists
+        "output_format": None,  # Will be set below based on args
     }
 
     if args.no_title:
@@ -55,21 +102,17 @@ def process_arguments(args):
         profiler_options["background"] = None
     else:
         # Set a tuple of integer
-        profiler_options["background"] = tuple(
-            int(i) for i in args.background.split(",")
-        )
-        assert len(profiler_options["background"]) == 3, _(
-            "RGB for background must have 3 integers"
-        )
+        background_tuple = tuple(int(i) for i in args.background.split(","))
+        assert len(background_tuple) == 3, _("RGB for background must have 3 integers")
+        profiler_options["background"] = background_tuple
     if args.page_background is None:
         profiler_options["page_background"] = None
     else:
-        profiler_options["page_background"] = tuple(
-            int(i) for i in args.page_background.split(",")
-        )
-        assert len(profiler_options["page_background"]) == 3, _(
+        page_background_tuple = tuple(int(i) for i in args.page_background.split(","))
+        assert len(page_background_tuple) == 3, _(
             "RGB for page background must have 3 integers"
         )
+        profiler_options["page_background"] = page_background_tuple
 
     if args.html:
         profiler_options["output_format"] = "html"
@@ -94,29 +137,30 @@ def process_arguments(args):
     else:
         profiler_options["output_format"] = None
 
-    if args.bokeh and profiler_options["output_format"] not in SUPPORT_BOKEH:
+    output_format = profiler_options["output_format"]
+    if args.bokeh and output_format not in SUPPORT_BOKEH:
         raise NotImplementedError(
             _("Output option {} not supported by bokeh").format(
-                profiler_options["output_format"].upper()
+                output_format.upper() if output_format else "None"
             )
         )
-    if args.mp and profiler_options["output_format"] not in SUPPORT_MP:
+    if args.mp and output_format not in SUPPORT_MP:
         raise NotImplementedError(
             _("Output option {} not supported by matplotlib").format(
-                profiler_options["output_format"].upper()
+                output_format.upper() if output_format else "None"
             )
         )
-    if args.tikz and profiler_options["output_format"] not in SUPPORT_TIKZ:
+    if args.tikz and output_format not in SUPPORT_TIKZ:
         raise NotImplementedError(
             _("Output option {} not supported by TikZ").format(
-                profiler_options["output_format"].upper()
+                output_format.upper() if output_format else "None"
             )
         )
-    if args.raw and profiler_options["output_format"]:
+    if args.raw and output_format:
         raise NotImplementedError(
             _("--raw does not support output except standard output")
         )
-    if args.table and profiler_options["output_format"]:
+    if args.table and output_format:
         raise NotImplementedError(_("--table only write to .tex or to standard output"))
 
     if args.subset:
@@ -124,15 +168,12 @@ def process_arguments(args):
             parser_options["subset"] = [line.strip() for line in subset_file]
         if len(parser_options["subset"]) == 0:
             raise AttributeError(_("ERROR: Subset is empty"))
-    else:
-        parser_options["subset"] = []
 
     return parser_options, profiler_options
 
 
-def set_arguments(args):
+def set_arguments(args: list[str]) -> argparse.Namespace:
     """Set all the arguments of perprof."""
-    import argparse
 
     parser = argparse.ArgumentParser(
         description=_(
@@ -358,7 +399,7 @@ def set_arguments(args):
     return parsed_args
 
 
-def main():
+def main() -> None:
     """Entry point when calling perprof."""
     try:
         args = set_arguments(sys.argv[1:])
@@ -369,14 +410,14 @@ def main():
             # bokeh
             from . import bokeh
 
-            data = bokeh.Profiler(parser_options, profiler_options)
-            data.plot()
+            bokeh_profiler = bokeh.Profiler(parser_options, profiler_options)
+            bokeh_profiler.plot()
         elif args.mp:
             # matplotlib
             from . import matplotlib
 
-            data = matplotlib.Profiler(parser_options, profiler_options)
-            data.plot()
+            mp_profiler = matplotlib.Profiler(parser_options, profiler_options)
+            mp_profiler.plot()
         elif args.tikz:
             if profiler_options["output_format"] == "pdf" and args.output is None:
                 print(
@@ -389,8 +430,8 @@ def main():
                 # tikz
                 from . import tikz
 
-                data = tikz.Profiler(parser_options, profiler_options)
-                data.plot()
+                tikz_profiler = tikz.Profiler(parser_options, profiler_options)
+                tikz_profiler.plot()
         elif args.raw:
             # raw
             from . import prof
@@ -402,8 +443,8 @@ def main():
             # table
             from . import prof
 
-            data = prof.Pdata(parser_options, profiler_options)
-            data.print_rob_eff_table()
+            pdata = prof.Pdata(parser_options, profiler_options)
+            pdata.print_rob_eff_table()
     except ValueError as error:
         print(error)
     except NotImplementedError as error:

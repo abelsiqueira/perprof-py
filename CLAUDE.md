@@ -33,8 +33,9 @@ sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-ex
 ### Testing
 
 - Run all tests: `uv run pytest -v`
-- Run tests with coverage: `uv run pytest -v --cov`
+- Run tests with coverage: `uv run pytest --cov=perprof --cov-report=html --cov-report=term`
 - Run single test file: `uv run pytest tests/test_profile_data.py -v`
+- View coverage report: Open `htmlcov/index.html` in browser
 
 ### Code Quality
 
@@ -128,6 +129,19 @@ This project uses modern pre-commit hooks for code quality:
 - **markdownlint** - Markdown formatting
 - **check-toml** - TOML validation
 - **validate-pyproject** - pyproject.toml validation
+
+## Improvement Planning
+
+This project has structured improvement planning documents:
+
+- **IMPROVEMENT_SUGGESTIONS.md** - Comprehensive analysis of 13 improvement suggestions organized by priority (High/Medium/High impact, Low/Medium/High effort)
+- **EVALUATION_CHECKLIST.md** - Systematic evaluation checklist for each suggestion with decision tracking
+
+**IMPORTANT:** When working on any improvement suggestions, make sure to update the EVALUATION_CHECKLIST.md file after each item with:
+
+- Progress checkmarks
+- Implementation decisions (✅ Implement / ❌ Skip / ⏸️ Defer)
+- Notes about implementation details or reasons for decisions
 
 ## Release Process
 
