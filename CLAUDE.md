@@ -24,7 +24,7 @@ This project uses [uv](https://github.com/astral-sh/uv) for fast dependency mana
 
 ```bash
 # Create virtual environment and install all dependencies
-uv sync --extra dev
+uv sync --group dev
 ```
 
 **Alternative setup** (if uv is unavailable):
@@ -166,11 +166,19 @@ uv run mkdocs build
 # Runtime dependency
 uv add package-name
 
-# Development/testing dependency
-uv add --dev package-name
+# Development dependency (specific group)
+uv add --group test package-name     # Testing tools
+uv add --group lint package-name     # Linting/formatting
+uv add --group type-check package-name  # Type checking
 
-# Optional dependency group
-uv add --optional extra-name package-name
+# Optional dependency (for end users)
+uv add --optional docs package-name
+
+# Install only specific dependency groups (use --no-dev for granular control)
+uv sync --group test --no-dev        # Only testing tools
+uv sync --group lint --no-dev        # Only linting/formatting tools
+uv sync --group type-check --no-dev  # Only type checking tools
+uv sync --group dev                   # All development tools (includes test, lint, type-check)
 ```
 
 **Maintenance**:
@@ -181,6 +189,9 @@ uv lock --upgrade
 
 # Sync environment after pulling changes
 uv sync
+
+# Refresh lock file after dependency structure changes
+uv lock --refresh
 
 # Build distributable package
 uv build
@@ -269,7 +280,7 @@ perprof --raw file1.txt file2.txt
 
 ```bash
 # Ensure virtual environment is activated and dependencies installed
-uv sync --extra dev
+uv sync --group dev
 ```
 
 **TikZ/LaTeX compilation fails**:
@@ -360,7 +371,7 @@ git pull origin main
 git checkout -b feature/your-improvement
 
 # 3. Install development dependencies
-uv sync --extra dev
+uv sync --group dev
 
 # 4. Make your changes...
 

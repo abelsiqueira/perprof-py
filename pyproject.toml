@@ -26,6 +26,13 @@ dependencies = [
 ]
 version = "1.1.4"
 
+[project.optional-dependencies]
+docs = [
+  "mkdocs",
+  "mkdocstrings[python]",
+  "mkdocs-material",
+  "mike",
+]
 
 [project.scripts]
 perprof = "perprof.main:main"
@@ -68,26 +75,29 @@ namespaces = false
 perprof = ["locale/*/*/*.mo", "examples/*.table"]
 
 [dependency-groups]
-dev = [
+test = [
+    "pytest",
+    "pytest-cov",
+]
+lint = [
     "black",
+    "ruff",
+    "isort",
     "pre-commit",
     "prospector[with_pyroma]",
     "pylint",
-    "pytest",
-    "pytest-cov",
-    "ruff",
-    "isort",
+]
+type-check = [
     "mypy>=1.4.1",
     "pandas-stubs>=1.2.0.62",
     "types-pyyaml>=6.0.12.12",
 ]
+dev = [
+    {include-group = "test"},
+    {include-group = "lint"},
+    {include-group = "type-check"},
+]
 publishing = [
     "build",
     "twine",
-]
-docs = [
-    "mkdocs",
-    "mkdocstrings[python]",
-    "mkdocs-material",
-    "mike",
 ]

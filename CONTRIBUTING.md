@@ -22,7 +22,7 @@ We use Python 3 and uv for fast dependency management. Install uv first:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Create virtual environment and install dependencies
-uv sync --extra dev
+uv sync --group dev
 ```
 
 This will automatically create a virtual environment and install all development dependencies.
@@ -94,7 +94,7 @@ If the PyPI deployment did not work, these are the instructions to do it manuall
 cd $(mktemp -d)
 git clone https://github.com/abelsiqueira/perprof-py .
 curl -LsSf https://astral.sh/uv/install.sh | sh  # Install uv if needed
-uv sync --extra dev --extra publishing
+uv sync --group dev --group publishing
 uv build
 uv run twine upload -u __token__ -p THETOKEN -r testpypi dist/*
 ```
