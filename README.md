@@ -1,10 +1,10 @@
 # perprof-py
 
-[![Tests](https://github.com/abelsiqueira/perprof-py/actions/workflows/tests.yml/badge.svg)](https://github.com/abelsiqueira/perprof-py/actions/workflows/tests.yml)
-[![Lint](https://github.com/abelsiqueira/perprof-py/actions/workflows/lint.yml/badge.svg)](https://github.com/abelsiqueira/perprof-py/actions/workflows/lint.yml)
-![PyPI](https://img.shields.io/pypi/v/perprof-py)
-[![](https://img.shields.io/badge/docs-latest-blue)](https://abelsiqueira.github.io/perprof-py/latest)
-[![](https://img.shields.io/badge/docs-dev-blue)](https://abelsiqueira.github.io/perprof-py/dev)
+[![Tests](https://github.com/abelsiqueira/perprof-py/actions/workflows/tests.yml/badge.svg "Test Status")](https://github.com/abelsiqueira/perprof-py/actions/workflows/tests.yml)
+[![Lint](https://github.com/abelsiqueira/perprof-py/actions/workflows/lint.yml/badge.svg "Lint Status")](https://github.com/abelsiqueira/perprof-py/actions/workflows/lint.yml)
+![PyPI](https://img.shields.io/pypi/v/perprof-py "PyPI Version")
+[![Documentation Latest](https://img.shields.io/badge/docs-latest-blue "Latest Documentation")](https://abelsiqueira.github.io/perprof-py/latest)
+[![Documentation Dev](https://img.shields.io/badge/docs-dev-blue "Development Documentation")](https://abelsiqueira.github.io/perprof-py/dev)
 
 A Python module for performance profiling (as described by [Dolan and
 Moré](http://arxiv.org/abs/cs/0102001)) with TikZ and matplotlib output.
@@ -21,7 +21,8 @@ DOI: [http://doi.org/10.5334/jors.81](http://doi.org/10.5334/jors.81).
 
 ## License
 
-Copyright (C) 2013-2023 Abel Soares Siqueira, Raniere Gaia Costa da Silva, Luiz Rafael dos Santos.
+Copyright (C) 2013-2023 Abel Soares Siqueira, Raniere Gaia Costa da Silva,
+Luiz Rafael dos Santos.
 Licensed under the GNU GPL v3.
 
 This program is free software: you can redistribute it and/or modify it under
@@ -56,6 +57,12 @@ cd perprof-py
 
 # Create virtual environment and install dependencies
 uv sync --extra dev
+
+# Run tests with coverage
+uv run pytest --cov=perprof --cov-report=html --cov-report=term
+
+# Run code quality checks
+uv run pre-commit run --all-files
 ```
 
 For more details, see the [documentation](https://abelsiqueira.github.io/perprof-py/latest).
@@ -89,8 +96,25 @@ perprof --demo --bokeh
 - `--tikz`: Generate TikZ/LaTeX code for publication-quality plots
 - `--raw`: Process data without generating plots
 
+### Logging and Debugging
+
+perprof-py includes comprehensive logging support for debugging and development:
+
+```bash
+# Enable verbose logging
+perprof --verbose --bokeh solver1.table solver2.table
+
+# Enable debug logging for detailed output
+perprof --debug --mp solver1.table solver2.table
+
+# Save logs to file
+perprof --verbose --log-file perprof.log --tikz solver1.table solver2.table
+```
+
 For more details on the file format and options, see the [documentation](https://abelsiqueira.github.io/perprof-py/latest).
 
 ## Getting Help
 
-If you didn't find something at the documentation, want to report a bug, or request a new feature, please open an [issue](https://github.com/abelsiqueira/perprof-py/issues).
+If you didn't find something at the documentation, want to report a bug, or
+request a new feature, please open an
+[issue](https://github.com/abelsiqueira/perprof-py/issues).
