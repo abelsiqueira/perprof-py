@@ -13,22 +13,26 @@ jobs:
     name: Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.9
+          python-version: '3.11'
 
-      - name: Upgrade pip and install dependencies
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
         run: |
-          pip install --upgrade pip setuptools
-          pip install '.[docs]'
+          uv sync --extra docs
 
       - name: Build docs
         run: |
-          mkdocs -v build
+          uv run mkdocs -v build
 
       - name: Setup doc deploy
         run: |
@@ -38,11 +42,11 @@ jobs:
       - name: Deploy docs (dev)
         if: github.ref == 'refs/heads/main'
         run: |
-          mike delete dev
-          mike deploy --push --rebase -t "Documentation for branch main (commit ${GITHUB_SHA::8})" dev
+          uv run mike delete dev
+          uv run mike deploy --push -t "Documentation for branch main (commit ${GITHUB_SHA::8})" dev
 
       - name: Deploy docs (tag and latest)
         if: github.ref != 'refs/heads/main'
         run: |
-          mike deploy --push --update-aliases -t "Documentation for release $GITHUB_REF_NAME"  $GITHUB_REF_NAME latest
-          mike set-default latest
+          uv run mike deploy --push --update-aliases -t "Documentation for release $GITHUB_REF_NAME"  $GITHUB_REF_NAME latest
+          uv run mike set-default latest
