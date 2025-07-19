@@ -1,0 +1,2403 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://abelsiqueira.com/perprof-py/dev/api/">
+      
+      
+        <link rel="prev" href="../file-format/">
+      
+      
+        <link rel="next" href="../old-api/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Public API - perprof-py</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-for-developers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="perprof-py" class="md-header__button md-logo" aria-label="perprof-py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            perprof-py
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Public API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="perprof-py" class="md-nav__button md-logo" aria-label="perprof-py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    perprof-py
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Format
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Public API
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Public API
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solver-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solver Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solver Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      solver_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profile-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profile Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Profile Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      profile_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../old-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Old public API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#solver-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solver Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solver Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      solver_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.solver_data-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profile-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profile Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Profile Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      profile_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perprof.profile_data-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-for-developers">API for Developers<a class="headerlink" href="#api-for-developers" title="Permanent link">&para;</a></h1>
+<p>Here you will find the API provide for developers.</p>
+<div class="toc">
+<ul>
+<li><a href="#api-for-developers">API for Developers</a><ul>
+<li><a href="#solver-data">Solver Data</a><ul>
+<li><a href="#perprof.solver_data">solver_data</a></li>
+<li><a href="#perprof.solver_data-classes">Classes</a></li>
+<li><a href="#perprof.solver_data-functions">Functions</a></li>
+</ul>
+</li>
+<li><a href="#profile-data">Profile Data</a><ul>
+<li><a href="#perprof.profile_data">profile_data</a></li>
+<li><a href="#perprof.profile_data-classes">Classes</a></li>
+<li><a href="#perprof.profile_data-functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="solver-data">Solver Data<a class="headerlink" href="#solver-data" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="perprof.solver_data"></a>
+    <div class="doc doc-contents first">
+
+        <p>Class and functions related to storing the solver&rsquo;s results.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+<h3 id="perprof.solver_data-classes">Classes<a href="#perprof.solver_data-classes" class="headerlink" title="Permanent link">&para;</a></h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="perprof.solver_data.SolverData" class="doc doc-heading">
+            <code>perprof.solver_data.SolverData</code>
+
+
+<a href="#perprof.solver_data.SolverData" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+
+        <p>Store performance data from a single solver/algorithm.</p>
+<p>Contains performance metrics and metadata for one solver across multiple test problems.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.solver_data.SolverData.algname">algname</span></code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Name of the algorithm/solver being analyzed.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.solver_data.SolverData.data">data</span></code></b>
+              (<code><a class="autorefs autorefs-external" title="pandas.DataFrame" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame">DataFrame</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>DataFrame containing performance results with required columns:</p>
+<ul>
+<li>&ldquo;name&rdquo;: The problem name (string identifier).</li>
+<li>&ldquo;exit&rdquo;: Exit flag to determine successful termination.</li>
+<li>&ldquo;time&rdquo;: Elapsed time for the algorithm (float, seconds).</li>
+<li>&ldquo;fval&rdquo;: Function value at the solution (optional).</li>
+<li>&ldquo;primal&rdquo;: Primal residual at the solution (optional).</li>
+<li>&ldquo;dual&rdquo;: Dual residual at the solution (optional).</li>
+</ul>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.solver_data.SolverData.success">success</span></code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>List of exit flag values considered successful termination.
+Default: [&ldquo;c&rdquo;, &ldquo;converged&rdquo;, &ldquo;solved&rdquo;, &ldquo;success&rdquo;]</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>import pandas as pd
+from perprof.solver_data import SolverData</p>
+<h5 id="perprof.solver_data.SolverData--create-from-dataframe">Create from DataFrame<a class="headerlink" href="#perprof.solver_data.SolverData--create-from-dataframe" title="Permanent link">&para;</a></h5>
+<p>data = pd.DataFrame({
+&hellip;     &ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;, &ldquo;prob3&rdquo;],
+&hellip;     &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;, &ldquo;failed&rdquo;],
+&hellip;     &ldquo;time&rdquo;: [1.2, 3.4, 10.0]
+&hellip; })
+solver = SolverData(&ldquo;Newton&rdquo;, data)</p>
+<h5 id="perprof.solver_data.SolverData--access-data">Access data<a class="headerlink" href="#perprof.solver_data.SolverData--access-data" title="Permanent link">&para;</a></h5>
+<p>solver.algname
+&lsquo;Newton&rsquo;
+len(solver.data)
+3
+successful = solver.data[solver.data.exit.isin(solver.success)]
+len(successful) / len(solver.data) &gt; 0.5
+True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>perprof/solver_data.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SolverData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store performance data from a single solver/algorithm.</span>
+
+<span class="sd">    Contains performance metrics and metadata for one solver across multiple test problems.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        algname (str):</span>
+<span class="sd">            Name of the algorithm/solver being analyzed.</span>
+<span class="sd">        data (pandas.DataFrame):</span>
+<span class="sd">            DataFrame containing performance results with required columns:</span>
+
+<span class="sd">            - &quot;name&quot;: The problem name (string identifier).</span>
+<span class="sd">            - &quot;exit&quot;: Exit flag to determine successful termination.</span>
+<span class="sd">            - &quot;time&quot;: Elapsed time for the algorithm (float, seconds).</span>
+<span class="sd">            - &quot;fval&quot;: Function value at the solution (optional).</span>
+<span class="sd">            - &quot;primal&quot;: Primal residual at the solution (optional).</span>
+<span class="sd">            - &quot;dual&quot;: Dual residual at the solution (optional).</span>
+<span class="sd">        success (list[str]):</span>
+<span class="sd">            List of exit flag values considered successful termination.</span>
+<span class="sd">            Default: [&quot;c&quot;, &quot;converged&quot;, &quot;solved&quot;, &quot;success&quot;]</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Create from DataFrame</span>
+<span class="sd">        &gt;&gt;&gt; data = pd.DataFrame({</span>
+<span class="sd">        ...     &quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;, &quot;prob3&quot;],</span>
+<span class="sd">        ...     &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;, &quot;failed&quot;],</span>
+<span class="sd">        ...     &quot;time&quot;: [1.2, 3.4, 10.0]</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; solver = SolverData(&quot;Newton&quot;, data)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Access data</span>
+<span class="sd">        &gt;&gt;&gt; solver.algname</span>
+<span class="sd">        &#39;Newton&#39;</span>
+<span class="sd">        &gt;&gt;&gt; len(solver.data)</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; successful = solver.data[solver.data.exit.isin(solver.success)]</span>
+<span class="sd">        &gt;&gt;&gt; len(successful) / len(solver.data) &gt; 0.5</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="n">success</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_csv_args</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize SolverData from file or DataFrame.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algname (str):</span>
+<span class="sd">                Name of the algorithm/solver for identification.</span>
+<span class="sd">            data (Union[str, Path, pd.DataFrame]):</span>
+<span class="sd">                Source of performance data. Can be:</span>
+<span class="sd">                - File path (str/Path) to CSV file with solver results</span>
+<span class="sd">                - Pre-loaded pandas DataFrame with required columns</span>
+<span class="sd">            success (list[str], optional):</span>
+<span class="sd">                Exit flag values considered successful termination.</span>
+<span class="sd">                If None, defaults to [&quot;c&quot;, &quot;converged&quot;, &quot;solved&quot;, &quot;success&quot;].</span>
+<span class="sd">            read_csv_args (dict, optional):</span>
+<span class="sd">                Additional arguments passed to pandas.read_csv when loading files.</span>
+<span class="sd">                Useful for custom separators, encoding, etc.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If data is not a supported type (str, Path, or DataFrame).</span>
+<span class="sd">            ValueError: If required columns (&quot;name&quot;, &quot;exit&quot;, &quot;time&quot;) are missing.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; # From DataFrame</span>
+<span class="sd">            &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">            &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">            &gt;&gt;&gt; df = pd.DataFrame({</span>
+<span class="sd">            ...     &quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;],</span>
+<span class="sd">            ...     &quot;exit&quot;: [&quot;converged&quot;, &quot;failed&quot;],</span>
+<span class="sd">            ...     &quot;time&quot;: [1.0, 5.0]</span>
+<span class="sd">            ... })</span>
+<span class="sd">            &gt;&gt;&gt; solver = SolverData(&quot;MyAlgorithm&quot;, df)</span>
+<span class="sd">            &gt;&gt;&gt; solver.algname</span>
+<span class="sd">            &#39;MyAlgorithm&#39;</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Custom success flags</span>
+<span class="sd">            &gt;&gt;&gt; solver2 = SolverData(&quot;Algorithm2&quot;, df, success=[&quot;optimal&quot;, &quot;feasible&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; solver2.success</span>
+<span class="sd">            [&#39;optimal&#39;, &#39;feasible&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">algname</span> <span class="o">=</span> <span class="n">algname</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;converged&quot;</span><span class="p">,</span> <span class="s2">&quot;solved&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">read_csv_args</span><span class="p">:</span>
+                <span class="n">read_csv_args</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">read_csv_args</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unexpected type for data input&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Make sure that a columns name, time and exit exist</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;fval&quot;</span><span class="p">,</span> <span class="s2">&quot;primal&quot;</span><span class="p">,</span> <span class="s2">&quot;dual&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="perprof.solver_data.SolverData-functions">Functions<a href="#perprof.solver_data.SolverData-functions" class="headerlink" title="Permanent link">&para;</a></h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="perprof.solver_data.SolverData.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">algname</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">read_csv_args</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#perprof.solver_data.SolverData.__init__" class="headerlink" title="Permanent link">&para;</a></h6>
+
+
+    <div class="doc doc-contents ">
+
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>algname</code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Name of the algorithm/solver for identification.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>data</code></b>
+              (<code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>, <a class="autorefs autorefs-external" title="pandas.DataFrame" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame">DataFrame</a>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>Source of performance data. Can be:
+- File path (str/Path) to CSV file with solver results
+- Pre-loaded pandas DataFrame with required columns</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>success</code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Exit flag values considered successful termination.
+If None, defaults to [&ldquo;c&rdquo;, &ldquo;converged&rdquo;, &ldquo;solved&rdquo;, &ldquo;success&rdquo;].</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>read_csv_args</code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Additional arguments passed to pandas.read_csv when loading files.
+Useful for custom separators, encoding, etc.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#TypeError">TypeError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If data is not a supported type (str, Path, or DataFrame).</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If required columns (&ldquo;name&rdquo;, &ldquo;exit&rdquo;, &ldquo;time&rdquo;) are missing.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<h6 id="perprof.solver_data.SolverData.__init__--from-dataframe">From DataFrame<a class="headerlink" href="#perprof.solver_data.SolverData.__init__--from-dataframe" title="Permanent link">&para;</a></h6>
+<p>import pandas as pd
+from perprof.solver_data import SolverData
+df = pd.DataFrame({
+&hellip;     &ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;],
+&hellip;     &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;failed&rdquo;],
+&hellip;     &ldquo;time&rdquo;: [1.0, 5.0]
+&hellip; })
+solver = SolverData(&ldquo;MyAlgorithm&rdquo;, df)
+solver.algname
+&lsquo;MyAlgorithm&rsquo;</p>
+<h6 id="perprof.solver_data.SolverData.__init__--custom-success-flags">Custom success flags<a class="headerlink" href="#perprof.solver_data.SolverData.__init__--custom-success-flags" title="Permanent link">&para;</a></h6>
+<p>solver2 = SolverData(&ldquo;Algorithm2&rdquo;, df, success=[&ldquo;optimal&rdquo;, &ldquo;feasible&rdquo;])
+solver2.success
+[&lsquo;optimal&rsquo;, &lsquo;feasible&rsquo;]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>perprof/solver_data.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">algname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">read_csv_args</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize SolverData from file or DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        algname (str):</span>
+<span class="sd">            Name of the algorithm/solver for identification.</span>
+<span class="sd">        data (Union[str, Path, pd.DataFrame]):</span>
+<span class="sd">            Source of performance data. Can be:</span>
+<span class="sd">            - File path (str/Path) to CSV file with solver results</span>
+<span class="sd">            - Pre-loaded pandas DataFrame with required columns</span>
+<span class="sd">        success (list[str], optional):</span>
+<span class="sd">            Exit flag values considered successful termination.</span>
+<span class="sd">            If None, defaults to [&quot;c&quot;, &quot;converged&quot;, &quot;solved&quot;, &quot;success&quot;].</span>
+<span class="sd">        read_csv_args (dict, optional):</span>
+<span class="sd">            Additional arguments passed to pandas.read_csv when loading files.</span>
+<span class="sd">            Useful for custom separators, encoding, etc.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data is not a supported type (str, Path, or DataFrame).</span>
+<span class="sd">        ValueError: If required columns (&quot;name&quot;, &quot;exit&quot;, &quot;time&quot;) are missing.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # From DataFrame</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame({</span>
+<span class="sd">        ...     &quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;],</span>
+<span class="sd">        ...     &quot;exit&quot;: [&quot;converged&quot;, &quot;failed&quot;],</span>
+<span class="sd">        ...     &quot;time&quot;: [1.0, 5.0]</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; solver = SolverData(&quot;MyAlgorithm&quot;, df)</span>
+<span class="sd">        &gt;&gt;&gt; solver.algname</span>
+<span class="sd">        &#39;MyAlgorithm&#39;</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Custom success flags</span>
+<span class="sd">        &gt;&gt;&gt; solver2 = SolverData(&quot;Algorithm2&quot;, df, success=[&quot;optimal&quot;, &quot;feasible&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; solver2.success</span>
+<span class="sd">        [&#39;optimal&#39;, &#39;feasible&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">algname</span> <span class="o">=</span> <span class="n">algname</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;converged&quot;</span><span class="p">,</span> <span class="s2">&quot;solved&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">read_csv_args</span><span class="p">:</span>
+            <span class="n">read_csv_args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">read_csv_args</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unexpected type for data input&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make sure that a columns name, time and exit exist</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;fval&quot;</span><span class="p">,</span> <span class="s2">&quot;primal&quot;</span><span class="p">,</span> <span class="s2">&quot;dual&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="perprof.solver_data-functions">Functions<a href="#perprof.solver_data-functions" class="headerlink" title="Permanent link">&para;</a></h3>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="perprof.solver_data.read_table" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">perprof</span><span class="o">.</span><span class="n">solver_data</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
+
+<a href="#perprof.solver_data.read_table" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Read solver data from YAML-formatted table file.</p>
+<p>Parses files with YAML front matter and tabular data. Standard format for
+perprof solver data files.</p>
+
+
+<details class="file-format" open>
+  <summary>File format</summary>
+  <pre><code>---
+Solver Name: MyAlgorithm
+Success: converged,optimal
+---
+problem1 converged 1.23 0.001
+problem2 failed 5.67 0.1
+problem3 converged 2.45 0.01
+</code></pre>
+</details>
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>filename</code></b>
+              (<code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>Path to the table file with YAML header and data rows.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+<b><code>SolverData</code></b> (              <code><a class="autorefs autorefs-internal" title="perprof.solver_data.SolverData" href="#perprof.solver_data.SolverData">SolverData</a></code>
+)          –
+          <div class="doc-md-description">
+            <p>Parsed solver data ready for profile analysis.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>The file format combines YAML metadata with tabular data:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<h5 id="perprof.solver_data.read_table--file-content-example-not-actual-doctest">File content example (not actual doctest):<a class="headerlink" href="#perprof.solver_data.read_table--file-content-example-not-actual-doctest" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--_1">&mdash;<a class="headerlink" href="#perprof.solver_data.read_table--_1" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--solver-name-myalgorithm">Solver Name: MyAlgorithm<a class="headerlink" href="#perprof.solver_data.read_table--solver-name-myalgorithm" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--success-convergedoptimal">Success: converged,optimal<a class="headerlink" href="#perprof.solver_data.read_table--success-convergedoptimal" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--_2">&mdash;<a class="headerlink" href="#perprof.solver_data.read_table--_2" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--problem1-converged-123-0001">problem1 converged 1.23 0.001<a class="headerlink" href="#perprof.solver_data.read_table--problem1-converged-123-0001" title="Permanent link">&para;</a></h5>
+<h5 id="perprof.solver_data.read_table--problem2-failed-567-01">problem2 failed 5.67 0.1<a class="headerlink" href="#perprof.solver_data.read_table--problem2-failed-567-01" title="Permanent link">&para;</a></h5>
+<p>pass  # Placeholder since file operations can&rsquo;t be tested in doctest</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>perprof/solver_data.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read_table</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SolverData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read solver data from YAML-formatted table file.</span>
+
+<span class="sd">    Parses files with YAML front matter and tabular data. Standard format for</span>
+<span class="sd">    perprof solver data files.</span>
+
+<span class="sd">    File format:</span>
+<span class="sd">        ```</span>
+<span class="sd">        ---</span>
+<span class="sd">        Solver Name: MyAlgorithm</span>
+<span class="sd">        Success: converged,optimal</span>
+<span class="sd">        ---</span>
+<span class="sd">        problem1 converged 1.23 0.001</span>
+<span class="sd">        problem2 failed 5.67 0.1</span>
+<span class="sd">        problem3 converged 2.45 0.01</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (Union[str, Path]):</span>
+<span class="sd">            Path to the table file with YAML header and data rows.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        SolverData: Parsed solver data ready for profile analysis.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        The file format combines YAML metadata with tabular data:</span>
+
+<span class="sd">        &gt;&gt;&gt; # File content example (not actual doctest):</span>
+<span class="sd">        &gt;&gt;&gt; # ---</span>
+<span class="sd">        &gt;&gt;&gt; # Solver Name: MyAlgorithm</span>
+<span class="sd">        &gt;&gt;&gt; # Success: converged,optimal</span>
+<span class="sd">        &gt;&gt;&gt; # ---</span>
+<span class="sd">        &gt;&gt;&gt; # problem1 converged 1.23 0.001</span>
+<span class="sd">        &gt;&gt;&gt; # problem2 failed 5.67 0.1</span>
+<span class="sd">        &gt;&gt;&gt; pass  # Placeholder since file operations can&#39;t be tested in doctest</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">_ParseOptions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;algname&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;c,converged,solved,success&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;free_format&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;col_name&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;col_exit&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;col_time&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;col_fval&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;col_primal&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;col_dual&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">file_</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="n">in_yaml</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;---&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">in_yaml</span><span class="p">:</span>
+                    <span class="n">yaml_header</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">data_lines</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span>
+                    <span class="k">break</span>
+                <span class="n">in_yaml</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">_parse_yaml</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">yaml_header</span><span class="p">))</span>
+    <span class="n">success_list</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">data_header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;exit&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;fval&quot;</span><span class="p">,</span> <span class="s2">&quot;primal&quot;</span><span class="p">,</span> <span class="s2">&quot;dual&quot;</span><span class="p">]</span>
+    <span class="n">header_order</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_name&quot;</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_exit&quot;</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_time&quot;</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_fval&quot;</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_primal&quot;</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;col_dual&quot;</span><span class="p">],</span>
+    <span class="p">]</span>
+    <span class="n">data_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_header</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">header_order</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">StringIO</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_header</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data_lines</span><span class="p">)),</span>
+        <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">SolverData</span><span class="p">(</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;algname&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">,</span>
+        <span class="n">success</span><span class="o">=</span><span class="n">success_list</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="profile-data">Profile Data<a class="headerlink" href="#profile-data" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="perprof.profile_data"></a>
+    <div class="doc doc-contents first">
+
+        <p>Class to store the profile configuration and data.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+<h3 id="perprof.profile_data-classes">Classes<a href="#perprof.profile_data-classes" class="headerlink" title="Permanent link">&para;</a></h3>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="perprof.profile_data.ProfileData" class="doc doc-heading">
+            <code>perprof.profile_data.ProfileData</code>
+
+
+<a href="#perprof.profile_data.ProfileData" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+
+        <p>Computes and stores performance profiles for algorithm comparison.</p>
+<p>Implements the Dolan and Moré performance profile methodology. Processes solver
+timing data and computes the fraction of problems solved by each solver within
+performance ratios relative to the best solver.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.profile_data.ProfileData.solvers">solvers</span></code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-internal" title="perprof.solver_data.SolverData" href="#perprof.solver_data.SolverData">SolverData</a>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>List of solver_data.SolverData objects associated with this performance profile.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.profile_data.ProfileData.subset">subset</span></code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>)
+          –
+          <div class="doc-md-description">
+            <p>If not None, used to restrict the problems in which the profile is created.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.profile_data.ProfileData.ratio">ratio</span></code></b>
+              (<code><a class="autorefs autorefs-external" title="numpy.array" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array">array</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Ratio matrix computed using the best time for each problem.
+Shape: (n_problems, n_solvers). Entry [i,j] = time[i,j] / min_time[i]</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.profile_data.ProfileData.breakpoints">breakpoints</span></code></b>
+              (<code><a class="autorefs autorefs-external" title="numpy.array" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array">array</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Array of unique ratio values sorted in ascending order.
+Used as x-axis values for profile visualization.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code><span title="perprof.profile_data.ProfileData.cumulative">cumulative</span></code></b>
+              (<code><a class="autorefs autorefs-external" title="numpy.array" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array">array</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>Matrix of cumulative distribution of problems solved.
+Shape: (len(breakpoints), n_solvers). Entry [i,j] = fraction of problems
+where solver j has ratio &lt;= breakpoints[i].</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>import pandas as pd
+from perprof.profile_data import ProfileData
+from perprof.solver_data import SolverData</p>
+<h5 id="perprof.profile_data.ProfileData--create-solver-data-from-dataframes">Create solver data from DataFrames<a class="headerlink" href="#perprof.profile_data.ProfileData--create-solver-data-from-dataframes" title="Permanent link">&para;</a></h5>
+<p>data1 = pd.DataFrame({
+&hellip;     &ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;],
+&hellip;     &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;],
+&hellip;     &ldquo;time&rdquo;: [1.0, 2.0]
+&hellip; })
+data2 = pd.DataFrame({
+&hellip;     &ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;],
+&hellip;     &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;],
+&hellip;     &ldquo;time&rdquo;: [1.5, 1.5]
+&hellip; })
+solver1 = SolverData(&ldquo;Newton&rdquo;, data1, success=[&ldquo;converged&rdquo;])
+solver2 = SolverData(&ldquo;BFGS&rdquo;, data2, success=[&ldquo;converged&rdquo;])</p>
+<h5 id="perprof.profile_data.ProfileData--create-performance-profile">Create performance profile<a class="headerlink" href="#perprof.profile_data.ProfileData--create-performance-profile" title="Permanent link">&para;</a></h5>
+<p>profile = ProfileData(solver1, solver2)</p>
+<h5 id="perprof.profile_data.ProfileData--access-computed-data">Access computed data<a class="headerlink" href="#perprof.profile_data.ProfileData--access-computed-data" title="Permanent link">&para;</a></h5>
+<p>print(f&rdquo;Ratio matrix shape: {profile.ratio.shape}&rdquo;)
+Ratio matrix shape: (2, 2)
+print(f&rdquo;Number of breakpoints: {len(profile.breakpoints)}&rdquo;)
+Number of breakpoints: 3</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>perprof/profile_data.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ProfileData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes and stores performance profiles for algorithm comparison.</span>
+
+<span class="sd">    Implements the Dolan and Moré performance profile methodology. Processes solver</span>
+<span class="sd">    timing data and computes the fraction of problems solved by each solver within</span>
+<span class="sd">    performance ratios relative to the best solver.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        solvers (list[SolverData]):</span>
+<span class="sd">            List of solver_data.SolverData objects associated with this performance profile.</span>
+<span class="sd">        subset (list[str]):</span>
+<span class="sd">            If not None, used to restrict the problems in which the profile is created.</span>
+<span class="sd">        ratio (numpy.array):</span>
+<span class="sd">            Ratio matrix computed using the best time for each problem.</span>
+<span class="sd">            Shape: (n_problems, n_solvers). Entry [i,j] = time[i,j] / min_time[i]</span>
+<span class="sd">        breakpoints (numpy.array):</span>
+<span class="sd">            Array of unique ratio values sorted in ascending order.</span>
+<span class="sd">            Used as x-axis values for profile visualization.</span>
+<span class="sd">        cumulative (numpy.array):</span>
+<span class="sd">            Matrix of cumulative distribution of problems solved.</span>
+<span class="sd">            Shape: (len(breakpoints), n_solvers). Entry [i,j] = fraction of problems</span>
+<span class="sd">            where solver j has ratio &lt;= breakpoints[i].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.profile_data import ProfileData</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Create solver data from DataFrames</span>
+<span class="sd">        &gt;&gt;&gt; data1 = pd.DataFrame({</span>
+<span class="sd">        ...     &quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;],</span>
+<span class="sd">        ...     &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;],</span>
+<span class="sd">        ...     &quot;time&quot;: [1.0, 2.0]</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; data2 = pd.DataFrame({</span>
+<span class="sd">        ...     &quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;],</span>
+<span class="sd">        ...     &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;],</span>
+<span class="sd">        ...     &quot;time&quot;: [1.5, 1.5]</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; solver1 = SolverData(&quot;Newton&quot;, data1, success=[&quot;converged&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; solver2 = SolverData(&quot;BFGS&quot;, data2, success=[&quot;converged&quot;])</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Create performance profile</span>
+<span class="sd">        &gt;&gt;&gt; profile = ProfileData(solver1, solver2)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Access computed data</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Ratio matrix shape: {profile.ratio.shape}&quot;)</span>
+<span class="sd">        Ratio matrix shape: (2, 2)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Number of breakpoints: {len(profile.breakpoints)}&quot;)</span>
+<span class="sd">        Number of breakpoints: 3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">solvers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">SolverData</span><span class="p">],</span> <span class="n">subset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize performance profile with solver data or file paths.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *solvers (Union[str, Path, SolverData]):</span>
+<span class="sd">                Solver data sources. Can be:</span>
+<span class="sd">                - File paths (str/Path) to YAML files with solver results</span>
+<span class="sd">                - SolverData objects with pre-loaded data</span>
+<span class="sd">                At least 2 solvers are required for comparison.</span>
+<span class="sd">            subset (list[str], optional):</span>
+<span class="sd">                If provided, restricts the analysis to only these problem names.</span>
+<span class="sd">                Useful for focusing on specific problem subsets.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If solver input type is not supported or fewer than 2 solvers provided.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">            &gt;&gt;&gt; from perprof.profile_data import ProfileData</span>
+<span class="sd">            &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # From SolverData objects with DataFrames</span>
+<span class="sd">            &gt;&gt;&gt; data1 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.2, 3.4]})</span>
+<span class="sd">            &gt;&gt;&gt; data2 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.5, 2.8]})</span>
+<span class="sd">            &gt;&gt;&gt; solver1 = SolverData(&quot;Method1&quot;, data1)</span>
+<span class="sd">            &gt;&gt;&gt; solver2 = SolverData(&quot;Method2&quot;, data2)</span>
+<span class="sd">            &gt;&gt;&gt; profile = ProfileData(solver1, solver2)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # With problem subset</span>
+<span class="sd">            &gt;&gt;&gt; profile_subset = ProfileData(solver1, solver2, subset=[&quot;prob1&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; len(profile_subset._solvers_data)</span>
+<span class="sd">            1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="n">solvers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_table</span><span class="p">(</span><span class="n">solver</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">SolverData</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected type for solver input: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subset</span> <span class="o">=</span> <span class="n">subset</span>
+
+        <span class="c1"># Variables that will be filled by self.process()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process solver data to compute performance profile.</span>
+
+<span class="sd">        Computes ratio matrix, breakpoints, and cumulative distribution:</span>
+<span class="sd">        1. Merge solver data into unified DataFrame</span>
+<span class="sd">        2. Set failed convergence times to infinity</span>
+<span class="sd">        3. Compute ratio matrix: time[solver,problem] / min_time[problem]</span>
+<span class="sd">        4. Generate breakpoints from unique ratio values</span>
+<span class="sd">        5. Compute cumulative distribution</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If fewer than 2 solvers are provided.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">            &gt;&gt;&gt; from perprof.profile_data import ProfileData</span>
+<span class="sd">            &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Create test data</span>
+<span class="sd">            &gt;&gt;&gt; data1 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.0, 2.0]})</span>
+<span class="sd">            &gt;&gt;&gt; data2 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.5, 1.5]})</span>
+<span class="sd">            &gt;&gt;&gt; solver1 = SolverData(&quot;Solver1&quot;, data1, success=[&quot;converged&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; solver2 = SolverData(&quot;Solver2&quot;, data2, success=[&quot;converged&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; profile = ProfileData(solver1, solver2)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Check computed ratios and cumulative distribution exist</span>
+<span class="sd">            &gt;&gt;&gt; profile.ratio is not None</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; profile.cumulative is not None</span>
+<span class="sd">            True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A Profile needs two solvers, at least&quot;</span><span class="p">)</span>
+
+        <span class="c1"># create the reduced dataset: |subset| x |solvers|</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">solver</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
+                <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+                <span class="n">rsuffix</span><span class="o">=</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">solver</span><span class="o">.</span><span class="n">algname</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;time_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">algname</span><span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># set to inf the ones that fail convergence</span>
+        <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">solver</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">exit</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;time_&quot;</span> <span class="o">+</span> <span class="n">solver</span><span class="o">.</span><span class="n">algname</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset</span><span class="p">)</span>
+            <span class="p">]</span>
+
+        <span class="c1"># Compute the minimum time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># Compute the cumulative distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="c1"># This removes inf and nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)]</span>
+        <span class="c1"># self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<h5 id="perprof.profile_data.ProfileData-functions">Functions<a href="#perprof.profile_data.ProfileData-functions" class="headerlink" title="Permanent link">&para;</a></h5>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="perprof.profile_data.ProfileData.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">solvers</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#perprof.profile_data.ProfileData.__init__" class="headerlink" title="Permanent link">&para;</a></h6>
+
+
+    <div class="doc doc-contents ">
+
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>*solvers</code></b>
+              (<code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>, <a class="autorefs autorefs-internal" title="perprof.solver_data.SolverData" href="#perprof.solver_data.SolverData">SolverData</a>]</code>, default:
+                  <code>()</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Solver data sources. Can be:
+- File paths (str/Path) to YAML files with solver results
+- SolverData objects with pre-loaded data
+At least 2 solvers are required for comparison.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>subset</code></b>
+              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>If provided, restricts the analysis to only these problem names.
+Useful for focusing on specific problem subsets.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If solver input type is not supported or fewer than 2 solvers provided.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>import pandas as pd
+from perprof.profile_data import ProfileData
+from perprof.solver_data import SolverData</p>
+<h6 id="perprof.profile_data.ProfileData.__init__--from-solverdata-objects-with-dataframes">From SolverData objects with DataFrames<a class="headerlink" href="#perprof.profile_data.ProfileData.__init__--from-solverdata-objects-with-dataframes" title="Permanent link">&para;</a></h6>
+<p>data1 = pd.DataFrame({&ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;], &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;], &ldquo;time&rdquo;: [1.2, 3.4]})
+data2 = pd.DataFrame({&ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;], &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;], &ldquo;time&rdquo;: [1.5, 2.8]})
+solver1 = SolverData(&ldquo;Method1&rdquo;, data1)
+solver2 = SolverData(&ldquo;Method2&rdquo;, data2)
+profile = ProfileData(solver1, solver2)</p>
+<h6 id="perprof.profile_data.ProfileData.__init__--with-problem-subset">With problem subset<a class="headerlink" href="#perprof.profile_data.ProfileData.__init__--with-problem-subset" title="Permanent link">&para;</a></h6>
+<p>profile_subset = ProfileData(solver1, solver2, subset=[&ldquo;prob1&rdquo;])
+len(profile_subset._solvers_data)
+1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>perprof/profile_data.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">solvers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">SolverData</span><span class="p">],</span> <span class="n">subset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize performance profile with solver data or file paths.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *solvers (Union[str, Path, SolverData]):</span>
+<span class="sd">            Solver data sources. Can be:</span>
+<span class="sd">            - File paths (str/Path) to YAML files with solver results</span>
+<span class="sd">            - SolverData objects with pre-loaded data</span>
+<span class="sd">            At least 2 solvers are required for comparison.</span>
+<span class="sd">        subset (list[str], optional):</span>
+<span class="sd">            If provided, restricts the analysis to only these problem names.</span>
+<span class="sd">            Useful for focusing on specific problem subsets.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If solver input type is not supported or fewer than 2 solvers provided.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.profile_data import ProfileData</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # From SolverData objects with DataFrames</span>
+<span class="sd">        &gt;&gt;&gt; data1 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.2, 3.4]})</span>
+<span class="sd">        &gt;&gt;&gt; data2 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.5, 2.8]})</span>
+<span class="sd">        &gt;&gt;&gt; solver1 = SolverData(&quot;Method1&quot;, data1)</span>
+<span class="sd">        &gt;&gt;&gt; solver2 = SolverData(&quot;Method2&quot;, data2)</span>
+<span class="sd">        &gt;&gt;&gt; profile = ProfileData(solver1, solver2)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # With problem subset</span>
+<span class="sd">        &gt;&gt;&gt; profile_subset = ProfileData(solver1, solver2, subset=[&quot;prob1&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; len(profile_subset._solvers_data)</span>
+<span class="sd">        1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="n">solvers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_table</span><span class="p">(</span><span class="n">solver</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">SolverData</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected type for solver input: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">subset</span> <span class="o">=</span> <span class="n">subset</span>
+
+    <span class="c1"># Variables that will be filled by self.process()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="perprof.profile_data.ProfileData.process" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">process</span><span class="p">()</span></code>
+
+<a href="#perprof.profile_data.ProfileData.process" class="headerlink" title="Permanent link">&para;</a></h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Process solver data to compute performance profile.</p>
+<p>Computes ratio matrix, breakpoints, and cumulative distribution:
+1. Merge solver data into unified DataFrame
+2. Set failed convergence times to infinity
+3. Compute ratio matrix: time[solver,problem] / min_time[problem]
+4. Generate breakpoints from unique ratio values
+5. Compute cumulative distribution</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code>
+            –
+          <div class="doc-md-description">
+            <p>If fewer than 2 solvers are provided.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>import pandas as pd
+from perprof.profile_data import ProfileData
+from perprof.solver_data import SolverData</p>
+<h6 id="perprof.profile_data.ProfileData.process--create-test-data">Create test data<a class="headerlink" href="#perprof.profile_data.ProfileData.process--create-test-data" title="Permanent link">&para;</a></h6>
+<p>data1 = pd.DataFrame({&ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;], &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;], &ldquo;time&rdquo;: [1.0, 2.0]})
+data2 = pd.DataFrame({&ldquo;name&rdquo;: [&ldquo;prob1&rdquo;, &ldquo;prob2&rdquo;], &ldquo;exit&rdquo;: [&ldquo;converged&rdquo;, &ldquo;converged&rdquo;], &ldquo;time&rdquo;: [1.5, 1.5]})
+solver1 = SolverData(&ldquo;Solver1&rdquo;, data1, success=[&ldquo;converged&rdquo;])
+solver2 = SolverData(&ldquo;Solver2&rdquo;, data2, success=[&ldquo;converged&rdquo;])
+profile = ProfileData(solver1, solver2)</p>
+<h6 id="perprof.profile_data.ProfileData.process--check-computed-ratios-and-cumulative-distribution-exist">Check computed ratios and cumulative distribution exist<a class="headerlink" href="#perprof.profile_data.ProfileData.process--check-computed-ratios-and-cumulative-distribution-exist" title="Permanent link">&para;</a></h6>
+<p>profile.ratio is not None
+True
+profile.cumulative is not None
+True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>perprof/profile_data.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process solver data to compute performance profile.</span>
+
+<span class="sd">    Computes ratio matrix, breakpoints, and cumulative distribution:</span>
+<span class="sd">    1. Merge solver data into unified DataFrame</span>
+<span class="sd">    2. Set failed convergence times to infinity</span>
+<span class="sd">    3. Compute ratio matrix: time[solver,problem] / min_time[problem]</span>
+<span class="sd">    4. Generate breakpoints from unique ratio values</span>
+<span class="sd">    5. Compute cumulative distribution</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If fewer than 2 solvers are provided.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.profile_data import ProfileData</span>
+<span class="sd">        &gt;&gt;&gt; from perprof.solver_data import SolverData</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Create test data</span>
+<span class="sd">        &gt;&gt;&gt; data1 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.0, 2.0]})</span>
+<span class="sd">        &gt;&gt;&gt; data2 = pd.DataFrame({&quot;name&quot;: [&quot;prob1&quot;, &quot;prob2&quot;], &quot;exit&quot;: [&quot;converged&quot;, &quot;converged&quot;], &quot;time&quot;: [1.5, 1.5]})</span>
+<span class="sd">        &gt;&gt;&gt; solver1 = SolverData(&quot;Solver1&quot;, data1, success=[&quot;converged&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; solver2 = SolverData(&quot;Solver2&quot;, data2, success=[&quot;converged&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; profile = ProfileData(solver1, solver2)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Check computed ratios and cumulative distribution exist</span>
+<span class="sd">        &gt;&gt;&gt; profile.ratio is not None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; profile.cumulative is not None</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A Profile needs two solvers, at least&quot;</span><span class="p">)</span>
+
+    <span class="c1"># create the reduced dataset: |subset| x |solvers|</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">solver</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
+            <span class="n">on</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+            <span class="n">rsuffix</span><span class="o">=</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">solver</span><span class="o">.</span><span class="n">algname</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;time_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">algname</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="c1"># set to inf the ones that fail convergence</span>
+    <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">:</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">solver</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">exit</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;time_&quot;</span> <span class="o">+</span> <span class="n">solver</span><span class="o">.</span><span class="n">algname</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="c1"># Compute the minimum time</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="c1"># Compute the cumulative distribution</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solvers_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_best_times</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="c1"># This removes inf and nan</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)]</span>
+    <span class="c1"># self</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+<h3 id="perprof.profile_data-functions">Functions<a href="#perprof.profile_data-functions" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
