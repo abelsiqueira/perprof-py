@@ -1,5 +1,0 @@
-/* Indentation. */
-div.doc-contents:not(.first) {
-  padding-left: 15px;
-  border-left: .15rem solid var(--md-default-fg-color--lightest);
-}
