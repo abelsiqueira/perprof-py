@@ -61,7 +61,8 @@ force_single_line = 1
 src_paths = "bird_cloud_gnn,tests"
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "perprof"]
+addopts = "--doctest-modules --ignore=perprof/examples/"
 
 [tool.coverage.run]
 source = ["perprof"]

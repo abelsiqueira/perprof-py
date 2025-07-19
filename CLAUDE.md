@@ -1,155 +1,433 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and human contributors when working with code in this repository.
 
 ## Project Overview
 
 perprof-py is a Python package for generating performance profiles as described by Dolan and Moré. It creates visualizations comparing the performance of different solvers/algorithms using TikZ, matplotlib, or Bokeh backends.
 
+**Requirements**: Python 3.8+ (tested on 3.8-3.12)
+
 ## Development Setup
+
+### Prerequisites
+
+**All platforms**: Ensure you have Python 3.8+ and git installed.
 
 ### Installation
 
-This project uses uv for dependency management. Install uv if not already available:
+This project uses [uv](https://github.com/astral-sh/uv) for fast dependency management.
+
+#### Setup Development Environment
+
+**From the project root directory**:
 
 ```bash
-# Install uv (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Create virtual environment and install dependencies
+# Create virtual environment and install all dependencies
 uv sync --extra dev
 ```
 
-### Required System Dependencies
+**Alternative setup** (if uv is unavailable):
 
-For full functionality (TikZ backend), install TeX dependencies:
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Unix: source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+### Optional System Dependencies
+
+**TikZ backend** (for publication-quality LaTeX output):
+
+**Ubuntu/Debian**:
 
 ```bash
 sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-extra
 ```
 
+**macOS** (with Homebrew):
+
+```bash
+brew install --cask mactex
+```
+
+**Windows**: Install [MiKTeX](https://miktex.org/) or [TeX Live](https://tug.org/texlive/)
+
+**Note**: TikZ backend will fail gracefully if LaTeX is not available. Other backends work without LaTeX.
+
 ## Common Development Commands
 
 ### Testing
 
-- Run all tests: `uv run pytest -v`
-- Run tests with coverage: `uv run pytest --cov=perprof --cov-report=html --cov-report=term`
-- Run single test file: `uv run pytest tests/test_profile_data.py -v`
-- View coverage report: Open `htmlcov/index.html` in browser
+**Run all tests** (includes doctests):
+
+```bash
+uv run pytest -v
+```
+
+**Coverage analysis**:
+
+```bash
+uv run pytest --cov=perprof --cov-report=html --cov-report=term
+# View report: open htmlcov/index.html in browser
+```
+
+**Specific test categories**:
+
+```bash
+# Single test file
+uv run pytest tests/test_profile_data.py -v
+
+# Only doctests (documentation examples)
+uv run pytest --doctest-modules perprof/ --ignore=perprof/examples/ -v
+
+# Only unit tests (exclude doctests)
+uv run pytest tests/ -v
+```
+
+**Alternative testing** (if uv unavailable):
+
+```bash
+python -m pytest -v
+```
+
+**Test counts**: 41 total (33 unit tests + 8 doctest modules)
 
 ### Code Quality
 
-- Run all pre-commit checks: `uv run pre-commit run -a`
-- Run specific linter: `uv run pylint perprof/`
-- Format code: `uv run ruff format perprof/ tests/`
-- Lint code: `uv run ruff check perprof/ tests/ --fix`
+**All quality checks** (recommended before committing):
 
-### Examples and Demo
+```bash
+uv run pre-commit run --all-files
+```
 
-- Run example generation: `cd perprof/examples && uv run ./make-examples.sh`
-- Test CLI with demo data: `uv run perprof --bokeh --demo`
-- Test with verbose logging: `uv run perprof --verbose --mp --demo -o output`
-- Debug mode with file logging: `uv run perprof --debug --log-file debug.log --mp --demo -o output`
+**Individual tools**:
+
+```bash
+# Fast linting and formatting
+uv run ruff check perprof/ tests/ --fix
+uv run ruff format perprof/ tests/
+
+# Additional linting (slower)
+uv run pylint perprof/
+
+# Type checking
+uv run mypy perprof/
+```
+
+**Setup pre-commit hooks** (runs automatically on git commit):
+
+```bash
+uv run pre-commit install
+```
+
+### Quick Start / Demo
+
+**Try the tool immediately**:
+
+```bash
+# Interactive HTML output
+uv run perprof --bokeh --demo
+
+# Static plot output
+uv run perprof --matplotlib --png --demo
+
+# With logging to see what happens
+uv run perprof --verbose --bokeh --demo -o my_profile
+```
+
+**Generate example plots**:
+
+```bash
+cd perprof/examples && uv run ./make-examples.sh
+```
 
 ### Documentation
 
-- Build docs: `uv run mkdocs build`
-- Serve docs locally: `uv run mkdocs serve`
+**Local development** (with auto-reload):
+
+```bash
+uv run mkdocs serve
+# Open http://127.0.0.1:8000
+```
+
+**Build documentation**:
+
+```bash
+uv run mkdocs build
+```
 
 ### Package Management
 
-- Add new dependency: `uv add package-name`
-- Add development dependency: `uv add --dev package-name`
-- Update dependencies: `uv lock --upgrade`
-- Build package: `uv build`
-- Sync environment after pulling changes: `uv sync`
+**Adding dependencies**:
+
+```bash
+# Runtime dependency
+uv add package-name
+
+# Development/testing dependency
+uv add --dev package-name
+
+# Optional dependency group
+uv add --optional extra-name package-name
+```
+
+**Maintenance**:
+
+```bash
+# Update all dependencies to latest compatible versions
+uv lock --upgrade
+
+# Sync environment after pulling changes
+uv sync
+
+# Build distributable package
+uv build
+```
 
 ## Architecture
+
+### High-Level Workflow
+
+1. **Input**: Solver data files (YAML + tabular format)
+2. **Processing**: Parse files → Create performance ratios → Compute profiles
+3. **Output**: Generate visualizations using chosen backend
 
 ### Core Components
 
 #### Data Processing Pipeline
 
-1. **parse.py** - Parses solver data files in YAML format with problem results
-2. **solver_data.py** - `SolverData` class representing individual solver performance
-3. **profile_data.py** - `ProfileData` class computing performance profiles from multiple solvers
-4. **prof.py** - Legacy `Pdata` class and data loading utilities
+1. **parse.py** - Parses solver data files in YAML+tabular format
+2. **solver_data.py** - `SolverData` class for individual solver performance data
+3. **profile_data.py** - `ProfileData` class implementing Dolan-Moré profile computation
+4. **prof.py** - Legacy `Pdata` base class (still used by backends)
 
-#### Output Backends
+#### Visualization Backends
 
-- **matplotlib.py** - `Profiler` class for matplotlib/pyplot output (png, pdf, svg, etc.)
-- **tikz.py** - `Profiler` class for TikZ/LaTeX output (tex, pdf)
-- **bokeh.py** - `Profiler` class for interactive HTML output
+- **matplotlib.py** - Static plots (PNG, PDF, SVG, EPS, PS)
+- **tikz.py** - Publication-quality LaTeX/TikZ output (TEX, PDF)
+- **bokeh.py** - Interactive HTML plots with zoom/pan
+- **Raw mode** - Data processing only (tables, no plots)
 
-#### Main Entry Point
+#### CLI Interface
 
-- **main.py** - CLI argument parsing and backend selection logic
+- **main.py** - Command-line argument parsing and backend routing
 
-### File Format
+### Input File Format
 
-Input files use YAML front matter followed by problem results:
+**Structure**: YAML metadata + whitespace-separated data
 
 ```yaml
 ---
 Solver Name: MySolver
+Success: converged,optimal
 ---
-problem1 converged 1.23
-problem2 failed 5.67
+problem1 converged 1.23 0.001
+problem2 failed   5.67 0.1
+problem3 optimal  2.45 0.01
 ```
+
+**Column meanings**:
+
+1. Problem name (required)
+2. Exit status (required)
+3. Time in seconds (required)
+4. Function value (optional)
+5. Primal residual (optional)
+6. Dual residual (optional)
 
 ### Backend Selection
 
-The CLI supports multiple backends via flags:
+**Command patterns**:
 
-- `--mp` or `--matplotlib` - matplotlib backend
-- `--tikz` - TikZ/LaTeX backend
-- `--bokeh` - Bokeh HTML backend
-- `--raw` - Raw data processing only
+```bash
+# Matplotlib (static plots)
+perprof --mp --png file1.txt file2.txt
+perprof --matplotlib --pdf file1.txt file2.txt
 
-## Testing Strategy
+# Bokeh (interactive HTML)
+perprof --bokeh file1.txt file2.txt
 
-- **test_all.py** - Comprehensive backend testing with various input scenarios
-- **test_profile_data.py** - Unit tests for ProfileData class
-- **test_solver_data.py** - Unit tests for SolverData class
-- Tests include error cases (invalid files, missing data, etc.)
+# TikZ (LaTeX/academic)
+perprof --tikz --pdf file1.txt file2.txt
 
-### Dependency Notes
+# Raw data only
+perprof --raw file1.txt file2.txt
+```
 
-- numpy is pinned to `<2.0` due to ABI incompatibility with pandas 1.x and bokeh 2.x
-- This constraint resolves import errors and ensures all tests pass
-- All backends (raw, matplotlib, bokeh, tikz) are fully functional
-- The project has migrated from pip to uv for dependency management
+**Output defaults**:
 
-## Pre-commit Configuration
+- No backend specified → matplotlib PNG
+- No output filename → `performance-profile.{ext}`
 
-This project uses modern pre-commit hooks for code quality:
+## Troubleshooting
 
-- **ruff** - Fast Python linting and formatting (replaces black, autoflake, pyupgrade)
-- **lychee** - Fast link checking for markdown files
-- **isort** - Import sorting
-- **prospector** - Static analysis
-- **markdownlint** - Markdown formatting
-- **check-toml** - TOML validation
-- **validate-pyproject** - pyproject.toml validation
+### Common Issues
 
-## Improvement Planning
+**"Module not found" errors**:
 
-This project has structured improvement planning documents:
+```bash
+# Ensure virtual environment is activated and dependencies installed
+uv sync --extra dev
+```
 
-- **IMPROVEMENT_SUGGESTIONS.md** - Comprehensive analysis of 13 improvement suggestions organized by priority (High/Medium/High impact, Low/Medium/High effort)
-- **EVALUATION_CHECKLIST.md** - Systematic evaluation checklist for each suggestion with decision tracking
+**TikZ/LaTeX compilation fails**:
 
-**IMPORTANT:** When working on any improvement suggestions, make sure to update the EVALUATION_CHECKLIST.md file after each item with:
+- TikZ backend requires LaTeX installation (see system dependencies above)
+- Use `--tikz --tex` to generate .tex file without compilation
+- Other backends work without LaTeX
 
-- Progress checkmarks
-- Implementation decisions (✅ Implement / ❌ Skip / ⏸️ Defer)
-- Notes about implementation details or reasons for decisions
+**Tests fail with pandas/numpy warnings**:
 
-## Release Process
+- Warnings are expected (numpy 2.0 compatibility constraints)
+- All functionality works correctly despite warnings
 
-1. Create release branch: `release-vx.y.z`
-2. Update version in `pyproject.toml` and `perprof/__init__.py`
-3. Update `CHANGELOG.md`
-4. Run tests: `uv run pytest -v` and `uv run pre-commit run -a`
-5. Create PR and merge after CI passes
-6. Tag release on GitHub (triggers PyPI deployment)
+**Pre-commit hooks fail**:
+
+```bash
+# Fix formatting issues automatically
+uv run pre-commit run --all-files
+```
+
+**Performance/memory issues with large datasets**:
+
+- Consider using `--raw` mode for data processing only
+- Profile computation scales O(n×m×k) where n=problems, m=solvers, k=breakpoints
+
+### Getting Help
+
+- **Documentation**: [perprof-py.readthedocs.org](https://perprof-py.readthedocs.org/en/latest/)
+- **Issues**: [GitHub Issues](https://github.com/abelsiqueira/perprof-py/issues)
+- **Examples**: See `perprof/examples/` directory
+
+## Technical Details
+
+### Dependency Constraints
+
+**Compatibility matrix**:
+
+- **Python**: 3.8+ (tested on 3.8-3.12)
+- **numpy**: `<2.0` (ABI compatibility with pandas 1.x and bokeh 2.x)
+- **pandas**: 1.x series (performance and API stability)
+- **bokeh**: 2.x series (compatible with numpy <2.0)
+
+**Why these constraints**: Resolves import errors and ensures all backends work correctly. All functionality is preserved.
+
+### Code Quality Tools
+
+**Pre-commit hooks** (run automatically on `git commit`):
+
+- **ruff** - Fast Python linting and formatting (replaces black, isort, flake8)
+- **mypy** - Static type checking
+- **markdownlint** - Markdown formatting consistency
+- **lychee** - Fast link checking for documentation
+- **prospector** - Additional static analysis
+- **validate-pyproject** - TOML file validation
+
+**Manual quality checks**:
+
+```bash
+# Complete quality assessment
+uv run pre-commit run --all-files
+```
+
+### Test Coverage
+
+**Test categories**:
+
+- **Unit tests** (33): Core functionality, edge cases, error handling
+- **Doctests** (8 modules): Documentation examples, API usage patterns
+- **Integration tests**: Full CLI workflow with all backends
+
+**Coverage targets**:
+
+- Overall: ~67% (focusing on core algorithms)
+- ProfileData/SolverData: 100% (critical data processing)
+- Backend coverage varies (matplotlib > bokeh > tikz)
+
+## Development Workflow
+
+### Making Changes
+
+**Standard workflow**:
+
+```bash
+# 1. Get latest changes
+git pull origin main
+
+# 2. Create feature branch
+git checkout -b feature/your-improvement
+
+# 3. Install development dependencies
+uv sync --extra dev
+
+# 4. Make your changes...
+
+# 5. Test your changes
+uv run pytest -v
+uv run pre-commit run --all-files
+
+# 6. Commit (pre-commit hooks run automatically)
+git add .
+git commit -m "Your descriptive commit message"
+
+# 7. Push and create pull request
+git push origin feature/your-improvement
+```
+
+### Improvement Planning
+
+**Structured improvement process**:
+
+- **IMPROVEMENT_SUGGESTIONS.md** - 13 analyzed improvements by priority/effort
+- **EVALUATION_CHECKLIST.md** - Implementation tracking with decisions
+
+**When implementing improvements**:
+
+1. Check EVALUATION_CHECKLIST.md for current status
+2. Update checklist with progress and decisions (✅ Implement / ❌ Skip / ⏸️ Defer)
+3. Document implementation details and reasoning
+
+### Release Process
+
+**For maintainers**:
+
+```bash
+# 1. Create release branch
+git checkout -b release-v1.x.y
+
+# 2. Update version numbers
+# Edit: pyproject.toml, perprof/__init__.py, CHANGELOG.md
+
+# 3. Verify everything works
+uv run pytest -v
+uv run pre-commit run --all-files
+
+# 4. Create PR, merge after CI passes
+
+# 5. Tag release (triggers PyPI deployment)
+git tag v1.x.y
+git push origin v1.x.y
+```
+
+**Versioning**: Follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH)
+
+### Contributing Guidelines
+
+**For external contributors**:
+
+1. Fork the repository on GitHub
+2. Follow the standard workflow above
+3. Ensure all tests pass and pre-commit hooks succeed
+4. Write clear commit messages explaining the "why" not just "what"
+5. Reference any related issues in your PR description
+
+**Code style**: Automatically enforced by pre-commit hooks (ruff, mypy, etc.)
+
+## Important Instruction Reminders
+
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
