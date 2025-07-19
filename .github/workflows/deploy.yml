@@ -2,18 +2,126 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      deploy_to_test_pypi:
+        description: 'Deploy to Test PyPI'
+        required: false
+        default: false
+        type: boolean
+      deploy_to_prod_pypi:
+        description: 'Deploy to Production PyPI'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
-  docker:
-    name: Docker
+  validate:
+    name: Validate Release
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_prerelease: ${{ steps.version.outputs.is_prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Extract version info
+        id: version
+        run: |
+          # Extract version from tag or pyproject.toml
+          if [[ "$GITHUB_REF" =~ refs/tags/v(.+) ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+          else
+            VERSION=$(grep '^version = ' pyproject.toml | sed 's/version = "\(.*\)"/\1/')
+          fi
+
+          # Check if pre-release (contains alpha, beta, rc, dev)
+          if [[ "$VERSION" =~ (alpha|beta|rc|dev) ]]; then
+            IS_PRERELEASE=true
+          else
+            IS_PRERELEASE=false
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "is_prerelease=$IS_PRERELEASE" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION, Pre-release: $IS_PRERELEASE"
+
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Build package
+        run: |
+          uv sync --group publishing
+          uv build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  deploy-test-pypi:
+    name: Deploy to Test PyPI
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    if: |
+      (startsWith(github.ref, 'refs/tags/v') && needs.validate.outputs.is_prerelease == 'true') ||
+      (github.event_name == 'workflow_dispatch' && inputs.deploy_to_test_pypi)
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  deploy-prod-pypi:
+    name: Deploy to PyPI
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    if: |
+      (startsWith(github.ref, 'refs/tags/v') && needs.validate.outputs.is_prerelease == 'false') ||
+      (github.event_name == 'workflow_dispatch' && inputs.deploy_to_prod_pypi)
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+  docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - uses: actions/checkout@v4
 
@@ -26,45 +134,15 @@ jobs:
         id: meta
         with:
           images: abelsiqueira/perprof-py
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - uses: docker/build-push-action@v6
         with:
           context: .
           file: docker/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  pypi:
-    name: PyPI
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          enable-cache: true
-
-      - name: Install dependencies and build
-        run: |
-          uv sync --group publishing
-          uv build
-
-      - name: Publish distribution 📦 to Test PyPI
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && contains(github.ref, 'rc')
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
-
-      - name: Publish distribution 📦 to PyPI
-        if: startsWith(github.ref, 'refs/tags')
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
