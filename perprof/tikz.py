@@ -13,19 +13,16 @@ _ = THIS_TRANSLATION.gettext
 
 
 class Profiler(prof.Pdata):
-    """Publication-quality performance profile generator using TikZ/PGFPlots.
+    """Performance profile generator using TikZ/PGFPlots for LaTeX integration.
 
-    This class creates high-quality LaTeX-based performance profile plots using
-    TikZ and PGFPlots. The output is ideal for academic publications, technical
-    reports, and presentations requiring vector graphics with consistent typography.
+    Creates LaTeX-based performance profile plots using TikZ and PGFPlots.
+    Suitable for academic publications and technical reports.
 
-    TikZ/PGFPlots advantages:
-    - True vector graphics with infinite scalability
-    - Consistent fonts matching LaTeX document typography
-    - Professional mathematical notation and symbols
-    - Fine-grained control over plot appearance
-    - Direct integration with LaTeX documents
-    - Support for both standalone and embedded figures
+    Features:
+    - Vector graphics with scalability
+    - LaTeX document font consistency
+    - Mathematical notation support
+    - Standalone and embedded figure support
 
     The profiler generates either standalone LaTeX documents or TikZ code that
     can be embedded into larger documents. It supports both color and black-and-white
@@ -113,31 +110,27 @@ class Profiler(prof.Pdata):
 
     # pylint: disable=too-many-locals,too-many-branches,too-many-statements
     def plot(self):
-        """Generate and save the TikZ/PGFPlots performance profile.
+        r"""Generate and save the TikZ/PGFPlots performance profile.
 
-        Creates publication-quality LaTeX code for performance profiles using TikZ
-        and PGFPlots packages. The output can be either a standalone LaTeX document
-        or TikZ code for embedding in larger documents.
+        Creates LaTeX code for performance profiles using TikZ and PGFPlots.
+        Output can be standalone LaTeX document or TikZ code for embedding.
 
-        LaTeX generation process:
-        1. Document structure (if standalone): documentclass, packages, setup
-        2. Color and line style definitions based on solver count and B&W setting
-        3. PGFPlots axis environment with scaling, labels, and grid
-        4. Data plots using step functions with appropriate styling
-        5. Legend and plot finalization
-        6. Optional PDF compilation via pdflatex
+        Process:
+        1. Document structure (if standalone)
+        2. Color and line style definitions
+        3. PGFPlots axis environment with scaling and labels
+        4. Data plots using step functions
+        5. Legend and finalization
+        6. Optional PDF compilation
 
-        Key features:
+        Features:
         - Step plots using PGFPlots \\addplot commands
         - Logarithmic x-axis scaling (if semilog=True)
-        - Extensive color and line style combinations
-        - Professional typography matching document fonts
-        - Automatic PDF compilation for output_format="pdf"
-        - Background color support with RGB definitions
-        - Grid lines and legend positioning
+        - Color and line style combinations
+        - Automatic PDF compilation for PDF output
+        - Background color support
 
-        The method validates solver count limits (13 for B&W, 30 for color)
-        and generates appropriate error messages for violations.
+        Validates solver count limits (13 for B&W, 30 for color).
 
         Raises:
             ValueError: If too many solvers for the chosen style (B&W vs color).
@@ -148,6 +141,7 @@ class Profiler(prof.Pdata):
             # After creating profiler instance (see __init__ example)
             profiler.plot()  # Creates .tex file and optionally compiles to PDF
             ```
+
         """
         self.pre_plot()
 

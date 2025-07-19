@@ -23,8 +23,8 @@ This project uses [uv](https://github.com/astral-sh/uv) for fast dependency mana
 **From the project root directory**:
 
 ```bash
-# Create virtual environment and install all dependencies
-uv sync --group dev
+# Create virtual environment and install all dependencies (including docs)
+uv sync --extra docs --all-groups
 ```
 
 **Alternative setup** (if uv is unavailable):
@@ -145,6 +145,12 @@ cd perprof/examples && uv run ./make-examples.sh
 
 ### Documentation
 
+**Install documentation dependencies** (if not using full development setup):
+
+```bash
+uv sync --extra docs
+```
+
 **Local development** (with auto-reload):
 
 ```bash
@@ -174,11 +180,13 @@ uv add --group type-check package-name  # Type checking
 # Optional dependency (for end users)
 uv add --optional docs package-name
 
-# Install only specific dependency groups (use --no-dev for granular control)
+# Install only specific dependency groups or extras
 uv sync --group test --no-dev        # Only testing tools
 uv sync --group lint --no-dev        # Only linting/formatting tools
 uv sync --group type-check --no-dev  # Only type checking tools
 uv sync --group dev                   # All development tools (includes test, lint, type-check)
+uv sync --extra docs                  # Only documentation tools
+uv sync --extra docs --all-groups    # Full development environment (all tools + docs)
 ```
 
 **Maintenance**:

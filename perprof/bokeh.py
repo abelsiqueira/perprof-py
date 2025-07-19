@@ -18,16 +18,14 @@ BOKEH_COLOR_LIST = ["blue", "green", "red", "cyan", "magenta", "yellow"]
 class Profiler(prof.Pdata):
     """Interactive performance profile generator using Bokeh backend.
 
-    This class creates interactive HTML performance profile plots using Bokeh.
-    The resulting plots are fully interactive with zooming, panning, hover tooltips,
-    and responsive design suitable for web deployment or standalone viewing.
+    Creates interactive HTML performance profile plots with zooming, panning,
+    and responsive design for web deployment or standalone viewing.
 
-    Bokeh profiles offer advantages over static plots for data exploration:
-    - Interactive zoom and pan for detailed analysis
+    Features:
+    - Interactive zoom and pan
     - Hover tooltips showing exact values
-    - Legend-based line toggling for visual comparison
-    - Responsive layout adapting to different screen sizes
-    - Self-contained HTML files requiring no server
+    - Legend-based line toggling
+    - Self-contained HTML files
 
     The profiler generates line plots showing the cumulative distribution of solver
     performance ratios with smooth curves instead of traditional step plots.

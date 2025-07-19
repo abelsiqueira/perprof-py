@@ -14,12 +14,9 @@ from .solver_data import SolverData, read_table
 class ProfileData:
     """Computes and stores performance profiles for algorithm comparison.
 
-    This class implements the performance profile methodology described by Dolan and Moré
-    for comparing the performance of different solvers/algorithms. It processes solver
-    timing data to create profiles suitable for visualization.
-
-    The performance profile shows the fraction of problems solved by each solver within
-    a given performance ratio (compared to the best solver for each problem).
+    Implements the Dolan and Moré performance profile methodology. Processes solver
+    timing data and computes the fraction of problems solved by each solver within
+    performance ratios relative to the best solver.
 
     Attributes:
         solvers (list[SolverData]):
@@ -122,16 +119,12 @@ class ProfileData:
     def process(self) -> None:
         """Process solver data to compute performance profile.
 
-        This method implements the performance profile algorithm as described by Dolan and Moré.
-        It computes the ratio matrix, breakpoints, and cumulative distribution needed for
-        profile visualization.
-
-        The algorithm:
-        1. Merges solver data into a unified DataFrame indexed by problem name
-        2. Sets failed convergence times to infinity
-        3. Computes ratio matrix: time[solver,problem] / min_time[problem]
-        4. Generates breakpoints from unique ratio values
-        5. Computes cumulative distribution: fraction of problems solved within each ratio
+        Computes ratio matrix, breakpoints, and cumulative distribution:
+        1. Merge solver data into unified DataFrame
+        2. Set failed convergence times to infinity
+        3. Compute ratio matrix: time[solver,problem] / min_time[problem]
+        4. Generate breakpoints from unique ratio values
+        5. Compute cumulative distribution
 
         Raises:
             ValueError: If fewer than 2 solvers are provided.

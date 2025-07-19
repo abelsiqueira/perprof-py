@@ -18,13 +18,10 @@ _ = THIS_TRANSLATION.gettext
 class Profiler(prof.Pdata):
     """Performance profile generator using matplotlib backend.
 
-    This class creates publication-quality performance profile plots using matplotlib
-    and pyplot. It supports various output formats (PNG, PDF, SVG, EPS, PS) and
-    extensive customization options including colors, styling, and translations.
+    Creates performance profile plots using matplotlib with support for multiple
+    output formats (PNG, PDF, SVG, EPS, PS) and customization options.
 
-    The profiler generates step plots showing the cumulative distribution of solver
-    performance ratios, which is the standard visualization for performance profiles
-    as described by Dolan and Moré.
+    Generates step plots showing cumulative distribution of solver performance ratios.
 
     Attributes:
         output (str): Output filename including format extension.
@@ -106,22 +103,17 @@ class Profiler(prof.Pdata):
     def plot(self):
         """Generate and save the performance profile plot.
 
-        Creates a publication-quality step plot showing the cumulative distribution
-        of performance ratios for each solver. The plot shows what fraction of problems
-        each solver can solve within a given performance ratio compared to the best
-        solver for each problem.
+        Creates a step plot showing cumulative distribution of performance ratios
+        for each solver.
 
-        Plot features:
+        Features:
         - Step plot with solver-specific line styles and colors
         - Logarithmic x-axis scaling (if semilog=True)
         - Customizable background colors and transparency
-        - Internationalization support for labels
-        - Legend showing solver names
-        - Grid lines for improved readability
-        - Automatic axis scaling and limits
+        - Legend and grid lines
+        - Automatic axis scaling
 
-        The plot is saved to the filename specified during initialization with
-        the configured output format and styling options.
+        Saves plot to filename specified during initialization.
 
         Raises:
             matplotlib-related exceptions: If plot generation or saving fails.
