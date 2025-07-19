@@ -3,6 +3,7 @@
 ## **1. Test Coverage and Quality Improvements**
 
 ### **1.1 Add Coverage Reporting**
+
 ```toml
 # pyproject.toml addition
 [tool.coverage.run]
@@ -16,6 +17,7 @@ fail_under = 80
 ```
 
 **Why this is good:**
+
 - Shows exactly which code paths aren't tested
 - Helps identify risky areas during refactoring
 - Provides confidence metric for releases
@@ -27,6 +29,7 @@ fail_under = 80
 ---
 
 ### **1.2 Add Property-Based Testing**
+
 ```python
 # For testing ProfileData with hypothesis
 from hypothesis import given, strategies as st
@@ -46,6 +49,7 @@ def test_profile_data_invariants(times):
 ## **2. Type Safety and IDE Experience**
 
 ### **2.1 Comprehensive Type Annotations**
+
 ```python
 # Example for profile_data.py
 from typing import Dict, List, Optional, Union, Protocol
@@ -61,6 +65,7 @@ class ProfileData:
 ```
 
 **Why this is good:**
+
 - Better IDE autocomplete and error detection
 - Self-documenting code
 - Catches type-related bugs before runtime
@@ -72,6 +77,7 @@ class ProfileData:
 ---
 
 ### **2.2 Runtime Type Checking with Pydantic**
+
 ```python
 from pydantic import BaseModel, validator
 
@@ -96,6 +102,7 @@ class SolverConfig(BaseModel):
 ## **3. Development Workflow Enhancements**
 
 ### **3.1 Add Development Scripts**
+
 ```toml
 # pyproject.toml
 [tool.uv.scripts]
@@ -108,6 +115,7 @@ docs-serve = "mkdocs serve"
 ```
 
 **Why this is good:**
+
 - Consistent commands across environments
 - Reduces cognitive load remembering complex commands
 - Easy for new contributors
@@ -119,6 +127,7 @@ docs-serve = "mkdocs serve"
 ---
 
 ### **3.2 Add Performance Benchmarking**
+
 ```python
 # Simple benchmark script
 import time
@@ -143,6 +152,7 @@ def benchmark_profile_generation():
 ## **4. Code Organization and Maintainability**
 
 ### **4.1 Consolidate Legacy Code**
+
 Create a migration plan to gradually deprecate `prof.py`:
 
 ```python
@@ -158,6 +168,7 @@ def deprecated_function():
 ```
 
 **Why this is good:**
+
 - Reduces maintenance burden
 - Clearer codebase for future you
 - Easier to understand for contributors
@@ -169,6 +180,7 @@ def deprecated_function():
 ---
 
 ### **4.2 Add Logging Infrastructure**
+
 ```python
 import logging
 import sys
@@ -183,6 +195,7 @@ def setup_logging(verbose: bool = False) -> None:
 ```
 
 **Why this is good:**
+
 - Better debugging for you and users
 - Professional CLI experience
 - Easier troubleshooting
@@ -196,6 +209,7 @@ def setup_logging(verbose: bool = False) -> None:
 ## **5. Documentation and User Experience**
 
 ### **5.1 Add Usage Examples in Code**
+
 ```python
 class ProfileData:
     """Performance profile data processor.
@@ -210,6 +224,7 @@ class ProfileData:
 ```
 
 **Why this is good:**
+
 - Examples are always up-to-date with code
 - Better IDE experience
 - Easier to understand API
@@ -221,6 +236,7 @@ class ProfileData:
 ---
 
 ### **5.2 Add Configuration File Support**
+
 ```python
 # perprof.toml configuration file support
 [perprof]
@@ -234,6 +250,7 @@ dpi = 300
 ```
 
 **Why this is good:**
+
 - Repeatable configurations
 - Easier for batch processing
 - Professional tool experience
@@ -247,6 +264,7 @@ dpi = 300
 ## **6. Deployment and Distribution**
 
 ### **6.1 Add Security Scanning**
+
 ```yaml
 # .github/workflows/security.yml
 - name: Run Bandit Security Scan
@@ -256,6 +274,7 @@ dpi = 300
 ```
 
 **Why this is good:**
+
 - Catches potential security issues
 - Important for packages that others install
 - Professional development practice
@@ -267,6 +286,7 @@ dpi = 300
 ---
 
 ### **6.2 Add Dependency Update Automation**
+
 ```yaml
 # .github/dependabot.yml
 version: 2
@@ -278,6 +298,7 @@ updates:
 ```
 
 **Why this is good:**
+
 - Keeps dependencies current automatically
 - Reduces security vulnerabilities
 - Less manual maintenance
@@ -291,27 +312,32 @@ updates:
 ## **Priority Recommendations**
 
 ### **High Impact, Low Effort:**
+
 1. Add coverage reporting (1.1)
 2. Development scripts in pyproject.toml (3.1)
 3. Basic type annotations for public APIs (2.1)
 
 ### **Medium Impact, Medium Effort:**
-4. Logging infrastructure (4.2)
-5. Legacy code deprecation plan (4.1)
-6. More comprehensive docstrings (5.1)
+
+1. Logging infrastructure (4.2)
+2. Legacy code deprecation plan (4.1)
+3. More comprehensive docstrings (5.1)
 
 ### **High Impact, High Effort:**
-7. Comprehensive type annotations (2.1)
-8. Configuration file support (5.2)
-9. Property-based testing (1.2)
+
+1. Comprehensive type annotations (2.1)
+2. Configuration file support (5.2)
+3. Property-based testing (1.2)
 
 ### **Optional/Future:**
-10. Runtime type checking with Pydantic (2.2)
-11. Performance benchmarking (3.2)
-12. Security scanning (6.1)
-13. Dependency update automation (6.2)
+
+1. Runtime type checking with Pydantic (2.2)
+2. Performance benchmarking (3.2)
+3. Security scanning (6.1)
+4. Dependency update automation (6.2)
 
 ## **Solo Developer Benefits:**
+
 - Focus on tools that reduce cognitive load
 - Automate repetitive tasks
 - Improve debugging and troubleshooting

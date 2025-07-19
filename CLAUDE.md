@@ -89,7 +89,7 @@ sudo apt-get install texlive-pictures texlive-fonts-recommended texlive-latex-ex
 
 Input files use YAML front matter followed by problem results:
 
-```
+```yaml
 ---
 Solver Name: MySolver
 ---
