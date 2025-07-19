@@ -11,7 +11,7 @@ authors = [
 ]
 description = "A python module for performance profiling (as described by Dolan and Moré)"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 keywords = ["benchmark", "comparison", "performance profile"]
 license = {file = "LICENSE"}
 classifiers = [
@@ -26,27 +26,6 @@ dependencies = [
 ]
 version = "1.1.4"
 
-[project.optional-dependencies]
-dev = [
-  "black",
-  "pre-commit",
-  "prospector[with_pyroma]",
-  "pylint",
-  "pytest",
-  "pytest-cov",
-  "ruff",
-  "isort",
-]
-publishing = [
-  "build",
-  "twine",
-]
-docs = [
-  "mkdocs",
-  "mkdocstrings[python]",
-  "mkdocs-material",
-  "mike",
-]
 
 [project.scripts]
 perprof = "perprof.main:main"
@@ -90,7 +69,25 @@ perprof = ["locale/*/*/*.mo", "examples/*.table"]
 
 [dependency-groups]
 dev = [
+    "black",
+    "pre-commit",
+    "prospector[with_pyroma]",
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "isort",
     "mypy>=1.4.1",
     "pandas-stubs>=1.2.0.62",
     "types-pyyaml>=6.0.12.12",
+]
+publishing = [
+    "build",
+    "twine",
+]
+docs = [
+    "mkdocs",
+    "mkdocstrings[python]",
+    "mkdocs-material",
+    "mike",
 ]
