@@ -9,12 +9,10 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-added-large-files
-  - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.12.0
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.43.0
     hooks:
-      - id: markdownlint
-        args: [-r, "~MD013,~MD029,~MD024"]
-        exclude: "^.git"
+      - id: markdownlint-fix
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.24.1
     hooks:
