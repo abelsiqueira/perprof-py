@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv sync --extra dev
+          uv sync --group lint --group type-check
 
       - name: pre-commit checks
         run: uv run pre-commit run -a
