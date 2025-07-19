@@ -27,22 +27,48 @@ class _ParseOptions(TypedDict):
 
 
 class SolverData:
-    """Store data from one solver.
+    """Store performance data from a single solver/algorithm.
+
+    This class encapsulates all performance metrics and metadata for one solver across
+    multiple test problems. It serves as the fundamental data structure for performance
+    profile analysis.
 
     Attributes:
         algname (str):
-            Name of the algorithm
+            Name of the algorithm/solver being analyzed.
         data (pandas.DataFrame):
-            DataFrame with columns
+            DataFrame containing performance results with required columns:
 
-            - "name": The problem name.
+            - "name": The problem name (string identifier).
             - "exit": Exit flag to determine successful termination.
-            - "time": Elapsed time for the algorithm.
-            - "fval": Function value at the solution.
-            - "primal": Primal residual at the solution.
-            - "dual": Dual residual at the solution.
+            - "time": Elapsed time for the algorithm (float, seconds).
+            - "fval": Function value at the solution (optional).
+            - "primal": Primal residual at the solution (optional).
+            - "dual": Dual residual at the solution (optional).
         success (list[str]):
-            List of strings used to define what is a successful termination.
+            List of exit flag values considered successful termination.
+            Default: ["c", "converged", "solved", "success"]
+
+    Example:
+        >>> import pandas as pd
+        >>> from perprof.solver_data import SolverData
+        >>>
+        >>> # Create from DataFrame
+        >>> data = pd.DataFrame({
+        ...     "name": ["prob1", "prob2", "prob3"],
+        ...     "exit": ["converged", "converged", "failed"],
+        ...     "time": [1.2, 3.4, 10.0]
+        ... })
+        >>> solver = SolverData("Newton", data)
+        >>>
+        >>> # Access data
+        >>> solver.algname
+        'Newton'
+        >>> len(solver.data)
+        3
+        >>> successful = solver.data[solver.data.exit.isin(solver.success)]
+        >>> len(successful) / len(solver.data) > 0.5
+        True
     """
 
     def __init__(
@@ -52,20 +78,43 @@ class SolverData:
         success: list[str] | None = None,
         read_csv_args: dict | None = None,
     ) -> None:
-        """Initializes the SolverData from files or DataFrames.
+        """Initialize SolverData from file or DataFrame.
 
         Args:
             algname (str):
-                Name of the algorithm.
-            data (Union[str, Path, pandas.DataFrame]):
-                File name of csv to read or DataFrame.
-            success (list[str]):
-                Vector of flags considered as success.
-            read_csv_args (dict):
-                Arguments to be passed to `pandas.read_csv` if `data` is a file name.
+                Name of the algorithm/solver for identification.
+            data (Union[str, Path, pd.DataFrame]):
+                Source of performance data. Can be:
+                - File path (str/Path) to CSV file with solver results
+                - Pre-loaded pandas DataFrame with required columns
+            success (list[str], optional):
+                Exit flag values considered successful termination.
+                If None, defaults to ["c", "converged", "solved", "success"].
+            read_csv_args (dict, optional):
+                Additional arguments passed to pandas.read_csv when loading files.
+                Useful for custom separators, encoding, etc.
 
         Raises:
-            TypeError: If the data is not a str, Path, or pandas.DataFrame.
+            TypeError: If data is not a supported type (str, Path, or DataFrame).
+            ValueError: If required columns ("name", "exit", "time") are missing.
+
+        Example:
+            >>> # From DataFrame
+            >>> import pandas as pd
+            >>> from perprof.solver_data import SolverData
+            >>> df = pd.DataFrame({
+            ...     "name": ["prob1", "prob2"],
+            ...     "exit": ["converged", "failed"],
+            ...     "time": [1.0, 5.0]
+            ... })
+            >>> solver = SolverData("MyAlgorithm", df)
+            >>> solver.algname
+            'MyAlgorithm'
+            >>>
+            >>> # Custom success flags
+            >>> solver2 = SolverData("Algorithm2", df, success=["optimal", "feasible"])
+            >>> solver2.success
+            ['optimal', 'feasible']
         """
         self.algname = algname
         if not success:
@@ -90,15 +139,41 @@ class SolverData:
 
 
 def read_table(filename: Union[str, Path]) -> SolverData:
-    """
-    Read a table file as described in the documentation section [File Format](file-format).
+    """Read solver data from YAML-formatted table file.
+
+    This function parses files with YAML front matter containing solver configuration
+    followed by tabular data with problem results. This is the standard format for
+    perprof solver data files.
+
+    File format:
+        ```
+        ---
+        Solver Name: MyAlgorithm
+        Success: converged,optimal
+        ---
+        problem1 converged 1.23 0.001
+        problem2 failed 5.67 0.1
+        problem3 converged 2.45 0.01
+        ```
 
     Args:
-        filename (str):
-            Name of the table file.
+        filename (Union[str, Path]):
+            Path to the table file with YAML header and data rows.
 
     Returns:
-        solver (SolverData): Parsed data
+        SolverData: Parsed solver data ready for profile analysis.
+
+    Example:
+        The file format combines YAML metadata with tabular data:
+
+        >>> # File content example (not actual doctest):
+        >>> # ---
+        >>> # Solver Name: MyAlgorithm
+        >>> # Success: converged,optimal
+        >>> # ---
+        >>> # problem1 converged 1.23 0.001
+        >>> # problem2 failed 5.67 0.1
+        >>> pass  # Placeholder since file operations can't be tested in doctest
     """
     options: _ParseOptions = {
         "algname": None,

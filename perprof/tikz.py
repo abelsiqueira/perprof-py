@@ -13,14 +13,87 @@ _ = THIS_TRANSLATION.gettext
 
 
 class Profiler(prof.Pdata):
-    """The profiler using TikZ."""
+    """Publication-quality performance profile generator using TikZ/PGFPlots.
+
+    This class creates high-quality LaTeX-based performance profile plots using
+    TikZ and PGFPlots. The output is ideal for academic publications, technical
+    reports, and presentations requiring vector graphics with consistent typography.
+
+    TikZ/PGFPlots advantages:
+    - True vector graphics with infinite scalability
+    - Consistent fonts matching LaTeX document typography
+    - Professional mathematical notation and symbols
+    - Fine-grained control over plot appearance
+    - Direct integration with LaTeX documents
+    - Support for both standalone and embedded figures
+
+    The profiler generates either standalone LaTeX documents or TikZ code that
+    can be embedded into larger documents. It supports both color and black-and-white
+    output with extensive line style and color customization.
+
+    Attributes:
+        output (str|TextIO): Output filename or file handle (stdout for None).
+        standalone (bool): Whether to generate standalone LaTeX document.
+        output_format (str): Target format ("tex" or "pdf").
+        plot_lang (function): Localization function for plot text.
+
+    Example:
+        Creating a TikZ profiler for publication-quality output:
+
+        ```python
+        from perprof.tikz import Profiler
+
+        parser_opts = {
+            "files": ["solver1.txt", "solver2.txt"],
+            "success": ["converged"],
+            "free_format": True
+        }
+        profiler_opts = {
+            "output": "publication_figure",
+            "output_format": "pdf",
+            "standalone": True,
+            "black_and_white": False,
+            "title": "Performance Profile Comparison",
+            "lang": "en"
+        }
+        profiler = Profiler(parser_opts, profiler_opts)
+        profiler.plot()  # Creates publication_figure.tex and compiles to PDF
+        ```
+    """
 
     def __init__(self, parser_options, profiler_options):
-        """Initialize Profiler with TikZ.
+        """Initialize TikZ/PGFPlots-based performance profiler.
 
         Args:
-            parser_options (dict): parser options.
-            profiler_options (dict): profiler options
+            parser_options (dict): Data parsing configuration including:
+                - files: List of solver data files to process
+                - success: Success criteria for solver convergence
+                - maxtime/mintime: Time filtering bounds
+                - compare: Performance metric to compare (default: "time")
+                - subset: Optional problem subset restriction
+            profiler_options (dict): Visualization configuration including:
+                - output: Output filename prefix (None for stdout)
+                - output_format: Target format ("tex" or "pdf")
+                - standalone: Generate standalone LaTeX document
+                - black_and_white: Use monochrome line styles
+                - semilog: Use logarithmic x-axis scaling
+                - lang: Language for plot labels
+                - title/xlabel/ylabel: Plot text customization
+                - pgfplot_version: PGFPlots compatibility version
+                - background/page_background: Color customization
+
+        Note:
+            TikZ backend has solver limits: 13 for black-and-white plots,
+            30 for color plots. This is due to the finite number of
+            predefined line styles and colors in the TikZ implementation.
+
+        Example:
+            ```python
+            parser_opts = {"files": ["data1.txt"], "success": ["converged"]}
+            profiler_opts = {"output": "plot", "output_format": "pdf",
+                           "standalone": True, "lang": "en"}
+            profiler = Profiler(parser_opts, profiler_opts)
+            ```
         """
         if profiler_options["output"] is None:
             self.output = sys.stdout
@@ -40,7 +113,42 @@ class Profiler(prof.Pdata):
 
     # pylint: disable=too-many-locals,too-many-branches,too-many-statements
     def plot(self):
-        """Create the performance profile using TikZ/PgfPlots."""
+        """Generate and save the TikZ/PGFPlots performance profile.
+
+        Creates publication-quality LaTeX code for performance profiles using TikZ
+        and PGFPlots packages. The output can be either a standalone LaTeX document
+        or TikZ code for embedding in larger documents.
+
+        LaTeX generation process:
+        1. Document structure (if standalone): documentclass, packages, setup
+        2. Color and line style definitions based on solver count and B&W setting
+        3. PGFPlots axis environment with scaling, labels, and grid
+        4. Data plots using step functions with appropriate styling
+        5. Legend and plot finalization
+        6. Optional PDF compilation via pdflatex
+
+        Key features:
+        - Step plots using PGFPlots \\addplot commands
+        - Logarithmic x-axis scaling (if semilog=True)
+        - Extensive color and line style combinations
+        - Professional typography matching document fonts
+        - Automatic PDF compilation for output_format="pdf"
+        - Background color support with RGB definitions
+        - Grid lines and legend positioning
+
+        The method validates solver count limits (13 for B&W, 30 for color)
+        and generates appropriate error messages for violations.
+
+        Raises:
+            ValueError: If too many solvers for the chosen style (B&W vs color).
+            subprocess-related exceptions: If PDF compilation fails.
+
+        Example:
+            ```python
+            # After creating profiler instance (see __init__ example)
+            profiler.plot()  # Creates .tex file and optionally compiles to PDF
+            ```
+        """
         self.pre_plot()
 
         if self.black_and_white and len(self.solvers) > 13:

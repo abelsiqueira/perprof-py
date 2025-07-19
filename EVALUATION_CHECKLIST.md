@@ -71,15 +71,22 @@
   document prof.Pdata as internal API, promote ProfileData for direct usage.
   Defer major deprecation until v2.0.
 
-### ☐ 5.1 Enhanced Docstrings with Examples
+### ☑️ 5.1 Enhanced Docstrings with Examples
 
-- [ ] Audit current docstring coverage
-- [ ] Add examples to main classes
-- [ ] Add examples to key functions
-- [ ] Test examples with doctest
-- [ ] Update documentation generation
-- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
-- [ ] **Notes:**
+- [x] Audit current docstring coverage
+- [x] Add examples to main classes (ProfileData, SolverData)
+- [x] Add examples to key functions (main CLI functions)
+- [x] Add examples to backend plot() methods (matplotlib, bokeh, tikz)
+- [x] Test examples with doctest (30 tests passing)
+- [x] Update documentation generation
+- [x] **Decision:** ✅ Implement
+- [x] **Notes:** Comprehensive docstring enhancement completed with working doctest
+  examples. Added detailed documentation for ProfileData, SolverData, main CLI
+  functions, and all three backend plot() methods. Examples use proper code
+  blocks for complex cases and working doctests for simple cases. All doctests
+  pass (30/30 in core modules). Backend examples use non-executable code blocks
+  to avoid file dependency issues. Significant improvement in API documentation
+  quality and developer experience.
 
 ## High Impact, High Effort (Priority 3)
 
@@ -187,24 +194,25 @@ For each suggestion, consider:
 
 ### Current Status Summary
 
-**Completed (4/13 items):**
+**Completed (5/13 items):**
 
 - ✅ Coverage Reporting (1.1) - 67.03% coverage with HTML reports
 - ✅ Type Annotations (2.1) - Basic public API types, TypedDict for CLI args
 - ✅ Logging Infrastructure (4.2) - Comprehensive logging with --verbose/--debug
+- ✅ Enhanced Docstrings (5.1) - Comprehensive examples, 30 passing doctests
 - ⏸️ Development Scripts (3.1) - Deferred until uv.scripts support
 - ⏸️ Legacy Code Deprecation (4.1) - Deferred to v2.0 due to complexity
 
-### Recommended Next Target: Enhanced Docstrings (5.1)
+### Recommended Next Target: Configuration File Support (5.2)
 
-**Priority:** Medium Impact, Medium Effort
+**Priority:** High Impact, High Effort
 **Rationale:**
 
-- Builds on completed type annotations work
-- Improves developer experience and API usability
-- Low risk, incremental implementation possible
-- Prepares foundation for future comprehensive type work
-- Doctest integration provides additional test coverage
+- User-facing feature that improves CLI usability and workflow
+- Enables reproducible configurations for batch processing
+- Professional tool feature that adds significant value
+- Complements completed logging and documentation improvements
+- Foundation for advanced features like project templates
 
 ### Alternative Targets
 
@@ -215,9 +223,25 @@ For each suggestion, consider:
 
 ## Next Steps
 
-1. **Immediate:** Implement Enhanced Docstrings (5.1) as next improvement
-2. **Future cycles:** Consider Configuration File Support or Comprehensive Type
-   Annotations
+1. **Immediate:** Consider Configuration File Support (5.2) or Comprehensive Type
+   Annotations (2.1) as next major improvement
+2. **Future cycles:** Property-based testing, security scanning, or dependency
+   automation when ready for advanced features
 3. **Long-term:** Revisit deferred items (Development Scripts when uv.scripts
    available, Legacy Deprecation for v2.0)
 4. Update this checklist as evaluations complete
+
+## Summary
+
+The Enhanced Docstrings improvement (5.1) has been successfully completed,
+bringing the total completed improvements to 5 out of 13. The project now has:
+
+- Comprehensive API documentation with working examples
+- Strong test coverage with automated reporting
+- Professional logging infrastructure
+- Basic type safety for public APIs
+- High-quality documentation suitable for open source contribution
+
+The next logical step would be Configuration File Support (5.2) to add user-facing
+workflow improvements, or Comprehensive Type Annotations (2.1) to build on the
+existing type foundation.

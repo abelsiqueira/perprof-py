@@ -107,7 +107,31 @@ class ProfilerOptions(TypedDict):
 def process_arguments(
     args: argparse.Namespace,
 ) -> tuple[ParserOptions, ProfilerOptions]:
-    """Generate the dictionaries with options."""
+    """Convert parsed command-line arguments into structured option dictionaries.
+
+    This function transforms the argparse.Namespace object into two TypedDict
+    structures that separate parser options (data processing) from profiler
+    options (visualization). It handles argument validation, format conversion,
+    and compatibility checking between backends and output formats.
+
+    Args:
+        args (argparse.Namespace): Parsed command-line arguments from argparse.
+
+    Returns:
+        tuple[ParserOptions, ProfilerOptions]: A tuple containing:
+            - ParserOptions: Configuration for data parsing and processing
+            - ProfilerOptions: Configuration for profile visualization
+
+    Raises:
+        NotImplementedError: If an unsupported output format is specified for a backend.
+        AssertionError: If RGB color values are invalid.
+
+    Example:
+        >>> import argparse
+        >>> # Create a minimal mock args object - full args object would be much larger
+        >>> # This demonstrates the function's purpose rather than testing all attributes
+        >>> pass  # Simplified example due to extensive argument requirements
+    """
     parser_options: ParserOptions = {
         "free_format": args.free_format,
         "files": args.file_name,
@@ -218,7 +242,29 @@ def process_arguments(
 
 
 def set_arguments(args: list[str]) -> argparse.Namespace:
-    """Set all the arguments of perprof."""
+    """Parse and validate command-line arguments for perprof.
+
+    This function defines the complete argument parser for the perprof CLI,
+    including all backend options, output formats, visualization settings,
+    and data processing parameters. It provides extensive help text and
+    validation for user input.
+
+    Args:
+        args (list[str]): Command-line arguments (typically sys.argv[1:]).
+
+    Returns:
+        argparse.Namespace: Parsed and validated arguments ready for processing.
+
+    Example:
+        >>> # Parse arguments for Bokeh output
+        >>> args = set_arguments(["--bokeh", "data1.txt", "data2.txt", "-o", "out.html"])
+        >>> args.bokeh
+        True
+        >>> args.file_name
+        ['data1.txt', 'data2.txt']
+        >>> args.output
+        'out.html'
+    """
 
     parser = argparse.ArgumentParser(
         description=_(
@@ -460,7 +506,27 @@ def set_arguments(args: list[str]) -> argparse.Namespace:
 
 
 def main() -> None:
-    """Entry point when calling perprof."""
+    """Main entry point for the perprof command-line tool.
+
+    This function orchestrates the complete performance profile generation workflow:
+    1. Parses command-line arguments
+    2. Configures logging based on verbosity settings
+    3. Processes arguments into structured option dictionaries
+    4. Selects appropriate backend (matplotlib, bokeh, tikz, or raw output)
+    5. Creates and executes the profiler to generate output
+
+    The function handles all error cases gracefully, providing user-friendly
+    error messages for common issues like missing files, invalid arguments,
+    or backend-specific errors.
+
+    Example usage:
+        $ perprof --bokeh data1.txt data2.txt -o comparison.html
+        $ perprof --matplotlib --pdf solver1.csv solver2.csv
+        $ perprof --tikz --tex algorithm1.yaml algorithm2.yaml
+
+    Raises:
+        SystemExit: On argument parsing errors or critical failures.
+    """
     try:
         args = set_arguments(sys.argv[1:])
 

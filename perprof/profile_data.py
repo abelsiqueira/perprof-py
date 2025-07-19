@@ -12,10 +12,14 @@ from .solver_data import SolverData, read_table
 
 
 class ProfileData:
-    """Computes and stores the performance profile.
+    """Computes and stores performance profiles for algorithm comparison.
 
-    This class will store and compute the performance profile of given solvers.
-    This is only the most basic profile choice, it only uses the time and the convergence status.
+    This class implements the performance profile methodology described by Dolan and Moré
+    for comparing the performance of different solvers/algorithms. It processes solver
+    timing data to create profiles suitable for visualization.
+
+    The performance profile shows the fraction of problems solved by each solver within
+    a given performance ratio (compared to the best solver for each problem).
 
     Attributes:
         solvers (list[SolverData]):
@@ -24,22 +28,78 @@ class ProfileData:
             If not None, used to restrict the problems in which the profile is created.
         ratio (numpy.array):
             Ratio matrix computed using the best time for each problem.
+            Shape: (n_problems, n_solvers). Entry [i,j] = time[i,j] / min_time[i]
         breakpoints (numpy.array):
-            Array of breakpoints obtained from the ratio matrix.
+            Array of unique ratio values sorted in ascending order.
+            Used as x-axis values for profile visualization.
         cumulative (numpy.array):
-            Matrix of the cumulative distribution of problems. Dimensions and len(breakpoints) by len(solvers).
+            Matrix of cumulative distribution of problems solved.
+            Shape: (len(breakpoints), n_solvers). Entry [i,j] = fraction of problems
+            where solver j has ratio <= breakpoints[i].
+
+    Example:
+        >>> import pandas as pd
+        >>> from perprof.profile_data import ProfileData
+        >>> from perprof.solver_data import SolverData
+        >>>
+        >>> # Create solver data from DataFrames
+        >>> data1 = pd.DataFrame({
+        ...     "name": ["prob1", "prob2"],
+        ...     "exit": ["converged", "converged"],
+        ...     "time": [1.0, 2.0]
+        ... })
+        >>> data2 = pd.DataFrame({
+        ...     "name": ["prob1", "prob2"],
+        ...     "exit": ["converged", "converged"],
+        ...     "time": [1.5, 1.5]
+        ... })
+        >>> solver1 = SolverData("Newton", data1, success=["converged"])
+        >>> solver2 = SolverData("BFGS", data2, success=["converged"])
+        >>>
+        >>> # Create performance profile
+        >>> profile = ProfileData(solver1, solver2)
+        >>>
+        >>> # Access computed data
+        >>> print(f"Ratio matrix shape: {profile.ratio.shape}")
+        Ratio matrix shape: (2, 2)
+        >>> print(f"Number of breakpoints: {len(profile.breakpoints)}")
+        Number of breakpoints: 3
     """
 
     def __init__(
         self, *solvers: Union[str, Path, SolverData], subset: list[str] | None = None
     ) -> None:
-        """Initialize the profile structure with solver_data.SolverData or files.
+        """Initialize performance profile with solver data or file paths.
 
         Args:
             *solvers (Union[str, Path, SolverData]):
-                Arguments of type str/Path to be read through solver_data.read_table or of type solver_data.SolverData. At least 2 arguments are required
-            subset (list[str]):
-                If not None, restricts the solvers data to only these problems.
+                Solver data sources. Can be:
+                - File paths (str/Path) to YAML files with solver results
+                - SolverData objects with pre-loaded data
+                At least 2 solvers are required for comparison.
+            subset (list[str], optional):
+                If provided, restricts the analysis to only these problem names.
+                Useful for focusing on specific problem subsets.
+
+        Raises:
+            ValueError: If solver input type is not supported or fewer than 2 solvers provided.
+
+        Example:
+            >>> import pandas as pd
+            >>> from perprof.profile_data import ProfileData
+            >>> from perprof.solver_data import SolverData
+            >>>
+            >>> # From SolverData objects with DataFrames
+            >>> data1 = pd.DataFrame({"name": ["prob1", "prob2"], "exit": ["converged", "converged"], "time": [1.2, 3.4]})
+            >>> data2 = pd.DataFrame({"name": ["prob1", "prob2"], "exit": ["converged", "converged"], "time": [1.5, 2.8]})
+            >>> solver1 = SolverData("Method1", data1)
+            >>> solver2 = SolverData("Method2", data2)
+            >>> profile = ProfileData(solver1, solver2)
+            >>>
+            >>> # With problem subset
+            >>> profile_subset = ProfileData(solver1, solver2, subset=["prob1"])
+            >>> len(profile_subset._solvers_data)
+            1
         """
         self.solvers = []
         for solver in solvers:
@@ -60,11 +120,39 @@ class ProfileData:
         self.process()
 
     def process(self) -> None:
-        """
-        Process the solver data.
+        """Process solver data to compute performance profile.
 
-        If the solvers argument is updated, this should be called again.
-        This returns the internal values and returns nothing.
+        This method implements the performance profile algorithm as described by Dolan and Moré.
+        It computes the ratio matrix, breakpoints, and cumulative distribution needed for
+        profile visualization.
+
+        The algorithm:
+        1. Merges solver data into a unified DataFrame indexed by problem name
+        2. Sets failed convergence times to infinity
+        3. Computes ratio matrix: time[solver,problem] / min_time[problem]
+        4. Generates breakpoints from unique ratio values
+        5. Computes cumulative distribution: fraction of problems solved within each ratio
+
+        Raises:
+            ValueError: If fewer than 2 solvers are provided.
+
+        Example:
+            >>> import pandas as pd
+            >>> from perprof.profile_data import ProfileData
+            >>> from perprof.solver_data import SolverData
+            >>>
+            >>> # Create test data
+            >>> data1 = pd.DataFrame({"name": ["prob1", "prob2"], "exit": ["converged", "converged"], "time": [1.0, 2.0]})
+            >>> data2 = pd.DataFrame({"name": ["prob1", "prob2"], "exit": ["converged", "converged"], "time": [1.5, 1.5]})
+            >>> solver1 = SolverData("Solver1", data1, success=["converged"])
+            >>> solver2 = SolverData("Solver2", data2, success=["converged"])
+            >>> profile = ProfileData(solver1, solver2)
+            >>>
+            >>> # Check computed ratios and cumulative distribution exist
+            >>> profile.ratio is not None
+            True
+            >>> profile.cumulative is not None
+            True
         """
         if len(self.solvers) <= 1:
             raise ValueError("A Profile needs two solvers, at least")

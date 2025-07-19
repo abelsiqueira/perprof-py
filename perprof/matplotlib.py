@@ -16,14 +16,75 @@ _ = THIS_TRANSLATION.gettext
 
 
 class Profiler(prof.Pdata):
-    """The profiler using matplotlib."""
+    """Performance profile generator using matplotlib backend.
+
+    This class creates publication-quality performance profile plots using matplotlib
+    and pyplot. It supports various output formats (PNG, PDF, SVG, EPS, PS) and
+    extensive customization options including colors, styling, and translations.
+
+    The profiler generates step plots showing the cumulative distribution of solver
+    performance ratios, which is the standard visualization for performance profiles
+    as described by Dolan and Moré.
+
+    Attributes:
+        output (str): Output filename including format extension.
+        output_format (str): File format for the output (png, pdf, svg, etc.).
+        plot_lang (function): Localization function for plot text.
+
+    Example:
+        Creating a matplotlib profiler for performance analysis:
+
+        ```python
+        from perprof.matplotlib import Profiler
+
+        # Configure data parsing
+        parser_opts = {
+            "files": ["solver1.txt", "solver2.txt"],
+            "success": ["converged", "solved"],
+            "maxtime": 300.0,
+            "compare": "time"
+        }
+
+        # Configure plot appearance
+        profiler_opts = {
+            "output": "comparison",
+            "output_format": "png",
+            "semilog": True,
+            "lang": "en",
+            "title": "Performance Comparison"
+        }
+
+        # Generate plot
+        profiler = Profiler(parser_opts, profiler_opts)
+        profiler.plot()  # Creates comparison.png
+        ```
+    """
 
     def __init__(self, parser_options, profiler_options):
-        """Intialize Profiler with Matplotlib.
+        """Initialize matplotlib-based performance profiler.
 
         Args:
-            parser_options (dict): parser options.
-            profiler_options (dict): profiler options
+            parser_options (dict): Data parsing configuration including:
+                - files: List of solver data files to process
+                - success: Success criteria for solver convergence
+                - maxtime/mintime: Time filtering bounds
+                - compare: Performance metric to compare (default: "time")
+                - subset: Optional problem subset restriction
+            profiler_options (dict): Visualization configuration including:
+                - output: Output filename prefix (extension auto-added)
+                - output_format: File format (png, pdf, svg, eps, ps)
+                - semilog: Use logarithmic x-axis scaling
+                - black_and_white: Use monochrome line styles
+                - lang: Language for plot labels
+                - title/xlabel/ylabel: Plot text customization
+                - background/page_background: Color customization
+
+        Example:
+            ```python
+            parser_opts = {"files": ["data1.txt"], "success": ["converged"]}
+            profiler_opts = {"output": "plot", "output_format": "png", "lang": "en"}
+            profiler = Profiler(parser_opts, profiler_opts)
+            ```
         """
         if profiler_options["output"] is None:
             self.output = f"performance-profile.{profiler_options['output_format']}"
@@ -43,7 +104,34 @@ class Profiler(prof.Pdata):
 
     # pylint: disable=too-many-branches
     def plot(self):
-        """Create the performance profile using matplotlib."""
+        """Generate and save the performance profile plot.
+
+        Creates a publication-quality step plot showing the cumulative distribution
+        of performance ratios for each solver. The plot shows what fraction of problems
+        each solver can solve within a given performance ratio compared to the best
+        solver for each problem.
+
+        Plot features:
+        - Step plot with solver-specific line styles and colors
+        - Logarithmic x-axis scaling (if semilog=True)
+        - Customizable background colors and transparency
+        - Internationalization support for labels
+        - Legend showing solver names
+        - Grid lines for improved readability
+        - Automatic axis scaling and limits
+
+        The plot is saved to the filename specified during initialization with
+        the configured output format and styling options.
+
+        Raises:
+            matplotlib-related exceptions: If plot generation or saving fails.
+
+        Example:
+            ```python
+            # After creating profiler instance (see __init__ example)
+            profiler.plot()  # Creates the performance profile plot file
+            ```
+        """
         self.pre_plot()
 
         # Hack need to background color
