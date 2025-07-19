@@ -52,10 +52,11 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          uv sync --extra publishing
+          uv sync --group publishing
           uv build
 
       - name: Publish distribution 📦 to Test PyPI
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
