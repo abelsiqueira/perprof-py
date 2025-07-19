@@ -8,6 +8,30 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Added
+
+- Type annotations for main modules
+- Logging support with --verbose and --debug flags
+- uv for dependency management
+- Docstrings with examples for public functions
+- GitHub Actions workflows use uv
+
+### Changed
+
+- Build system from pip to uv
+- CI/CD workflows to use uv
+- CLAUDE.md with development commands
+- Documentation structure
+- Pre-commit hooks to latest versions
+- Development dependencies to latest versions
+- Python 3.7 support removed, Python 3.11 added
+
+### Fixed
+
+- Numpy 2.0 compatibility by pinning numpy<2.0
+- Markdown linting issues
+- CI/CD deployment conditions and dependency groups
+
 ## [1.1.4] - 2023-04-11
 
 ### Added
