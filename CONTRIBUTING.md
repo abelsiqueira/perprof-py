@@ -21,8 +21,8 @@ We use Python 3 and uv for fast dependency management. Install uv first:
 # Install uv (if not already installed)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Create virtual environment and install dependencies
-uv sync --group dev
+# Create virtual environment and install all dependencies (including docs)
+uv sync --extra docs --all-groups
 ```
 
 This will automatically create a virtual environment and install all development dependencies.

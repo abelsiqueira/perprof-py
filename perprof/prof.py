@@ -12,8 +12,7 @@ _ = THIS_TRANSLATION.gettext
 
 
 def load_data(parser_options):
-    """
-    Load the data.
+    """Load the data.
 
     Args:
         parser_options (dict): the configuration dicionary
@@ -76,8 +75,7 @@ class Pdata:
         return str2output[:-2]
 
     def get_set_solvers(self):
-        """
-        Get the set of solvers to use.
+        """Get the set of solvers to use.
 
         Returns:
             solvers (list[dict]): list of solvers
@@ -85,8 +83,7 @@ class Pdata:
         return self.solvers
 
     def get_set_problems(self):
-        """
-        Get the set of problems to use.
+        """Get the set of problems to use.
 
         Returns:
             problems (list[str]): list of problems

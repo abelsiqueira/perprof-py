@@ -29,9 +29,7 @@ class _ParseOptions(TypedDict):
 class SolverData:
     """Store performance data from a single solver/algorithm.
 
-    This class encapsulates all performance metrics and metadata for one solver across
-    multiple test problems. It serves as the fundamental data structure for performance
-    profile analysis.
+    Contains performance metrics and metadata for one solver across multiple test problems.
 
     Attributes:
         algname (str):
@@ -141,8 +139,7 @@ class SolverData:
 def read_table(filename: Union[str, Path]) -> SolverData:
     """Read solver data from YAML-formatted table file.
 
-    This function parses files with YAML front matter containing solver configuration
-    followed by tabular data with problem results. This is the standard format for
+    Parses files with YAML front matter and tabular data. Standard format for
     perprof solver data files.
 
     File format:

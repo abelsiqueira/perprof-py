@@ -55,13 +55,15 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 git clone https://github.com/abelsiqueira/perprof-py.git
 cd perprof-py
 
-# Create virtual environment and install all development dependencies
-uv sync --group dev
+# Create virtual environment and install all dependencies (including docs)
+uv sync --extra docs --all-groups
 
-# Or install only specific dependency groups:
-# uv sync --group test --no-dev        # Only testing tools
-# uv sync --group lint --no-dev        # Only linting/formatting
-# uv sync --group type-check --no-dev  # Only type checking
+# Or install only specific dependency groups/extras:
+# uv sync --group dev                   # Development tools (test, lint, type-check)
+# uv sync --extra docs                  # Documentation tools only
+# uv sync --group test --no-dev         # Only testing tools
+# uv sync --group lint --no-dev         # Only linting/formatting
+# uv sync --group type-check --no-dev   # Only type checking
 
 # Run tests with coverage
 uv run pytest --cov=perprof --cov-report=html --cov-report=term

@@ -1,5 +1,4 @@
-"""
-Functions to parse the files.
+"""Functions to parse the files.
 
 The files must be in the following format::
 
@@ -24,8 +23,7 @@ _ = THIS_TRANSLATION.gettext
 
 
 def _error_message(filename, line_number, details):
-    """
-    Format the error message.
+    """Format the error message.
 
     Args:
         filename (str): name of the file with the error
@@ -41,8 +39,7 @@ def _error_message(filename, line_number, details):
 
 
 def _str_sanitize(str2sanitize):
-    """
-    Sanitize the problem name for LaTeX.
+    """Sanitize the problem name for LaTeX.
 
     Args:
         str2sanitize (str): string to be sanitize
@@ -53,8 +50,7 @@ def _str_sanitize(str2sanitize):
 
 
 def _parse_yaml(options, yaml_header):
-    """
-    Parse the yaml header.
+    """Parse the yaml header.
 
     Args:
         options (dict): the local options for the parser
@@ -71,8 +67,7 @@ def _parse_yaml(options, yaml_header):
 
 # pylint: disable=too-many-branches,too-many-statements,too-many-locals
 def parse_file(filename, parser_options):
-    """
-    Parse one file.
+    """Parse one file.
 
     Args:
         filename (str): name of the file to be parser

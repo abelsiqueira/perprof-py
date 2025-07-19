@@ -107,12 +107,10 @@ class ProfilerOptions(TypedDict):
 def process_arguments(
     args: argparse.Namespace,
 ) -> tuple[ParserOptions, ProfilerOptions]:
-    """Convert parsed command-line arguments into structured option dictionaries.
+    """Convert command-line arguments into parser and profiler option dictionaries.
 
-    This function transforms the argparse.Namespace object into two TypedDict
-    structures that separate parser options (data processing) from profiler
-    options (visualization). It handles argument validation, format conversion,
-    and compatibility checking between backends and output formats.
+    Separates data processing options from visualization options and validates
+    backend/format compatibility.
 
     Args:
         args (argparse.Namespace): Parsed command-line arguments from argparse.
@@ -244,10 +242,8 @@ def process_arguments(
 def set_arguments(args: list[str]) -> argparse.Namespace:
     """Parse and validate command-line arguments for perprof.
 
-    This function defines the complete argument parser for the perprof CLI,
-    including all backend options, output formats, visualization settings,
-    and data processing parameters. It provides extensive help text and
-    validation for user input.
+    Defines the CLI argument parser with backend options, output formats,
+    and data processing parameters.
 
     Args:
         args (list[str]): Command-line arguments (typically sys.argv[1:]).
@@ -265,7 +261,6 @@ def set_arguments(args: list[str]) -> argparse.Namespace:
         >>> args.output
         'out.html'
     """
-
     parser = argparse.ArgumentParser(
         description=_(
             "A python module for performance profiling "
@@ -506,18 +501,14 @@ def set_arguments(args: list[str]) -> argparse.Namespace:
 
 
 def main() -> None:
-    """Main entry point for the perprof command-line tool.
+    """Run the perprof command-line tool.
 
-    This function orchestrates the complete performance profile generation workflow:
-    1. Parses command-line arguments
-    2. Configures logging based on verbosity settings
-    3. Processes arguments into structured option dictionaries
-    4. Selects appropriate backend (matplotlib, bokeh, tikz, or raw output)
-    5. Creates and executes the profiler to generate output
+    Orchestrates the performance profile generation workflow:
+    1. Parse command-line arguments and configure logging
+    2. Process arguments into option dictionaries
+    3. Select backend and generate profile output
 
-    The function handles all error cases gracefully, providing user-friendly
-    error messages for common issues like missing files, invalid arguments,
-    or backend-specific errors.
+    Handles errors gracefully with user-friendly messages.
 
     Example usage:
         $ perprof --bokeh data1.txt data2.txt -o comparison.html
