@@ -1,0 +1,157 @@
+# Improvement Suggestions Evaluation Checklist
+
+## High Impact, Low Effort (Priority 1)
+
+### ☑️ 1.1 Add Coverage Reporting
+- [x] Review current test coverage situation
+- [x] Add coverage configuration to pyproject.toml
+- [x] Update test commands in CLAUDE.md
+- [x] Test coverage report generation
+- [x] **Decision:** ✅ Implement
+- [x] **Notes:** Implemented with 67.03% coverage, fail_under=60%. HTML reports generated to htmlcov/. Core data classes have 100% coverage, main.py at 78%, visualization backends need improvement.
+
+### ☑️ 3.1 Development Scripts in pyproject.toml
+- [x] Review current command complexity
+- [x] Research uv.scripts support (not available yet)
+- [x] Investigate mise.jdx.dev as alternative (comprehensive analysis)
+- [x] Evaluate alternatives (Makefile, justfile, shell aliases)
+- [x] **Decision:** ⏸️ Defer
+- [x] **Notes:** uv doesn't support [tool.uv.scripts] yet. mise is powerful but overkill for solo project with stability concerns. Current verbose commands acceptable. Consider simple shell aliases or wait for uv.scripts support.
+
+### ☑️ 2.1 Basic Type Annotations for Public APIs
+- [x] Identify main public API surfaces
+- [x] Add type hints to ProfileData class
+- [x] Add type hints to SolverData class
+- [x] Add type hints to main CLI functions
+- [x] Install type stubs (pandas-stubs, types-PyYAML)
+- [x] Test functionality still works
+- [ ] Resolve remaining mypy errors (complex YAML parsing)
+- [x] **Decision:** ✅ Implement (partially)
+- [x] **Notes:** Basic public API types added with __future__ annotations. Core classes (ProfileData, SolverData, main functions) have type hints. Some complex internal parsing logic still has mypy errors but functionality preserved. Good foundation for future type safety improvements.
+
+## Medium Impact, Medium Effort (Priority 2)
+
+### ☑️ 4.2 Logging Infrastructure
+- [x] Evaluate current debugging/error reporting
+- [x] Design logging strategy (levels, formats)
+- [x] Add logging setup to main.py
+- [x] Add --verbose flag to CLI
+- [x] Test logging in different scenarios
+- [x] **Decision:** ✅ Implement
+- [x] **Notes:** Comprehensive logging infrastructure implemented with WARNING (default), INFO (--verbose), DEBUG (--debug) levels. Console output to stderr, optional file logging with --log-file. Main entry points, backend selection, and error handling all have appropriate log messages. Maintains backward compatibility with existing print statements for user output.
+
+### ☐ 4.1 Legacy Code Deprecation Plan
+- [ ] Analyze usage of prof.py vs newer classes
+- [ ] Identify breaking vs non-breaking changes
+- [ ] Create migration timeline
+- [ ] Add deprecation warnings where appropriate
+- [ ] Update documentation to prefer new APIs
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 5.1 Enhanced Docstrings with Examples
+- [ ] Audit current docstring coverage
+- [ ] Add examples to main classes
+- [ ] Add examples to key functions
+- [ ] Test examples with doctest
+- [ ] Update documentation generation
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+## High Impact, High Effort (Priority 3)
+
+### ☐ 2.1 Comprehensive Type Annotations
+- [ ] Plan incremental rollout strategy
+- [ ] Add type hints to all modules
+- [ ] Configure mypy for strict checking
+- [ ] Add type checking to CI
+- [ ] Address all mypy errors
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 5.2 Configuration File Support
+- [ ] Design configuration file format
+- [ ] Choose configuration library (toml, yaml, etc.)
+- [ ] Implement config loading in main.py
+- [ ] Add config file documentation
+- [ ] Test configuration precedence
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 1.2 Property-Based Testing
+- [ ] Evaluate hypothesis vs current testing
+- [ ] Identify good candidates for property testing
+- [ ] Add hypothesis dependency
+- [ ] Write property tests for ProfileData
+- [ ] Integrate with existing test suite
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+## Optional/Future Improvements
+
+### ☐ 2.2 Runtime Type Checking with Pydantic
+- [ ] Evaluate need for runtime validation
+- [ ] Design Pydantic models for key data
+- [ ] Implement validation in critical paths
+- [ ] Test performance impact
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 3.2 Performance Benchmarking
+- [ ] Identify performance-critical operations
+- [ ] Set up benchmarking framework
+- [ ] Create baseline benchmarks
+- [ ] Add benchmarks to CI
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 6.1 Security Scanning
+- [ ] Add bandit to dev dependencies
+- [ ] Add safety to dev dependencies
+- [ ] Create security GitHub Action
+- [ ] Configure security checks
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+### ☐ 6.2 Dependency Update Automation
+- [ ] Set up Dependabot configuration
+- [ ] Configure update frequency
+- [ ] Test automated PR creation
+- [ ] Set up review process
+- [ ] **Decision:** ✅ Implement / ❌ Skip / ⏸️ Defer
+- [ ] **Notes:**
+
+## Evaluation Criteria
+
+For each suggestion, consider:
+
+### **Value Assessment**
+- [ ] How much time will this save in the long run?
+- [ ] How much will this improve code quality?
+- [ ] How much will this help with debugging/maintenance?
+- [ ] How much will this improve the user experience?
+
+### **Cost Assessment**
+- [ ] How much time will implementation take?
+- [ ] How much ongoing maintenance will this require?
+- [ ] What are the risks of implementation?
+- [ ] What dependencies does this add?
+
+### **Fit Assessment**
+- [ ] Does this align with project goals?
+- [ ] Is this appropriate for a solo developer?
+- [ ] Does this fit the current architecture?
+- [ ] Will this help or hurt simplicity?
+
+### **Timing Assessment**
+- [ ] Is now the right time for this change?
+- [ ] Should this wait for a major version?
+- [ ] Are there prerequisites that need to be done first?
+- [ ] Is there a better alternative approach?
+
+## Next Steps
+1. Start with High Impact, Low Effort items
+2. Evaluate each item using the criteria above
+3. Make implementation decisions
+4. Create specific implementation todos for accepted items
+5. Update this checklist as you complete evaluations
