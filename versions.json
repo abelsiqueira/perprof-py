@@ -1,5 +1,10 @@
 [
   {
+    "version": "dev",
+    "title": "Documentation for branch main (commit d7e4f262)",
+    "aliases": []
+  },
+  {
     "version": "v1.1.4",
     "title": "Documentation for release v1.1.4",
     "aliases": [
